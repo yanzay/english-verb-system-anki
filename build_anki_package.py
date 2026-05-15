@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.4.1'
+VERSION = '2.5.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -147,13 +147,56 @@ MODULE_NAMES = {
     '10': 'English Verb System::10 - Non-Finite Forms',
     '11': 'English Verb System::11 - Phrasal Verbs',
     '12': 'English Verb System::12 - Discourse & Pragmatics',
-    '13': 'English Verb System::13 - L1 Interference',
+    # Module 13 is split per-L1 so a Russian speaker, say, only sees
+    # the contrasts that actually trip Russian speakers up. The bare
+    # '13' key is a catch-all for any L1 row that lacks a language tag.
+    '13':    'English Verb System::13 - L1 Interference::Other',
+    '13-es': 'English Verb System::13 - L1 Interference::🇪🇸 Spanish speakers',
+    '13-fr': 'English Verb System::13 - L1 Interference::🇫🇷 French speakers',
+    '13-de': 'English Verb System::13 - L1 Interference::🇩🇪 German speakers',
+    '13-ru': 'English Verb System::13 - L1 Interference::🇷🇺 Russian speakers',
+    '13-zh': 'English Verb System::13 - L1 Interference::🇨🇳 Mandarin speakers',
+    '13-ja': 'English Verb System::13 - L1 Interference::🇯🇵 Japanese speakers',
+    '13-ko': 'English Verb System::13 - L1 Interference::🇰🇷 Korean speakers',
+    '13-ar': 'English Verb System::13 - L1 Interference::🇸🇦 Arabic speakers',
+    '13-pt': 'English Verb System::13 - L1 Interference::🇵🇹 Portuguese speakers',
+    '13-nl': 'English Verb System::13 - L1 Interference::🇳🇱 Dutch speakers',
     '14': 'English Verb System::14 - Image Cue',
 }
 
 
+L1_LANG_SUFFIX = {
+    'l1-spanish':    '-es', 'l1-french':     '-fr', 'l1-german':    '-de',
+    'l1-russian':    '-ru', 'l1-mandarin':   '-zh', 'l1-japanese':  '-ja',
+    'l1-korean':     '-ko', 'l1-arabic':     '-ar', 'l1-portuguese':'-pt',
+    'l1-dutch':      '-nl',
+}
+
+
+def row_modules(tags_str):
+    """Like row_module() but returns ALL applicable module codes when an
+    L1 card pertains to multiple languages (e.g. Romance-language cluster
+    tagged with l1-spanish + l1-french + l1-portuguese gets routed to all
+    three per-language decks). Always returns at least one element.
+    """
+    tags = set(tags_str.split())
+    if 'l1-interference' in tags or any(t in L1_LANG_SUFFIX for t in tags):
+        mods = ['13' + L1_LANG_SUFFIX[t] for t in tags if t in L1_LANG_SUFFIX]
+        return mods if mods else ['13']
+    return [row_module(tags_str)]
+
+
 def row_module(tags_str):
     tags = set(tags_str.split())
+    # L1 interference routes per-language so each user reviews only their L1.
+    # We check this BEFORE the generic module loop because an L1 card may
+    # also carry tags like 'modal' (about a specific structure), and we
+    # always want it in the per-language deck.
+    if 'l1-interference' in tags or any(t in L1_LANG_SUFFIX for t in tags):
+        for tag, suffix in L1_LANG_SUFFIX.items():
+            if tag in tags:
+                return '13' + suffix
+        return '13'  # generic L1 card with no specific language → "Other"
     # Check newer/more-specific modules first so e.g. a phrasal-verb card
     # tagged with both 'phrasal-verb' and 'modal' routes to module 11.
     for mod in ['14', '13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02']:
@@ -1167,7 +1210,19 @@ input[type=text],
         ('10', 'rec'): 2056102001, ('10', 'con'): 2056102002, ('10', 'pro'): 2056102003,
         ('11', 'rec'): 2056102101, ('11', 'con'): 2056102102, ('11', 'pro'): 2056102103,
         ('12', 'rec'): 2056102201, ('12', 'con'): 2056102202, ('12', 'pro'): 2056102203,
+        # Module 13 — bare keys are the catch-all "Other" L1 deck. Per-
+        # language IDs follow at +10/+20/+30/+40 offsets to stay readable.
         ('13', 'rec'): 2056102301, ('13', 'con'): 2056102302, ('13', 'pro'): 2056102303,
+        ('13-es', 'rec'): 2056102311, ('13-es', 'con'): 2056102312, ('13-es', 'pro'): 2056102313, ('13-es', 'clz'): 2056102314,
+        ('13-fr', 'rec'): 2056102321, ('13-fr', 'con'): 2056102322, ('13-fr', 'pro'): 2056102323, ('13-fr', 'clz'): 2056102324,
+        ('13-de', 'rec'): 2056102331, ('13-de', 'con'): 2056102332, ('13-de', 'pro'): 2056102333, ('13-de', 'clz'): 2056102334,
+        ('13-ru', 'rec'): 2056102341, ('13-ru', 'con'): 2056102342, ('13-ru', 'pro'): 2056102343, ('13-ru', 'clz'): 2056102344,
+        ('13-zh', 'rec'): 2056102351, ('13-zh', 'con'): 2056102352, ('13-zh', 'pro'): 2056102353, ('13-zh', 'clz'): 2056102354,
+        ('13-ja', 'rec'): 2056102361, ('13-ja', 'con'): 2056102362, ('13-ja', 'pro'): 2056102363, ('13-ja', 'clz'): 2056102364,
+        ('13-ko', 'rec'): 2056102371, ('13-ko', 'con'): 2056102372, ('13-ko', 'pro'): 2056102373, ('13-ko', 'clz'): 2056102374,
+        ('13-ar', 'rec'): 2056102381, ('13-ar', 'con'): 2056102382, ('13-ar', 'pro'): 2056102383, ('13-ar', 'clz'): 2056102384,
+        ('13-pt', 'rec'): 2056102391, ('13-pt', 'con'): 2056102392, ('13-pt', 'pro'): 2056102393, ('13-pt', 'clz'): 2056102394,
+        ('13-nl', 'rec'): 2056102501, ('13-nl', 'con'): 2056102502, ('13-nl', 'pro'): 2056102503, ('13-nl', 'clz'): 2056102504,
         # Cloze decks (Tier 3)
         ('01', 'clz'): 2056101104, ('02', 'clz'): 2056101204, ('03', 'clz'): 2056101304,
         ('04', 'clz'): 2056101404, ('05', 'clz'): 2056101504, ('06', 'clz'): 2056101604,
@@ -1209,7 +1264,7 @@ input[type=text],
     for row in rec_rows:
         if len(row) < 9:
             row += [''] * (9 - len(row))
-        mod = row_module(row[8])  # Tags now at index 8
+        mods = row_modules(row[8])  # Tags now at index 8
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[1])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
@@ -1219,7 +1274,8 @@ input[type=text],
             fields=row[:9] + [audio_f, ipa_f, tl_f],
             tags=row[8].split(),
         )
-        decks[(mod, 'rec')].add_note(note)
+        for _mod in mods:
+            decks[(_mod, 'rec')].add_note(note)
         counts['rec'] += 1
 
     # Reverse Production (Auto) — generated from recognition rows
@@ -1260,7 +1316,8 @@ input[type=text],
             fields=[sentence, sentence, formula, tags_str, audio_f, ipa_f, tl_f],
             tags=tags_set.split() if isinstance(tags_set, str) else list(tags_set),
         )
-        decks[(mod, 'pro')].add_note(rev_pro_note)
+        for _mod in mods:
+            decks[(_mod, 'pro')].add_note(rev_pro_note)
         rev_pro_count += 1
         existing_samples.add(sentence)
 
@@ -1271,7 +1328,7 @@ input[type=text],
     for row in con_rows:
         if len(row) < 7:
             row += [''] * (7 - len(row))
-        mod = row_module(row[6])
+        mods = row_modules(row[6])
         # For contrast, the "label" we map to a timeline is the Answer (column 3)
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[3])
         if audio_f: media_counts['audio'] += 1
@@ -1284,7 +1341,8 @@ input[type=text],
             fields=row[:7] + [audio_f, ipa_f, tl_f],
             tags=row[6].split(),
         )
-        decks[(mod, 'con')].add_note(note)
+        for _mod in mods:
+            decks[(_mod, 'con')].add_note(note)
         counts['con'] += 1
         
         # Create spot-the-error note if row has error-correction, l1-interference, or spot-the-error tag
@@ -1296,7 +1354,8 @@ input[type=text],
                 fields=row[:7] + [audio_f, ipa_f, tl_f],
                 tags=row[6].split(),
             )
-            decks[(mod, 'con')].add_note(spot_note)
+            for _mod in mods:
+                decks[(_mod, 'con')].add_note(spot_note)
             spot_error_count += 1
 
     # Production
@@ -1305,7 +1364,7 @@ input[type=text],
     for row in pro_rows:
         if len(row) < 6:
             row += [''] * (6 - len(row))
-        mod = row_module(row[5])
+        mods = row_modules(row[5])
         # For production, audio/IPA come from the Sample (column 3); timeline from Target (column 1).
         audio_f, ipa_f, tl_f = media_for_sentence(row[3], ipa_index, timeline_index, label=row[1])
         if audio_f: media_counts['audio'] += 1
@@ -1316,7 +1375,8 @@ input[type=text],
             fields=row[:6] + [audio_f, ipa_f, tl_f],
             tags=row[5].split(),
         )
-        decks[(mod, 'pro')].add_note(note)
+        for _mod in mods:
+            decks[(_mod, 'pro')].add_note(note)
         counts['pro'] += 1
 
     # Cloze (Tier 3)
@@ -1327,7 +1387,7 @@ input[type=text],
         for row in cloze_rows:
             if len(row) < 3:
                 row += [''] * (3 - len(row))
-            mod = row_module(row[2])
+            mods = row_modules(row[2])
             # For cloze, the spoken sentence is the cloze Text with the
             # {{c1::…}} markers stripped — that's the natural English audio.
             spoken = re.sub(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}', r'\1', row[0])
@@ -1339,7 +1399,8 @@ input[type=text],
                 fields=row[:3] + [audio_f, ipa_f, tl_f],
                 tags=row[2].split(),
             )
-            decks[(mod, 'clz')].add_note(note)
+            for _mod in mods:
+                decks[(_mod, 'clz')].add_note(note)
             counts['clz'] += 1
 
     # Image-Cue (Module 14)
@@ -1351,6 +1412,9 @@ input[type=text],
             if len(row) < 6:
                 row += [''] * (6 - len(row))
             tags_str = row[5]
+            # Image cards always live in module 14, never per-L1 — even if
+            # an l1-* tag slipped onto an image row.
+            mods = ['14']
             mod = '14'
             caption = row[1].strip()
             cap_h = _image_caption_hash(caption)
@@ -1373,7 +1437,8 @@ input[type=text],
                         img_field, audio_f, ipa_f, attribution_field],
                 tags=tags_str.split(),
             )
-            decks[(mod, 'img')].add_note(note)
+            for _mod in mods:
+                decks[(_mod, 'img')].add_note(note)
             img_count += 1
 
     out = 'english_verb_system_anki.apkg'
