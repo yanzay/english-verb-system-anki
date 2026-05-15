@@ -26,27 +26,28 @@ conditionals, passive voice, and stative/dynamic verb distinctions.
 
 ## Deck structure (v3.2.0 — curriculum-first)
 
-The package produces **96 sub-decks across 14 modules**, sequenced as a
-proper curriculum:
+The package produces **85 sub-decks across 13 modules**, sequenced as a
+proper curriculum (counts are deck placements; some cards live in
+multiple sub-decks by design):
 
 ```
 English Verb System
-├── 00 - Foundation (12-Cell Grid)              ← 1,397 cards · ENABLED by default
-├── 01 - Periphrastic Futures (be going to)     ←    39 cards · opt-in
-├── 02 - Past Habits (used to)                  ←    11 cards · opt-in
-├── 03 - Modal Verbs                            ←   134 cards · opt-in
-├── 04 - Conditionals                           ←   147 cards · opt-in
-├── 05 - Passive Voice                          ←   134 cards · opt-in
-├── 06 - Mood (Subjunctive, Imperative)         ←    25 cards · opt-in
-├── 07 - Non-Finite Forms                       ←   107 cards · opt-in
-├── 08 - Reported Speech                        ←    86 cards · opt-in
+├── 00 - Foundation (12-Cell Grid)              ←   598 cards · ENABLED by default
+├── 01 - Periphrastic Futures (be going to)     ←    37 cards · opt-in
+├── 02 - Past Habits (used to)                  ←     7 cards · opt-in
+├── 03 - Modal Verbs                            ←   125 cards · opt-in
+├── 04 - Conditionals                           ←   192 cards · opt-in
+├── 05 - Passive Voice                          ←   168 cards · opt-in
+├── 06 - Mood (Subjunctive, Imperative)         ←    15 cards · opt-in
+├── 07 - Non-Finite Forms                       ←    79 cards · opt-in
+├── 08 - Reported Speech                        ←    70 cards · opt-in
 ├── 09 - Phrasal Verbs                          ←   101 cards · opt-in
-├── 10 - Discourse Constructions                ←   202 cards · opt-in
+├── 10 - Discourse Constructions                ←   757 cards · opt-in
 ├── 11 - Phonology & Connected Speech           ←    62 cards · opt-in
 ├── 12 - Transformation & Register              ←    73 cards · opt-in
-└── 13 - L1 Interference (per-language)         ← 1,006 cards · opt-in (per L1)
+└── 13 - L1 Interference (per-language)         ← 1,004 cards · opt-in (per L1)
 
-Total: 3,524 cards across 96 sub-decks.
+Total: 2,794 unique cards across 85 sub-decks (3,288 deck placements).
 ```
 
 Each module has 4 sub-decks: **Recognition · Contrast · Cloze · Production**.
@@ -73,7 +74,7 @@ When you're ready to add, say, **Module 03 - Modal Verbs**:
 1. Click the gear icon ⚙ next to `English Verb System::03 - Modal Verbs`
 2. **Deck Options** → at the top, switch the preset from
    `English Verb System (L1 — opt in)` to `English Verb System`
-3. The 134 modal cards will start flowing in at 10/day alongside your
+3. The 125 modal cards will start flowing in at 10/day alongside your
    Foundation reviews
 
 Same flow for Module 13 sub-decks — switch only your L1 (e.g.
