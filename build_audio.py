@@ -27,6 +27,7 @@ import argparse
 import csv
 import hashlib
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -115,12 +116,17 @@ def load_tsv(path: Path):
         yield row
 
 
+_CLOZE_RE = re.compile(r"\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}")
+
+
 def collect_sentences():
-    """Return a sorted list of unique English sentences across all 3 files."""
+    """Return a sorted list of unique English sentences across all 4 files
+    (recognition, contrast, production, and Tier-3 cloze)."""
     sentences = set()
     rec = Path("conjugations_recognition.txt")
     con = Path("conjugations_contrast.txt")
     pro = Path("conjugations_production.txt")
+    clz = Path("conjugations_cloze.txt")
     if rec.exists():
         for row in load_tsv(rec):
             if row and row[0].strip():
@@ -133,6 +139,11 @@ def collect_sentences():
         for row in load_tsv(pro):
             if len(row) >= 4 and row[3].strip():
                 sentences.add(row[3].strip())
+    if clz.exists():
+        for row in load_tsv(clz):
+            if row and row[0].strip():
+                # Strip {{c1::form}} markers so the spoken sentence is natural.
+                sentences.add(_CLOZE_RE.sub(r"\1", row[0].strip()))
     return sorted(sentences)
 
 

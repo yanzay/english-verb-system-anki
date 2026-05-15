@@ -26,6 +26,7 @@ Recommended Anki settings: see ANKI_SETTINGS.md
 import csv
 import hashlib
 import json
+import re
 import sys
 import subprocess
 from pathlib import Path
@@ -454,6 +455,57 @@ hr#answer {
 .nightMode .ipa-key, .night_mode .ipa-key { color: #fde68a; }
 .nightMode .ipa-val, .night_mode .ipa-val { color: #fef3c7; }
 .nightMode .audio-row, .night_mode .audio-row { color: #9ca3af; }
+
+/* ── Tier-3 additions: WhenNotToUse callout, cloze hint row ── */
+.when-not-box {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border-left: 3px solid #dc2626;
+  border-radius: 4px;
+  font-size: 0.92em;
+  color: #7f1d1d;
+}
+.when-not-key {
+  font-weight: 700;
+  margin-right: 6px;
+  color: #b91c1c;
+}
+.when-not-val { color: #7f1d1d; }
+.hint-row {
+  margin: 8px 0;
+  padding: 6px 10px;
+  background: #f0fdf4;
+  border-left: 3px solid #16a34a;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: #166534;
+}
+/* Night-mode for Tier-3 boxes */
+.nightMode .when-not-box, .night_mode .when-not-box {
+  background: #450a0a;
+  color: #fecaca;
+  border-left-color: #ef4444;
+}
+.nightMode .when-not-key, .night_mode .when-not-key { color: #fca5a5; }
+.nightMode .when-not-val, .night_mode .when-not-val { color: #fecaca; }
+.nightMode .hint-row, .night_mode .hint-row {
+  background: #052e16;
+  color: #bbf7d0;
+  border-left-color: #22c55e;
+}
+/* Anki cloze blank styling */
+.cloze {
+  font-weight: 700;
+  color: #1d4ed8;
+  background: #dbeafe;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+.nightMode .cloze, .night_mode .cloze {
+  color: #93c5fd;
+  background: #1e3a8a;
+}
 '''
 
     # ------------------------------------------------------------------
@@ -461,8 +513,8 @@ hr#answer {
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
     rec_model = genanki.Model(
-        2056102004,  # bumped: schema changed (added Audio/IPA/Timeline)
-        'Verb System · Recognition (v2)',
+        2056102008,  # bumped: schema changed again (added WhenNotToUse)
+        'Verb System · Recognition (v3)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'Label'},
@@ -471,6 +523,7 @@ hr#answer {
             {'name': 'MainUse'},
             {'name': 'QuickCue'},
             {'name': 'Contrast'},
+            {'name': 'WhenNotToUse'},
             {'name': 'Tags'},
             {'name': 'Audio'},
             {'name': 'IPA'},
@@ -495,6 +548,7 @@ hr#answer {
   <span class="meta-key">Formula</span><span class="meta-val">{{Formula}}</span>
   <span class="meta-key">Main use</span><span class="meta-val">{{MainUse}}</span>
 </div>
+{{#WhenNotToUse}}<div class="when-not-box"><span class="when-not-key">🚫 Don't use when</span> <span class="when-not-val">{{WhenNotToUse}}</span></div>{{/WhenNotToUse}}
 {{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
 {{#QuickCue}}
 <div class="info-box">
@@ -560,6 +614,41 @@ hr#answer {
     # PRODUCTION MODEL
     # Fields: Prompt | Target | Aspect | Sample | Why | Tags
     # ------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # CLOZE MODEL (Tier-3 — uses Anki's built-in cloze type)
+    # Fields: Text | Hint | Tags | Audio | IPA | Timeline
+    # ------------------------------------------------------------------
+    cloze_model = genanki.Model(
+        2056102007,
+        'Verb System · Cloze',
+        fields=[
+            {'name': 'Text'},
+            {'name': 'Hint'},
+            {'name': 'Tags'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Timeline'},
+        ],
+        templates=[{
+            'name': 'Cloze Card',
+            'qfmt': '''
+<div class="instruction">Fill in the missing form</div>
+<div class="sentence">{{cloze:Text}}</div>
+{{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
+''',
+            'afmt': '''
+<div class="instruction">Fill in the missing form</div>
+<div class="sentence">{{cloze:Text}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+{{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
+{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+''',
+        }],
+        css=css,
+        model_type=genanki.Model.CLOZE,
+    )
+
     pro_model = genanki.Model(
         2056102006,  # bumped
         'Verb System · Production (v2)',
@@ -614,15 +703,22 @@ hr#answer {
         ('11', 'rec'): 2056102101, ('11', 'con'): 2056102102, ('11', 'pro'): 2056102103,
         ('12', 'rec'): 2056102201, ('12', 'con'): 2056102202, ('12', 'pro'): 2056102203,
         ('13', 'rec'): 2056102301, ('13', 'con'): 2056102302, ('13', 'pro'): 2056102303,
+        # Cloze decks (Tier 3)
+        ('01', 'clz'): 2056101104, ('02', 'clz'): 2056101204, ('03', 'clz'): 2056101304,
+        ('04', 'clz'): 2056101404, ('05', 'clz'): 2056101504, ('06', 'clz'): 2056101604,
+        ('07', 'clz'): 2056101704, ('08', 'clz'): 2056101804, ('09', 'clz'): 2056101904,
+        ('10', 'clz'): 2056102004, ('11', 'clz'): 2056102104, ('12', 'clz'): 2056102204,
+        ('13', 'clz'): 2056102304,
     }
-    TYPE_SUFFIX = {'rec': '::1 - Recognition', 'con': '::2 - Contrast', 'pro': '::3 - Production'}
+    TYPE_SUFFIX = {'rec': '::1 - Recognition', 'con': '::2 - Contrast',
+                   'pro': '::3 - Production', 'clz': '::4 - Cloze'}
 
     decks = {}
     for (mod, typ), did in DECK_IDS.items():
         name = MODULE_NAMES[mod] + TYPE_SUFFIX[typ]
         decks[(mod, typ)] = genanki.Deck(did, name)
 
-    counts = {'rec': 0, 'con': 0, 'pro': 0}
+    counts = {'rec': 0, 'con': 0, 'pro': 0, 'clz': 0}
     media_counts = {'audio': 0, 'ipa': 0, 'timeline': 0}
 
     # Tier-2 media indices
@@ -630,19 +726,19 @@ hr#answer {
 
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
-    # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
+    # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | WhenNotToUse | Tags
     for row in rec_rows:
-        if len(row) < 8:
-            row += [''] * (8 - len(row))
-        mod = row_module(row[7])
+        if len(row) < 9:
+            row += [''] * (9 - len(row))
+        mod = row_module(row[8])  # Tags now at index 8
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[1])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
         note = genanki.Note(
             model=rec_model,
-            fields=row[:8] + [audio_f, ipa_f, tl_f],
-            tags=row[7].split(),
+            fields=row[:9] + [audio_f, ipa_f, tl_f],
+            tags=row[8].split(),
         )
         decks[(mod, 'rec')].add_note(note)
         counts['rec'] += 1
@@ -687,6 +783,29 @@ hr#answer {
         decks[(mod, 'pro')].add_note(note)
         counts['pro'] += 1
 
+    # Cloze (Tier 3)
+    counts['clz'] = 0
+    cloze_path = Path('conjugations_cloze.txt')
+    if cloze_path.exists():
+        _, cloze_rows = load_tsv(str(cloze_path))
+        for row in cloze_rows:
+            if len(row) < 3:
+                row += [''] * (3 - len(row))
+            mod = row_module(row[2])
+            # For cloze, the spoken sentence is the cloze Text with the
+            # {{c1::…}} markers stripped — that's the natural English audio.
+            spoken = re.sub(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}', r'\1', row[0])
+            audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label='')
+            if audio_f: media_counts['audio'] += 1
+            if ipa_f: media_counts['ipa'] += 1
+            note = genanki.Note(
+                model=cloze_model,
+                fields=row[:3] + [audio_f, ipa_f, tl_f],
+                tags=row[2].split(),
+            )
+            decks[(mod, 'clz')].add_note(note)
+            counts['clz'] += 1
+
     out = 'english_verb_system_anki.apkg'
     package = genanki.Package(list(decks.values()))
     package.media_files = media_files
@@ -696,6 +815,7 @@ hr#answer {
     print(f'  recognition: {counts["rec"]}')
     print(f'  contrast:    {counts["con"]}')
     print(f'  production:  {counts["pro"]}')
+    print(f'  cloze:       {counts["clz"]}')
     print(f'  total:       {sum(counts.values())}')
     print(f'Media bundled: {len(media_files)} files '
           f'(audio={media_counts["audio"]}, ipa={media_counts["ipa"]}, '
