@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.3.0'
+VERSION = '2.3.1'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -419,9 +419,17 @@ def main():
   --shadow-image:   0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Dark theme tokens (Anki sets either .nightMode OR .night_mode on <body>) */
-.nightMode .card,
-.night_mode .card {
+/* Dark theme tokens.
+   Anki applies its night-mode class in DIFFERENT ways across versions
+   and clients — sometimes on <body>, sometimes directly on .card itself,
+   and the class name is .nightMode (Desktop / AnkiMobile) OR .night_mode
+   (AnkiDroid / Krassowski legacy add-on). We cover ALL combinations
+   below + add a prefers-color-scheme fallback for any future client. */
+.card.nightMode,  .card.night_mode,
+.nightMode .card, .night_mode .card,
+.nightMode.card, .night_mode.card,
+body.nightMode .card, body.night_mode .card,
+html.nightMode .card, html.night_mode .card {
   --bg-card:        #0f172a;
   --bg-surface:     #1e293b;
   --bg-surface-2:   #334155;
@@ -447,6 +455,34 @@ def main():
   --cloze-fg:       #93c5fd;
 
   --shadow-image:   0 2px 8px rgba(0,0,0,0.5);
+}
+/* Belt-and-braces: if Anki ever forgets to add the class but the OS/app
+   reports dark mode, still flip our tokens. Anki's own preferences UI
+   exposes a "Match OS" toggle that goes through this path. */
+@media (prefers-color-scheme: dark) {
+  .card {
+    --bg-card:        #0f172a;
+    --bg-surface:     #1e293b;
+    --bg-surface-2:   #334155;
+    --fg-strong:      #f8fafc;
+    --fg-default:     #e2e8f0;
+    --fg-muted:       #cbd5e1;
+    --fg-faint:       #94a3b8;
+    --fg-fainter:     #64748b;
+    --border-default: #334155;
+    --border-muted:   #475569;
+    --border-strong:  #64748b;
+    --success-bg:     #064e3b;  --success-fg:    #bbf7d0;  --success-border: #047857;
+    --info-bg:        #1e3a8a;  --info-fg:       #dbeafe;  --info-border:    #2563eb;
+    --warn-bg:        #422006;  --warn-fg:       #fef3c7;  --warn-border:    #92400e;
+    --danger-bg:      #450a0a;  --danger-fg:     #fecaca;  --danger-border:  #b91c1c;
+    --hint-bg:        #052e16;  --hint-fg:       #bbf7d0;  --hint-border:    #22c55e;
+    --ipa-bg:         #422006;  --ipa-fg:        #fef3c7;  --ipa-key-fg:     #fde68a;  --ipa-border: #92400e;
+    --sample-fg:      #93c5fd;
+    --target-bg:      #1e3a8a;  --target-fg:     #dbeafe;  --target-border:  #2563eb;
+    --cloze-fg:       #93c5fd;
+    --shadow-image:   0 2px 8px rgba(0,0,0,0.5);
+  }
 }
 
 /* ============================================================
@@ -681,8 +717,13 @@ input[type=text],
 .timeline-box img { max-width: 100%; height: auto; display: inline-block; }
 /* Timeline SVGs are line drawings on transparent BG; invert in dark mode
    so the strokes become bright. Keeps a single asset usable for both themes. */
-.nightMode .timeline-box img,
-.night_mode .timeline-box img { filter: invert(0.92) hue-rotate(180deg); }
+.card.nightMode .timeline-box img, .card.night_mode .timeline-box img,
+.nightMode .timeline-box img,    .night_mode .timeline-box img {
+  filter: invert(0.92) hue-rotate(180deg);
+}
+@media (prefers-color-scheme: dark) {
+  .timeline-box img { filter: invert(0.92) hue-rotate(180deg); }
+}
 
 .image-box {
   margin: 14px auto;
