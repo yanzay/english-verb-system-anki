@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.1.0'
+VERSION = '3.1.1'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1001,8 +1001,14 @@ mark.focus {
     # Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
     # ------------------------------------------------------------------
     con_model = ap.Model(
-        2056102005,  # bumped
-        'Verb System · Contrast (v2)',
+        2056102016,  # bumped (was 2056102005): added Instruction +
+                     # Category fields. v3.1.1 brings the v3.1.0
+                     # taxonomy from Recognition to Contrast cards too,
+                     # so the prompt names the EXPECTED answer category
+                     # ("Which tense + aspect fits…?" vs "Which modal
+                     # fits…?") instead of the muddled "Which form
+                     # fits this sentence?".
+        'Verb System · Contrast (v3)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'OptionA'},
@@ -1014,12 +1020,14 @@ mark.focus {
             {'name': 'Audio'},
             {'name': 'IPA'},
             {'name': 'Timeline'},
+            {'name': 'Instruction'},  # category-aware: "Which X fits this sentence?"
+            {'name': 'Category'},     # one of 15 grammatical categories
         ],
         templates=[{
             'name': 'Contrast Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Which form fits this sentence?</div>
+<div class="instruction">{{Instruction}}</div>
 <div class="sentence">{{Sentence}}</div>
 <div class="options">
   <div class="option"><span class="opt-letter">A.</span>{{OptionA}}</div>
@@ -1029,7 +1037,7 @@ mark.focus {
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Which form fits this sentence?</div>
+<div class="instruction">{{Instruction}}</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
@@ -1112,8 +1120,12 @@ mark.focus {
     # Fields: Text | Hint | Tags | Audio | IPA | Timeline
     # ------------------------------------------------------------------
     cloze_model = ap.Model(
-        2056102007,
-        'Verb System · Cloze',
+        2056102017,  # bumped (was 2056102007): added Instruction +
+                     # Category fields. v3.1.1 makes the cloze prompt
+                     # name the expected answer category — e.g. "Fill
+                     # in the missing tense + aspect" instead of the
+                     # generic "Fill in the missing form".
+        'Verb System · Cloze (v2)',
         fields=[
             {'name': 'Text'},
             {'name': 'Hint'},
@@ -1121,19 +1133,21 @@ mark.focus {
             {'name': 'Audio'},
             {'name': 'IPA'},
             {'name': 'Timeline'},
+            {'name': 'Instruction'},  # category-aware: "Fill in the missing X"
+            {'name': 'Category'},
         ],
         templates=[{
             'name': 'Cloze Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Fill in the missing form</div>
+<div class="instruction">{{Instruction}}</div>
 <div class="sentence">{{cloze:Text}}</div>
 {{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
 </div>
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Fill in the missing form</div>
+<div class="instruction">{{Instruction}}</div>
 <div class="sentence">{{cloze:Text}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 {{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
@@ -1147,10 +1161,15 @@ mark.focus {
     )
 
     pro_model = ap.Model(
-        2056102011,  # was 2056102007 — collided with cloze_model
-        'Verb System · Production (v3)',
+        2056102018,  # bumped (was 2056102011): added Instruction +
+                     # Category fields. v3.1.1 makes the production
+                     # prompt name the expected answer category — e.g.
+                     # "Write a sentence using the target tense + aspect"
+                     # vs "...using the target modal" vs "...using the
+                     # target conditional type".
+        'Verb System · Production (v4)',
         fields=[
-            {'name': 'Prompt'},
+            {'name': 'Prompt'},        # the sentence-stem (NL or schema task)
             {'name': 'Target'},
             {'name': 'Aspect'},
             {'name': 'Sample'},
@@ -1159,12 +1178,14 @@ mark.focus {
             {'name': 'Audio'},
             {'name': 'IPA'},
             {'name': 'Timeline'},
+            {'name': 'Instruction'},   # category-aware: "Write a sentence using the target X"
+            {'name': 'Category'},
         ],
         templates=[{
             'name': 'Production Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Write a sentence using the target form</div>
+<div class="instruction">{{Instruction}}</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
 {{type:Sample}}
@@ -1172,7 +1193,7 @@ mark.focus {
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Write a sentence in English</div>
+<div class="instruction">{{Instruction}}</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
 </div>
@@ -1564,7 +1585,11 @@ mark.focus {
             sentence, count=1,
         )
 
-    # ── Grammatical category classifier (v3.1.0) ─────────────────────
+    # ── Grammatical category classifier (v3.1.0+) ────────────────────
+    # Module-level so Recognition + Contrast + Cloze + Production all
+    # share the same taxonomy. Plus a few extra rules for the wider
+    # vocabulary used by Contrast (Formal/Informal, single-word answers
+    # like "have"/"are") and Production (Modal Paraphrase, Tense Change).
     # English verb-system Labels conflate tense, aspect, mood, voice,
     # modality, and various sentence-level constructions. Premium
     # pedagogy demands precision: we classify each Label into one of
@@ -1589,6 +1614,14 @@ mark.focus {
     # the same taxonomy in the prompt itself.
     _CATPATS = [
         # Order matters: more specific first. Each rule is a (pattern, category).
+        # Register / pragmatic axis (Contrast cards):
+        (r'^(formal|informal|neutral|colloquial|academic|spoken|written|literary)$', 'register'),
+        # Aux-verb single-word answers in Contrast (am/is/are/was/were/has/have/had/do/does/did)
+        (r'^(am|is|are|was|were|has|have|had|do|does|did|will|would|shall|should|can|could|may|might|must|ought|need)$', 'aux-form'),
+        # Production targets
+        (r'modal paraphrase|tense change|contraction expansion|register shift|active.{0,4}passive|passive.{0,4}active|paraphrase|transformation|nominalisation|nominalization', 'transformation'),
+        # Discourse semantics
+        (r'epistemic|deontic|dynamic.{0,4}modality', 'modal'),
         (r'connected speech|reduction|contraction|stress|linking|t[- ]flap|weak form|schwa|elision|intonation|assimilation|silent letter|word stress|sentence stress|prosody|rhythm', 'phonology'),
         (r'phrasal verb|particle verb', 'phrasal-verb'),
         (r'reported speech|indirect speech|direct speech|backshift', 'reported-speech'),
@@ -1630,6 +1663,9 @@ mark.focus {
         'phrasal-verb':            'Identify the highlighted phrasal verb',
         'reported-speech':         'Identify the highlighted reported-speech form',
         'phonology':               'Identify the highlighted pronunciation feature',
+        'register':                'Identify the highlighted register',
+        'aux-form':                'Identify the highlighted auxiliary',
+        'transformation':          'Identify the highlighted transformation',
     }
     _CAT_PROMPTS_BARE = {
         'tense-aspect':            'Name this tense + aspect',
@@ -1644,6 +1680,62 @@ mark.focus {
         'phrasal-verb':            'Name this phrasal verb',
         'reported-speech':         'Name this reported-speech form',
         'phonology':               'Name this pronunciation feature',
+        'register':                'Name this register',
+        'aux-form':                'Name this auxiliary',
+        'transformation':          'Name this transformation',
+    }
+    # Per-card-type prompts (Contrast/Cloze/Production are not "Name X"
+    # — they're "Choose / Fill / Write a sentence X").
+    _CAT_PROMPTS_CONTRAST = {
+        'tense-aspect':            'Which tense + aspect fits this sentence?',
+        'modal':                   'Which modal fits this sentence?',
+        'voice':                   'Which voice fits this sentence?',
+        'mood':                    'Which mood fits this sentence?',
+        'conditional':             'Which conditional type fits this sentence?',
+        'non-finite':              'Which non-finite form fits this sentence?',
+        'periphrastic-future':     'Which future construction fits this sentence?',
+        'periphrastic-past-habit': 'Which past-habit construction fits this sentence?',
+        'construction':            'Which construction fits this sentence?',
+        'phrasal-verb':            'Which phrasal verb fits this sentence?',
+        'reported-speech':         'Which reported-speech form fits this sentence?',
+        'phonology':               'Which pronunciation feature fits this sentence?',
+        'register':                'Which register fits this sentence?',
+        'aux-form':                'Which auxiliary fits this sentence?',
+        'transformation':          'Which transformation fits this sentence?',
+    }
+    _CAT_PROMPTS_CLOZE = {
+        'tense-aspect':            'Fill in the missing tense + aspect',
+        'modal':                   'Fill in the missing modal',
+        'voice':                   'Fill in the missing passive form',
+        'mood':                    'Fill in the missing mood',
+        'conditional':             'Fill in the missing conditional form',
+        'non-finite':              'Fill in the missing non-finite form',
+        'periphrastic-future':     'Fill in the missing future construction',
+        'periphrastic-past-habit': 'Fill in the missing past-habit construction',
+        'construction':            'Fill in the missing construction',
+        'phrasal-verb':            'Fill in the missing phrasal verb',
+        'reported-speech':         'Fill in the missing reported-speech form',
+        'phonology':               'Fill in the missing pronunciation feature',
+        'register':                'Fill in the missing register',
+        'aux-form':                'Fill in the missing auxiliary',
+        'transformation':          'Fill in the missing form',
+    }
+    _CAT_PROMPTS_PROD = {
+        'tense-aspect':            'Write a sentence using the target tense + aspect',
+        'modal':                   'Write a sentence using the target modal',
+        'voice':                   'Write a sentence using the target passive form',
+        'mood':                    'Write a sentence using the target mood',
+        'conditional':             'Write a sentence using the target conditional type',
+        'non-finite':              'Write a sentence using the target non-finite form',
+        'periphrastic-future':     'Write a sentence using the target future construction',
+        'periphrastic-past-habit': 'Write a sentence using the target past-habit construction',
+        'construction':            'Write a sentence using the target construction',
+        'phrasal-verb':            'Write a sentence using the target phrasal verb',
+        'reported-speech':         'Write a sentence using the target reported-speech form',
+        'phonology':               'Write a sentence using the target pronunciation feature',
+        'register':                'Write a sentence in the target register',
+        'aux-form':                'Write a sentence using the target auxiliary',
+        'transformation':          'Apply the target transformation',
     }
     def _prompt_for(focused_html: str, label: str, sentence: str) -> str:
         """Always-honest instruction: announces both the category of the
@@ -1758,11 +1850,15 @@ mark.focus {
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
         
-        # Create regular contrast note
+        # Create regular contrast note. Category is inferred from the
+        # Answer field (col 3); see _category_for above. The Instruction
+        # is "Which X fits this sentence?" with X = the answer category.
+        cat = _category_for(row[3])
+        instruction = _CAT_PROMPTS_CONTRAST[cat]
         note = ap.Note(
             model=con_model,
-            fields=row[:7] + [audio_f, ipa_f, tl_f],
-            tags=row[6].split(),
+            fields=row[:7] + [audio_f, ipa_f, tl_f, instruction, cat],
+            tags=row[6].split() + [f'cat:{cat}'],
         )
         for _mod in mods:
             decks[(_mod, 'con')].add_note(note)
@@ -1793,10 +1889,15 @@ mark.focus {
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
+        # Production: classify on Target field (col 1). Instruction is
+        # "Write a sentence using the target X" — e.g. "...using the
+        # target tense + aspect" / "...using the target modal".
+        cat = _category_for(row[1])
+        instruction = _CAT_PROMPTS_PROD[cat]
         note = ap.Note(
             model=pro_model,
-            fields=row[:6] + [audio_f, ipa_f, tl_f],
-            tags=row[5].split(),
+            fields=row[:6] + [audio_f, ipa_f, tl_f, instruction, cat],
+            tags=row[5].split() + [f'cat:{cat}'],
         )
         for _mod in mods:
             decks[(_mod, 'pro')].add_note(note)
@@ -1817,10 +1918,17 @@ mark.focus {
             audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label='')
             if audio_f: media_counts['audio'] += 1
             if ipa_f: media_counts['ipa'] += 1
+            # Cloze: classify from the row's tags (e.g. 'present-c' tag
+            # indicates Present Continuous → tense-aspect). Hint field
+            # often also names the form ("Present Continuous, action…").
+            cloze_tags = row[2]
+            cloze_label = (row[1] or '') + ' ' + cloze_tags  # combine for classifier
+            cat = _category_for(cloze_label)
+            instruction = _CAT_PROMPTS_CLOZE[cat]
             note = ap.Note(
                 model=cloze_model,
-                fields=row[:3] + [audio_f, ipa_f, tl_f],
-                tags=row[2].split(),
+                fields=row[:3] + [audio_f, ipa_f, tl_f, instruction, cat],
+                tags=row[2].split() + [f'cat:{cat}'],
             )
             for _mod in mods:
                 decks[(_mod, 'clz')].add_note(note)
