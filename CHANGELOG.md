@@ -2,6 +2,38 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [2.1.0] - 2026-05-15
+
+### Removed
+- ** PyPI dependency.** Eliminated the last vestige of the legacy
+  packager. The  file in this repo is now a drop-in *shim*
+  built directly on top of the official  API. The shim
+  exposes the tiny subset of genanki we use (, , ,
+  ) so 1,287 lines of model/template/note construction code in
+   continue to work unchanged.
+-  (no longer needed — the shim writes
+  the modern .apkg directly).
+-  standalone import workaround.
+
+### Changed
+-  no longer pins .
+-  is now a no-op stub (preset is created via the
+  proper Anki backend API inside the shim's ).
+
+### Why this matters
+The shim creates the FSRS preset and binds every deck to it via
+ *during* the export step, then exports
+with . Result: a modern v18 .apkg
+whose preset auto-applies to all 68 sub-decks the moment the user
+imports it in Anki Desktop 23.10+. Acid-tested with round-trip import
+into a fresh Collection: every sub-deck binds to English Verb System
+preset (FSRS on, retention 0.9, 10 new/day, 150 reviews/day).
+
+### Verified
+- 3,063 notes, 3,297 cards, 7 models, 3,011 media files (109 MB .apkg)
+- 0 validator errors, 0 warnings
+- 100% of non-default decks bound to FSRS preset on import
+
 ## [2.0.0] - 2026-05-15
 
 ### 🎉 The "Preset That Actually Works" Release

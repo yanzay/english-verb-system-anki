@@ -36,13 +36,17 @@ CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CH
 
 
 def ensure_genanki():
+    """Verify the official `anki` package is installed (our genanki shim
+    is a drop-in built on top of `anki.Collection`).
+    """
     try:
-        import genanki  # noqa: F401
+        import anki  # noqa: F401
         return
     except ImportError:
         pass
+    print('  [setup] official `anki` package not found; installing…')
     subprocess.check_call([sys.executable, '-m', 'pip', 'install',
-                           '--user', '--break-system-packages', 'genanki'])
+                           '--user', '--break-system-packages', 'anki>=24.0'])
 
 
 def load_tsv(path):
@@ -222,6 +226,17 @@ def media_for_sentence(sentence, ipa_index, timeline_index, label=''):
 
 
 def embed_fsrs_preset(apkg_path):
+    """DEPRECATED in v2.0: superseded by genanki-shim's official-anki path.
+
+    The genanki package now in this repo (see ./genanki.py) is a drop-in
+    shim built on `anki.Collection` that creates the FSRS preset and binds
+    every deck to it during the export step itself. This SQLite-hackery
+    fallback is kept only as a safety net and is NOT called by main().
+    """
+    pass
+
+
+def _embed_fsrs_preset_legacy(apkg_path):
     """Post-process the .apkg to embed a recommended FSRS deck-options preset.
 
     genanki 0.13 ships the package with Anki's stock SM-2 dconf and no
@@ -1244,24 +1259,9 @@ hr#answer {
     package.media_files = media_files
     package.write_to_file(out)
 
-    # ── v2.0: repackage through the official `anki` library so the deck
-    # preset auto-binds on import (genanki produces legacy v11 format
-    # whose deck-options Anki silently discards on import). The repackager
-    # imports the genanki output, binds every deck to our preset using
-    # the proper backend API, then re-exports with `with_deck_configs=true`
-    # in the modern .anki21b format. Anki Desktop 23.10+ then auto-creates
-    # the preset and applies it to every imported deck — no manual step.
-    try:
-        from repackage_with_official_anki import repackage as _repackage
-    except Exception as _e:
-        print(f'  [repackage] could not import repackager: {_e}')
-        print(f'  [repackage] falling back to legacy embed_fsrs_preset (preset will NOT auto-bind)')
-        embed_fsrs_preset(out)
-    else:
-        rc = _repackage(Path(out), Path(out))
-        if rc != 0:
-            print(f'\n✗ Repackage failed (rc={rc}). Aborting.')
-            sys.exit(rc)
+    # v2.0: the genanki shim (./genanki.py) builds the .apkg directly via
+    # `anki.Collection`, so it's already in modern format with the FSRS
+    # preset bound to every deck. No post-processing repackage step needed.
 
     # Post-build integrity check: round-trip through SQLite to catch
     # model-id collisions, field-count mismatches, dangling references, etc.
