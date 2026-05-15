@@ -2,6 +2,56 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [2.3.0] - 2026-05-15
+
+### Changed
+- **Complete CSS rewrite as a design-system with semantic tokens.**
+  All ~50 hardcoded colors that had been scattered across the
+  stylesheet are now consolidated into two CSS-variable blocks at
+  the top of the file: one light-theme token set, one dark-theme
+  token set. Every class below the tokens uses `var(--*)` so
+  switching themes is automatic and impossible to miss.
+
+### Fixed
+- **Many field values that were invisible on Anki dark theme are
+  now properly themed.** Previously the dark-mode override block
+  covered only `.option`, `.answer-correct`, `.info-box` and a
+  few others; classes like `.meta-key`, `.meta-val`, `.info-key`,
+  `.info-val`, `.why-block`, `.tip-block`, `.target-badge`,
+  `.sample-label`, `.sample-answer`, `.attribution`, `.cloze`
+  inherited the original light-theme colors and showed as nearly-
+  black-on-near-black. With the design-system rewrite they now
+  pick up the dark token automatically.
+- Timeline SVGs (drawn with dark strokes on transparent background)
+  are now `filter: invert(0.92) hue-rotate(180deg)` in dark mode,
+  so they remain legible against the dark card background without
+  needing two separate asset sets.
+- Anki's `{{type:Sample}}` rendered comparison table (typeans /
+  typeGood / typeBad / typeMissed classes) now picks up themed
+  colors so the input box and result diff are readable on dark.
+- Added `color-scheme: light dark` on `.card` so native form
+  controls (especially the type-in-the-answer input on iOS/iPadOS
+  WebKit) render with theme-matching default chrome.
+- New `.attribution` class (image-cue back side) styled and
+  themed for proper visibility in both modes.
+
+### Token taxonomy
+```
+--bg-card  --bg-surface  --bg-surface-2
+--fg-strong --fg-default --fg-muted --fg-faint --fg-fainter
+--border-default --border-muted --border-strong
+--success-* --info-* --warn-* --danger-* --hint-*
+--ipa-* --sample-fg --target-* --cloze-fg
+--shadow-image
+```
+Every semantic accent ships as a triplet (-bg / -fg / -border) so
+new callout components can reuse the system without inventing
+new colors.
+
+### Build verified
+3,063 notes · 3,297 cards · 0 errors · 0 warnings · preset still
+auto-binds on import.
+
 ## [2.2.0] - 2026-05-15
 
 ### Changed
