@@ -166,6 +166,57 @@ python3 build_anki_package.py
 `build_audio.py --dry-run --limit 10` is the recommended cost-free smoke test
 before committing a full re-render.
 
+## Cloning the repository (Git LFS)
+
+Audio (`media/audio/*.mp3`), IPA (`media/ipa/*.txt`), timeline diagrams
+(`media/timelines/*.svg`), image-cue photos (`media/images/*.jpg`), and
+the built `.apkg` are all stored in **Git LFS** to keep the repository
+fast and under GitHub's hard size limit.
+
+You need [Git LFS](https://git-lfs.github.com/) installed once on your
+machine before cloning:
+
+```bash
+# macOS
+brew install git-lfs
+
+# Ubuntu / Debian
+sudo apt install git-lfs
+
+# After install (one-time):
+git lfs install
+```
+
+Then clone normally — LFS files download transparently:
+
+```bash
+git clone https://github.com/yanzay/english-verb-system-anki.git
+cd english-verb-system-anki
+```
+
+If you cloned **before** installing LFS, fix the working tree with:
+
+```bash
+git lfs install
+git lfs pull
+```
+
+You can verify the working tree is healthy with:
+
+```bash
+file media/audio/00516b6462bf.mp3   # → "Audio file with ID3..."
+file media/images/00516b6462bf.jpg  # → "JPEG image data..."
+```
+
+If those say `ASCII text`, you have LFS pointers instead of real files —
+run `git lfs pull` to resolve.
+
+**For users who only want the `.apkg`**: download the latest release from
+the [GitHub Releases page](https://github.com/yanzay/english-verb-system-anki/releases)
+or pull just that file: `git lfs pull --include="*.apkg"`.
+
+---
+
 ## How to build and import
 
 ### Step 1 — Install dependencies
