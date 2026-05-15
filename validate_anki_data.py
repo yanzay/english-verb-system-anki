@@ -169,6 +169,86 @@ ALLOWED_LABELS = {
     'Bare Infinitive (Help)',
     'Perfect Infinitive', 'Perfect Gerund', 'Perfect Participle',
     'Present Participle (Adverbial)',
+    # ─── Tier 1 expansions: missing topic clusters ───
+    # Auxiliary ellipsis
+    'Auxiliary Ellipsis (So + Aux + Subject)',
+    'Auxiliary Ellipsis (Neither/Nor + Aux + Subject)',
+    'Auxiliary Ellipsis (Short Reply)',
+    # Tag questions
+    'Tag Question (Positive Statement)', 'Tag Question (Negative Statement)',
+    'Tag Question (Imperative)', 'Tag Question (Modal)',
+    # Raising vs control
+    'Raising Verb (Seem/Appear)', 'Control Verb (Want/Promise/Manage)',
+    # Ditransitive passive
+    'Ditransitive Passive (Recipient Subject)',
+    'Ditransitive Passive (Theme Subject)',
+    # Ergative / middle voice
+    'Ergative (Inchoative)', 'Middle Voice (Generic)',
+    # Reduced relative clauses
+    'Reduced Relative (Present Participle)', 'Reduced Relative (Past Participle)',
+    # Double passive
+    'Double Passive (be + V-ed + to be + V-ed)',
+    # Inversion after negative adverbials
+    'Negative Inversion (Hardly/Scarcely)', 'Negative Inversion (Not Only)',
+    'Negative Inversion (Never/Seldom/Rarely)', 'Negative Inversion (No Sooner)',
+    'Negative Inversion (Only After/When)',
+    # Inverted conditionals (third)
+    'Inverted Conditional (Should — First)',
+    # Light/delexical verbs
+    'Light Verb (Have)', 'Light Verb (Take)', 'Light Verb (Make)',
+    'Light Verb (Do)', 'Light Verb (Give)',
+    # Formal BE + to-infinitive
+    'Be + To-Infinitive (Formal Future)',
+    # Shall
+    'Shall (Suggestion)', 'Shall (Formal Future)',
+    # Semi-modals
+    'Semi-Modal (Dare)', 'Semi-Modal (Need)',
+    'Modal (Would Rather)', 'Modal (Would Sooner)',
+    # Suppose / supposing / provided / providing
+    'Suppose (Conditional Suggestion)', 'Supposing (Hypothetical)',
+    'Providing (Conditional)', 'On Condition That',
+    'In Case (Precaution)',
+    # Comparative inversion
+    'Comparative Correlative (The …er, the …er)',
+    # Even if / even though
+    'Even If (Hypothetical Concession)', 'Even Though (Real Concession)',
+    # Implicit conditional
+    'Implicit Conditional (Coordination)',
+    # Future-in-the-past
+    'Future-in-the-Past (Was Going To)', 'Future-in-the-Past (Would)',
+    'Future-in-the-Past (Was About To)',
+    # Narrative tense layering
+    'Narrative Layering (Past Simple + Past Continuous + Past Perfect)',
+    # Modal + perfect continuous
+    'Modal Perfect Continuous (Must Have Been V-ing)',
+    'Modal Perfect Continuous (Should Have Been V-ing)',
+    'Modal Perfect Continuous (Could Have Been V-ing)',
+    # Embedded / indirect questions
+    'Embedded Question (Yes/No)', 'Embedded Question (Wh-)',
+    # Reporting verb patterns
+    'Reporting Verb (Admit + V-ing)', 'Reporting Verb (Deny + V-ing)',
+    'Reporting Verb (Suggest + V-ing)', 'Reporting Verb (Accuse Of + V-ing)',
+    'Reporting Verb (Apologise For + V-ing)', 'Reporting Verb (Blame For + V-ing)',
+    'Reporting Verb (Promise + To-Inf)', 'Reporting Verb (Refuse + To-Inf)',
+    # Backshift exceptions
+    'Reported Speech (Universal Truth — No Backshift)',
+    'Reported Speech (Conditional 2/3 — No Backshift)',
+    # Wish + would
+    'Wish (Annoyance — Would)', 'Wish (Polite Request — Would)',
+    # AmE vs BrE
+    'Past Simple (American Variant)', 'Present Perfect (British Variant)',
+    # Habitual would
+    'Would (Habitual Past)', 'Used To (Habitual Past)',
+    # As if / as though nuanced
+    'As If / As Though (Past Perfect — Counterfactual)',
+    # It's high time
+    "It's High Time (Past Subjunctive)",
+    # Cleft with verbs
+    'Cleft Conditional (If It Weren\u2019t For)',
+    # Causative production/contrast labels
+    'Causative Have (Service)', 'Causative Get (Result)',
+    'Causative Make (Compulsion)', 'Causative Let (Permission)',
+    'Causative Help (Bare or To-Inf)',
 }
 
 # Permit any label that begins with one of these canonical prefixes (extension-friendly)
