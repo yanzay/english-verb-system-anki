@@ -728,6 +728,54 @@ hr#answer {
     )
 
     # ------------------------------------------------------------------
+    # SPOT-THE-ERROR MODEL (v1)
+    # Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
+    # Same schema as Contrast, but front shows strikethrough OptionA
+    # ------------------------------------------------------------------
+    spot_error_model = genanki.Model(
+        2056102006,  # new model ID
+        'Verb System · Spot-the-Error (v1)',
+        fields=[
+            {'name': 'Sentence'},
+            {'name': 'OptionA'},
+            {'name': 'OptionB'},
+            {'name': 'Answer'},
+            {'name': 'Why'},
+            {'name': 'Tip'},
+            {'name': 'Tags'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Timeline'},
+        ],
+        templates=[{
+            'name': 'Spot-the-Error Card',
+            'qfmt': '''
+<div class="instruction">Spot the error</div>
+<div class="sentence">{{Sentence}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+<div class="options">
+  <div class="option"><span class="opt-letter">ERROR:</span><s>{{OptionA}}</s></div>
+</div>
+''',
+            'afmt': '''
+<div class="instruction">Spot the error</div>
+<div class="sentence">{{Sentence}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+<div class="options">
+  <div class="option"><span class="opt-letter">ERROR:</span><s>{{OptionA}}</s></div>
+</div>
+<hr id="answer">
+<span class="answer-correct">✓ {{Answer}}: {{OptionB}}</span>
+{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+<div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
+''',
+        }],
+        css=css,
+    )
+
+    # ------------------------------------------------------------------
     # PRODUCTION MODEL
     # Fields: Prompt | Target | Aspect | Sample | Why | Tags
     # ------------------------------------------------------------------
@@ -805,6 +853,45 @@ hr#answer {
     )
 
     # ------------------------------------------------------------------
+    # REVERSE PRODUCTION (AUTO) MODEL (v1)
+    # Fields: Prompt | Sample | Why | Tags
+    # Auto-generated from recognition rows for B2+ learners
+    # ------------------------------------------------------------------
+    rev_pro_model = genanki.Model(
+        2056102008,  # new model ID
+        'Verb System · Reverse Production (Auto) (v1)',
+        fields=[
+            {'name': 'Prompt'},
+            {'name': 'Sample'},
+            {'name': 'Why'},
+            {'name': 'Tags'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Timeline'},
+        ],
+        templates=[{
+            'name': 'Reverse Production Card',
+            'qfmt': '''
+<div class="instruction">Produce a sentence</div>
+<div class="sentence">{{Prompt}}</div>
+{{type:Sample}}
+''',
+            'afmt': '''
+<div class="instruction">Produce a sentence</div>
+<div class="sentence">{{Prompt}}</div>
+<hr id="answer">
+<div class="sample-label">Sample answer</div>
+<div class="sample-answer">{{type:Sample}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#Why}}<div class="why-block"><span class="why-label">Note: </span>{{Why}}</div>{{/Why}}
+''',
+        }],
+        css=css,
+    )
+
+    # ------------------------------------------------------------------
     # Decks
     # ------------------------------------------------------------------
     DECK_IDS = {
@@ -842,6 +929,15 @@ hr#answer {
     # Tier-2 media indices
     ipa_index, timeline_index, media_files = load_media_indices()
 
+    # Load production samples for deduplication in reverse-production generation
+    existing_samples = set()
+    pro_path = Path('conjugations_production.txt')
+    if pro_path.exists():
+        _, pro_rows = load_tsv(str(pro_path))
+        for row in pro_rows:
+            if len(row) >= 4:
+                existing_samples.add(row[3].strip())  # Sample is column 3
+
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | WhenNotToUse | Tags
@@ -861,9 +957,52 @@ hr#answer {
         decks[(mod, 'rec')].add_note(note)
         counts['rec'] += 1
 
+    # Reverse Production (Auto) — generated from recognition rows
+    rev_pro_count = 0
+    standard_tenses = {
+        'Present Simple', 'Past Simple', 'Present Perfect',
+        'Present Perfect Continuous', 'Past Perfect', 'Past Perfect Continuous',
+        'Future Perfect', 'Future Continuous', 'Future Perfect Continuous',
+    }
+    cefr_b2_plus = {'cefr:b2', 'cefr:c1', 'cefr:c2'}
+    
+    for row in rec_rows:
+        if len(row) < 9:
+            row += [''] * (9 - len(row))
+        
+        label = row[1]
+        tags_str = row[8]
+        tags_set = set(tags_str.split())
+        
+        # Check if label is in standard tense set and CEFR is B2+
+        if label not in standard_tenses or not (tags_set & cefr_b2_plus):
+            continue
+        
+        sentence = row[0]  # The Sentence field as the prompt
+        formula = row[3]   # Formula for Why
+        
+        # Skip if sentence already exists in production samples
+        if sentence in existing_samples:
+            continue
+        
+        mod = row_module(tags_str)
+        audio_f, ipa_f, tl_f = media_for_sentence(sentence, ipa_index, timeline_index, label=label)
+        
+        # Create reverse production note
+        # Fields: Prompt | Sample | Why | Tags | Audio | IPA | Timeline
+        rev_pro_note = genanki.Note(
+            model=rev_pro_model,
+            fields=[sentence, sentence, formula, tags_str, audio_f, ipa_f, tl_f],
+            tags=tags_set.split() if isinstance(tags_set, str) else list(tags_set),
+        )
+        decks[(mod, 'pro')].add_note(rev_pro_note)
+        rev_pro_count += 1
+        existing_samples.add(sentence)
+
     # Contrast
     _, con_rows = load_tsv('conjugations_contrast.txt')
     # Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
+    spot_error_count = 0
     for row in con_rows:
         if len(row) < 7:
             row += [''] * (7 - len(row))
@@ -873,6 +1012,8 @@ hr#answer {
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
+        
+        # Create regular contrast note
         note = genanki.Note(
             model=con_model,
             fields=row[:7] + [audio_f, ipa_f, tl_f],
@@ -880,6 +1021,18 @@ hr#answer {
         )
         decks[(mod, 'con')].add_note(note)
         counts['con'] += 1
+        
+        # Create spot-the-error note if row has error-correction, l1-interference, or spot-the-error tag
+        tags_set = set(row[6].split())
+        error_tags = {'error-correction', 'l1-interference', 'spot-the-error'}
+        if tags_set & error_tags:
+            spot_note = genanki.Note(
+                model=spot_error_model,
+                fields=row[:7] + [audio_f, ipa_f, tl_f],
+                tags=row[6].split(),
+            )
+            decks[(mod, 'con')].add_note(spot_note)
+            spot_error_count += 1
 
     # Production
     _, pro_rows = load_tsv('conjugations_production.txt')
@@ -931,12 +1084,15 @@ hr#answer {
 
     embed_fsrs_preset(out)
 
+    total_cards = sum(counts.values()) + spot_error_count + rev_pro_count
     print(f'Built {out}')
     print(f'  recognition: {counts["rec"]}')
     print(f'  contrast:    {counts["con"]}')
+    print(f'  spot-the-error: {spot_error_count}')
     print(f'  production:  {counts["pro"]}')
+    print(f'  reverse-production (auto): {rev_pro_count}')
     print(f'  cloze:       {counts["clz"]}')
-    print(f'  total:       {sum(counts.values())}')
+    print(f'  total:       {total_cards}')
     print(f'Media bundled: {len(media_files)} files '
           f'(audio={media_counts["audio"]}, ipa={media_counts["ipa"]}, '
           f'timeline={media_counts["timeline"]})')
