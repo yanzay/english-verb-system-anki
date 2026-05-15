@@ -47,6 +47,15 @@ def load_tsv(path: Path):
         yield row
 
 
+CLOZE_RE = re.compile(r"\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}")
+
+
+def strip_cloze(text: str) -> str:
+    """Replace {{c1::form}} or {{c1::form::hint}} with just 'form' so the
+    sentence is naturally readable / pronounceable."""
+    return CLOZE_RE.sub(r"\1", text)
+
+
 def collect_sentences():
     sentences = set()
     for p, idx in [
@@ -59,6 +68,12 @@ def collect_sentences():
         for row in load_tsv(p):
             if len(row) > idx and row[idx].strip():
                 sentences.add(row[idx].strip())
+    # Tier-3 cloze sentences (strip {{c1::…}} markers first)
+    cloze_path = Path("conjugations_cloze.txt")
+    if cloze_path.exists():
+        for row in load_tsv(cloze_path):
+            if row and row[0].strip():
+                sentences.add(strip_cloze(row[0].strip()))
     return sorted(sentences)
 
 

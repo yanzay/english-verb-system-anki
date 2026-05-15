@@ -11,7 +11,7 @@ from pathlib import Path
 
 FILES = {
     'conjugations_recognition.txt': {
-        'header': ['Sentence', 'Label', 'Aspect', 'Formula', 'MainUse', 'QuickCue', 'Contrast', 'Tags'],
+        'header': ['Sentence', 'Label', 'Aspect', 'Formula', 'MainUse', 'QuickCue', 'Contrast', 'WhenNotToUse', 'Tags'],
         'required': ['Sentence', 'Label', 'Formula', 'MainUse', 'Tags'],
         'type': 'rec',
     },
@@ -24,6 +24,11 @@ FILES = {
         'header': ['Prompt', 'Target', 'Aspect', 'Sample', 'Why', 'Tags'],
         'required': ['Prompt', 'Target', 'Sample', 'Tags'],
         'type': 'pro',
+    },
+    'conjugations_cloze.txt': {
+        'header': ['Text', 'Hint', 'Tags'],
+        'required': ['Text', 'Tags'],
+        'type': 'cloze',
     },
 }
 
@@ -335,6 +340,12 @@ def validate_file(path, spec, errors):
             opt_b = field_map.get('OptionB', '').strip()
             if answer not in (opt_a, opt_b):
                 errors.append(f'{path}:{i}: Answer "{answer}" not in options ("{opt_a}" / "{opt_b}")')
+
+        # Cloze validation: must contain at least one {{c1::…}} marker
+        if type_ == 'cloze':
+            text = field_map.get('Text', '')
+            if '{{c' not in text or '::' not in text:
+                errors.append(f'{path}:{i}: cloze row missing {{c1::…}} marker')
 
         # Tag presence
         tags = field_map.get('Tags', '').strip()

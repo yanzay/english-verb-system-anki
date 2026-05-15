@@ -7,9 +7,11 @@ conditionals, passive voice, and stative/dynamic verb distinctions.
 
 | File | Purpose |
 |------|---------|
-| `conjugations_recognition.txt` | Recognition notes — 8 fields per row (546 rows) |
+| `conjugations_recognition.txt` | Recognition notes — 9 fields per row (546 rows) |
 | `conjugations_contrast.txt` | Contrast notes — 7 fields per row (296 rows) |
 | `conjugations_production.txt` | Production notes — 6 fields per row (271 rows) |
+| `conjugations_cloze.txt` | **Tier 3** — Cloze deletion notes (3 fields, 260 rows) |
+| `apply_taxonomy_tags.py` | **Tier 3** — auto-injects `register:* / frequency:* / domain:*` tags |
 | `anki_premium_schema_package.txt` | Schema and study strategy reference |
 | `build_anki_package.py` | Builds the `.apkg` package from the source files (Tier 1 + Tier 2 media) |
 | `build_audio.py` | **Tier 2** — generates one MP3 per unique sentence via Google Cloud TTS |
@@ -43,8 +45,11 @@ English Verb System
 └── 13 - L1 Interference (6 langs)    ( 33 / 25 / 10)
 
 Counts shown as Recognition / Contrast / Production.
-Total: 1,113 cards across 39 subdecks.
+Total: 1,113 basic cards + **260 Cloze cards** (Tier 3) = **1,373 cards across 52 subdecks**.
 ```
+
+Each module also has a `4 - Cloze` subdeck for fill-in-the-blank practice on
+high-impact verb forms (Tier 3).
 
 ## What each module covers
 
@@ -276,7 +281,7 @@ Present Simple (Stative) · Present Continuous (Dynamic Stative Shift)
 ## Notes
 
 - The build script auto-installs `genanki` if it is missing.
-- All 1,113 rows pass validation before each build.
+- All 1,373 rows pass validation before each build.
 - Cards route to the correct module subdeck automatically based on their tags.
 - See `ANKI_SETTINGS.md` for full recommended options including new cards/day,
   review limits, burying, leech thresholds, and tag-based filtering shortcuts.
