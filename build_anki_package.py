@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.0.0'
+VERSION = '2.2.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -384,6 +384,15 @@ def main():
   margin: 0 auto;
   padding: 4px 0;
 }
+
+/* ── Front side: centered prompt for distraction-free recall ── */
+.front {
+  text-align: center;
+}
+/* Children that would otherwise stretch full-width need centering too. */
+.front .options { align-items: center; }
+.front .option { display: inline-block; text-align: left; }
+.front .audio-row { display: flex; justify-content: center; }
 
 /* ── Front instruction line ── */
 .instruction {
@@ -743,14 +752,17 @@ hr#answer {
         templates=[{
             'name': 'Recognition Card',
             'qfmt': '''
+<div class="front">
 <div class="instruction">What tense or aspect is this?</div>
 <div class="sentence">{{Sentence}}</div>
-{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+</div>
 ''',
             'afmt': '''
+<div class="front">
 <div class="instruction">What tense or aspect is this?</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+</div>
 <hr id="answer">
 <div class="answer-label">{{Label}}</div>
 {{#Aspect}}<span class="answer-correct">{{Aspect}}</span>{{/Aspect}}
@@ -794,18 +806,21 @@ hr#answer {
         templates=[{
             'name': 'Contrast Card',
             'qfmt': '''
+<div class="front">
 <div class="instruction">Which label fits this sentence?</div>
 <div class="sentence">{{Sentence}}</div>
-{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 <div class="options">
   <div class="option"><span class="opt-letter">A.</span>{{OptionA}}</div>
   <div class="option"><span class="opt-letter">B.</span>{{OptionB}}</div>
 </div>
+</div>
 ''',
             'afmt': '''
+<div class="front">
 <div class="instruction">Which label fits this sentence?</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+</div>
 <div class="options">
   <div class="option"><span class="opt-letter">A.</span>{{OptionA}}</div>
   <div class="option"><span class="opt-letter">B.</span>{{OptionB}}</div>
@@ -844,19 +859,22 @@ hr#answer {
         templates=[{
             'name': 'Spot-the-Error Card',
             'qfmt': '''
+<div class="front">
+<div class="instruction">Spot the error</div>
+<div class="sentence">{{Sentence}}</div>
+<div class="options">
+  <div class="option"><span class="opt-letter">ERROR:</span><s>{{OptionA}}</s></div>
+</div>
+</div>
+''',
+            'afmt': '''
+<div class="front">
 <div class="instruction">Spot the error</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 <div class="options">
   <div class="option"><span class="opt-letter">ERROR:</span><s>{{OptionA}}</s></div>
 </div>
-''',
-            'afmt': '''
-<div class="instruction">Spot the error</div>
-<div class="sentence">{{Sentence}}</div>
-{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
-<div class="options">
-  <div class="option"><span class="opt-letter">ERROR:</span><s>{{OptionA}}</s></div>
 </div>
 <hr id="answer">
 <span class="answer-correct">✓ {{Answer}}: {{OptionB}}</span>
@@ -891,15 +909,19 @@ hr#answer {
         templates=[{
             'name': 'Cloze Card',
             'qfmt': '''
+<div class="front">
 <div class="instruction">Fill in the missing form</div>
 <div class="sentence">{{cloze:Text}}</div>
 {{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
+</div>
 ''',
             'afmt': '''
+<div class="front">
 <div class="instruction">Fill in the missing form</div>
 <div class="sentence">{{cloze:Text}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 {{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
+</div>
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
 {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 ''',
@@ -925,15 +947,19 @@ hr#answer {
         templates=[{
             'name': 'Production Card',
             'qfmt': '''
+<div class="front">
 <div class="instruction">Produce a sentence — type your answer below</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
 {{type:Sample}}
+</div>
 ''',
             'afmt': '''
+<div class="front">
 <div class="instruction">Produce a sentence</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
+</div>
 <hr id="answer">
 <div class="sample-label">Sample answer (compared to your input above)</div>
 <div class="sample-answer">{{type:Sample}}</div>
@@ -966,13 +992,17 @@ hr#answer {
         templates=[{
             'name': 'Reverse Production Card',
             'qfmt': '''
+<div class="front">
 <div class="instruction">Produce a sentence</div>
 <div class="sentence">{{Prompt}}</div>
 {{type:Sample}}
+</div>
 ''',
             'afmt': '''
+<div class="front">
 <div class="instruction">Produce a sentence</div>
 <div class="sentence">{{Prompt}}</div>
+</div>
 <hr id="answer">
 <div class="sample-label">Sample answer</div>
 <div class="sample-answer">{{type:Sample}}</div>
@@ -1009,13 +1039,17 @@ hr#answer {
         templates=[{
             'name': 'Image Cue Card',
             'qfmt': '''
+<div class="front">
 <div class="instruction">Describe what you see in one English sentence</div>
 {{#Image}}<div class="image-box">{{Image}}</div>{{/Image}}
 {{^Image}}<div class="instruction">[image not available — caption: {{ImageQuery}}]</div>{{/Image}}
+</div>
 ''',
             'afmt': '''
+<div class="front">
 <div class="instruction">Describe what you see</div>
 {{#Image}}<div class="image-box">{{Image}}</div>{{/Image}}
+</div>
 <hr id="answer">
 <div class="sentence">{{Caption}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
