@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.8.0'
+VERSION = '2.8.1'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -662,10 +662,14 @@ hr#answer {
   padding: 11px 14px;
   font-size: 0.88em;
   color: var(--fg-default);
-  margin-top: 12px;
+  /* Centered as a block within .answer-block, but key/value rows
+     inside stay left-aligned so the columns line up. */
+  margin: 12px auto 0;
+  max-width: 560px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  text-align: left;
 }
 .info-row { display: flex; gap: 8px; }
 .info-key {
