@@ -31,6 +31,9 @@ import sys
 import subprocess
 from pathlib import Path
 
+VERSION = '1.5.0'
+CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
+
 
 def ensure_genanki():
     try:
@@ -571,6 +574,14 @@ hr#answer {
   font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif;
   font-size: 0.95em;
 }
+.ipa-box summary {
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+}
+.ipa-box summary::-webkit-details-marker {
+  display: none;
+}
 .ipa-key {
   font-weight: 700;
   color: #92400e;
@@ -580,7 +591,14 @@ hr#answer {
   letter-spacing: 0.04em;
   margin-right: 6px;
 }
-.ipa-val { color: #78350f; }
+.ipa-val {
+  color: #78350f;
+  display: none;
+  margin-left: 4px;
+}
+.ipa-box[open] .ipa-val {
+  display: inline;
+}
 .timeline-box {
   margin: 10px 0;
   text-align: center;
@@ -609,8 +627,17 @@ hr#answer {
   background: #422006;
   border-color: #78350f;
 }
+.nightMode .ipa-box summary, .night_mode .ipa-box summary {
+  cursor: pointer;
+}
 .nightMode .ipa-key, .night_mode .ipa-key { color: #fde68a; }
-.nightMode .ipa-val, .night_mode .ipa-val { color: #fef3c7; }
+.nightMode .ipa-val, .night_mode .ipa-val {
+  color: #fef3c7;
+  display: none;
+}
+.nightMode .ipa-box[open] .ipa-val, .night_mode .ipa-box[open] .ipa-val {
+  display: inline;
+}
 .nightMode .audio-row, .night_mode .audio-row { color: #9ca3af; }
 
 /* ── Tier-3 additions: WhenNotToUse callout, cloze hint row ── */
@@ -706,7 +733,7 @@ hr#answer {
   <span class="meta-key">Main use</span><span class="meta-val">{{MainUse}}</span>
 </div>
 {{#WhenNotToUse}}<div class="when-not-box"><span class="when-not-key">🚫 Don't use when</span> <span class="when-not-val">{{WhenNotToUse}}</span></div>{{/WhenNotToUse}}
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 {{#QuickCue}}
 <div class="info-box">
   <div class="info-row"><span class="info-key">Quick cue</span><span class="info-val">{{QuickCue}}</span></div>
@@ -760,7 +787,7 @@ hr#answer {
 <span class="answer-correct">✓ {{Answer}}</span>
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
 <div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 {{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
 ''',
         }],
@@ -808,7 +835,7 @@ hr#answer {
 <span class="answer-correct">✓ {{Answer}}: {{OptionB}}</span>
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
 <div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 {{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
 ''',
         }],
@@ -847,7 +874,7 @@ hr#answer {
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 {{#Hint}}<div class="hint-row">💡 {{Hint}}</div>{{/Hint}}
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 ''',
         }],
         css=css,
@@ -885,7 +912,7 @@ hr#answer {
 <div class="sample-answer">{{type:Sample}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 <div class="why-block"><span class="why-label">Why this works: </span>{{Why}}</div>
 ''',
         }],
@@ -924,7 +951,7 @@ hr#answer {
 <div class="sample-answer">{{type:Sample}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 {{#Why}}<div class="why-block"><span class="why-label">Note: </span>{{Why}}</div>{{/Why}}
 ''',
         }],
@@ -968,7 +995,7 @@ hr#answer {
 <div class="target-badge">{{Form}}</div>
 <div class="why-block"><span class="why-label">Function: </span>{{Function}}</div>
 {{#Contrast}}<div class="tip-block"><span class="why-label">Contrast: </span>{{Contrast}}</div>{{/Contrast}}
-{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
 {{#Attribution}}<div class="hint-row" style="font-size:0.75em;opacity:0.7">📷 {{Attribution}}</div>{{/Attribution}}
 ''',
         }],
@@ -1005,10 +1032,12 @@ hr#answer {
                    'pro': '::3 - Production', 'clz': '::4 - Cloze',
                    'img': '::1 - Image Cue'}
 
+    deck_description = f'English Verb System v{VERSION} — Comprehensive tense, aspect, and mood study. <a href="{CHANGELOG_URL}">Changelog</a>'
+    
     decks = {}
     for (mod, typ), did in DECK_IDS.items():
         name = MODULE_NAMES[mod] + TYPE_SUFFIX[typ]
-        decks[(mod, typ)] = genanki.Deck(did, name)
+        decks[(mod, typ)] = genanki.Deck(did, name, description=deck_description)
 
     counts = {'rec': 0, 'con': 0, 'pro': 0, 'clz': 0}
     media_counts = {'audio': 0, 'ipa': 0, 'timeline': 0}
@@ -1206,7 +1235,7 @@ hr#answer {
     embed_fsrs_preset(out)
 
     total_cards = sum(counts.values()) + spot_error_count + rev_pro_count + img_count
-    print(f'Built {out}')
+    print(f'Built {out} (v{VERSION})')
     print(f'  recognition: {counts["rec"]}')
     print(f'  contrast:    {counts["con"]}')
     print(f'  spot-the-error: {spot_error_count}')
