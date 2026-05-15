@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.2'
+VERSION = '3.2.3'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1673,7 +1673,7 @@ mark.focus {
         (r'gerund|infinitive|participle', 'non-finite'),
         (r'subjunctive|imperative', 'mood'),
         (r'passive|middle voice', 'voice'),
-        (r'conditional|if[- ]clause|mixed cond|inverted cond', 'conditional'),
+        (r'conditional|if[- ]clause|mixed cond|inverted cond|supposing|suppose|providing|provided that|imagine|hypothetical|in case|unless|^wish\b|\bwish (i|you|he|she|we|they)|wish \(|if only|as if|as though|would rather|sooner.{0,4}than', 'conditional'),
         (r'used to|would \(habitual\)|habitual past', 'periphrastic-past-habit'),
         (r'going to|be about to|be to\b|be due to|be on the verge', 'periphrastic-future'),
         (r"\bmodal\b|\bmust\b|\bshould\b|\bought\b|\bneed\b|\bdare\b|\bcan\b|\bcould\b|\bmay\b|\bmight\b|have to|has to|had to", 'modal'),
@@ -1681,6 +1681,17 @@ mark.focus {
         # Anything else falls through to the canonical 12-cell grid.
     ]
     _CATPATS = [(re.compile(p, re.I), cat) for p, cat in _CATPATS]
+    # Words that genuinely belong to the canonical 12-cell grid. Used
+    # as a strict gate before falling through to 'tense-aspect': if the
+    # label contains NONE of these, it does NOT belong in Foundation.
+    # Otherwise advanced labels with no recognised category (e.g.
+    # 'Supposing (Hypothetical)') would silently land in Foundation
+    # and confuse beginner learners.
+    _TENSE_ASPECT_GATE = re.compile(
+        r'\b(present|past|future|simple|continuous|progressive|perfect|'
+        r'present-?perfect|past-?perfect|future-?perfect|'
+        r'narrative|historical|stative|dynamic)\b', re.I)
+
     def _category_for(label: str) -> str:
         L = label.strip()
         # Future tenses are tense-aspect, not modal:
@@ -1689,7 +1700,15 @@ mark.focus {
         for pat, cat in _CATPATS:
             if pat.search(L):
                 return cat
-        return 'tense-aspect'  # default: canonical grid
+        # Strict fallback: only land in Foundation if the label
+        # mentions a tense/aspect word. Anything else is a layered
+        # construction by default. This guarantees beginner Foundation
+        # decks are never polluted by advanced Labels (e.g. Supposing,
+        # Existential There, Cleft, Inversion) that happen to escape
+        # every regex above.
+        if _TENSE_ASPECT_GATE.search(L):
+            return 'tense-aspect'
+        return 'construction'
 
     # Honest, category-specific prompts. The phrase always names exactly
     # what kind of grammatical answer is expected — no more "Name this
