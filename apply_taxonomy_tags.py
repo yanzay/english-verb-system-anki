@@ -205,7 +205,8 @@ def augment_tags(tag_str, sentence_or_sample):
 
 # ── File I/O ─────────────────────────────────────────────────────────────
 SCHEMAS = {
-    "conjugations_recognition.txt": {"tag_idx": 7, "text_idx": 0, "fields": 8},
+    # Schema: Sentence|Label|Aspect|Formula|MainUse|QuickCue|Contrast|WhenNotToUse|Tags
+    "conjugations_recognition.txt": {"tag_idx": 8, "text_idx": 0, "fields": 9},
     "conjugations_contrast.txt":     {"tag_idx": 6, "text_idx": 0, "fields": 7},
     "conjugations_production.txt":   {"tag_idx": 5, "text_idx": 3, "fields": 6},
     "conjugations_cloze.txt":        {"tag_idx": 3, "text_idx": 0, "fields": 4},

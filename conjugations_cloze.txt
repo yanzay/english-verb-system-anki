@@ -41,7 +41,7 @@ The roof {{c1::had been repaired}} long before the next storm hit the region.	Pa
 The treaty {{c1::will be signed}} during next month's summit in Vienna.	Future Simple Passive	cloze passive register:formal frequency:mid domain:news
 The order {{c1::must be approved}} by the regional manager before processing.	Modal Passive	cloze passive passive-modal register:formal frequency:mid domain:work
 She {{c1::had}} the leaking roof repaired by a professional contractor last week.	Causative Have (have + obj + past participle)	cloze passive-causative-have causative register:neutral frequency:mid domain:family
-She finally {{c1::got}} her thesis approved by the dissertation committee.	Causative Get (get + obj + past participle, informal)	cloze passive-causative-get register:informal frequency:mid domain:academic
+She finally {{c1::got}} her car repaired after months of putting it off.	Causative Get (get + obj + past participle, informal)	cloze passive-causative-get register:informal frequency:mid domain:family
 She {{c1::owns}} three properties in central Madrid.	Stative verb in Present Simple (not continuous)	cloze stative core register:neutral frequency:mid domain:work
 He {{c1::is being}} unusually quiet this evening — is something wrong?	Dynamic use of stative 'be' (temporary behaviour)	cloze dynamic-stative register:spoken frequency:mid domain:dialogue
 He told me he {{c1::was going}} to call back later that afternoon.	Future-in-the-past, was/were going to	cloze future-in-past reported-speech register:neutral frequency:mid domain:dialogue
@@ -90,7 +90,7 @@ He doesn't drink coffee. — Neither {{c1::do}} I, actually.	Auxiliary ellipsis 
 You're coming to the wedding, {{c1::aren't you}}?	Tag question — positive statement → negative tag	cloze tag-question discourse register:spoken frequency:high domain:dialogue
 She doesn't speak any German, {{c1::does she}}?	Tag question — negative statement → positive tag	cloze tag-question discourse register:spoken frequency:high domain:dialogue
 Do you know {{c1::whether the parcel has arrived}} yet?	Embedded yes/no question — statement word order	cloze embedded-question discourse register:spoken frequency:mid domain:dialogue
-Could you tell me {{c1::where the nearest pharmacy is}} open today?	Embedded wh-question — statement word order	cloze embedded-question politeness register:spoken frequency:mid domain:dialogue
+Could you tell me {{c1::what time the pharmacy closes}} this evening?	Embedded wh-question — statement word order (no inversion)	cloze embedded-question politeness register:spoken frequency:mid domain:dialogue
 You {{c1::are to}} report to the security desk at 8 a.m. tomorrow morning.	Be + to-infinitive (formal scheduled future)	cloze be-to-infinitive register:formal frequency:low domain:work
 The President {{c1::is to}} address the nation this evening at nine.	Be + to-infinitive (official scheduled event)	cloze be-to-infinitive register:formal frequency:low domain:news
 {{c1::Shall}} we take a short break before the next session begins?	Shall (first-person suggestion — BrE)	cloze shall shall-suggestion register:formal frequency:mid domain:work
