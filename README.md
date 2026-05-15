@@ -289,40 +289,21 @@ This creates `english_verb_system_anki.apkg`.
 
 ### Step 4 — Import into Anki
 
-1. Open Anki.
+1. Open Anki (23.10 or later strongly recommended).
 2. Choose **File → Import**.
 3. Select `english_verb_system_anki.apkg`.
-4. Anki will create all 15 subdecks automatically.
+4. In the import dialog, **leave "Update notetypes" and "Import deck
+   presets" checked** (both are on by default in Anki 23.10+).
+5. Anki creates all 85 sub-decks plus both presets
+   (`English Verb System` + `English Verb System (L1 — opt in)`) and
+   binds them automatically. **You're done — start studying Module 00.**
 
-### Step 5 — Apply the recommended preset
+> 🛈 If you're on **Anki ≤ 23.09**, the importer ignores the embedded
+> deck-options. In that case set up the preset by hand using
+> [`ANKI_SETTINGS.md`](ANKI_SETTINGS.md) Path B.
 
-> ⚠️ **Anki bug**: deck-options bundled inside an `.apkg` are **not reliably
-> applied on import** — your decks will show the **Default** preset.
-> This is by design (Anki forum threads, Anki ≥23.10 still affected).
-
-To get FSRS, sibling burying, and the recommended scheduling, do this **once**
-after import:
-
-**Anki 23.10+** (one-click):
-1. Click the gear next to any "English Verb System::*" sub-deck → **Deck options**.
-2. Click **⋮** (top-right) → **Import preset…**
-3. Select **`english_verb_system_preset.json`** (next to the .apkg in this repo).
-4. Right-click the parent **English Verb System** deck → **Deck options** → choose the
-   imported preset → **Save** → "Apply to all sub-decks?" → **Yes**.
-
-**Older Anki**: see `ANKI_SETTINGS.md` Path B for manual setup.
-
-## Recommended study path
-
-| Stage | Module | Deck types to enable |
-|-------|--------|----------------------|
-| 1 | 01 - Core Tense & Aspect | Recognition only |
-| 2 | 01 - Core Tense & Aspect | + Contrast |
-| 3 | 01 - Core Tense & Aspect | + Production |
-| 4 | 02 - Future Forms | All three |
-| 5 | 03 - Conditionals | All three |
-| 6 | 04 - Passive Voice | All three |
-| 7 | 05 - Stative vs Dynamic | All three |
+(See **[Recommended study path](#recommended-study-path)** above for
+when to enable each layer.)
 
 ## Field schemas
 
