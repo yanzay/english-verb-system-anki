@@ -120,7 +120,11 @@ MODULE_TAGS = {
            'even-if-vs-even-though', 'narrative-layering', 'cleft-conditional',
            'light-verb', 'ame-vs-bre'},
     '13': {'l1-interference', 'l1-spanish', 'l1-french', 'l1-german',
-           'l1-russian', 'l1-mandarin', 'l1-japanese'},
+           'l1-russian', 'l1-mandarin', 'l1-japanese',
+           'l1-korean', 'l1-arabic', 'l1-portuguese'},
+    '14': {'image', 'module:image', 'image-cue', 'aspect-dynamic',
+           'aspect-habitual', 'aspect-perfect', 'phrasal-literal',
+           'phrasal-figurative'},
 }
 
 MODULE_NAMES = {
@@ -137,6 +141,7 @@ MODULE_NAMES = {
     '11': 'English Verb System::11 - Phrasal Verbs',
     '12': 'English Verb System::12 - Discourse & Pragmatics',
     '13': 'English Verb System::13 - L1 Interference',
+    '14': 'English Verb System::14 - Image Cue',
 }
 
 
@@ -144,7 +149,7 @@ def row_module(tags_str):
     tags = set(tags_str.split())
     # Check newer/more-specific modules first so e.g. a phrasal-verb card
     # tagged with both 'phrasal-verb' and 'modal' routes to module 11.
-    for mod in ['13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02']:
+    for mod in ['14', '13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02']:
         if tags & MODULE_TAGS[mod]:
             return mod
     return '01'
@@ -155,6 +160,9 @@ MEDIA_AUDIO_DIR = Path('media/audio')
 MEDIA_IPA_INDEX = Path('media/ipa_index.json')
 MEDIA_TIMELINES_DIR = Path('media/timelines')
 MEDIA_TIMELINES_INDEX = Path('media/timelines_index.json')
+MEDIA_IMAGES_DIR = Path('media/images')
+MEDIA_IMAGES_INDEX = Path('media/images_index.json')
+IMAGE_TSV = Path('conjugations_image.txt')
 
 
 def _sentence_hash(text):
@@ -178,7 +186,24 @@ def load_media_indices():
                            if p.stat().st_size > 0)
     if MEDIA_TIMELINES_DIR.exists():
         media_files.extend(str(p) for p in sorted(MEDIA_TIMELINES_DIR.glob('*.svg')))
+    if MEDIA_IMAGES_DIR.exists():
+        media_files.extend(str(p) for p in sorted(MEDIA_IMAGES_DIR.glob('*.jpg')))
+        media_files.extend(str(p) for p in sorted(MEDIA_IMAGES_DIR.glob('*.png')))
     return ipa_index, timeline_index, media_files
+
+
+def load_image_index():
+    """Return {caption_hash → manifest_entry} or {} if not built yet."""
+    if MEDIA_IMAGES_INDEX.exists():
+        try:
+            return json.loads(MEDIA_IMAGES_INDEX.read_text(encoding='utf-8'))
+        except Exception:
+            return {}
+    return {}
+
+
+def _image_caption_hash(caption):
+    return hashlib.sha1((caption or '').strip().encode('utf-8')).hexdigest()[:12]
 
 
 def media_for_sentence(sentence, ipa_index, timeline_index, label=''):
@@ -565,6 +590,21 @@ hr#answer {
   height: auto;
   display: inline-block;
 }
+.image-box {
+  margin: 14px auto;
+  text-align: center;
+  max-width: 480px;
+}
+.image-box img {
+  max-width: 100%;
+  max-height: 360px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.nightMode .image-box img, .night_mode .image-box img {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
 .nightMode .ipa-box, .night_mode .ipa-box {
   background: #422006;
   border-color: #78350f;
@@ -892,6 +932,50 @@ hr#answer {
     )
 
     # ------------------------------------------------------------------
+    # IMAGE-CUE MODEL (v1) — visual semantics for stative/dynamic, aspect, phrasals
+    # Fields: ImageQuery | Caption | Form | Function | Contrast | Tags | Image | Audio | IPA | Attribution
+    # Front: image only; learner formulates the caption silently.
+    # Back:  caption + form/function + contrast + audio + IPA + image + CC attribution.
+    # ------------------------------------------------------------------
+    img_model = genanki.Model(
+        2056102009,  # new model ID
+        'Verb System · Image Cue (v1)',
+        fields=[
+            {'name': 'ImageQuery'},
+            {'name': 'Caption'},
+            {'name': 'Form'},
+            {'name': 'Function'},
+            {'name': 'Contrast'},
+            {'name': 'Tags'},
+            {'name': 'Image'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Attribution'},
+        ],
+        templates=[{
+            'name': 'Image Cue Card',
+            'qfmt': '''
+<div class="instruction">Describe what you see in one English sentence</div>
+{{#Image}}<div class="image-box">{{Image}}</div>{{/Image}}
+{{^Image}}<div class="instruction">[image not available — caption: {{ImageQuery}}]</div>{{/Image}}
+''',
+            'afmt': '''
+<div class="instruction">Describe what you see</div>
+{{#Image}}<div class="image-box">{{Image}}</div>{{/Image}}
+<hr id="answer">
+<div class="sentence">{{Caption}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+<div class="target-badge">{{Form}}</div>
+<div class="why-block"><span class="why-label">Function: </span>{{Function}}</div>
+{{#Contrast}}<div class="tip-block"><span class="why-label">Contrast: </span>{{Contrast}}</div>{{/Contrast}}
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
+{{#Attribution}}<div class="hint-row" style="font-size:0.75em;opacity:0.7">📷 {{Attribution}}</div>{{/Attribution}}
+''',
+        }],
+        css=css,
+    )
+
+    # ------------------------------------------------------------------
     # Decks
     # ------------------------------------------------------------------
     DECK_IDS = {
@@ -914,9 +998,12 @@ hr#answer {
         ('07', 'clz'): 2056101704, ('08', 'clz'): 2056101804, ('09', 'clz'): 2056101904,
         ('10', 'clz'): 2056102004, ('11', 'clz'): 2056102104, ('12', 'clz'): 2056102204,
         ('13', 'clz'): 2056102304,
+        # Image-Cue deck (Tier 4)
+        ('14', 'img'): 2056102401,
     }
     TYPE_SUFFIX = {'rec': '::1 - Recognition', 'con': '::2 - Contrast',
-                   'pro': '::3 - Production', 'clz': '::4 - Cloze'}
+                   'pro': '::3 - Production', 'clz': '::4 - Cloze',
+                   'img': '::1 - Image Cue'}
 
     decks = {}
     for (mod, typ), did in DECK_IDS.items():
@@ -1077,6 +1164,40 @@ hr#answer {
             decks[(mod, 'clz')].add_note(note)
             counts['clz'] += 1
 
+    # Image-Cue (Module 14)
+    img_count = 0
+    if IMAGE_TSV.exists():
+        img_index = load_image_index()
+        _, img_rows = load_tsv(str(IMAGE_TSV))
+        for row in img_rows:
+            if len(row) < 6:
+                row += [''] * (6 - len(row))
+            tags_str = row[5]
+            mod = '14'
+            caption = row[1].strip()
+            cap_h = _image_caption_hash(caption)
+            entry = img_index.get(cap_h, {})
+            img_filename = entry.get('file', '')
+            img_field = f'<img src="{img_filename}">' if img_filename else ''
+            attrib = entry.get('attribution', '') or entry.get('license', '')
+            source_url = entry.get('source', '')
+            attribution_field = (
+                f'{attrib} — <a href="{source_url}">source</a> ({entry.get("license", "")})'
+                if entry else ''
+            )
+            audio_f, ipa_f, _tl = media_for_sentence(caption, ipa_index, timeline_index, label='')
+            if audio_f: media_counts['audio'] += 1
+            if ipa_f: media_counts['ipa'] += 1
+            if img_field: media_counts.setdefault('image', 0); media_counts['image'] = media_counts.get('image', 0) + 1
+            note = genanki.Note(
+                model=img_model,
+                fields=[row[0], caption, row[2], row[3], row[4], tags_str,
+                        img_field, audio_f, ipa_f, attribution_field],
+                tags=tags_str.split(),
+            )
+            decks[(mod, 'img')].add_note(note)
+            img_count += 1
+
     out = 'english_verb_system_anki.apkg'
     package = genanki.Package(list(decks.values()))
     package.media_files = media_files
@@ -1084,7 +1205,7 @@ hr#answer {
 
     embed_fsrs_preset(out)
 
-    total_cards = sum(counts.values()) + spot_error_count + rev_pro_count
+    total_cards = sum(counts.values()) + spot_error_count + rev_pro_count + img_count
     print(f'Built {out}')
     print(f'  recognition: {counts["rec"]}')
     print(f'  contrast:    {counts["con"]}')
@@ -1092,10 +1213,12 @@ hr#answer {
     print(f'  production:  {counts["pro"]}')
     print(f'  reverse-production (auto): {rev_pro_count}')
     print(f'  cloze:       {counts["clz"]}')
+    print(f'  image-cue:   {img_count}')
     print(f'  total:       {total_cards}')
+    img_n = media_counts.get('image', 0)
     print(f'Media bundled: {len(media_files)} files '
           f'(audio={media_counts["audio"]}, ipa={media_counts["ipa"]}, '
-          f'timeline={media_counts["timeline"]})')
+          f'timeline={media_counts["timeline"]}, image={img_n})')
     print()
     print('Decks:')
     for (mod, typ), deck in decks.items():

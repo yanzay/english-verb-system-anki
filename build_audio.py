@@ -163,6 +163,13 @@ def collect_sentences() -> List[str]:
         for row in load_tsv(clz):
             if row and row[0].strip():
                 sentences.add(_CLOZE_RE.sub(r"\1", row[0].strip()))
+    # Image-cue captions (column 1) — also need TTS audio so the back of
+    # the image card can play the model pronunciation.
+    img = Path("conjugations_image.txt")
+    if img.exists():
+        for row in load_tsv(img):
+            if len(row) >= 2 and row[1].strip():
+                sentences.add(row[1].strip())
     return sorted(sentences)
 
 

@@ -116,6 +116,12 @@ def collect_sentences():
         for row in load_tsv(cloze_path):
             if row and row[0].strip():
                 sentences.add(strip_cloze(row[0].strip()))
+    # Image-cue captions (col 1)
+    img_path = Path("conjugations_image.txt")
+    if img_path.exists():
+        for row in load_tsv(img_path):
+            if len(row) >= 2 and row[1].strip():
+                sentences.add(row[1].strip())
     return sorted(sentences)
 
 

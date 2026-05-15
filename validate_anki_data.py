@@ -36,10 +36,16 @@ FILES = {
         'type': 'cloze',
         'card_tag': 'cloze',
     },
+    'conjugations_image.txt': {
+        'header': ['ImageQuery', 'Caption', 'Form', 'Function', 'Contrast', 'Tags'],
+        'required': ['ImageQuery', 'Caption', 'Form', 'Tags'],
+        'type': 'image',
+        'card_tag': 'image',
+    },
 }
 
 # Canonical Tier-3 taxonomy vocabularies (must agree with apply_taxonomy_tags.py).
-CARD_TYPE_TAGS = {'recognition', 'contrast', 'production', 'cloze'}
+CARD_TYPE_TAGS = {'recognition', 'contrast', 'production', 'cloze', 'image'}
 ALLOWED_REGISTERS = {'formal', 'neutral', 'informal', 'spoken', 'academic'}
 ALLOWED_FREQUENCIES = {'high', 'mid', 'low'}
 ALLOWED_DOMAINS = {
@@ -643,6 +649,11 @@ def cross_file_label_agreement(all_data):
             # Production rows have a Prompt + Sample, no shared Sentence with
             # other files; skip.
             continue
+        elif type_ == 'image':
+            # Image cards have a Caption (no Sentence column); skip cross-check.
+            continue
+        else:
+            continue
         si = header.index(sent_col)
         li = header.index(lbl_col)
         for i, r in enumerate(rows, start=2):
@@ -697,6 +708,10 @@ def _audio_corpus_sentences(all_data):
             for r in rows:
                 if r and r[0].strip():
                     sentences.add(_AUDIO_CLOZE_RE.sub(r'\1', r[0].strip()))
+        elif path.endswith('conjugations_image.txt'):
+            for r in rows:
+                if len(r) >= 2 and r[1].strip():
+                    sentences.add(r[1].strip())
     return sentences
 
 
