@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.2.0'
+VERSION = '2.3.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -373,46 +373,124 @@ def main():
     # Shared CSS
     # ------------------------------------------------------------------
     css = '''
+/* ============================================================
+   English Verb System — Design System v3.0
+   ------------------------------------------------------------
+   Single source of truth for colors. Everything below the token
+   block uses var(--*) so light <-> dark theming is automatic and
+   no class can ever fall through to invisible-on-dark text.
+   ------------------------------------------------------------
+   Naming convention:
+     --bg-*       background colors
+     --fg-*       text/foreground colors  (-strong, -muted, -faint)
+     --border-*   border colors
+     --accent-*   per-semantic accent (success, info, warn, danger, target, sample, ipa, hint)
+     --shadow-*   box-shadows
+   Each semantic accent has matching -bg / -fg / -border for its callout.
+   ============================================================ */
+
+/* Light theme tokens (default) */
+.card {
+  --bg-card:        #ffffff;
+  --bg-surface:     #f9fafb;
+  --bg-surface-2:   #f3f4f6;
+
+  --fg-strong:      #111827;
+  --fg-default:     #1f2937;
+  --fg-muted:       #4b5563;
+  --fg-faint:       #6b7280;
+  --fg-fainter:     #9ca3af;
+
+  --border-default: #e5e7eb;
+  --border-muted:   #d1d5db;
+  --border-strong:  #9ca3af;
+
+  /* Semantic callout palette (bg / fg / border) */
+  --success-bg:     #dcfce7;  --success-fg:    #166534;  --success-border: #86efac;
+  --info-bg:        #eff6ff;  --info-fg:       #1d4ed8;  --info-border:    #bfdbfe;
+  --warn-bg:        #fef3c7;  --warn-fg:       #92400e;  --warn-border:    #fde68a;
+  --danger-bg:      #fef2f2;  --danger-fg:     #991b1b;  --danger-border:  #fecaca;
+  --hint-bg:        #f0fdf4;  --hint-fg:       #166534;  --hint-border:    #86efac;
+  --ipa-bg:         #fef3c7;  --ipa-fg:        #78350f;  --ipa-key-fg:     #92400e;  --ipa-border: #fde68a;
+  --sample-fg:      #1e40af;
+  --target-bg:      #eff6ff;  --target-fg:     #1d4ed8;  --target-border:  #bfdbfe;
+  --cloze-fg:       #1d4ed8;
+
+  --shadow-image:   0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Dark theme tokens (Anki sets either .nightMode OR .night_mode on <body>) */
+.nightMode .card,
+.night_mode .card {
+  --bg-card:        #0f172a;
+  --bg-surface:     #1e293b;
+  --bg-surface-2:   #334155;
+
+  --fg-strong:      #f8fafc;
+  --fg-default:     #e2e8f0;
+  --fg-muted:       #cbd5e1;
+  --fg-faint:       #94a3b8;
+  --fg-fainter:     #64748b;
+
+  --border-default: #334155;
+  --border-muted:   #475569;
+  --border-strong:  #64748b;
+
+  --success-bg:     #064e3b;  --success-fg:    #bbf7d0;  --success-border: #047857;
+  --info-bg:        #1e3a8a;  --info-fg:       #dbeafe;  --info-border:    #2563eb;
+  --warn-bg:        #422006;  --warn-fg:       #fef3c7;  --warn-border:    #92400e;
+  --danger-bg:      #450a0a;  --danger-fg:     #fecaca;  --danger-border:  #b91c1c;
+  --hint-bg:        #052e16;  --hint-fg:       #bbf7d0;  --hint-border:    #22c55e;
+  --ipa-bg:         #422006;  --ipa-fg:        #fef3c7;  --ipa-key-fg:     #fde68a;  --ipa-border: #92400e;
+  --sample-fg:      #93c5fd;
+  --target-bg:      #1e3a8a;  --target-fg:     #dbeafe;  --target-border:  #2563eb;
+  --cloze-fg:       #93c5fd;
+
+  --shadow-image:   0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ============================================================
+   Layout primitives
+   ============================================================ */
 .card {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   font-size: 19px;
   text-align: left;
-  color: #1f2937;
-  background: #ffffff;
+  color: var(--fg-default);
+  background: var(--bg-card);
   line-height: 1.5;
   max-width: 860px;
   margin: 0 auto;
   padding: 4px 0;
 }
 
-/* ── Front side: centered prompt for distraction-free recall ── */
-.front {
-  text-align: center;
-}
-/* Children that would otherwise stretch full-width need centering too. */
+/* Front side: centered prompt for distraction-free recall */
+.front { text-align: center; }
 .front .options { align-items: center; }
-.front .option { display: inline-block; text-align: left; }
+.front .option  { display: inline-block; text-align: left; min-width: 240px; max-width: 100%; }
 .front .audio-row { display: flex; justify-content: center; }
 
-/* ── Front instruction line ── */
+/* ============================================================
+   Typography blocks
+   ============================================================ */
 .instruction {
   font-size: 0.82em;
-  color: #9ca3af;
+  color: var(--fg-fainter);
   letter-spacing: 0.02em;
   text-transform: uppercase;
   margin-bottom: 10px;
 }
-
-/* ── Main sentence / prompt ── */
 .sentence {
   font-size: 1.15em;
   font-weight: 600;
-  color: #111827;
+  color: var(--fg-strong);
   margin-bottom: 6px;
   line-height: 1.4;
 }
 
-/* ── A/B options on contrast cards ── */
+/* ============================================================
+   A/B options on contrast cards
+   ============================================================ */
 .options {
   margin-top: 14px;
   display: flex;
@@ -421,36 +499,37 @@ def main():
 }
 .option {
   padding: 9px 14px;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid var(--border-default);
   border-radius: 8px;
   font-size: 0.97em;
-  color: #374151;
-  background: #f9fafb;
+  color: var(--fg-default);
+  background: var(--bg-surface);
 }
 .option .opt-letter {
   font-weight: 700;
-  color: #6b7280;
+  color: var(--fg-faint);
   margin-right: 6px;
 }
 
-/* ── Answer divider ── */
+/* ============================================================
+   Answer divider + answer block
+   ============================================================ */
 hr#answer {
   border: none;
-  border-top: 2px solid #e5e7eb;
+  border-top: 2px solid var(--border-default);
   margin: 20px 0 16px;
 }
-
-/* ── Primary answer block ── */
 .answer-label {
   font-size: 1.35em;
   font-weight: 700;
-  color: #111827;
+  color: var(--fg-strong);
   margin-bottom: 4px;
 }
 .answer-correct {
   display: inline-block;
-  background: #dcfce7;
-  color: #166534;
+  background: var(--success-bg);
+  color: var(--success-fg);
+  border: 1px solid var(--success-border);
   border-radius: 6px;
   padding: 2px 10px;
   font-size: 0.88em;
@@ -458,7 +537,9 @@ hr#answer {
   margin-bottom: 10px;
 }
 
-/* ── Formula and main use ── */
+/* ============================================================
+   Meta grid (Formula / Main use)
+   ============================================================ */
 .meta-grid {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -467,65 +548,64 @@ hr#answer {
   font-size: 0.93em;
 }
 .meta-key {
-  color: #6b7280;
+  color: var(--fg-faint);
   font-weight: 600;
   white-space: nowrap;
 }
-.meta-val {
-  color: #1f2937;
-}
+.meta-val { color: var(--fg-default); }
 
-/* ── Secondary info box (cue + contrast) ── */
+/* ============================================================
+   Info box (Quick cue / Contrast)
+   ============================================================ */
 .info-box {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
   border-radius: 8px;
   padding: 11px 14px;
   font-size: 0.88em;
-  color: #374151;
+  color: var(--fg-default);
   margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.info-row {
-  display: flex;
-  gap: 8px;
-}
+.info-row { display: flex; gap: 8px; }
 .info-key {
-  color: #9ca3af;
+  color: var(--fg-fainter);
   font-weight: 600;
   white-space: nowrap;
   min-width: 80px;
 }
-.info-val {
-  color: #374151;
-}
+.info-val { color: var(--fg-default); }
 
-/* ── Why / tip block ── */
+/* ============================================================
+   Why / tip block
+   ============================================================ */
 .why-block {
   margin-top: 10px;
   font-size: 0.93em;
-  color: #374151;
+  color: var(--fg-default);
   line-height: 1.5;
 }
 .why-block .why-label {
   font-weight: 700;
-  color: #111827;
+  color: var(--fg-strong);
 }
 .tip-block {
   margin-top: 8px;
   font-size: 0.87em;
-  color: #6b7280;
+  color: var(--fg-muted);
   font-style: italic;
-  border-left: 3px solid #d1d5db;
+  border-left: 3px solid var(--border-muted);
   padding-left: 10px;
 }
 
-/* ── Production sample answer ── */
+/* ============================================================
+   Production: sample answer + target badge
+   ============================================================ */
 .sample-label {
   font-size: 0.8em;
-  color: #9ca3af;
+  color: var(--fg-fainter);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-bottom: 4px;
@@ -533,79 +613,44 @@ hr#answer {
 .sample-answer {
   font-size: 1.05em;
   font-weight: 600;
-  color: #1e40af;
+  color: var(--sample-fg);
   margin-bottom: 10px;
 }
 .target-badge {
   display: inline-block;
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #bfdbfe;
+  background: var(--target-bg);
+  color: var(--target-fg);
+  border: 1px solid var(--target-border);
   border-radius: 6px;
   padding: 2px 10px;
   font-size: 0.82em;
   font-weight: 600;
   margin-top: 6px;
 }
+/* Anki's type:* rendered comparison table inherits sane colors */
+input[type=text],
+.typeans, .typeGood, .typeBad, .typeMissed {
+  color: var(--fg-default);
+  background: var(--bg-surface);
+}
+.typeGood { color: var(--success-fg); background: var(--success-bg); }
+.typeBad,
+.typeMissed { color: var(--danger-fg); background: var(--danger-bg); }
 
-/* ── Mobile responsive: tighten paddings, scale fonts ── */
-@media (max-width: 600px) {
-  .card { font-size: 16px; padding: 2px 0; }
-  .sentence { font-size: 1.05em; }
-  .answer-label { font-size: 1.18em; }
-  .option { padding: 7px 10px; font-size: 0.92em; }
-}
-
-/* ── Dark mode (Anki "night mode" toggles .nightMode on body) ── */
-.nightMode .card,
-.night_mode .card {
-  background: #111827;
-  color: #e5e7eb;
-}
-.nightMode .sentence, .night_mode .sentence,
-.nightMode .answer-label, .night_mode .answer-label {
-  color: #f9fafb;
-}
-.nightMode .instruction, .night_mode .instruction {
-  color: #9ca3af;
-}
-.nightMode .option, .night_mode .option {
-  background: #1f2937;
-  border-color: #374151;
-  color: #d1d5db;
-}
-.nightMode hr#answer, .night_mode hr#answer {
-  border-top-color: #374151;
-}
-.nightMode .answer-correct, .night_mode .answer-correct {
-  background: #064e3b;
-  color: #d1fae5;
-  border-color: #065f46;
-}
-.nightMode .info-box, .night_mode .info-box,
-.nightMode .why-box, .night_mode .why-box,
-.nightMode .tip-box, .night_mode .tip-box {
-  background: #1f2937;
-  border-color: #374151;
-  color: #e5e7eb;
-}
-.nightMode .badge, .night_mode .badge {
-  background: #1e3a8a;
-  color: #dbeafe;
-  border-color: #1e40af;
-}
-
-/* ── Tier-2 additions: audio row, IPA box, timeline image ── */
+/* ============================================================
+   Audio + IPA + timeline + image
+   ============================================================ */
 .audio-row {
   margin: 6px 0 8px;
   font-size: 0.85em;
-  color: #6b7280;
+  color: var(--fg-faint);
 }
 .ipa-box {
   margin-top: 10px;
   padding: 6px 10px;
-  background: #fef3c7;
-  border: 1px solid #fde68a;
+  background: var(--ipa-bg);
+  color: var(--ipa-fg);
+  border: 1px solid var(--ipa-border);
   border-radius: 6px;
   font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif;
   font-size: 0.95em;
@@ -615,12 +660,10 @@ hr#answer {
   cursor: pointer;
   outline: none;
 }
-.ipa-box summary::-webkit-details-marker {
-  display: none;
-}
+.ipa-box summary::-webkit-details-marker { display: none; }
 .ipa-key {
   font-weight: 700;
-  color: #92400e;
+  color: var(--ipa-key-fg);
   font-family: -apple-system, "Segoe UI", Arial, sans-serif;
   font-size: 0.78em;
   text-transform: uppercase;
@@ -628,22 +671,19 @@ hr#answer {
   margin-right: 6px;
 }
 .ipa-val {
-  color: #78350f;
+  color: var(--ipa-fg);
   display: none;
   margin-left: 4px;
 }
-.ipa-box[open] .ipa-val {
-  display: inline;
-}
-.timeline-box {
-  margin: 10px 0;
-  text-align: center;
-}
-.timeline-box img {
-  max-width: 100%;
-  height: auto;
-  display: inline-block;
-}
+.ipa-box[open] .ipa-val { display: inline; }
+
+.timeline-box { margin: 10px 0; text-align: center; }
+.timeline-box img { max-width: 100%; height: auto; display: inline-block; }
+/* Timeline SVGs are line drawings on transparent BG; invert in dark mode
+   so the strokes become bright. Keeps a single asset usable for both themes. */
+.nightMode .timeline-box img,
+.night_mode .timeline-box img { filter: invert(0.92) hue-rotate(180deg); }
+
 .image-box {
   margin: 14px auto;
   text-align: center;
@@ -654,78 +694,82 @@ hr#answer {
   max-height: 360px;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-image);
 }
-.nightMode .image-box img, .night_mode .image-box img {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
-.nightMode .ipa-box, .night_mode .ipa-box {
-  background: #422006;
-  border-color: #78350f;
-}
-.nightMode .ipa-box summary, .night_mode .ipa-box summary {
-  cursor: pointer;
-}
-.nightMode .ipa-key, .night_mode .ipa-key { color: #fde68a; }
-.nightMode .ipa-val, .night_mode .ipa-val {
-  color: #fef3c7;
-  display: none;
-}
-.nightMode .ipa-box[open] .ipa-val, .night_mode .ipa-box[open] .ipa-val {
-  display: inline;
-}
-.nightMode .audio-row, .night_mode .audio-row { color: #9ca3af; }
 
-/* ── Tier-3 additions: WhenNotToUse callout, cloze hint row ── */
+/* ============================================================
+   WhenNotToUse callout, cloze hint row, attribution, etc.
+   ============================================================ */
 .when-not-box {
   margin-top: 10px;
   padding: 8px 12px;
-  background: #fef2f2;
-  border-left: 3px solid #dc2626;
+  background: var(--danger-bg);
+  border-left: 3px solid var(--danger-border);
   border-radius: 4px;
   font-size: 0.92em;
-  color: #7f1d1d;
+  color: var(--danger-fg);
 }
 .when-not-key {
   font-weight: 700;
   margin-right: 6px;
-  color: #b91c1c;
+  color: var(--danger-fg);
 }
-.when-not-val { color: #7f1d1d; }
+.when-not-val { color: var(--danger-fg); }
+
 .hint-row {
   margin: 8px 0;
   padding: 6px 10px;
-  background: #f0fdf4;
-  border-left: 3px solid #16a34a;
+  background: var(--hint-bg);
+  border-left: 3px solid var(--hint-border);
   border-radius: 4px;
   font-size: 0.88em;
-  color: #166534;
+  color: var(--hint-fg);
 }
-/* Night-mode for Tier-3 boxes */
-.nightMode .when-not-box, .night_mode .when-not-box {
-  background: #450a0a;
-  color: #fecaca;
-  border-left-color: #ef4444;
+
+/* Image-cue attribution line (small caption under back image) */
+.attribution {
+  margin-top: 8px;
+  font-size: 0.78em;
+  color: var(--fg-faint);
+  text-align: center;
+  font-style: italic;
 }
-.nightMode .when-not-key, .night_mode .when-not-key { color: #fca5a5; }
-.nightMode .when-not-val, .night_mode .when-not-val { color: #fecaca; }
-.nightMode .hint-row, .night_mode .hint-row {
-  background: #052e16;
-  color: #bbf7d0;
-  border-left-color: #22c55e;
+.attribution a {
+  color: var(--info-fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
+
 /* Anki cloze blank styling */
 .cloze {
   font-weight: 700;
-  color: #1d4ed8;
-  background: #dbeafe;
+  color: var(--cloze-fg);
+  background: var(--target-bg);
   padding: 0 4px;
   border-radius: 3px;
 }
-.nightMode .cloze, .night_mode .cloze {
-  color: #93c5fd;
-  background: #1e3a8a;
+
+/* ============================================================
+   Mobile responsive: tighten paddings, scale fonts
+   ============================================================ */
+@media (max-width: 600px) {
+  .card { font-size: 16px; padding: 2px 0; }
+  .sentence { font-size: 1.05em; }
+  .answer-label { font-size: 1.18em; }
+  .option { padding: 7px 10px; font-size: 0.92em; }
+  .front .option { min-width: 0; width: 100%; }
+  .image-box { max-width: 100%; }
+  .image-box img { max-height: 280px; }
+  .meta-grid { gap: 2px 8px; font-size: 0.88em; }
+  .info-key { min-width: 60px; }
 }
+
+/* ============================================================
+   Browser hint: which themes our card supports.
+   Helps native form elements (e.g. {{type:Sample}} input) pick
+   matching default colors on iOS / iPadOS WebKit.
+   ============================================================ */
+.card { color-scheme: light dark; }
 '''
 
     # ------------------------------------------------------------------
