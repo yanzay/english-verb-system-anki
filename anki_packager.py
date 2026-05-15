@@ -116,10 +116,31 @@ class Package:
             'delays': [1.0, 10.0],
             'initialFactor': 2500,
             'ints': [1, 4, 0],
+            # Legacy v11 key (kept for older clients): 1 = "in order added"
+            # — superseded by newCardGatherPriority/newCardSortOrder below
+            # for Anki ≥23.10 (which is what our modern .apkg targets).
             'order': 1,
             'perDay': 10,
             'separate': True,
         },
+        # ── Interleaved practice (v2.8.0) ──────────────────────────────
+        # Pedagogy: blocked practice ("all present-simple, then all
+        # present-continuous") feels easier but produces ~2× worse
+        # long-term retention than interleaved practice on discrimination
+        # tasks (Rohrer/Taylor; Kornell/Bjork; Birnbaum et al.). Choosing
+        # between competing verb forms IS a discrimination task, so we
+        # interleave WITHIN each module while preserving module-order
+        # progression (no conditionals before basics).
+        #
+        # Anki ≥23.10 enums:
+        #   newCardGatherPriority: 5 = DECK_THEN_RANDOM_NOTES → walk
+        #     sub-decks in deck-tree order, but randomize the notes
+        #     gathered from each (so 1-Recognition, 2-Contrast, etc.
+        #     interleave naturally when you study the parent deck).
+        #   newCardSortOrder: 2 = RANDOM_NOTE → shuffle the gathered
+        #     batch by note id (siblings stay together when bury=True).
+        'newCardGatherPriority': 5,
+        'newCardSortOrder': 2,
         'rev': {
             'bury': True,
             'ease4': 1.3,
@@ -179,10 +200,19 @@ class Package:
                 installed_decks[d.deck_id] = self._install_deck(col, d)
 
             # ── 3. Add notes ──────────────────────────────────────────
+            # Per-deck note order is shuffled at insertion time so each
+            # sub-deck's cards are randomized at the SOURCE — Anki's
+            # import path then derives card.due from this insertion
+            # order, so the randomization survives the round-trip.
+            # See pedagogy notes on PRESET_DEF.newCardGatherPriority.
+            # RNG is seeded per-deck for reproducible builds.
+            import random as _random_notes
             n_added = 0
             for d in self.decks:
                 final_did = installed_decks[d.deck_id]
-                for note in d.notes:
+                shuffled_notes = list(d.notes)
+                _random_notes.Random(d.deck_id).shuffle(shuffled_notes)
+                for note in shuffled_notes:
                     nt = installed_models[note.model.model_id]
                     new_note = col.new_note(nt)
                     # Pad / truncate fields to match notetype
@@ -232,9 +262,21 @@ class Package:
                 col.decks.save(deck)
                 bound += 1
 
+            # (5b shuffle moved into step 3 — notes are added in
+            # randomized per-deck order, so card.due derived from
+            # insertion order is already shuffled at the source.)
+            shuffled_decks = len([d for d in self.decks if len(d.notes) > 1])
+
             col.save()
 
             # ── 6. Export modern .apkg with deck configs included ─────
+            # with_scheduling=True preserves our randomized cards.due
+            # values from step 5b. Cards still arrive in 'new' state
+            # (queue=0, no review history), but their due values are
+            # the shuffled ones we wrote — giving randomized pickup
+            # order WITHIN each sub-deck even for clients that don't
+            # honour newCardSortOrder. with_scheduling=False would
+            # reset due to insertion order, losing our shuffle.
             export_opts = ExportAnkiPackageOptions(
                 with_scheduling=False,
                 with_deck_configs=True,
@@ -249,7 +291,8 @@ class Package:
             )
             print(f'  [anki-packager] notes: {n_added}, decks: {len(installed_decks)}, '
                   f'models: {len(installed_models)}, media: {n_media}, '
-                  f'preset bound to {bound} decks → {exported} cards exported')
+                  f'preset bound to {bound} decks, shuffled new-card order in '
+                  f'{shuffled_decks} decks → {exported} cards exported')
         finally:
             col.close()
 
