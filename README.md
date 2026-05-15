@@ -169,9 +169,9 @@ before committing a full re-render.
 ## Cloning the repository (Git LFS)
 
 Audio (`media/audio/*.mp3`), IPA (`media/ipa/*.txt`), timeline diagrams
-(`media/timelines/*.svg`), image-cue photos (`media/images/*.jpg`), and
-the built `.apkg` are all stored in **Git LFS** to keep the repository
-fast and under GitHub's hard size limit.
+(`media/timelines/*.svg`), and the built `.apkg` are all stored in
+**Git LFS** to keep the repository fast and under GitHub's hard size
+limit.
 
 You need [Git LFS](https://git-lfs.github.com/) installed once on your
 machine before cloning:
@@ -204,8 +204,8 @@ git lfs pull
 You can verify the working tree is healthy with:
 
 ```bash
-file media/audio/00516b6462bf.mp3   # → "Audio file with ID3..."
-file media/images/00516b6462bf.jpg  # → "JPEG image data..."
+file media/audio/00516b6462bf.mp3      # → "Audio file with ID3..."
+file media/timelines/abcdef123456.svg  # → "SVG Scalable Vector Graphics image..."
 ```
 
 If those say `ASCII text`, you have LFS pointers instead of real files —
