@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.5'
+VERSION = '3.2.6'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -152,14 +152,14 @@ MODULE_NAMES = {
     # only when they're ready. This pedagogy mirrors how Cambridge,
     # Oxford, and Pearson sequence English-as-a-Foreign-Language
     # syllabi (CEFR A1→C2).
-    '00': 'English Verb System::00 - Foundation (12-Cell Grid)',
-    '01': 'English Verb System::01 - Periphrastic Futures (be going to)',
-    '02': 'English Verb System::02 - Past Habits (used to)',
+    '00': 'English Verb System::00 - Foundation',
+    '01': 'English Verb System::01 - Periphrastic Futures',
+    '02': 'English Verb System::02 - Past Habits',
     '03': 'English Verb System::03 - Modal Verbs',
     '04': 'English Verb System::04 - Conditionals',
     '05': 'English Verb System::05 - Passive Voice',
-    '06': 'English Verb System::06 - Mood (Subjunctive, Imperative)',
-    '07': 'English Verb System::07 - Non-Finite Forms (Gerund, Infinitive, Participle)',
+    '06': 'English Verb System::06 - Mood',
+    '07': 'English Verb System::07 - Non-Finite Forms',
     '08': 'English Verb System::08 - Reported Speech',
     '09': 'English Verb System::09 - Phrasal Verbs',
     '10': 'English Verb System::10 - Discourse Constructions',
