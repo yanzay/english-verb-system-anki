@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.0.2'
+VERSION = '3.1.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -920,12 +920,17 @@ mark.focus {
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
     rec_model = ap.Model(
-        2056102014,  # bumped (was 2056102013): added Prompt field so
-                     # the instruction text can be conditional on
-                     # whether a focus span is present. Saying
-                     # 'Identify the highlighted form' on a card with
-                     # no highlight is broken UX.
-        'Verb System · Recognition (v6)',
+        2056102015,  # bumped (was 2056102014): added Category field +
+                     # unified Prompt. v3.1.0 introduces a proper
+                     # grammatical taxonomy: tense-aspect (the 12-cell
+                     # canonical grid) is treated as the FIRST thing
+                     # learners master; periphrastic-future, modal, mood,
+                     # voice, conditional, construction, phonology, etc.
+                     # are LATER additions, each with its own prompt
+                     # ('Identify the highlighted modal' vs '…tense+aspect'
+                     # vs '…construction') so the question is never
+                     # misleading.
+        'Verb System · Recognition (v7)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'Label'},
@@ -943,14 +948,17 @@ mark.focus {
                                           # span wrapped in <mark> when
                                           # extractable, else bare
                                           # sentence.
-            {'name': 'Prompt'},           # Always-present instruction
-                                          # matched to the card content:
-                                          #   - 'Identify the highlighted form'
-                                          #     when FocusedSentence has <mark>
-                                          #   - 'Name this verb form' / 'Name
-                                          #     this construction' / 'Name this
-                                          #     pronunciation feature' for
-                                          #     unmarked cards (category-aware).
+            {'name': 'Prompt'},           # Always-honest instruction
+                                          # matched to the card content
+                                          # AND its grammatical category.
+            {'name': 'Category'},         # Grammatical category (one of
+                                          # 12) for filtering/searching:
+                                          # tense-aspect, modal, voice,
+                                          # mood, conditional, non-finite,
+                                          # periphrastic-future, periphrastic-
+                                          # past-habit, construction,
+                                          # phrasal-verb, reported-speech,
+                                          # phonology.
         ],
         templates=[{
             'name': 'Recognition Card',
@@ -1556,35 +1564,94 @@ mark.focus {
             sentence, count=1,
         )
 
-    # Category-aware prompt for cards WITHOUT a highlight: never lie
-    # about a "highlighted" form when nothing is highlighted. Three
-    # categories so the question is always answerable from the bare
-    # sentence: pronunciation features, syntactic constructions, or
-    # the default catch-all "verb form" prompt.
-    _PROMPT_PHON_RE = re.compile(
-        r'connected speech|reduction|contraction|stress|linking|'
-        r't[- ]flap|weak form|schwa|elision|intonation|assimilation|'
-        r'silent letter|word stress|sentence stress|prosody|rhythm',
-        re.I,
-    )
-    _PROMPT_CONSTR_RE = re.compile(
-        r'cleft|existential|causative|tag question|hedging|inversion|'
-        r'fronting|catenative|emphatic|exclamative|pseudo-cleft|'
-        r'reverse pseudo|response form|comment clause|extraposition',
-        re.I,
-    )
+    # ── Grammatical category classifier (v3.1.0) ─────────────────────
+    # English verb-system Labels conflate tense, aspect, mood, voice,
+    # modality, and various sentence-level constructions. Premium
+    # pedagogy demands precision: we classify each Label into one of
+    # 12 grammatical categories so the prompt and the curriculum
+    # progression are honest.
+    #
+    # Pedagogical sequence (CEFR-aligned):
+    #   FOUNDATION        →  tense-aspect (the 12-cell grid)
+    #   FUTURE EXPRESSION →  periphrastic-future, modal (will/be going to)
+    #   PAST EXPRESSION   →  periphrastic-past-habit (used to, would)
+    #   ADVANCED INDIC.   →  voice (passives), conditional
+    #   NON-INDICATIVE    →  mood (subjunctive, imperative)
+    #   NON-FINITE        →  non-finite (gerund, infinitive, participle)
+    #   LEXICAL           →  phrasal-verb
+    #   DISCOURSE         →  construction (cleft, existential, causative,
+    #                        tag question, hedging, inversion, etc.)
+    #   META              →  reported-speech, modal (other), phonology
+    #
+    # The 12-cell tense×aspect grid is the FIRST thing every learner
+    # masters — everything else builds on it. Module sub-decks (01–13)
+    # already roughly track this curriculum; this classifier surfaces
+    # the same taxonomy in the prompt itself.
+    _CATPATS = [
+        # Order matters: more specific first. Each rule is a (pattern, category).
+        (r'connected speech|reduction|contraction|stress|linking|t[- ]flap|weak form|schwa|elision|intonation|assimilation|silent letter|word stress|sentence stress|prosody|rhythm', 'phonology'),
+        (r'phrasal verb|particle verb', 'phrasal-verb'),
+        (r'reported speech|indirect speech|direct speech|backshift', 'reported-speech'),
+        (r'cleft|existential|causative|tag question|hedging|inversion|fronting|catenative|emphatic|exclamative|pseudo-cleft|reverse pseudo|response form|comment clause|extraposition|locative|comparative.*invers|degree.*invers|so.*such', 'construction'),
+        (r'gerund|infinitive|participle', 'non-finite'),
+        (r'subjunctive|imperative', 'mood'),
+        (r'passive|middle voice', 'voice'),
+        (r'conditional|if[- ]clause|mixed cond|inverted cond', 'conditional'),
+        (r'used to|would \(habitual\)|habitual past', 'periphrastic-past-habit'),
+        (r'going to|be about to|be to\b|be due to|be on the verge', 'periphrastic-future'),
+        (r"\bmodal\b|\bmust\b|\bshould\b|\bought\b|\bneed\b|\bdare\b|\bcan\b|\bcould\b|\bmay\b|\bmight\b|have to|has to|had to", 'modal'),
+        # Future Simple uses 'will' as future marker — that's tense-aspect, NOT modal.
+        # Anything else falls through to the canonical 12-cell grid.
+    ]
+    _CATPATS = [(re.compile(p, re.I), cat) for p, cat in _CATPATS]
+    def _category_for(label: str) -> str:
+        L = label.strip()
+        # Future tenses are tense-aspect, not modal:
+        if re.search(r'^future (?:simple|continuous|perfect)', L, re.I):
+            return 'tense-aspect'
+        for pat, cat in _CATPATS:
+            if pat.search(L):
+                return cat
+        return 'tense-aspect'  # default: canonical grid
+
+    # Honest, category-specific prompts. The phrase always names exactly
+    # what kind of grammatical answer is expected — no more "Name this
+    # verb form" when the answer is actually "Connected Speech".
+    _CAT_PROMPTS_HIGHLIGHTED = {
+        'tense-aspect':            'Identify the highlighted tense + aspect',
+        'modal':                   'Identify the highlighted modal',
+        'voice':                   'Identify the highlighted passive form',
+        'mood':                    'Identify the highlighted mood',
+        'conditional':             'Identify the highlighted conditional type',
+        'non-finite':              'Identify the highlighted non-finite form',
+        'periphrastic-future':     'Identify the highlighted future construction',
+        'periphrastic-past-habit': 'Identify the highlighted past-habit construction',
+        'construction':            'Identify the highlighted construction',
+        'phrasal-verb':            'Identify the highlighted phrasal verb',
+        'reported-speech':         'Identify the highlighted reported-speech form',
+        'phonology':               'Identify the highlighted pronunciation feature',
+    }
+    _CAT_PROMPTS_BARE = {
+        'tense-aspect':            'Name this tense + aspect',
+        'modal':                   'Name this modal',
+        'voice':                   'Name this passive form',
+        'mood':                    'Name this mood',
+        'conditional':             'Name this conditional type',
+        'non-finite':              'Name this non-finite form',
+        'periphrastic-future':     'Name this future construction',
+        'periphrastic-past-habit': 'Name this past-habit construction',
+        'construction':            'Name this construction',
+        'phrasal-verb':            'Name this phrasal verb',
+        'reported-speech':         'Name this reported-speech form',
+        'phonology':               'Name this pronunciation feature',
+    }
     def _prompt_for(focused_html: str, label: str, sentence: str) -> str:
-        """Pick the instruction string. If the FocusedSentence contains a
-        <mark> tag, use the consistent 'Identify the highlighted form'.
-        Otherwise pick a category-appropriate prompt so we never claim
-        something is highlighted when it isn't."""
+        """Always-honest instruction: announces both the category of the
+        expected answer AND whether a span is highlighted."""
+        cat = _category_for(label)
         if '<mark' in focused_html:
-            return 'Identify the highlighted form'
-        if _PROMPT_PHON_RE.search(label):
-            return 'Name this pronunciation feature'
-        if _PROMPT_CONSTR_RE.search(label):
-            return 'Name this construction'
-        return 'Name this verb form'
+            return _CAT_PROMPTS_HIGHLIGHTED[cat]
+        return _CAT_PROMPTS_BARE[cat]
 
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
@@ -1614,15 +1681,16 @@ mark.focus {
         else:
             focus_misses += 1
         prompt_text = _prompt_for(focused, row[1], row[0])
+        category = _category_for(row[1])
         row_for_note = list(row)
         row_for_note[7] = deduped_when
         # Recognition fields: Sentence | Label | Aspect | Formula | MainUse |
         #   QuickCue | Contrast | WhenNotToUse | Tags | Audio | IPA |
-        #   Timeline | FocusedSentence | Prompt
+        #   Timeline | FocusedSentence | Prompt | Category
         note = ap.Note(
             model=rec_model,
-            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, focused, prompt_text],
-            tags=row[8].split(),
+            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, focused, prompt_text, category],
+            tags=row[8].split() + [f'cat:{category}'],
         )
         for _mod in mods:
             decks[(_mod, 'rec')].add_note(note)
