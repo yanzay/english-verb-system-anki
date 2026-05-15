@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.6.3'
+VERSION = '2.7.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -129,7 +129,13 @@ MODULE_TAGS = {
     '13': {'l1-interference', 'l1-spanish', 'l1-french', 'l1-german',
            'l1-russian', 'l1-mandarin', 'l1-japanese',
            'l1-korean', 'l1-arabic', 'l1-portuguese'},
-    '14': {'image', 'module:image', 'image-cue', 'aspect-dynamic',
+    # Module 14 (Image-Cue) was REMOVED in v2.7.0. Wikimedia keyword
+    # search produced semantically random matches (e.g. "woman thinking
+    # in profile" → Picasso sculpture in Chicago). The premise itself
+    # was flawed: most verbal-aspect contrasts are abstract and cannot
+    # be disambiguated by a still photograph. Better no images than
+    # misleading images.
+    '_REMOVED_14': {'image', 'module:image', 'image-cue', 'aspect-dynamic',
            'aspect-habitual', 'aspect-perfect', 'phrasal-literal',
            'phrasal-figurative'},
 }
@@ -161,7 +167,7 @@ MODULE_NAMES = {
     '13-ar': 'English Verb System::13 - L1 Interference::🇸🇦 Arabic speakers',
     '13-pt': 'English Verb System::13 - L1 Interference::🇵🇹 Portuguese speakers',
     '13-nl': 'English Verb System::13 - L1 Interference::🇳🇱 Dutch speakers',
-    '14': 'English Verb System::14 - Image Cue',
+    # '14' (Image Cue) intentionally absent — see MODULE_TAGS comment.
 }
 
 
@@ -199,7 +205,7 @@ def row_module(tags_str):
         return '13'  # generic L1 card with no specific language → "Other"
     # Check newer/more-specific modules first so e.g. a phrasal-verb card
     # tagged with both 'phrasal-verb' and 'modal' routes to module 11.
-    for mod in ['14', '13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02']:
+    for mod in ['13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02']:
         if tags & MODULE_TAGS[mod]:
             return mod
     return '01'
@@ -1270,11 +1276,10 @@ input[type=text],
         ('10', 'clz'): 2056102004, ('11', 'clz'): 2056102104, ('12', 'clz'): 2056102204,
         ('13', 'clz'): 2056102304,
         # Image-Cue deck (Tier 4)
-        ('14', 'img'): 2056102401,
+        # ('14', 'img') deck-id retired in v2.7.0 — see MODULE_TAGS comment.
     }
     TYPE_SUFFIX = {'rec': '::1 - Recognition', 'con': '::2 - Contrast',
-                   'pro': '::3 - Production', 'clz': '::4 - Cloze',
-                   'img': '::1 - Image Cue'}
+                   'pro': '::3 - Production', 'clz': '::4 - Cloze'}
 
     deck_description = f'English Verb System v{VERSION} — Comprehensive tense, aspect, and mood study. <a href="{CHANGELOG_URL}">Changelog</a>'
     
@@ -1478,9 +1483,10 @@ input[type=text],
                 decks[(_mod, 'clz')].add_note(note)
             counts['clz'] += 1
 
-    # Image-Cue (Module 14)
+    # Image-Cue (Module 14) was REMOVED in v2.7.0 — semantically random
+    # Wikimedia matches actively misled learners. See MODULE_TAGS comment.
     img_count = 0
-    if IMAGE_TSV.exists():
+    if False and IMAGE_TSV.exists():
         img_index = load_image_index()
         _, img_rows = load_tsv(str(IMAGE_TSV))
         for row in img_rows:
