@@ -97,6 +97,14 @@
         "size": 43200
       }
     },
+    "0112efd3adf0": {
+      "text": "There are many people here.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2af9267eecdae0f5e16cb5bdf28f3531b3a0ac9bd104a433039eefbf475b6039",
+      "size": 13632
+    },
     "011df25e41a6": {
       "text": "Can you make out what the sign says?",
       "voice": "en-US-Neural2-F",
@@ -129,6 +137,14 @@
         "size": 43392
       }
     },
+    "0148948538f3": {
+      "text": "She is very tired.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "76ffe965e6abd147164160ac589752b5dda16564b864c3b5c0ad045051bb2e3b",
+      "size": 12864
+    },
     "015ed2b811e8": {
       "text": "She eats an apple every day.",
       "voice": "en-US-Neural2-F",
@@ -144,6 +160,14 @@
         "sha256": "356ed0e09f887289a10f7c34d8c75e0e3e484a78b4f4a370e1013d40eec7a86b",
         "size": 21120
       }
+    },
+    "016f9e00971d": {
+      "text": "A beautiful house red.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "7659017c178045b3041e67b9a5643f64fb3b29efb0eec700502a39059f3dc336",
+      "size": 13632
     },
     "01beb56c2f45": {
       "text": "If I had more time, I would learn Spanish.",
@@ -401,6 +425,14 @@
         "size": 40320
       }
     },
+    "0495988183fc": {
+      "text": "I have book on shelf.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "3595716e812d775a3422521eafccc1d7f7674d156af24b1c6dddd20b03bbe1eb",
+      "size": 14400
+    },
     "04ed02706680": {
       "text": "They had not eaten before the meeting.",
       "voice": "en-US-Neural2-F",
@@ -512,6 +544,14 @@
         "sha256": "407af8e658442c6a2eb4004222e8943d11226ac9b1edbf1a5d08a52387d51b39",
         "size": 37632
       }
+    },
+    "05d1f8524ae8": {
+      "text": "She works in accounting.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "a7f1f61ab0addb1c7f0d60a3682562609ddc7901461cb12419ff07d682c6a39c",
+      "size": 13056
     },
     "05e127cb46e8": {
       "text": "They are waiting outside the station right now.",
@@ -640,6 +680,14 @@
         "sha256": "117344405c21cbeed31325714fb51ef726843542e52826d7947359ade011024d",
         "size": 26112
       }
+    },
+    "079d04381154": {
+      "text": "I like reading books.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "40302f173f2e1d295cb344450016ffa62fce59b932762663005ae87ab9744afc",
+      "size": 13056
     },
     "07c509c4e27a": {
       "text": "He should have come yesterday.",
@@ -961,6 +1009,14 @@
         "size": 23040
       }
     },
+    "0b363ec5f98f": {
+      "text": "I have just finished the project.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b7539c7f7958716fcb57fc9d1e77263e1035fdd68a11de597c450681abb6f6b9",
+      "size": 18048
+    },
     "0b88dd696bf5": {
       "text": "I wish I had more time.",
       "voice": "en-US-Neural2-F",
@@ -1009,6 +1065,14 @@
         "size": 24576
       }
     },
+    "0bb554d6f73f": {
+      "text": "I like it very much. / I really like it.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "c04630e180a4764b1095b370e7a244d11199364ef1f4fdeec9032abe399fea8b",
+      "size": 24576
+    },
     "0bdd925a89f6": {
       "text": "I prefer tea to coffee in the morning.",
       "voice": "en-US-Neural2-F",
@@ -1040,6 +1104,14 @@
         "sha256": "9def4afe37e3fec7f6883429edc23d099d668e747234fb17a1a0c0e50df78dcd",
         "size": 31872
       }
+    },
+    "0bfa223b339e": {
+      "text": "Have many people in the room.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2c6b0d4ae01d0b4a60f1703237e531b738ac4c3892611b5f107a16398ea0cca6",
+      "size": 15168
     },
     "0c13eb7f101c": {
       "text": "You may borrow my pen if you like.",
@@ -1249,6 +1321,14 @@
         "size": 30720
       }
     },
+    "0dbba561c41e": {
+      "text": "I no understand.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ffb818fb4d5425740e40d6ad0d5feb2c9b05617bd90390f4ce622f05ad75a585",
+      "size": 11904
+    },
     "0dc363018f14": {
       "text": "They will not have arrived by then.",
       "voice": "en-US-Neural2-F",
@@ -1280,6 +1360,22 @@
         "sha256": "e7b018f2211d2b559746682a87c932892aa34c9328e054e667ac183d189704cd",
         "size": 50112
       }
+    },
+    "0e8a4f0096dd": {
+      "text": "Eventually he will arrive.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6a273e451069765908e92564cb2f19edefdc7d2982aa0236e0b6e3e4e6fba76c",
+      "size": 14592
+    },
+    "0eb3d36d2fbd": {
+      "text": "I bought book yesterday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "71ba3cf1d16b97180067470398cc47bf8f6f233355904cab71004c1de6750a09",
+      "size": 13056
     },
     "0ede92ccd128": {
       "text": "The committee suggested postponing the launch until the new fiscal year.",
@@ -1392,6 +1488,14 @@
         "sha256": "3f8436d5130a5845ad0cf2a328c70afe4940f36a337029a6dacfaab1b2bb0868",
         "size": 41664
       }
+    },
+    "1122ea61ccf8": {
+      "text": "I yesterday store went.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "e6b4add4f8f2fdf4219ba1c804343ed9a669774c6e0e8e6c8611da9f6270e7b8",
+      "size": 14208
     },
     "11529d9d582b": {
       "text": "She feels tired after the long journey.",
@@ -1665,6 +1769,14 @@
         "size": 45696
       }
     },
+    "12edbc079b89": {
+      "text": "Is raining today.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "dcba8c21297bd9a01a86d1594190a4587ed11e885cd775e6cc9e13a8ea7b2795",
+      "size": 10560
+    },
     "1360f7a8f4ee": {
       "text": "The wall fell apart.",
       "voice": "en-US-Neural2-F",
@@ -1696,6 +1808,14 @@
         "sha256": "f52d6df70ac94008d9cbedb76d4a4ddbf79a15fb32f494b9fb64fe66b384bfee",
         "size": 23808
       }
+    },
+    "1406d6b9c163": {
+      "text": "This report is due by Friday. / I need this by Friday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "fa350c25c9afd9fc07c6fb5ea309a2f40194f19eacf1eb3d51710e469e4707cc",
+      "size": 31104
     },
     "1479a5ff8f7e": {
       "text": "He got caught speeding on the motorway last weekend.",
@@ -1808,6 +1928,14 @@
         "sha256": "da6f061a52660876dce9a36a1361fd427e2d67610c62b4acc48e0ad566f3b7c3",
         "size": 33216
       }
+    },
+    "15fef73cada2": {
+      "text": "I work here since 2010.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "e1e08eb14e94d8a385882579cea112b228e326f39879b7e7276c3bc11211c7e8",
+      "size": 17088
     },
     "1610a36614ef": {
       "text": "I do like your proposal, and I'll vote for it.",
@@ -2193,6 +2321,14 @@
         "size": 31104
       }
     },
+    "19aeaf047290": {
+      "text": "Yesterday I went to the store.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "99e794f8a811b49f12f8d2df29f981546c4c7102130ec940e2c5392c56136f0a",
+      "size": 16704
+    },
     "19baa1012fce": {
       "text": "The course costs five hundred dollars.",
       "voice": "en-US-Neural2-F",
@@ -2208,6 +2344,14 @@
         "sha256": "650bf878442c4e9e7a83e659a74a6fc99e505de94b7c6bd6d644892f008ab8cc",
         "size": 25344
       }
+    },
+    "1a0fc1838726": {
+      "text": "I like it very much.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "7902876e38acfd927b8ec3c897a731c805917e460e88815138868991a6efaf59",
+      "size": 14400
     },
     "1a14c4224a12": {
       "text": "Do you know ___ the parcel has arrived?",
@@ -2257,6 +2401,14 @@
         "size": 36672
       }
     },
+    "1a856305fb7a": {
+      "text": "I know him from long time.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "53b44f37852423a38ecf6e75d0636322bcf1c297fab7d64223ff14857a11b273",
+      "size": 15552
+    },
     "1a93ebc8147c": {
       "text": "This box contains fragile items.",
       "voice": "en-US-Neural2-F",
@@ -2304,6 +2456,14 @@
         "sha256": "d6d30422b493a7aad1c06f8d25d4474bc9cf0ba0a928bf9a13516bc12eca6418",
         "size": 20736
       }
+    },
+    "1b44dbe4b314": {
+      "text": "The party is in 8pm.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "cfd785e921adde30260b1424ce37165bb5a7ef96698720b78f726945f57a1805",
+      "size": 15936
     },
     "1b798159095f": {
       "text": "At eight o’clock, we were driving home.",
@@ -2433,6 +2593,14 @@
         "size": 20544
       }
     },
+    "1cc00b0dbefa": {
+      "text": "Actually I work in Paris.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b34c6f7ac4256862d3e1a3ada9c29c0462d252aa3adb9d777349078252332e20",
+      "size": 17088
+    },
     "1cf4fd581bf7": {
       "text": "We are going to visit my parents next weekend.",
       "voice": "en-US-Neural2-F",
@@ -2465,6 +2633,22 @@
         "size": 34752
       }
     },
+    "1d7293752aa5": {
+      "text": "I work here since two months.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "fef129063022c8d1c86cdb480787071a35292cc8eb1edce953557a858eb132a7",
+      "size": 17472
+    },
+    "1d966c85c54a": {
+      "text": "I like read books.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "c326fcd72160f208c02c249b81796648e4afbfb34bc6bc0ffa0dc401ab389db0",
+      "size": 12288
+    },
     "1d9b9dfd4898": {
       "text": "By June, they will have been living there for a decade.",
       "voice": "en-US-Neural2-F",
@@ -2481,6 +2665,14 @@
         "size": 34560
       }
     },
+    "1d9e949400ce": {
+      "text": "I am hot right now.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "4483c900ea7a3ac2157fe149d375760a05a92307b97cf6b7b8d26366c1be1c9e",
+      "size": 12480
+    },
     "1dcf2197c883": {
       "text": "She brought back souvenirs.",
       "voice": "en-US-Neural2-F",
@@ -2496,6 +2688,14 @@
         "sha256": "87bca65d306b91ffaab655628edb1d7b97c4e30477923dfa7876d103885e8732",
         "size": 18624
       }
+    },
+    "1dda54b3e3e5": {
+      "text": "I am 25 years old.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "8a2f5310f20834c7b4f677726c9c31c119799e484138daeeec9a0feb2202108a",
+      "size": 16512
     },
     "1e3243955a9e": {
       "text": "Do you know the answer?",
@@ -2784,6 +2984,14 @@
         "sha256": "7fe2f3f3672e13c4dd62c6de5e191bf68ad8f6b9497e902ea89462fc9321dfea",
         "size": 30528
       }
+    },
+    "20788a98f3c1": {
+      "text": "By me is a car.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "7b9a8820f9f3242874211495060967f5fb67fe5df997484ee5b9ad32c17e8ff5",
+      "size": 12288
     },
     "20b3903cf436": {
       "text": "She had finished the task before lunch.",
@@ -3185,6 +3393,14 @@
         "size": 25344
       }
     },
+    "2599b6a7dfdf": {
+      "text": "A red book is on the table.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6911f9e197387d46132885d09fc0b74b79f82913937f84ed22230539cc13d81d",
+      "size": 15744
+    },
     "25a0d8603853": {
       "text": "He has finished the report, hasn't he?",
       "voice": "en-US-Neural2-F",
@@ -3249,6 +3465,14 @@
         "size": 23616
       }
     },
+    "26e74332ee52": {
+      "text": "I go to school.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b449737a904ab876498c65e7dbfef31e1234caf1bb3276caf8fbb9f8816cb34a",
+      "size": 10368
+    },
     "271827535b96": {
       "text": "I was going to call you, but I forgot.",
       "voice": "en-US-Neural2-F",
@@ -3296,6 +3520,14 @@
         "sha256": "48afef07cf8f036b6144dd0a9bf85a64fa1fb506cfc764ee1fadd5567938d0ba",
         "size": 34944
       }
+    },
+    "2813d7c28e2a": {
+      "text": "I have worked here for five years.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ae4ccdb9374cd2297ee65ac9a41d3ce5af8d7b674f70461638a8481bdff245db",
+      "size": 17664
     },
     "28488079dca3": {
       "text": "If I were you, I would wait a little longer.",
@@ -3521,6 +3753,14 @@
         "size": 30144
       }
     },
+    "2bcea95f4dbc": {
+      "text": "I don't understand.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "3cf9b7958f1a7c887740098d7007aea7f3f50175cb3c38795e0514270590824f",
+      "size": 11712
+    },
     "2bd29421873c": {
       "text": "The decision had been made long before the meeting was even scheduled.",
       "voice": "en-US-Neural2-F",
@@ -3665,6 +3905,14 @@
         "size": 27456
       }
     },
+    "2dd5f1a725aa": {
+      "text": "I have 30 years.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "dfb8d9f54653cbfe1b1c535abc6d1f0d929e7da3b42b1fde6fd53e8b5d8de2ef",
+      "size": 12480
+    },
     "2de3aabdcd8f": {
       "text": "I'll let you know when I hear back from them.",
       "voice": "en-US-Neural2-F",
@@ -3696,6 +3944,14 @@
         "sha256": "508afc7d291da240aff59da04d1cd1537bad5554529d515578667416701ccbf0",
         "size": 45696
       }
+    },
+    "2df13dae554d": {
+      "text": "I bought new car yesterday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "49caf0516362da399e61d5be20f730405eeeefd0e508a90bcf9a01818b14b5c1",
+      "size": 15552
     },
     "2df35549d514": {
       "text": "I wish I had taken that job.",
@@ -3841,6 +4097,14 @@
         "size": 24768
       }
     },
+    "2f9269b5dcc0": {
+      "text": "I have forgotten it.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "227810408e9b3cf39e9699a128583014c10115d0868204b892c12a7f19da124c",
+      "size": 11328
+    },
     "303995c737d6": {
       "text": "Her phone got stolen at the station.",
       "voice": "en-US-Neural2-F",
@@ -3905,6 +4169,14 @@
         "size": 26880
       }
     },
+    "30db541f7f35": {
+      "text": "I am 30 years old. / I'm 30.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "61208e3238d8e6c5232b70ad076b09af4793538064c99f45942b32f7409a9767",
+      "size": 21888
+    },
     "30eb729e61ec": {
       "text": "The treaty will be signed during next month's summit in Vienna.",
       "voice": "en-US-Neural2-F",
@@ -3968,6 +4240,14 @@
         "sha256": "89cf40cf11691d7bc1b918aba4edbe34304e53f0cde8e081d7439f9e0b756da7",
         "size": 37824
       }
+    },
+    "31500f6bbe44": {
+      "text": "I have worked here since 2015. / I've been working here since 2015.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "68b470534ab07e28b8e76d23838f31712aeb6cc9b7ee76c9477f218fa6ff81a9",
+      "size": 39936
     },
     "316f0699699d": {
       "text": "She works in Beijing for an international consultancy.",
@@ -4112,6 +4392,14 @@
         "sha256": "17195bced89a7c428a43d7a771756b7a125864eb45d77c9d51ab687b73833911",
         "size": 23616
       }
+    },
+    "325f8817cb97": {
+      "text": "Yesterday I went to school.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "17a198e28c377751d7617a2bda382616a7be5078b6089a46504b1793c9ef7ded",
+      "size": 16128
     },
     "334ec5586f90": {
       "text": "Had they reviewed the contract, they would not have signed it blindly.",
@@ -4817,6 +5105,14 @@
         "size": 23040
       }
     },
+    "3cca12e40561": {
+      "text": "Maybe it will rain tomorrow probably.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "15bed233b01352178667c8a8a63f248bc50f8380c7722fbc03a6905d2c08f45e",
+      "size": 19584
+    },
     "3cd30f6e1d7a": {
       "text": "Unless you pay now, we will cancel your order.",
       "voice": "en-US-Neural2-F",
@@ -5201,6 +5497,14 @@
         "size": 37248
       }
     },
+    "40ed3290d094": {
+      "text": "I depend on my parents.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "206ca4c57aab61c760ce892666fb762ee814d580fed42dcf2137c25f47d53770",
+      "size": 15936
+    },
     "410be8f4c873": {
       "text": "She appears confident in the meeting.",
       "voice": "en-US-Neural2-F",
@@ -5232,6 +5536,14 @@
         "sha256": "54d9e08a19033d939afb25c0964a00b8f45c04352f12ee5a77d4646ec8fe416d",
         "size": 42432
       }
+    },
+    "4172d483dafb": {
+      "text": "Yesterday I went home.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "fc905a4465b5d3201fbb7b58cda05d67892d4c5d2095a91ad9426985691cae01",
+      "size": 13248
     },
     "41986c16d0ad": {
       "text": "His promotion got delayed by the restructuring.",
@@ -5457,6 +5769,14 @@
         "size": 26688
       }
     },
+    "43087c4c0bd8": {
+      "text": "He has place in the team.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "14c376b83c31332cac943890d311f72a8bff070c90b6411ef0252c96d82d2f06",
+      "size": 14400
+    },
     "432a051a87fd": {
       "text": "The contract is hoped to have been finalised before the deadline.",
       "voice": "en-US-Neural2-F",
@@ -5520,6 +5840,14 @@
         "sha256": "6c11651b7b4f17f57a136bf2b6068f8a74f0a7cb0c6be0ee5ce3c9267ab285e7",
         "size": 38976
       }
+    },
+    "434536c0325f": {
+      "text": "I have a car.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b48901d657581922897ee63ec4417c9e809192b7fd13e9527d0130023ef4f740",
+      "size": 9216
     },
     "43b56910c6dd": {
       "text": "I wish I were taller and more confident in social situations.",
@@ -5953,6 +6281,14 @@
         "size": 27648
       }
     },
+    "48dccb2b5737": {
+      "text": "I enjoy reading books.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b4b9d9f8cb63a2d231530de10885069565710568ac9410d97f876d3912d654e1",
+      "size": 14208
+    },
     "48e164b4d805": {
       "text": "All documents should be backed up regularly.",
       "voice": "en-US-Neural2-F",
@@ -6160,6 +6496,22 @@
         "sha256": "60bb5e9331ce12f2463d8ca597f57703520506540f0eb8046f2421529b59d5e6",
         "size": 31680
       }
+    },
+    "4b39ec63c983": {
+      "text": "He very smart.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6c3ddeca75114bf5b412e351da441d3a23ce513092b10af7a90e44cef38fe0e4",
+      "size": 11136
+    },
+    "4b772dc7a30f": {
+      "text": "I have five books on my shelf. / I have 5 books.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "a7dc3bdc162cf561958010399a75aab4ce1a76860aa676bf9c45a2f7267661bc",
+      "size": 30528
     },
     "4b80c6d31f75": {
       "text": "She's looking at the schedule to find a free slot.",
@@ -6641,6 +6993,14 @@
         "size": 28032
       }
     },
+    "51929be00f9b": {
+      "text": "I have many books.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "86c5d12ca8f42a9535cdc578cd06892fa344a3d80a4e23af30218bc938963423",
+      "size": 11904
+    },
     "51980b3405e0": {
       "text": "This situation has been going on for months.",
       "voice": "en-US-Neural2-F",
@@ -6817,6 +7177,14 @@
         "size": 23232
       }
     },
+    "536fb206eca9": {
+      "text": "I want to know maybe she will come.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "7072b73de9b376b2d88047d700f665073c8e5521d7884259a91c7ddd2a3da5e8",
+      "size": 16896
+    },
     "53b00f02af3d": {
       "text": "The moment the lights ___, the orchestra will begin.",
       "voice": "en-US-Neural2-F",
@@ -6832,6 +7200,14 @@
         "sha256": "40e0d856846e36bd4fc51afc06d5e78e76c222c1b453260c7d565410bd803f40",
         "size": 52224
       }
+    },
+    "53bc7795377e": {
+      "text": "I have lived here for eight years. / I've been here for 8 years.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2b2505102d0f4b83959adbd818d051c7a21d9f54d7ee38f0783fb8f25e7834f8",
+      "size": 32448
     },
     "53db633c264f": {
       "text": "Every summer, we would drive up to the lake for a long weekend.",
@@ -7457,6 +7833,14 @@
         "size": 22272
       }
     },
+    "5c968e1194c2": {
+      "text": "He becomes a present for his birthday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2630cd9b5646c92b11423b360f4178741db3b93427aa7b35d622ffeabf9c319e",
+      "size": 19776
+    },
     "5c9c81bd241d": {
       "text": "Have you already finished? I've barely started!",
       "voice": "en-US-Neural2-F",
@@ -7536,6 +7920,14 @@
         "sha256": "b610f4144271e4c697934e1dc1cade4326d7c3d84b53c30ffb1848e58bab6ffe",
         "size": 39936
       }
+    },
+    "5d2f54c464b2": {
+      "text": "I have hot.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "527247f45e7baf587b8af8cbb31da36823c441a34c824e21125e8e94fe382157",
+      "size": 9216
     },
     "5d46675f3237": {
       "text": "I am not working on Monday because I have a dental appointment.",
@@ -7873,6 +8265,14 @@
         "size": 15168
       }
     },
+    "61fd332cfecb": {
+      "text": "I will finish it by Monday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "bde340d6c56b388d65ca3de628f1ed96377c13c4cfc09e4995cc25e5372e5d02",
+      "size": 15936
+    },
     "62218216df2f": {
       "text": "I'm leaving now. → The bus is about to leave—we need to hurry!",
       "voice": "en-US-Neural2-F",
@@ -8000,6 +8400,14 @@
         "sha256": "442d5946eb8fc9011b2103d4fd206dd86280915cb93df1e6c418dd01429cd9db",
         "size": 37440
       }
+    },
+    "6371c8779ded": {
+      "text": "I am living here for two years.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "e127efc24f203c927d5df732bc2300f1d8aa9855395216cee6495b3372c83bf9",
+      "size": 17280
     },
     "6395bb4b9cdf": {
       "text": "You ought to call your mother soon.",
@@ -8129,6 +8537,14 @@
         "size": 24192
       }
     },
+    "64d3823aa025": {
+      "text": "He always is reading.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6fa495185f7e3a4bf1eeea324f9cdf21f5a94a007f72eb65dc75385268afbaee",
+      "size": 12480
+    },
     "65570058ab29": {
       "text": "The meeting can be postponed if needed.",
       "voice": "en-US-Neural2-F",
@@ -8176,6 +8592,14 @@
         "sha256": "6c0698a68bd4130f8f5203f28e532903dc9105bb521f38824a667677c0ae5c9c",
         "size": 13440
       }
+    },
+    "66675899dc2b": {
+      "text": "I will to call you tomorrow.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b8c15b1956f2bca358cd7cefdb79b35e678c844c90e49cb9ce98d3666d09e0cb",
+      "size": 14784
     },
     "6669ce238eb2": {
       "text": "This time tomorrow, she will be presenting the update.",
@@ -8240,6 +8664,14 @@
         "sha256": "419ef0b7859dab8a400b89237c054ad19d9e1336558aea9699d771fe5977ab52",
         "size": 43968
       }
+    },
+    "6717bad850b0": {
+      "text": "She is very tired after the exam. / She's very tired.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "951f4a46576655622368352bed31089f2aef422eecea21af22fa6cca68f1662f",
+      "size": 31680
     },
     "67203784baff": {
       "text": "She will have been living here for years by next month.",
@@ -8801,6 +9233,14 @@
         "size": 40512
       }
     },
+    "6c95e3af3f8e": {
+      "text": "He just has eaten.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "074e3af94ca5d9d8fd0b6d84a6a91079ab5d6d52a07779209cbd7786b368026a",
+      "size": 11520
+    },
     "6cdd3fe269a7": {
       "text": "As soon as I'll get home, I'll cook dinner.",
       "voice": "en-US-Neural2-F",
@@ -8832,6 +9272,14 @@
         "sha256": "b304a84fcc516d4a5878f6f8caa4f16f1fb05f50bca153b3314d24905ea1dbf6",
         "size": 30720
       }
+    },
+    "6d8c2f643cfd": {
+      "text": "There are many temples in Kyoto.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "eee6b13d7abee717c43eef62073ea3fd610943f78ebde07b8ad41f75b28b6446",
+      "size": 18048
     },
     "6da79a93a5a2": {
       "text": "She fell behind in her studies this semester.",
@@ -9393,6 +9841,14 @@
         "size": 34176
       }
     },
+    "736900c90063": {
+      "text": "I have lived here for five years.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "16027917e40bc40e3f66430d39845274c0ab2cd442da990d8f4ab3dc5bd076cc",
+      "size": 17472
+    },
     "73b296374adb": {
       "text": "You can take the afternoon off, provided that the report is finished.",
       "voice": "en-US-Neural2-F",
@@ -9665,6 +10121,14 @@
         "size": 51072
       }
     },
+    "77374af3e149": {
+      "text": "In Tokyo, has many people.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2c84d235b4af523e81beaca22042b3e92bbdb314997e6480f8b3a8ddf54cd298",
+      "size": 19584
+    },
     "773d2e22a62e": {
       "text": "She has visited Paris several times.",
       "voice": "en-US-Neural2-F",
@@ -9809,6 +10273,14 @@
         "size": 24768
       }
     },
+    "797188fdf70c": {
+      "text": "I go to school every morning.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "abb22d8571fbf001bc60df2dc2ac9698fbeab3b3c2aa7c10ed643afad13e941f",
+      "size": 16512
+    },
     "79a31a98f1bc": {
       "text": "You should have known better.",
       "voice": "en-US-Neural2-F",
@@ -9889,6 +10361,14 @@
         "size": 43392
       }
     },
+    "7a16f17ead5b": {
+      "text": "I must go home now.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b3de62a634852d17c167a10cef4e785371e969bcd8e547956a6e465e81f4d557",
+      "size": 13056
+    },
     "7a8529104138": {
       "text": "I'm going to the conference next week to give the keynote.",
       "voice": "en-US-Neural2-F",
@@ -9936,6 +10416,14 @@
         "sha256": "a3184378405437e6aabcfeca76f79f42116aa1d4c7d3e98261390ce43df7e837",
         "size": 20544
       }
+    },
+    "7b07233483ce": {
+      "text": "I am knowing this fact.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "d1ddf721e896a5db07f23afe7951c2d25b816b39189d6b4947551cb77a9a879a",
+      "size": 14016
     },
     "7b157b03c5f7": {
       "text": "The teacher reminded the class that water boils at 100 degrees Celsius.",
@@ -10049,6 +10537,14 @@
         "size": 18048
       }
     },
+    "7bde49c26643": {
+      "text": "How long have you worked here? / How long have you been working here?",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "c1f95997fb6bb8cb99a31151db91cd1700ea5aaa8eea62f95e87d2aaf8dcecd4",
+      "size": 29184
+    },
     "7be9325b926f": {
       "text": "She wishes she lived closer to work.",
       "voice": "en-US-Neural2-F",
@@ -10144,6 +10640,14 @@
         "sha256": "e16dcfdc1d4e24dbbb5cce5d707ce369f77fca2970343d32915885f6a951398e",
         "size": 25152
       }
+    },
+    "7cbbb21d829b": {
+      "text": "One book is on the table.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ecaf24a568a1711cbaadb301bb9905ffb1860bad73671851e3ad7dcf5d77831b",
+      "size": 15360
     },
     "7ccb3a1ae248": {
       "text": "If you heat ice above zero degrees, it melts within seconds.",
@@ -10401,6 +10905,14 @@
         "size": 23808
       }
     },
+    "807e2ff4b2dd": {
+      "text": "Does she like coffee?",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2ea3262fe0e5968b90e860eaab96323646d7393365a799b6aa7dd92e8c27df16",
+      "size": 11328
+    },
     "808b87c19940": {
       "text": "He will not attend the event.",
       "voice": "en-US-Neural2-F",
@@ -10624,6 +11136,14 @@
         "sha256": "a6ab7ad9cca4e65c34170c238006fcde4a30aa29162c423553db0e4d23301183",
         "size": 32256
       }
+    },
+    "83ef7d2644ef": {
+      "text": "Is raining outside.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "7d7ee83716e28eff44f35ecd286251f1161db49f4407c08ad6e14cd56a0eebf9",
+      "size": 12672
     },
     "83fd5d9bb88b": {
       "text": "A detailed report was sent to every member of the committee.",
@@ -10913,6 +11433,14 @@
         "size": 32832
       }
     },
+    "880ba97e2ea6": {
+      "text": "He doctor.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "88e71a39bbc5947781e2d562d0529b501133d314c423fe97af9ceef51da464b0",
+      "size": 8640
+    },
     "8831fb828399": {
       "text": "She's looking at the map to find the route.",
       "voice": "en-US-Neural2-F",
@@ -10992,6 +11520,14 @@
         "sha256": "bbc989eebc830128fa4b51fc35dd4b7e362b0887a5c63564dd07dc56ed1ac62a",
         "size": 63936
       }
+    },
+    "894456deddcd": {
+      "text": "I very like this movie.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "5b3451fc0938087c6a229883560e2cf7a52373892a8991b20a856a047eed400a",
+      "size": 14784
     },
     "8962b9c571e0": {
       "text": "Why had she gone home early?",
@@ -11377,6 +11913,14 @@
         "size": 27072
       }
     },
+    "8d2a32e92ab6": {
+      "text": "I have a new car. / I've got a new car.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "8a4b5a6ee4d29f7635900c70c11d23ea84142ad77fd0259c5ca3bca44e5c13d0",
+      "size": 23040
+    },
     "8d448c0f2c87": {
       "text": "All expenses must be approved before submission.",
       "voice": "en-US-Neural2-F",
@@ -11633,6 +12177,14 @@
         "size": 59904
       }
     },
+    "92c430ac379b": {
+      "text": "The book, I already read.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "fd08a57a6e30000652942ab73d71756a18dd0dc7d8091ee0a4ee980e29c0bb6b",
+      "size": 17280
+    },
     "93069f2f55fb": {
       "text": "Has he seen the new film?",
       "voice": "en-US-Neural2-F",
@@ -11808,6 +12360,14 @@
         "sha256": "6724c3c05db6f05d1d411d59ae008cc53cead04a587996b4b37537cc9bc8d213",
         "size": 26496
       }
+    },
+    "95f074ada714": {
+      "text": "A car red is outside.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "40786da9637f2302cd9a89ddcc075fe75e87b2298daf1bef476bdb53e4a5936e",
+      "size": 15360
     },
     "960db2625598": {
       "text": "She told me that he was working late.",
@@ -12032,6 +12592,14 @@
         "sha256": "c44631de3ca3192925d78840f279d8050ef8599c2fa94c07b04ccc162df4cdd2",
         "size": 27072
       }
+    },
+    "980c7ac960bf": {
+      "text": "She has understanding of physics.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6a277e5c8e25d7ac0aa50978f6b2a22fee03b86ddbdb30ef6f41aa1f5ac9ddfd",
+      "size": 18816
     },
     "9898d9c6b6bd": {
       "text": "If I had set my alarm, I would not have missed the meeting.",
@@ -12369,6 +12937,14 @@
         "size": 19392
       }
     },
+    "9d0e3bf8ce42": {
+      "text": "I went to home yesterday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "baa3fc429b905b696d2074f1b04081f71fdfe739522f22bcc72691f19887c93e",
+      "size": 14592
+    },
     "9d14872b045b": {
       "text": "I still haven't heard back from them.",
       "voice": "en-US-Neural2-F",
@@ -12384,6 +12960,14 @@
         "sha256": "69d03d9d8808d7420eb311c2684dde9affa7e520a2ff191c4e77534f810686f3",
         "size": 21504
       }
+    },
+    "9d45514891ef": {
+      "text": "She work in marketing.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "713b510f54bd7cb4ca7e4a5635c46443904ad75f7f65065a2b832486422f9688",
+      "size": 12288
     },
     "9d60dfb37a12": {
       "text": "The company appears to have survived the crisis.",
@@ -12881,6 +13465,22 @@
         "size": 26112
       }
     },
+    "a130fa845d0e": {
+      "text": "There are many students in the class.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6361241e1f322f165d1a1450b1e7aa74507b205cbf3204da1e30ef4d9a134228",
+      "size": 18240
+    },
+    "a16d696bb16a": {
+      "text": "I have many book.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "dd32248b96eeae94473c6e56cee321b883efa4d1e98c6d8ef6099646beb534c8",
+      "size": 10752
+    },
     "a1963601b6ea": {
       "text": "Prime minister resigned amid scandal. Opposition demands inquiry. → Prime minister resigns amid scandal. Opposition demands inquiry.",
       "voice": "en-US-Neural2-F",
@@ -12992,6 +13592,14 @@
         "sha256": "5756478d0a94b9ee4e2ec0f823fdeccd10e54f7b78358984292b0e826f60e701",
         "size": 17664
       }
+    },
+    "a3a4a768e4fe": {
+      "text": "I get a coffee every morning.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "f914185ea520b8b67901c34a14a3a02ef4b6c7ae1b4aae22b80e5805e2a2f67b",
+      "size": 16704
     },
     "a3b9bef8959e": {
       "text": "He was a student at the university when we first met.",
@@ -13105,6 +13713,14 @@
         "size": 37440
       }
     },
+    "a4cc83a06d82": {
+      "text": "I like this movie very much. / I really like this movie.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "e4eb191ccfaa3b4665d917771f8450c6974c2abe61f28af4c0e949200de4d2d7",
+      "size": 31872
+    },
     "a507a7407b11": {
       "text": "Hand over the documents now.",
       "voice": "en-US-Neural2-F",
@@ -13184,6 +13800,14 @@
         "sha256": "fde21553f2de2b3b40bc5826d4a4177f4737d58183b13ebf1b36472061d36ed5",
         "size": 29952
       }
+    },
+    "a62697a638d4": {
+      "text": "I become a coffee.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "185d31ad55912ffcde9d1a16faca29ae731d1fb1a4edc0dd4270ac8ed2ef4bee",
+      "size": 11520
     },
     "a668fde96139": {
       "text": "The office is being renovated by contractors.",
@@ -13393,6 +14017,14 @@
         "size": 21312
       }
     },
+    "a8429115456f": {
+      "text": "In Tokyo, there are many temples. / Tokyo has many temples.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ea70400875754014bbd8d50304473daef81f953a3fcafa7a2e53672f3f9efff3",
+      "size": 37056
+    },
     "a88a30f37eb0": {
       "text": "The teacher asked him why he was late.",
       "voice": "en-US-Neural2-F",
@@ -13440,6 +14072,14 @@
         "sha256": "6cb1bd9b3af40560d1764613174925219909559c74bd3254fad5e86c3c26cc22",
         "size": 29760
       }
+    },
+    "a972d1ab1282": {
+      "text": "I live here since 5 years.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "0d6930f486a37e86c4e0711f179caaea319eb8ba5290eae675459172de9d0099",
+      "size": 17664
     },
     "a9b7769d79de": {
       "text": "He should make up for his past mistakes.",
@@ -13536,6 +14176,22 @@
         "sha256": "a413c7970f45b2e7235b2feb08ff7dacbced0a37358bfd9cb4945511d2b0eb2a",
         "size": 19776
       }
+    },
+    "aaf296b65cd7": {
+      "text": "He very sleepy now.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "1dc53cadf995c4b6f5e88f060ca65812ec48327eea2103443cb9ec14dbf11d3f",
+      "size": 13248
+    },
+    "abeba2d2d669": {
+      "text": "There are many people in Tokyo.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "9d886b25702c56d523c0d935f098812f5e68ea4860c7e583de7fbb5fc0179ff4",
+      "size": 17472
     },
     "ac11da55dca6": {
       "text": "Add two eggs. Beat well. Pour into pan. Bake at 350 degrees.",
@@ -13889,6 +14545,14 @@
         "size": 46080
       }
     },
+    "af8b0bcb58dc": {
+      "text": "It likes me a lot.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "d043c4a0d7d80e4b6c1957be8e8f5291b2e34e1e578ea6067a1930001407238b",
+      "size": 12672
+    },
     "afbcd8584eae": {
       "text": "They carried out the plan without any problems.",
       "voice": "en-US-Neural2-F",
@@ -14017,6 +14681,14 @@
         "size": 21120
       }
     },
+    "b122777673f8": {
+      "text": "I don't know anything about this. / I know nothing about this.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "94d43de1df68a1d3b87c3b000c71c11fe23e8b03147eeaaf8213740ce728b480",
+      "size": 30912
+    },
     "b13ee901821c": {
       "text": "I went to Paris last month for a conference.",
       "voice": "en-US-Neural2-F",
@@ -14048,6 +14720,14 @@
         "sha256": "acdc12092a1ce1f6b2aba422c6bb9c6f3852ef947583e245df7f7c9d92370831",
         "size": 33600
       }
+    },
+    "b15cc3a166be": {
+      "text": "I enjoy to read novels.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "82f62f2bfa8745a7eaa7b64ba0c6e26bc0bb45088b4c2ce423bc307ca9b06eaa",
+      "size": 15936
     },
     "b1aaba5a3944": {
       "text": "She wishes she hadn't left so early.",
@@ -14161,6 +14841,22 @@
         "size": 42048
       }
     },
+    "b29ca6bbcbf9": {
+      "text": "I don't know nothing.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "34883eb044ebf2a5bb4fa7a5e65eb6ee0ec9298e9f069b74676f946fb985888c",
+      "size": 10944
+    },
+    "b2a731694e17": {
+      "text": "Yesterday went I home.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "f802da3e88b7772852d8f93b6654d7ee5717a023d291c35ff07e917657334366",
+      "size": 13440
+    },
     "b2b27e84314e": {
       "text": "That can't be true based on the evidence.",
       "voice": "en-US-Neural2-F",
@@ -14192,6 +14888,14 @@
         "sha256": "9f747b6256ee6bbd1e1f4e6c0e4469fb84b1ed48e8618765c2872fe0d4f778d9",
         "size": 23424
       }
+    },
+    "b3768ede0e13": {
+      "text": "I bought a book yesterday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ac6cae72de3bc4b9f55e439a273b0fde06fe91718ac7ca463d44fabedbb5f9f7",
+      "size": 14208
     },
     "b3942d8d6bef": {
       "text": "Turn on the television now.",
@@ -14353,6 +15057,14 @@
         "size": 41856
       }
     },
+    "b5385d3d1030": {
+      "text": "On Monday I go to the store. / I go to the store on Monday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "cc61b20c6587bafcb71dcc7e5fabc3a5ea095b2835137640fe1f3ceb0000c088",
+      "size": 32064
+    },
     "b58ff60a93e2": {
       "text": "He regretted having lied to his colleagues about the report.",
       "voice": "en-US-Neural2-F",
@@ -14385,6 +15097,14 @@
         "size": 18240
       }
     },
+    "b66580f6a3e0": {
+      "text": "I enjoy reading novels.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "02f098a05692ae0f982b5e1e5ef3f4b4ee16f9797176ce6bdd905f0b5f56f45c",
+      "size": 14784
+    },
     "b6b4b878eff0": {
       "text": "If I had more money, I would travel more.",
       "voice": "en-US-Neural2-F",
@@ -14400,6 +15120,14 @@
         "sha256": "eca66c0da3d4a85e2eb86166504772a09af9ee6605379a34064c90f2e204a820",
         "size": 27840
       }
+    },
+    "b6bdd30c9775": {
+      "text": "I like sushi.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ee84314694e4d2a9c908a276aec4a72bb860504429f6820890762f60c4b050f9",
+      "size": 10752
     },
     "b74209d17500": {
       "text": "By next month, she would have been working at the firm for ten full years.",
@@ -14464,6 +15192,14 @@
         "sha256": "01fee43e8d0888c8020c16b50a8aae1ab3c568d9c82239d925963dd2536fe249",
         "size": 28992
       }
+    },
+    "b7afdc295d79": {
+      "text": "I have it must do.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b65077826cbd8fb18ad62ffb85e1fbd540765848b0c116976f5d5cb6ad3d404c",
+      "size": 12672
     },
     "b7b1c0fdc739": {
       "text": "She must have arrived by now.",
@@ -15137,6 +15873,14 @@
         "size": 19200
       }
     },
+    "c0303928b572": {
+      "text": "I am understand the lesson.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "cdf6f0f4cb107a6a62b25292327ec25a965d59fa8514af053d3e44d355f8c482",
+      "size": 15168
+    },
     "c0474db91ae9": {
       "text": "He very like the music.",
       "voice": "en-US-Neural2-F",
@@ -15168,6 +15912,14 @@
         "sha256": "bba16c3f97989eee34f43f2be81417b471a3e63e5fde927b27dc0c7c04bb93a7",
         "size": 42240
       }
+    },
+    "c0adf3801a42": {
+      "text": "I depend of my family.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "070d919d1aec46c8f362e066089a392da25d0a5bd9fdfa8a8ea4e344994ab1d0",
+      "size": 14784
     },
     "c118abb2b010": {
       "text": "I love jazz. — So do I, especially the early Coltrane recordings.",
@@ -15345,6 +16097,14 @@
         "size": 36864
       }
     },
+    "c3051a0a01cb": {
+      "text": "How long you live here?",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "61912f25642ba788e82b5a5814c902294078f21ca0edf26cba8e971231ecf19d",
+      "size": 12864
+    },
     "c3170b30da05": {
       "text": "He happens to know the chairman personally.",
       "voice": "en-US-Neural2-F",
@@ -15440,6 +16200,14 @@
         "sha256": "176f857eae20e75f5942b0a0bf43fef641724e89c0e12db75994fc6f502c2402",
         "size": 35904
       }
+    },
+    "c4266d50f463": {
+      "text": "Me like sushi very much.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "0e189f6993ee8a0e3fc5bae07c98f80b6f5b118a226db2ab800dfb4d33339767",
+      "size": 17472
     },
     "c427c2f87437": {
       "text": "My brother has already gone to Tokyo and is there now. / My brother went to Tokyo and is still there.",
@@ -15616,6 +16384,14 @@
         "sha256": "0d0578eb117808c6c2338731a9c0470d5bad261412a25b5e52a4418ef824bdda",
         "size": 20928
       }
+    },
+    "c6a901e6e5d5": {
+      "text": "On Monday I go library.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ba49a02b942ebaeec9382e3416cf9c020fb7bb57d4f8720723c448ff5d300301",
+      "size": 16896
     },
     "c73f094fa98e": {
       "text": "She left, locked the door, and walked to the station.",
@@ -15873,6 +16649,14 @@
         "size": 34176
       }
     },
+    "cb85b985212b": {
+      "text": "She is 30 years old.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "04596c18226f17ead6ca20115f29664416548eceb9e444c8a5e3a4c7b346f560",
+      "size": 14976
+    },
     "cb967b68b80c": {
       "text": "A new vaccine has been developed by the research team.",
       "voice": "en-US-Neural2-F",
@@ -16129,6 +16913,14 @@
         "size": 41088
       }
     },
+    "cf3ae3c9a8ef": {
+      "text": "I am here since one hour.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "e1a9899f30ace234f4c3910eb0d2fa2472d1c306016920409c02c686dbd385b4",
+      "size": 15360
+    },
     "cf4576d2be6c": {
       "text": "I'll be calling you at noon — don't turn your phone off.",
       "voice": "en-US-Neural2-F",
@@ -16176,6 +16968,14 @@
         "sha256": "fdf0b0ab67009ea63e81efdfe2e72d6d2a53cf3ef9f3a131c445534347dd1bb1",
         "size": 28224
       }
+    },
+    "cf85ebd0449f": {
+      "text": "Five book are on the table.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "ffc8ac3116bef2cb67c765e34ab1c56aa70e74060caaaf1065c2bb8eb7f3c04d",
+      "size": 15360
     },
     "d033c721e85a": {
       "text": "Hold on a second please.",
@@ -16385,6 +17185,14 @@
         "size": 20736
       }
     },
+    "d2895c46120d": {
+      "text": "It is very good.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "03d0ca1347b31f297b7b293b58ab47d1ff034d7dc0bc12ab01bc2e087dc6c545",
+      "size": 10752
+    },
     "d2c2b943c0bd": {
       "text": "It was John who broke the window, not his brother.",
       "voice": "en-US-Neural2-F",
@@ -16464,6 +17272,14 @@
         "sha256": "bb1ab0e0c2cd0518e711632d905524361eaa0e690c74e7c437ef20c4c23bae7c",
         "size": 19200
       }
+    },
+    "d3db249d12ff": {
+      "text": "How long have you worked here?",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "bca8c388b44e9b75064240c33bb62f369e54c5f1fef6097db6df33c0101d7a22",
+      "size": 14208
     },
     "d41728f8d283": {
       "text": "Were she more experienced, the committee would offer her the directorship.",
@@ -16641,6 +17457,14 @@
         "size": 24768
       }
     },
+    "d5befcd3b72b": {
+      "text": "Tomorrow I will to call you.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "f2d73732ec629531c5236dedc9b1e7ee2155bca361285127958a2666f51abfbb",
+      "size": 15552
+    },
     "d5c160f84d68": {
       "text": "She looks really well — she must have had a good holiday.",
       "voice": "en-US-Neural2-F",
@@ -16688,6 +17512,14 @@
         "sha256": "32c351a97b01302f505fa695f4cecbe1a5ac6fe5d0e4a690ce5920e55f3c0715",
         "size": 21888
       }
+    },
+    "d623789d261c": {
+      "text": "He is an engineer and very smart. / He's an engineer and very smart.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "71dee6b2525836af519ec15fa7bc295bd181c763cbe2b48c300b12743675af84",
+      "size": 38208
     },
     "d63884ab005c": {
       "text": "They set out to climb the mountain at dawn.",
@@ -16881,6 +17713,14 @@
         "size": 27840
       }
     },
+    "d87e1a2240d2": {
+      "text": "How long have you lived here?",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "38a94b297cab9c9707c8dbde99665f4f0726c5081d9a95a10c9eacbb38e14c32",
+      "size": 14016
+    },
     "d89a355be337": {
       "text": "She let her younger brother borrow the car for the weekend.",
       "voice": "en-US-Neural2-F",
@@ -16945,6 +17785,14 @@
         "size": 42624
       }
     },
+    "d917b7007312": {
+      "text": "Is good.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "7309e2a0c886a18f9bc8aa0c9f7e1010450f4d835a7529e3fc36b0f8f99c6eef",
+      "size": 7680
+    },
     "d941933a52b1": {
       "text": "Hardly had I sat down when the fire alarm sounded.",
       "voice": "en-US-Neural2-F",
@@ -16976,6 +17824,14 @@
         "sha256": "d2116a2d4ba799903086d2bb4fccbffd6b682025147e5fe5a0e04b105a0cd96a",
         "size": 43008
       }
+    },
+    "d9f56ddd2ae3": {
+      "text": "It is good.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "438043bc78b99dc86ce7f4cb175a841c1b1619370b410982cdfeacbbc382a57c",
+      "size": 8640
     },
     "d9f6bdb68ce1": {
       "text": "He said he was going to call me back later that afternoon.",
@@ -17056,6 +17912,14 @@
         "sha256": "b06604a85ae0373ea59b6adb4bd8547feba1b4e8ab4f872d4c0ce23906d20d0f",
         "size": 35136
       }
+    },
+    "daf08e4ea6fc": {
+      "text": "I like it a lot.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "23b067b64b3e4ed5a0fdea724b4d7814727af420010c551144cba88a8762e88e",
+      "size": 12096
     },
     "dafaf1b7caa9": {
       "text": "Shakespeare wrote many plays.",
@@ -17185,6 +18049,14 @@
         "size": 23232
       }
     },
+    "dbd83ad37ffa": {
+      "text": "I like reading books every day. / I enjoy reading books.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "4598ee3b6d1ab7ecbc0f73b8fed17c6521e59d6531d5b84bde0c5c6747164354",
+      "size": 30720
+    },
     "dc65c18e41a2": {
       "text": "The thief is believed to have escaped through the back door.",
       "voice": "en-US-Neural2-F",
@@ -17217,6 +18089,14 @@
         "size": 21888
       }
     },
+    "dca37a42c886": {
+      "text": "I have forgotten to call. / I forgot to call.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "61cf9531ea236e46789f451c0933d9b68968e80e94fa4ea0f200442c5394c8b4",
+      "size": 25152
+    },
     "dd26359363a0": {
       "text": "The new manager made everyone attend the 7 a.m. briefing every day.",
       "voice": "en-US-Neural2-F",
@@ -17248,6 +18128,14 @@
         "sha256": "5cea5fa4b0309d2e32ee743121c46e43c00c4e7f02258b45e3d3c217c4fbf658",
         "size": 23424
       }
+    },
+    "dd95436c0e68": {
+      "text": "He is a doctor.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2ef05aa153e8646a8f2a8bfa68e03cfe458c9b39556b3d5fc6785ed2c32b75fd",
+      "size": 10368
     },
     "de85d39097a8": {
       "text": "Every door had been locked before the security guard left for the night.",
@@ -17569,6 +18457,14 @@
         "size": 19584
       }
     },
+    "e2408f5a5b89": {
+      "text": "It is very good here. / It's very good.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "92390940e5001bdab579c3f08c4945cfd6a2070393aa5b9c4a129dd4a185d4e7",
+      "size": 22656
+    },
     "e25c9054b141": {
       "text": "In case of emergency, press the button.",
       "voice": "en-US-Neural2-F",
@@ -17889,6 +18785,14 @@
         "size": 31104
       }
     },
+    "e75e09f0bcf9": {
+      "text": "On Saturday I to the gym went.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "55d13d900b3c6c88500827df1272b4d5f11173e262a7231152fc12a78d26308c",
+      "size": 18240
+    },
     "e7af19e04896": {
       "text": "This package contains all the parts you need.",
       "voice": "en-US-Neural2-F",
@@ -17968,6 +18872,14 @@
         "sha256": "673badc3feb8751541f5cab690e4fb16a97bbdbe3e7d282686ce642d0148aff8",
         "size": 23616
       }
+    },
+    "e90d96e36fbe": {
+      "text": "She works in a bank.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "b312f357c51268eaed1b15bfc4464871570c5954ab4e4e5e2b31d701e8434990",
+      "size": 13248
     },
     "e94f22a99f74": {
       "text": "Fighting broke out between the two groups.",
@@ -18049,6 +18961,14 @@
         "size": 27264
       }
     },
+    "e9e548299caa": {
+      "text": "She works in marketing.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "0d720d3b92935656ee33fdcacf7eba0cd37715cdfd461a261be0b93acce68b9a",
+      "size": 12672
+    },
     "ea0f3735028b": {
       "text": "She seems to have known the answer already.",
       "voice": "en-US-Neural2-F",
@@ -18081,6 +19001,14 @@
         "size": 24576
       }
     },
+    "eadaf570e474": {
+      "text": "I have hunger.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "cb51eb0c0a700b00950c430c6bfcb63881effc624a2f9601bdda74b670f4d24b",
+      "size": 9984
+    },
     "eaee1bbb478f": {
       "text": "She promised ___ the prototype.",
       "voice": "en-US-Neural2-F",
@@ -18112,6 +19040,14 @@
         "sha256": "85cbfd9b78c7c10ca27ac2c77e88749134e5c00baf9d1b063139e80cc805b5e8",
         "size": 36096
       }
+    },
+    "ebdcafd88f87": {
+      "text": "Is hot today, yes?",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "62aacd5d0ccadce0041c99abf2667c508cb8bf3e504b6461960e03e2c934e1ed",
+      "size": 15552
     },
     "ec261dcdf6b4": {
       "text": "Yesterday I have seen the film.",
@@ -18176,6 +19112,22 @@
         "sha256": "384f37e6771e938a3db2dd794b5deea03cd794af0df1af0ac7f538261763dbef",
         "size": 20544
       }
+    },
+    "ed59c2273175": {
+      "text": "A student came to my office.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "3d5df9c28b3efab35af018e87e9474366c2b17f157416ccad0466a3f1d2f4efb",
+      "size": 17472
+    },
+    "ed6438191006": {
+      "text": "She have the answer.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "05ef4728f5e453e0f6f894ddb1805d586ccf62ecebba0ce16b17bdf0b6b61327",
+      "size": 10944
     },
     "eda92d424969": {
       "text": "She owns three properties in central Madrid.",
@@ -18256,6 +19208,14 @@
         "sha256": "8afe37990ee201372c5406bbe9e7c429a40e8c99d0c70f50dd612d53c28c9560",
         "size": 20736
       }
+    },
+    "ef7e539b447c": {
+      "text": "She very tired.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "a58ae9b3261a529612fe67355ccaa529da2d171812c40589f3b1a2781232f92a",
+      "size": 11904
     },
     "ef88cc7e7d8e": {
       "text": "She could swim before she could walk — her parents are both lifeguards.",
@@ -18369,6 +19329,14 @@
         "size": 21888
       }
     },
+    "f1c9d6724124": {
+      "text": "I have it forgotten.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "032f8753f9aec2b482e7aade57ac014ad120be5734e7bb797c0d7d69ecdf7929",
+      "size": 11712
+    },
     "f1ef26d693b1": {
       "text": "He is eating his lunch in the cafeteria right now.",
       "voice": "en-US-Neural2-F",
@@ -18384,6 +19352,14 @@
         "sha256": "c141ea735b7c3118a0f449d40ea4c8ccec49e622122c83133adc7b07d4b5cbc2",
         "size": 30336
       }
+    },
+    "f1f0160b5b65": {
+      "text": "Yesterday I see good film.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2f71ae3c3c7ce74c90954cf4eb08c8ac046a611d0574872ab870359f90e6b597",
+      "size": 16896
     },
     "f1f63361bc58": {
       "text": "They set up the office yesterday.",
@@ -18625,6 +19601,14 @@
         "size": 48192
       }
     },
+    "f53a12dd5ab5": {
+      "text": "I am wanting to eat now.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "1b4bdc8f7e8785e16724208cb6c9198223145e4d00b504a7dd5f8e6e12d4c26b",
+      "size": 13440
+    },
     "f54ad16d7661": {
       "text": "Do you know whether the parcel has arrived yet?",
       "voice": "en-US-Neural2-F",
@@ -18865,6 +19849,14 @@
         "size": 24192
       }
     },
+    "f7966a428fe0": {
+      "text": "I must not call him today.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "021dc35384c56966a16aebf9efe7d40bcdd9b067dc572a9a9dbac533c0faef2b",
+      "size": 15552
+    },
     "f80d1beed5fb": {
       "text": "I know the answer.",
       "voice": "en-US-Neural2-F",
@@ -18896,6 +19888,14 @@
         "sha256": "807f1255ee98111ff637b0667dec60f9a267345587a108105f7275c0d6ff96fe",
         "size": 24960
       }
+    },
+    "f8ae0dc029c5": {
+      "text": "I work here since one year.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "6f2d32941f8cfdb03a2095838eccbe7f19f631b818ed76e91231247def999266",
+      "size": 16128
     },
     "f8bfa38d46bd": {
       "text": "She had already left by the time I got there.",
@@ -18961,6 +19961,22 @@
         "size": 17280
       }
     },
+    "f9991b633ade": {
+      "text": "The report is due until Monday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "16f4501c3a2bf07092038b027aa3760f227f1dc10679a25536f7eaaf22a26ce6",
+      "size": 17472
+    },
+    "f9baf784b3b8": {
+      "text": "Yesterday I went home by car. / I went home by car yesterday.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "f0ec98cc3f60a2982f58994dc9a72ade90f759ae17a80c31d6482e9afbde0af0",
+      "size": 33792
+    },
     "fa3f16e44198": {
       "text": "The policy will be announced tomorrow at 2pm. / The Minister will announce the policy tomorrow.",
       "voice": "en-US-Neural2-F",
@@ -19009,6 +20025,14 @@
         "size": 26112
       }
     },
+    "fadb07ab8d6a": {
+      "text": "I work here since 2018.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "2c75fa9af75ac4786e1f844fe6020b139e31efce54294ecee2da2a9d7c8722c0",
+      "size": 18432
+    },
     "fb09c469c10a": {
       "text": "We regret to inform you that your application has been unsuccessful.",
       "voice": "en-US-Neural2-F",
@@ -19024,6 +20048,14 @@
         "sha256": "1c56a14cbb7f5c1d7bd29620b531d1b3dec86b1a68990a3440874c36a848bb1f",
         "size": 38784
       }
+    },
+    "fb4489694868": {
+      "text": "I become hungry quickly.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "266996068a94219c658663b5506b6bd0304cf89d12279c1073029238ecbcf575",
+      "size": 14400
     },
     "fb4ed1a8e846": {
       "text": "Were she to apply, she would easily get the role.",
@@ -19088,6 +20120,22 @@
         "sha256": "6535688b756647e29623a82fa6a9dd9b8d8db90988c986c54dd59eaa26f61360",
         "size": 24768
       }
+    },
+    "fb9033dfbe18": {
+      "text": "There are many people in the room.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "265a4177471441ca6d0c0d5caff6915c09e438be20807095eec5aa090291e92e",
+      "size": 15744
+    },
+    "fbb9361e0f14": {
+      "text": "I have right about that.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "fa78c7524088b2f4d88e2e540551c6f2b80800537120fd8c3f5c0ac0ac32fe63",
+      "size": 13632
     },
     "fc0033e04ad7": {
       "text": "Take an umbrella, just in case.",
@@ -19456,6 +20504,14 @@
         "sha256": "755848affdd469cf047b291c7fbc12d906249c37cfe8bef3138369cd5257260c",
         "size": 32640
       }
+    },
+    "ffb4684c4316": {
+      "text": "A red car was parked outside.",
+      "voice": "en-US-Neural2-F",
+      "rate": 1.0,
+      "lang": "en-US",
+      "sha256": "a9c0863f4170fc8cdc328cb0caf2b18e568da7d2d1887ae5e5c88950caf4d835",
+      "size": 18240
     },
     "fff0e04145fe": {
       "text": "Should you require any further assistance, please contact our help desk.",

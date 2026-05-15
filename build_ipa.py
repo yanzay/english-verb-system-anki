@@ -60,6 +60,7 @@ IPA_OVERRIDES = {
     "o'clock": "əˈklɑk",
     "oclock":  "əˈklɑk",
     "2pm":     "tu pi ɛm",
+    "8pm":     "eɪt pi ɛm",
     "100°c":   "wʌn ˈhʌndrəd dɪˈgriz ˈsɛlsiəs",
     "q2":      "kju tu",
     "ubc":     "ju bi si",

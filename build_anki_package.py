@@ -193,6 +193,123 @@ def media_for_sentence(sentence, ipa_index, timeline_index, label=''):
     return audio_field, ipa_field, timeline_field
 
 
+def embed_fsrs_preset(apkg_path):
+    """Post-process the .apkg to embed a recommended FSRS deck-options preset.
+
+    genanki 0.13 ships the package with Anki's stock SM-2 dconf and no
+    FSRS / sibling-burying / sensible learning-steps. We open the embedded
+    SQLite collection, replace the JSON in col.dconf with our preset, and
+    re-pack the .apkg in place. On import Anki creates a deck-options preset
+    named 'English Verb System' and applies it to the bundled decks.
+    """
+    import json as _json
+    import sqlite3 as _sqlite3
+    import tempfile as _tempfile
+    import shutil as _shutil
+    import zipfile as _zipfile
+    import os as _os
+
+    preset = {
+        'id': 1700000000001,
+        'mod': 0,
+        'name': 'English Verb System',
+        'usn': 0,
+        'maxTaken': 60,
+        'autoplay': True,
+        'timer': 0,
+        'replayq': True,
+        # New cards
+        'new': {
+            'bury': True,                 # bury new siblings
+            'delays': [1.0, 10.0],        # learning steps (minutes)
+            'initialFactor': 2500,        # 250% starting ease
+            'ints': [1, 4, 0],            # graduating=1d, easy=4d
+            'order': 1,                   # in order added
+            'perDay': 10,
+            'separate': True,
+        },
+        # Reviews
+        'rev': {
+            'bury': True,                 # bury review siblings
+            'ease4': 1.30,                # easy bonus 130%
+            'ivlFct': 1.0,                # interval modifier 100%
+            'maxIvl': 365,
+            'perDay': 150,
+            'hardFactor': 1.2,            # hard interval 120%
+        },
+        # Lapses
+        'lapse': {
+            'delays': [10.0],             # relearning step 10m
+            'leechAction': 0,             # 0 = suspend
+            'leechFails': 8,
+            'minInt': 1,
+            'mult': 0.0,
+        },
+        'dyn': False,
+        # FSRS settings (Anki 23.10+ honours these)
+        'fsrsParams5': [],                # use Anki defaults until user trains
+        'desiredRetention': 0.90,
+        'fsrsWeightSearch': '',
+        # Anki 23.10+ key for enabling FSRS at the preset level
+        'fsrs': True,
+    }
+
+    # Extract → patch → repack
+    with _tempfile.TemporaryDirectory() as tmpdir:
+        with _zipfile.ZipFile(apkg_path, 'r') as zf:
+            zf.extractall(tmpdir)
+
+        # Anki packages may use collection.anki2 or collection.anki21
+        col_path = None
+        for name in ('collection.anki21', 'collection.anki2'):
+            p = _os.path.join(tmpdir, name)
+            if _os.path.exists(p):
+                col_path = p
+                break
+        if not col_path:
+            print('  [fsrs-preset] no collection db found; skipping')
+            return
+
+        conn = _sqlite3.connect(col_path)
+        cur = conn.cursor()
+        try:
+            row = cur.execute('SELECT dconf FROM col').fetchone()
+            if not row:
+                print('  [fsrs-preset] empty col table; skipping')
+                return
+            dconf = _json.loads(row[0]) if row[0] else {}
+            # Anki keys dconfs by string id
+            dconf[str(preset['id'])] = preset
+            cur.execute('UPDATE col SET dconf = ?', (_json.dumps(dconf),))
+
+            # Point every deck at our preset so it's used out of the box
+            drow = cur.execute('SELECT decks FROM col').fetchone()
+            if drow and drow[0]:
+                decks_blob = _json.loads(drow[0])
+                for did, ddef in decks_blob.items():
+                    if did == '1':
+                        continue  # leave the default deck alone
+                    if isinstance(ddef, dict) and ddef.get('dyn', 0) == 0:
+                        ddef['conf'] = preset['id']
+                cur.execute('UPDATE col SET decks = ?', (_json.dumps(decks_blob),))
+
+            conn.commit()
+        finally:
+            conn.close()
+
+        # Repack — preserve original layout (collection db + media + media map)
+        tmp_apkg = apkg_path + '.tmp'
+        with _zipfile.ZipFile(tmp_apkg, 'w', _zipfile.ZIP_DEFLATED) as zf:
+            for root, _dirs, files in _os.walk(tmpdir):
+                for fname in files:
+                    full = _os.path.join(root, fname)
+                    arc = _os.path.relpath(full, tmpdir)
+                    zf.write(full, arc)
+        _shutil.move(tmp_apkg, apkg_path)
+        print('  [fsrs-preset] embedded preset "English Verb System" '
+              '(FSRS on, retention 0.90, sibling burying)')
+
+
 def main():
     ensure_genanki()
     import genanki
@@ -650,8 +767,8 @@ hr#answer {
     )
 
     pro_model = genanki.Model(
-        2056102006,  # bumped
-        'Verb System · Production (v2)',
+        2056102007,  # bumped to v3 for type:Sample schema change
+        'Verb System · Production (v3)',
         fields=[
             {'name': 'Prompt'},
             {'name': 'Target'},
@@ -666,17 +783,18 @@ hr#answer {
         templates=[{
             'name': 'Production Card',
             'qfmt': '''
-<div class="instruction">Produce a sentence</div>
+<div class="instruction">Produce a sentence — type your answer below</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
+{{type:Sample}}
 ''',
             'afmt': '''
 <div class="instruction">Produce a sentence</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
 <hr id="answer">
-<div class="sample-label">Sample answer</div>
-<div class="sample-answer">{{Sample}}</div>
+<div class="sample-label">Sample answer (compared to your input above)</div>
+<div class="sample-answer">{{type:Sample}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
 {{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
@@ -810,6 +928,8 @@ hr#answer {
     package = genanki.Package(list(decks.values()))
     package.media_files = media_files
     package.write_to_file(out)
+
+    embed_fsrs_preset(out)
 
     print(f'Built {out}')
     print(f'  recognition: {counts["rec"]}')

@@ -18,6 +18,9 @@ with three new prefix-tag families:
                         domain:narrative     domain:kitchen
                         domain:sport         domain:tech
                         domain:family        domain:general
+    cefr:a1             cefr:a2              cefr:b1
+                        cefr:b2              cefr:c1
+                        cefr:c2
 
 Inference is heuristic, deterministic, and idempotent — re-running the script
 won't add duplicate tags.  Tags can be hand-corrected afterwards: this is
@@ -158,7 +161,68 @@ FREQUENCY_LOW_TAGS = {
     "modal-perfect-continuous",
 }
 
-NEW_PREFIXES = ("register:", "frequency:", "domain:")
+NEW_PREFIXES = ("register:", "frequency:", "domain:", "cefr:")
+
+# ── CEFR mapping (per English Grammar Profile / Cambridge English Profile) ─
+# Highest-level form on the row wins (a card teaching past-perfect-continuous
+# is C1-worthy even if it incidentally contains a present-simple clause).
+CEFR_C2_TAGS = {
+    "mandative", "mandative-subjunctive", "formulaic-subjunctive",
+    "double-passive", "ergative", "middle-voice", "cleft-conditional",
+    "comparative-correlative", "perfect-gerund", "perfect-participle",
+    "negative-inversion", "as-if-counterfactual", "modal-perfect-continuous",
+    "be-to-infinitive", "high-time", "on-condition-that",
+}
+CEFR_C1_TAGS = {
+    "future-perfect-continuous", "future-will-perfect-continuous",
+    "inverted-conditional", "inverted-vs-standard",
+    "wish-past-perfect", "subjunctive", "causative",
+    "narrative-layering", "hedging", "academic-hedging",
+    "reduced-relative-past-participle", "perfect-infinitive",
+    "passive-infinitive", "passive-gerund", "free-indirect-speech",
+    "no-sooner-than", "hardly-when", "scarcely-when",
+    "even-if-vs-even-though", "implicit-conditional",
+    "semi-modal", "semi-modal-dare", "semi-modal-need",
+    "would-rather", "would-sooner", "may-as-well",
+}
+CEFR_B2_TAGS = {
+    "past-perfect-continuous", "future-perfect", "future-will-perfect",
+    "conditional-third", "conditional-mixed", "mixed-conditional",
+    "modal-perfect", "passive-perfect", "passive-modal",
+    "passive-future", "passive-present-perfect", "passive-past-perfect",
+    "passive-present-continuous", "passive-past-continuous",
+    "reported-speech", "backshift", "reporting-verb",
+    "wish", "if-only", "wish-past",
+    "gerund-vs-infinitive", "pv-figurative", "pv-three-part",
+    "pv-inseparable", "pv-separable",
+    "cleft", "pseudo-cleft", "stative-vs-dynamic",
+    "had-better", "ought-to", "must-have", "should-have",
+    "could-have", "might-have",
+}
+CEFR_B1_TAGS = {
+    "present-perfect-continuous", "past-perfect",
+    "conditional-second", "used-to",
+    "passive-present-simple", "passive-past-simple",
+    "future-will-continuous", "future-continuous",
+    "modal-ability", "modal-permission", "modal-obligation",
+    "modal-deduction", "modal-possibility", "modal-advice",
+    "phrasal-verb", "pv-transitive", "pv-intransitive", "pv-literal",
+    "gerund", "to-infinitive", "bare-infinitive",
+    "present-participle", "past-participle",
+    "time-clause", "while", "since", "as-soon-as", "by-the-time",
+    "tag-question", "indirect-question", "embedded-question",
+    "question",
+}
+CEFR_A2_TAGS = {
+    "present-perfect", "past-continuous",
+    "future-will", "future-will-simple", "future-simple",
+    "conditional-zero", "conditional-first",
+    "going-to", "future-going-to",
+}
+CEFR_A1_TAGS = {
+    "present-simple", "present-continuous", "past-simple",
+    "imperative", "negative", "affirmative",
+}
 
 
 # ── Inference ────────────────────────────────────────────────────────────
@@ -191,6 +255,27 @@ def infer_domain(text):
     return "domain:general"
 
 
+def infer_cefr(tag_set):
+    """Highest-level grammatical form on the row wins.
+
+    Using the English Grammar Profile / Cambridge English Profile baseline.
+    """
+    if tag_set & CEFR_C2_TAGS:
+        return "cefr:c2"
+    if tag_set & CEFR_C1_TAGS:
+        return "cefr:c1"
+    if tag_set & CEFR_B2_TAGS:
+        return "cefr:b2"
+    if tag_set & CEFR_B1_TAGS:
+        return "cefr:b1"
+    if tag_set & CEFR_A2_TAGS:
+        return "cefr:a2"
+    if tag_set & CEFR_A1_TAGS:
+        return "cefr:a1"
+    # Default for un-tagged rows: assume B1 (the deck targets B1+ learners).
+    return "cefr:b1"
+
+
 def augment_tags(tag_str, sentence_or_sample):
     existing = tag_str.split()
     keep = [t for t in existing if not t.startswith(NEW_PREFIXES)]
@@ -199,6 +284,7 @@ def augment_tags(tag_str, sentence_or_sample):
         infer_register(tag_set),
         infer_frequency(tag_set),
         infer_domain(sentence_or_sample),
+        infer_cefr(tag_set),
     ]
     return " ".join(keep + new_tags)
 
