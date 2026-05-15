@@ -20,11 +20,8 @@ tmp_rovodev_*
 *.bak
 research-reports/
 
-# Tier-2 generated media (regenerate with build_audio.py / build_ipa.py / build_timelines.py)
-media/audio/
+# Tier-2 generated media — committed to the repo so users don't need a
+# Google Cloud account just to import the deck. Re-render anytime via
+#   build_audio.py / build_ipa.py / build_timelines.py
+# (the slow-audio variant remains opt-in / gitignored.)
 media/audio_slow/
-media/ipa/
-media/timelines/
-media/ipa_index.json
-media/ipa_words.json
-media/timelines_index.json
