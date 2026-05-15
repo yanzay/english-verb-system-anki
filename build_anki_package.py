@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.6.2'
+VERSION = '2.6.3'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1298,9 +1298,35 @@ input[type=text],
             if len(row) >= 4:
                 existing_samples.add(row[3].strip())  # Sample is column 3
 
+    # Helper: suppress redundant WhenNotToUse when it duplicates Contrast
+    # (same authored sentence in both fields makes the back read as if the
+    # same caveat is repeated twice — sloppy). We compute a SequenceMatcher
+    # ratio after light normalization (lowercase, strip trailing punct,
+    # collapse whitespace) and drop WhenNotToUse if it's >=0.85 similar
+    # to Contrast — empirically catches the duplicates without sacrificing
+    # genuinely-different notes.
+    from difflib import SequenceMatcher as _SM
+    def _norm_redundancy(s: str) -> str:
+        return re.sub(r'\s+', ' ', s.lower().strip().rstrip('.;,'))
+    def _dedupe_when_not(contrast: str, when_not: str) -> str:
+        if not (contrast and when_not):
+            return when_not
+        c, w = _norm_redundancy(contrast), _norm_redundancy(when_not)
+        if c == w:
+            return ''
+        # high-similarity (one is a near-superset of the other)
+        if _SM(None, c, w).ratio() >= 0.85:
+            return ''
+        # one starts with the other's first ~30 chars (clear prefix dupes)
+        head = w[:30]
+        if head and (c.startswith(head) or w.startswith(c[:30])):
+            return ''
+        return when_not
+
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | WhenNotToUse | Tags
+    suppressed_when_not = 0
     for row in rec_rows:
         if len(row) < 9:
             row += [''] * (9 - len(row))
@@ -1309,14 +1335,23 @@ input[type=text],
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
+        # Drop WhenNotToUse when it duplicates Contrast
+        deduped_when = _dedupe_when_not(row[6], row[7])
+        if deduped_when != row[7]:
+            suppressed_when_not += 1
+        row_for_note = list(row)
+        row_for_note[7] = deduped_when
         note = ap.Note(
             model=rec_model,
-            fields=row[:9] + [audio_f, ipa_f, tl_f],
+            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f],
             tags=row[8].split(),
         )
         for _mod in mods:
             decks[(_mod, 'rec')].add_note(note)
         counts['rec'] += 1
+    if suppressed_when_not:
+        print(f'  [dedupe] suppressed {suppressed_when_not} WhenNotToUse '
+              f'fields that duplicated Contrast')
 
     # Reverse Production (Auto) — generated from recognition rows
     rev_pro_count = 0
