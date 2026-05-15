@@ -263,11 +263,25 @@ class Package:
                 # mistake (importing → being overwhelmed by 3,000
                 # cards from every category) becomes impossible.
                 deck_name = deck.get('name', '')
+                # Anki rule: when studying a PARENT deck, the daily
+                # limit is taken from the parent's preset, NOT the
+                # sub-decks'. So if we bind the parent 'English Verb
+                # System' to the opt-in preset (0/day), the user can
+                # study NOTHING by clicking the top-level deck — even
+                # though Foundation has 1,397 cards available.
+                # Therefore the parent ALSO binds to the main preset.
+                # Sub-deck limits are still respected via the per-
+                # subdeck 'thisDeckLimit' the user can later configure.
+                is_parent = (deck_name == 'English Verb System')
                 is_foundation = '00 - Foundation' in deck_name
                 is_l1 = '13 - L1 Interference::' in deck_name
+                # Note: '13 - L1 Interference' (the parent of the
+                # per-language sub-decks, no '::' suffix) needs the
+                # opt-in preset so the L1 parent doesn't accidentally
+                # surface every L1's cards in one big bucket.
                 target_preset = (
-                    preset_id if is_foundation
-                    else l1_preset_id  # opted-out for both layered modules and L1
+                    preset_id if (is_parent or is_foundation)
+                    else l1_preset_id  # opted-out for layered modules + per-L1 sub-decks
                 )
                 col.decks.set_config_id_for_deck_dict(deck, target_preset)
                 col.decks.save(deck)
