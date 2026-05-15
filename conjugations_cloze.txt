@@ -1,261 +1,279 @@
 #separator:tab
 #html:true
 #columns:Text	Hint	Tags
-She {{c1::eats}} an apple every day before her morning run.	Present Simple, 3rd person -s	cloze present-simple core register:neutral frequency:high domain:tech
-He {{c1::doesn't drink}} coffee in the afternoon — only in the morning.	Present Simple, negative auxiliary	cloze present-simple core register:neutral frequency:high domain:kitchen
-Water {{c1::boils}} at 100 degrees Celsius under standard atmospheric pressure.	Present Simple, general truth	cloze present-simple register:neutral frequency:high domain:general
-The Earth {{c1::revolves}} around the Sun once every 365.25 days.	Present Simple, scientific fact	cloze present-simple register:neutral frequency:high domain:general
-She {{c1::is reading}} a fascinating novel about ancient Rome at the moment.	Present Continuous, action in progress now	cloze present-continuous core register:neutral frequency:high domain:narrative
-The kettle {{c1::is boiling}} — could you turn the gas off, please?	Present Continuous, momentary action	cloze present-continuous core register:neutral frequency:high domain:dialogue
-I {{c1::am working}} on the quarterly report this week, so I can't help.	Present Continuous, temporary situation	cloze present-continuous core register:neutral frequency:high domain:work
-She {{c1::has lived}} in this neighbourhood for over fifteen years.	Present Perfect, state up to now (for + duration)	cloze present-perfect core register:neutral frequency:high domain:general
-We {{c1::have just finished}} the final round of interviews this morning.	Present Perfect, recent completion (just)	cloze present-perfect register:neutral frequency:high domain:work
-I {{c1::have already eaten}} breakfast, so I'll skip the bagel.	Present Perfect, completion with current relevance (already)	cloze present-perfect core register:neutral frequency:high domain:kitchen
-They {{c1::have been waiting}} at the bus stop for over forty minutes.	Present Perfect Continuous, ongoing duration up to now	cloze present-perfect-continuous core register:neutral frequency:high domain:tech
-She {{c1::has been studying}} Japanese since she moved to Kyoto last spring.	Present Perfect Continuous, since + start point	cloze present-perfect-continuous core register:neutral frequency:high domain:academic
-He {{c1::worked}} at the museum for ten years before retiring last June.	Past Simple, finished past period	cloze past-simple core register:neutral frequency:high domain:narrative
-She {{c1::didn't reply}} to any of my messages all afternoon.	Past Simple, negative auxiliary	cloze past-simple core register:neutral frequency:high domain:general
-We {{c1::were driving}} along the coast when we spotted a pod of whales.	Past Continuous, ongoing past action interrupted	cloze past-continuous core register:neutral frequency:high domain:narrative
-At nine o'clock last night, I {{c1::was finishing}} my essay in the library.	Past Continuous, action at a specific past time	cloze past-continuous core register:neutral frequency:high domain:academic
-By the time we arrived, they {{c1::had already left}} for the airport.	Past Perfect, earlier past event	cloze past-perfect core register:neutral frequency:high domain:tech
-She {{c1::had finished}} the manuscript before her editor called for revisions.	Past Perfect, earlier of two past events	cloze past-perfect core register:neutral frequency:high domain:narrative
-We {{c1::had been hiking}} for three hours when the storm finally broke.	Past Perfect Continuous, duration before past reference	cloze past-perfect-continuous core register:neutral frequency:high domain:narrative
-She {{c1::had been working}} late every night that week before the merger closed.	Past Perfect Continuous, ongoing past background	cloze past-perfect-continuous core register:neutral frequency:high domain:work
-The package {{c1::will arrive}} sometime tomorrow afternoon, according to tracking.	Future Simple (will), prediction	cloze future-simple core register:neutral frequency:high domain:tech
-I {{c1::'ll get}} the door — you stay where you are.	Future Simple (will), spontaneous offer	cloze future-simple register:neutral frequency:mid domain:dialogue
-She {{c1::is going to launch}} her new bakery in early September.	Be Going To, pre-decided plan	cloze future-going-to core register:neutral frequency:high domain:kitchen
-Look at those clouds — it {{c1::'s going to pour}} any minute now.	Be Going To, prediction from present evidence	cloze future-going-to register:neutral frequency:high domain:dialogue
-At this time tomorrow, we {{c1::will be flying}} over the Atlantic.	Future Continuous, ongoing future action	cloze future-continuous core register:neutral frequency:high domain:general
-By next Friday, the team {{c1::will have completed}} all the user-acceptance tests.	Future Perfect, completion before future reference	cloze future-perfect core register:neutral frequency:high domain:work
-By the time she retires, she {{c1::will have been working}} at this firm for forty years.	Future Perfect Continuous, duration up to future point	cloze future-perfect-continuous register:neutral frequency:low domain:work
-If she {{c1::studies}} hard, she will pass the exam without any difficulty.	First Conditional, if + present simple	cloze conditional-first core register:neutral frequency:high domain:academic
-If I {{c1::were}} you, I would take the earlier train to avoid the rush.	Second Conditional, were (subjunctive be)	cloze conditional-second core register:neutral frequency:high domain:tech
-If she {{c1::had told}} me about the meeting, I would have rearranged my afternoon.	Third Conditional, if + past perfect	cloze conditional-third core register:neutral frequency:high domain:work
-If you {{c1::heat}} ice above zero degrees, it melts within seconds.	Zero Conditional, general truth	cloze conditional-zero register:neutral frequency:high domain:general
-I wish I {{c1::knew}} the answer to that question — I really don't.	Wish (Present Unreal), past form for present meaning	cloze wish-present subjunctive register:formal frequency:mid domain:dialogue
-I wish you {{c1::would stop}} interrupting me when I'm trying to explain.	Wish + would, annoyance	cloze wish-annoyance wish-would register:informal frequency:mid domain:tech
-The new bridge {{c1::is being inspected}} by structural engineers this week.	Present Continuous Passive	cloze passive passive-present-continuous register:neutral frequency:mid domain:general
-The proposal {{c1::was discussed}} at length during yesterday's board meeting.	Past Simple Passive	cloze passive passive-past-simple register:neutral frequency:high domain:work
-The contract {{c1::has been signed}} by both parties already.	Present Perfect Passive	cloze passive passive-present-perfect register:neutral frequency:mid domain:work
-The roof {{c1::had been repaired}} long before the next storm hit the region.	Past Perfect Passive	cloze passive passive-past-perfect register:neutral frequency:low domain:tech
-The treaty {{c1::will be signed}} during next month's summit in Vienna.	Future Simple Passive	cloze passive register:neutral frequency:mid domain:news
-The order {{c1::must be approved}} by the regional manager before processing.	Modal Passive	cloze passive passive-modal register:neutral frequency:mid domain:news
-She {{c1::had}} the leaking roof repaired by a professional contractor last week.	Causative Have (have + obj + past participle)	cloze passive-causative-have causative register:neutral frequency:mid domain:work
-She finally {{c1::got}} her car repaired after months of putting it off.	Causative Get (get + obj + past participle, informal)	cloze passive-causative-get register:neutral frequency:mid domain:tech
-She {{c1::owns}} three properties in central Madrid.	Stative verb in Present Simple (not continuous)	cloze stative core register:neutral frequency:high domain:travel
-He {{c1::is being}} unusually quiet this evening — is something wrong?	Dynamic use of stative 'be' (temporary behaviour)	cloze dynamic-stative register:neutral frequency:mid domain:dialogue
-He told me he {{c1::was going}} to call back later that afternoon.	Future-in-the-past, was/were going to	cloze future-in-past reported-speech register:neutral frequency:mid domain:general
-Hardly {{c1::had we sat down}} when the fire alarm sounded.	Negative inversion (Hardly + had + subject + V-ed)	cloze negative-inversion register:formal frequency:low domain:narrative
-{{c1::Had I known}} about the strike, I would have taken the earlier flight.	Inverted Conditional (Third) — drops 'if'	cloze inverted-conditional conditional-third register:formal frequency:mid domain:travel
-She seems {{c1::to have forgotten}} about our scheduled meeting this afternoon.	Raising verb + perfect infinitive	cloze raising-verb non-finite register:neutral frequency:mid domain:work
-The new interns {{c1::were given}} a thorough orientation on their first morning.	Ditransitive passive, recipient-subject	cloze passive ditransitive-passive register:neutral frequency:mid domain:work
-The man {{c1::wearing}} the red scarf is our keynote speaker tonight.	Reduced relative (present participle)	cloze reduced-relative non-finite register:neutral frequency:mid domain:general
-The report {{c1::submitted}} last Friday already contains the new figures.	Reduced relative (past participle)	cloze reduced-relative non-finite register:neutral frequency:mid domain:work
-You {{c1::must}} fasten your seatbelt at all times during the flight.	Modal of obligation (must)	cloze modal modal-obligation register:neutral frequency:high domain:travel
-She {{c1::should}} apologise for what she said at the meeting yesterday.	Modal of advice (should)	cloze modal register:neutral frequency:high domain:work
-You {{c1::can}} use my car this weekend if you fill the tank.	Modal of permission (can)	cloze modal modal-permission register:neutral frequency:high domain:general
-She {{c1::could}} swim before she could walk — her parents are both lifeguards.	Modal of past ability (could)	cloze modal modal-ability register:neutral frequency:high domain:sport
-He {{c1::might}} be stuck in traffic — he's usually punctual.	Modal of possibility (might)	cloze modal register:neutral frequency:high domain:dialogue
-He {{c1::must have been}} working late again last night — his car was still in the lot at midnight.	Modal Perfect Continuous (deduction about sustained past activity)	cloze modal-perfect-continuous modal register:neutral frequency:low domain:tech
-You {{c1::should have called}} me yesterday — I was waiting all afternoon.	Modal Perfect (should have + V-ed) — past advice/regret	cloze modal-perfect modal register:formal frequency:high domain:tech
-She {{c1::needn't have}} brought any wine — we already had three bottles.	Modal Perfect (needn't have)	cloze modal-perfect modal register:formal frequency:high domain:dialogue
-He {{c1::could have caught}} the earlier train if he had set off ten minutes sooner.	Modal Perfect (could have + V-ed) — unrealised possibility	cloze modal-perfect modal register:formal frequency:high domain:tech
-You {{c1::ought to}} apologise for your language at the dinner table.	Semi-modal ought to	cloze modal register:neutral frequency:high domain:kitchen
-You {{c1::had better}} leave now if you want to catch the last train home.	Semi-modal had better (urgent advice/warning)	cloze modal register:neutral frequency:high domain:tech
-She {{c1::used to}} commute by train before she moved closer to the office.	Used to + base verb (discontinued past habit/state)	cloze habitual-used-to modal register:neutral frequency:high domain:work
-Every summer, we {{c1::would}} drive up to the lake for a long weekend.	Habitual would (past habits)	cloze habitual-would modal register:neutral frequency:high domain:general
-She {{c1::daren't}} say what she really thinks at the staff meetings.	Semi-modal dare (negative)	cloze semi-modal semi-modal-dare register:formal frequency:mid domain:work
-You {{c1::needn't}} bring anything to the dinner — we have everything covered.	Semi-modal need (absence of necessity)	cloze semi-modal semi-modal-need register:formal frequency:mid domain:kitchen
-{{c1::Should you require}} any further assistance, please contact our help desk.	Inverted Conditional (Should + subject + base verb) — formal first conditional	cloze inverted-conditional conditional-first register:formal frequency:high domain:dialogue
-{{c1::Were she}} more experienced, the committee would offer her the directorship.	Inverted Conditional (Were + subject) — formal second conditional	cloze inverted-conditional conditional-second register:formal frequency:mid domain:work
-If she {{c1::had taken}} the earlier train, she would already be here by now.	Mixed Conditional (third + second) — past condition, present result	cloze conditional-mixed register:neutral frequency:mid domain:tech
-{{c1::If only}} I had listened to your advice when you offered it!	If only + past perfect — regret about past	cloze if-only conditional-third register:neutral frequency:mid domain:narrative
-Take an umbrella {{c1::in case}} it rains during the ceremony tomorrow.	In case + present simple — precaution before the event	cloze in-case time-clause register:neutral frequency:mid domain:tech
-We'll proceed with the merger, {{c1::on condition that}} the regulator approves.	On condition that — formal stipulated condition	cloze on-condition-that conditional register:formal frequency:mid domain:news
-You can borrow the car {{c1::providing}} you fill the tank before returning it.	Providing — conditional permission	cloze providing conditional register:neutral frequency:mid domain:narrative
-{{c1::As soon as}} the report arrives, I'll forward it to the entire executive team.	As soon as + present simple, will-clause	cloze time-clause future register:neutral frequency:mid domain:work
-{{c1::By the time}} we reach the summit, the sun will have risen above the clouds.	By the time + present simple, future perfect	cloze time-clause future-perfect register:neutral frequency:mid domain:news
-{{c1::While}} the lasagna was baking, I tidied up the entire kitchen.	While + past continuous — background ongoing past action	cloze time-clause past-continuous register:neutral frequency:high domain:kitchen
-She told me she {{c1::would meet}} us at the gallery on Saturday.	Reported speech, will → would (backshift)	cloze reported-speech backshift register:neutral frequency:mid domain:general
-He said he {{c1::had finished}} the report before the deadline.	Reported speech, present perfect → past perfect	cloze reported-speech backshift register:neutral frequency:mid domain:work
-She asked me {{c1::if I had ever}} visited the Louvre during my time in Paris.	Reported question (if/whether + statement order)	cloze reported-speech reported-question embedded-question register:spoken frequency:mid domain:travel
-The teacher reminded the class that water {{c1::boils}} at 100 degrees Celsius.	Reported speech — universal truth, no backshift	cloze reported-speech reported-no-backshift register:neutral frequency:mid domain:general
-He admitted {{c1::breaking}} the antique vase during the move.	Reporting verb admit + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:general
-The committee suggested {{c1::postponing}} the launch until the new fiscal year.	Reporting verb suggest + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work
-The auditor accused the manager {{c1::of falsifying}} the quarterly figures.	Reporting verb accuse OF + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work
-She apologised {{c1::for arriving}} so late to the budget meeting.	Reporting verb apologise FOR + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work
-She promised {{c1::to deliver}} the prototype by the end of the quarter.	Reporting verb promise + to-inf	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work
-I love jazz. — So {{c1::do}} I, especially the early Coltrane recordings.	Auxiliary ellipsis (so + DO + I) — match the lexical-verb auxiliary	cloze auxiliary-ellipsis discourse register:spoken frequency:mid domain:dialogue
-He doesn't drink coffee. — Neither {{c1::do}} I, actually.	Auxiliary ellipsis (neither + DO + I) — negative agreement	cloze auxiliary-ellipsis discourse register:spoken frequency:mid domain:kitchen
-You're coming to the wedding, {{c1::aren't you}}?	Tag question — positive statement → negative tag	cloze tag-question discourse register:spoken frequency:mid domain:dialogue
-She doesn't speak any German, {{c1::does she}}?	Tag question — negative statement → positive tag	cloze tag-question discourse register:spoken frequency:mid domain:dialogue
-Do you know {{c1::whether the parcel has arrived}} yet?	Embedded yes/no question — statement word order	cloze embedded-question discourse register:spoken frequency:mid domain:dialogue
-Could you tell me {{c1::what time the pharmacy closes}} this evening?	Embedded wh-question — statement word order (no inversion)	cloze embedded-question politeness register:spoken frequency:mid domain:dialogue
-You {{c1::are to}} report to the security desk at 8 a.m. tomorrow morning.	Be + to-infinitive (formal scheduled future)	cloze be-to-infinitive register:formal frequency:low domain:work
-The President {{c1::is to}} address the nation this evening at nine.	Be + to-infinitive (official scheduled event)	cloze be-to-infinitive register:formal frequency:low domain:news
-{{c1::Shall}} we take a short break before the next session begins?	Shall (first-person suggestion — BrE)	cloze shall shall-suggestion register:formal frequency:mid domain:narrative
-The harder you train, {{c1::the faster}} you'll recover from injuries.	Comparative correlative (the …er, the …er)	cloze comparative-correlative discourse register:spoken frequency:low domain:tech
-{{c1::Even if}} she apologises, I won't be inviting her to the next party.	Even if — hypothetical concession	cloze even-if-vs-even-though conditional register:neutral frequency:mid domain:general
-She talks {{c1::as if}} she had been there herself, but she only read about it.	As if + past perfect (counterfactual past)	cloze as-if-counterfactual subjunctive register:formal frequency:low domain:general
-It's high time you {{c1::started}} taking your studies seriously.	It's high time + past subjunctive	cloze high-time subjunctive register:formal frequency:mid domain:general
-The drill sergeant made every recruit {{c1::run}} five additional kilometres.	Causative make + bare infinitive	cloze causative-make non-finite register:neutral frequency:mid domain:general
-The thief is believed {{c1::to have escaped}} through the back door.	Double passive (is believed + perfect infinitive passive)	cloze passive double-passive register:formal frequency:low domain:general
-She had a hot {{c1::shower}} after the gym session this morning.	Light verb 'have' + delexical noun	cloze light-verb collocation register:spoken frequency:mid domain:kitchen
-He took a deep {{c1::breath}} before stepping onto the stage.	Light verb 'take' + delexical noun	cloze light-verb collocation register:spoken frequency:mid domain:narrative
-The vintage records {{c1::sell}} quickly at the Saturday flea market.	Middle voice (active form, generic patient subject)	cloze middle-voice discourse register:spoken frequency:low domain:general
-The bookshelf {{c1::collapsed}} under the weight of the encyclopaedias.	Ergative verb (intransitive, no agent)	cloze ergative discourse register:spoken frequency:low domain:general
-We {{c1::look forward to}} hearing from you in due course.	Phrasal verb 'look forward to' + V-ing	cloze phrasal-verb pv-three-part register:neutral frequency:high domain:general
-She finally {{c1::gave up}} smoking after her doctor's stark warning.	Phrasal verb 'give up' (separable) + V-ing	cloze phrasal-verb pv-separable register:neutral frequency:high domain:narrative
-Could you {{c1::pick up}} some milk on your way home from the station?	Phrasal verb 'pick up' (separable, transitive)	cloze phrasal-verb pv-separable register:neutral frequency:high domain:dialogue
-We need to {{c1::find out}} who is responsible for this oversight.	Phrasal verb 'find out' (separable)	cloze phrasal-verb pv-separable register:neutral frequency:high domain:general
-She always {{c1::looks after}} her younger siblings on weekends.	Phrasal verb 'look after' (inseparable)	cloze phrasal-verb pv-inseparable register:neutral frequency:high domain:general
-The flight {{c1::took off}} forty-five minutes behind schedule today.	Phrasal verb 'take off' (intransitive, dynamic)	cloze phrasal-verb pv-intransitive register:neutral frequency:high domain:travel
-I just can't {{c1::put up with}} her constant complaining any longer.	Phrasal verb 'put up with' (three-part, inseparable)	cloze phrasal-verb pv-three-part register:neutral frequency:high domain:tech
-A detailed report {{c1::was sent}} to every member of the committee.	Ditransitive passive (theme-subject)	cloze passive ditransitive-passive register:neutral frequency:mid domain:work
-The patient {{c1::is being prepped}} for surgery in the operating theatre.	Present Continuous Passive (institutional context)	cloze passive passive-present-continuous register:neutral frequency:mid domain:general
-By midnight, all the evidence {{c1::had been collected}} by the forensic team.	Past Perfect Passive (completion before another past)	cloze passive passive-past-perfect register:neutral frequency:low domain:work
-Dinner {{c1::was being served}} when the fire alarm went off.	Past Continuous Passive (interrupted ongoing past)	cloze passive passive-past-continuous register:neutral frequency:low domain:kitchen
-By next year, the renovation {{c1::will have been completed}} on time.	Future Perfect Passive	cloze passive register:neutral frequency:mid domain:general
-The new policy {{c1::is expected to be implemented}} by the end of Q2.	Double passive — formal news/business register	cloze passive double-passive register:formal frequency:low domain:general
-He {{c1::let}} the children stay up late to watch the eclipse.	Causative let + bare infinitive (permission)	cloze causative-let non-finite register:neutral frequency:mid domain:family
-Her parents {{c1::made}} her practise the violin for an hour every evening.	Causative make + object + bare infinitive (compulsion)	cloze causative-make non-finite register:neutral frequency:mid domain:family
-He helped his grandmother {{c1::(to) plant}} the tomato seedlings in the garden.	Causative help — bare or 'to' infinitive both acceptable	cloze causative-help non-finite register:neutral frequency:mid domain:family
-She suggested {{c1::we leave}} an hour earlier to beat the traffic.	Mandative subjunctive (suggest + base verb)	cloze mandative subjunctive register:formal frequency:low domain:kitchen
-The committee insists that the rule {{c1::be}} enforced without exception.	Mandative subjunctive (insist + base 'be')	cloze mandative subjunctive register:formal frequency:low domain:work
-I'd rather you {{c1::didn't mention}} the surprise in front of the children.	Would rather + different subject + past simple	cloze modal-would-rather-vs-sooner subjunctive register:formal frequency:mid domain:family
-He'd sooner {{c1::resign}} than accept the demotion to a junior role.	Would sooner + bare infinitive	cloze modal-would-rather-vs-sooner register:neutral frequency:mid domain:general
-{{c1::Suppose}} your flight gets cancelled — what would you do then?	Suppose + present simple (conversational hypothetical)	cloze suppose conditional-second register:neutral frequency:mid domain:travel
-{{c1::Supposing}} she had taken the earlier train, she'd be here by now.	Supposing + past perfect (counterfactual)	cloze supposing conditional-third register:neutral frequency:mid domain:tech
-The work {{c1::needs finishing}} before the inspector arrives next week.	Need + V-ing (passive sense, thing-as-subject)	cloze passive non-finite register:neutral frequency:mid domain:narrative
-She regretted {{c1::having lied}} to her colleagues about the report.	Perfect gerund (action prior to matrix verb)	cloze non-finite perfect-gerund register:neutral frequency:low domain:work
-He apologised {{c1::for having missed}} the previous two team meetings.	Perfect gerund after preposition	cloze non-finite perfect-gerund register:neutral frequency:low domain:work
-We were happy {{c1::to have completed}} the project ahead of schedule.	Perfect infinitive after adjective	cloze non-finite perfect-infinitive register:neutral frequency:mid domain:work
-{{c1::Walking}} through the park, I noticed how beautiful the autumn colours were.	Present participle (adverbial)	cloze non-finite register:neutral frequency:mid domain:general
-{{c1::Having finished}} her presentation, she sat down and waited for questions.	Perfect participle (adverbial, prior action)	cloze non-finite perfect-participle register:neutral frequency:low domain:work
-She moved to Vancouver {{c1::to study}} marine biology at UBC.	Infinitive of purpose	cloze non-finite infinitive-of-purpose register:neutral frequency:mid domain:academic
-He stayed late {{c1::to finish}} the quarterly report before the deadline.	Infinitive of purpose	cloze non-finite infinitive-of-purpose register:neutral frequency:mid domain:work
-{{c1::Smoking}} inside the restaurant is strictly prohibited by local law.	Gerund as subject	cloze non-finite gerund register:neutral frequency:mid domain:kitchen
-She's tired of {{c1::being told}} what to do all the time.	Gerund passive after preposition	cloze non-finite passive-gerund register:neutral frequency:mid domain:general
-The contract is hoped {{c1::to have been finalised}} before the deadline.	Perfect passive infinitive (formal)	cloze non-finite passive-infinitive register:neutral frequency:mid domain:work
-{{c1::Not only}} did she finish the marathon, but she also broke her personal record.	Negative inversion (Not only + auxiliary + subject + base verb)	cloze negative-inversion register:formal frequency:low domain:academic
-{{c1::Never}} have I seen such a chaotic city council meeting in my life.	Negative inversion (Never + auxiliary + subject + past participle)	cloze negative-inversion register:formal frequency:low domain:news
-{{c1::No sooner}} had the meeting begun than the CEO announced his resignation.	Negative inversion (No sooner … than)	cloze negative-inversion register:formal frequency:low domain:news
-{{c1::Only after}} the storm had passed did the rescue teams resume their search.	Negative inversion (Only after + clause + auxiliary + subject + base verb)	cloze negative-inversion register:formal frequency:low domain:work
-She {{c1::seemed to be enjoying}} the conversation immensely.	Raising verb + progressive infinitive	cloze raising-verb non-finite register:neutral frequency:mid domain:general
-The negotiations appear {{c1::to be making}} some real progress at last.	Raising verb + progressive infinitive	cloze raising-verb non-finite register:neutral frequency:mid domain:work
-She managed {{c1::to convince}} the board to approve the new budget.	Control verb (manage) + to-infinitive	cloze control-verb non-finite register:neutral frequency:mid domain:news
-He refused {{c1::to identify}} the suspect during the line-up.	Reporting verb refuse + to-infinitive	cloze reporting-verb register:neutral frequency:mid domain:general
-She denied {{c1::taking}} any documents from the office without permission.	Reporting verb deny + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work
-He blamed his assistant {{c1::for losing}} the client's signed contract.	Reporting verb blame FOR + V-ing	cloze reporting-verb register:neutral frequency:mid domain:work
-She told us that if she {{c1::had}} more time, she would learn Mandarin.	Reported speech — conditional 2 retains form (no further backshift)	cloze reported-speech reported-no-backshift conditional-second register:neutral frequency:mid domain:general
-I've just {{c1::spoken}} to him about the contract.	Present perfect with 'just' (BrE preference)	cloze ame-vs-bre present-perfect register:informal frequency:high domain:work
-I {{c1::just got}} off the phone with him a few minutes ago.	AmE: past simple with 'just' (where BrE prefers present perfect)	cloze ame-vs-bre past-simple register:informal frequency:high domain:general
-At nine o'clock tomorrow morning, I {{c1::'ll be sitting}} in the dentist's chair.	Future continuous (ongoing future activity)	cloze future-continuous core register:neutral frequency:high domain:tech
-She {{c1::has been being}} interviewed for nearly two hours now.	Present perfect continuous passive (rare, very advanced)	cloze passive register:neutral frequency:mid domain:work
-{{c1::What I love most}} about this city is its endless street art.	Pseudo-cleft (What-cleft) for emphasis	cloze cleft register:neutral frequency:mid domain:general
-{{c1::It was}} her quick thinking that prevented the accident.	It-cleft for emphasis	cloze cleft register:neutral frequency:mid domain:general
-I {{c1::do}} appreciate everything you've done for the team this quarter.	Emphatic do (with present simple)	cloze emphatic register:neutral frequency:mid domain:work
-{{c1::Heat}} the oven to 180 degrees and bake for 25 minutes.	Recipe imperative	cloze recipe imperative register:academic frequency:mid domain:kitchen
-The minister {{c1::announces}} sweeping reforms to the tax system today.	Headline present (news register)	cloze headline register:academic frequency:mid domain:news
-The witness {{c1::then enters}} the courtroom and identifies the defendant.	Historical present (narrative)	cloze historical-present register:neutral frequency:mid domain:general
-It {{c1::could be argued}} that the evidence remains inconclusive at this stage.	Academic hedging modal (could be argued)	cloze hedging academic-hedging register:academic frequency:mid domain:tech
-She {{c1::might consider}} revising her conclusions in light of these findings.	Academic hedging modal (might + consider)	cloze hedging academic-hedging register:academic frequency:mid domain:general
-{{c1::I hereby declare}} this conference officially open.	Performative present (speech act)	cloze performative register:academic frequency:mid domain:news
-She has worked at this company {{c1::for}} five years now.	Present perfect + FOR + duration	cloze present-perfect core register:neutral frequency:high domain:work
-We have lived here {{c1::since}} my childhood.	Present perfect + SINCE + start point	cloze present-perfect core register:neutral frequency:high domain:family
-They moved house three years {{c1::ago}}, when his parents retired.	Past simple + … AGO (incompatible with present perfect)	cloze past-simple core register:neutral frequency:high domain:family
-He has {{c1::just}} arrived at the hotel — the rooms aren't ready yet.	Present perfect with JUST (recent completion)	cloze present-perfect core register:neutral frequency:high domain:travel
-I haven't finished the report {{c1::yet}}.	Present perfect with YET (negative)	cloze present-perfect core register:neutral frequency:high domain:work
-She has {{c1::already}} eaten breakfast, so she'll skip the bagel.	Present perfect with ALREADY	cloze present-perfect core register:neutral frequency:high domain:kitchen
-I'll let you know {{c1::when}} the package arrives tomorrow.	Time clause — when + present simple (future meaning)	cloze time-clause future register:neutral frequency:mid domain:general
-Don't sign anything {{c1::before}} you read the small print carefully.	Time clause — before + present simple	cloze time-clause register:neutral frequency:mid domain:general
-{{c1::Whenever}} I visit Lisbon, I always stay at the same little guesthouse.	Time clause — whenever + present simple	cloze time-clause register:neutral frequency:mid domain:travel
-{{c1::Until}} you apologise, I'm not going to speak to you again.	Time clause — until + present simple, future negation	cloze time-clause future register:neutral frequency:mid domain:tech
-{{c1::The moment}} the lights dim, the orchestra will begin the overture.	Time clause — the moment + present simple, will-clause	cloze time-clause future register:neutral frequency:mid domain:narrative
-{{c1::No matter when}} you arrive, dinner will be waiting on the table.	Time clause (concessive) — no matter when + present simple	cloze time-clause future register:neutral frequency:mid domain:tech
-Just as we {{c1::were locking}} the office, the alarm went off.	Past continuous in time clause (just as)	cloze time-clause past-continuous register:neutral frequency:high domain:work
-After she {{c1::had finished}} her presentation, the audience cheered.	After + past perfect (earlier of two past events)	cloze time-clause past-perfect register:neutral frequency:mid domain:work
-We had been waiting for an hour {{c1::when}} the train finally arrived.	When-clause anchoring past perfect continuous	cloze when-clause time-clause register:neutral frequency:mid domain:tech
-This time tomorrow, we {{c1::'ll be sailing}} off the coast of Sicily.	Future continuous + this-time-tomorrow	cloze future-continuous register:neutral frequency:mid domain:tech
-The committee {{c1::will have made}} a decision by Friday.	Future perfect — completion before future deadline	cloze future-perfect register:neutral frequency:mid domain:work
-She'd be writing her novel right now if she {{c1::weren't}} so busy.	Conditional continuous + counterfactual were-clause	cloze conditional-continuous conditional-second register:neutral frequency:mid domain:narrative
-At this hour next week, I'd {{c1::be lying}} on a beach in Greece.	Conditional continuous (would be + V-ing)	cloze conditional-continuous register:neutral frequency:mid domain:travel
-She would {{c1::have been studying}} medicine if her family had supported her decision.	Conditional perfect continuous (would have been + V-ing)	cloze conditional-perfect-continuous register:neutral frequency:low domain:academic
-The new bridge will {{c1::be inspected}} next month.	Future passive (will be + past participle)	cloze passive register:neutral frequency:mid domain:general
-By the end of the day, the contract {{c1::will have been signed}}.	Future perfect passive	cloze passive register:neutral frequency:mid domain:work
-The decision {{c1::had been made}} long before the meeting was even scheduled.	Past perfect passive	cloze passive passive-past-perfect register:neutral frequency:low domain:work
-The proposal {{c1::was being discussed}} when the chairperson left the room.	Past continuous passive	cloze passive passive-past-continuous register:neutral frequency:low domain:tech
-The order can {{c1::be cancelled}} up to 24 hours before delivery.	Modal passive (can be + V-ed)	cloze passive passive-modal register:neutral frequency:mid domain:narrative
-The package should {{c1::have been delivered}} by yesterday.	Modal perfect passive	cloze passive passive-modal modal-perfect register:formal frequency:mid domain:narrative
-Three witnesses are {{c1::being interviewed}} by the police as we speak.	Present continuous passive (live ongoing process)	cloze passive passive-present-continuous register:neutral frequency:mid domain:work
-He {{c1::got}} caught speeding on the motorway last weekend.	Get-passive (often negative outcome)	cloze passive passive-get register:neutral frequency:mid domain:general
-She finally {{c1::got}} promoted after five years at the company.	Get-passive (positive outcome)	cloze passive passive-get register:neutral frequency:mid domain:work
-He hates {{c1::being interrupted}} during his morning routine.	Gerund passive (after hate/like/love)	cloze passive passive-gerund non-finite register:neutral frequency:mid domain:dialogue
-She prefers {{c1::being told}} the truth, however painful.	Gerund passive after 'prefer'	cloze passive passive-gerund register:neutral frequency:mid domain:tech
-The report needs {{c1::to be finalised}} before the meeting tomorrow.	Infinitive passive (needs + to be + V-ed)	cloze passive passive-infinitive non-finite register:neutral frequency:mid domain:work
-The interns {{c1::were given}} a tour of the new headquarters yesterday.	Ditransitive passive (recipient subject)	cloze passive ditransitive-passive register:neutral frequency:mid domain:work
-A bonus {{c1::was awarded}} to every team member who exceeded their target.	Ditransitive passive (theme subject)	cloze passive ditransitive-passive register:neutral frequency:mid domain:work
-My laptop {{c1::is being repaired}} at the moment.	Present continuous passive (personal context)	cloze passive passive-present-continuous register:neutral frequency:mid domain:tech
-A new vaccine {{c1::has been developed}} by the research team.	Present perfect passive (institutional)	cloze passive passive-present-perfect register:neutral frequency:mid domain:academic
-She insists {{c1::on paying}} for everyone's coffee this morning.	Insist + on + V-ing	cloze reporting-verb register:neutral frequency:mid domain:kitchen
-He admitted {{c1::to lying}} about his qualifications during the interview.	Admit + to + V-ing	cloze reporting-verb register:neutral frequency:mid domain:work
-She thanked us {{c1::for organising}} the surprise party so beautifully.	Thank + for + V-ing	cloze reporting-verb register:neutral frequency:mid domain:general
-He warned us {{c1::not to leave}} the house after dark in that neighbourhood.	Warn + object + (not) + to-inf	cloze reporting-verb register:neutral frequency:mid domain:narrative
-She advised me {{c1::to consult}} a specialist about the recurring pain.	Advise + object + to-inf	cloze reporting-verb register:neutral frequency:mid domain:tech
-He persuaded her {{c1::to accept}} the job offer despite the long commute.	Persuade + object + to-inf	cloze reporting-verb register:neutral frequency:mid domain:general
-She offered {{c1::to drive}} me to the airport tomorrow morning.	Offer + to-inf	cloze reporting-verb register:neutral frequency:mid domain:tech
-He decided {{c1::to take}} a sabbatical year to travel.	Decide + to-inf	cloze reporting-verb register:neutral frequency:mid domain:general
-She agreed {{c1::to participate}} in the round-table discussion.	Agree + to-inf	cloze reporting-verb register:neutral frequency:mid domain:general
-We can't risk {{c1::losing}} our biggest client over this misunderstanding.	Risk + V-ing	cloze reporting-verb register:neutral frequency:mid domain:work
-She enjoys {{c1::reading}} historical fiction in the evenings.	Enjoy + V-ing (always gerund)	cloze non-finite gerund register:neutral frequency:mid domain:general
-He avoided {{c1::answering}} my question by changing the subject.	Avoid + V-ing	cloze non-finite gerund register:neutral frequency:mid domain:general
-She gave up {{c1::trying}} to convince him after the third attempt.	Give up + V-ing (phrasal verb pattern)	cloze phrasal-verb pv-separable non-finite register:neutral frequency:high domain:narrative
-He kept {{c1::interrupting}} the speaker throughout the whole lecture.	Keep + V-ing (continuation)	cloze non-finite gerund register:neutral frequency:mid domain:academic
-She remembered {{c1::to lock}} the door before leaving for work.	Remember + to-inf (necessary action remembered)	cloze non-finite register:neutral frequency:mid domain:narrative
-She remembered {{c1::locking}} the door before leaving for work.	Remember + V-ing (memory of having done it)	cloze non-finite gerund register:neutral frequency:mid domain:narrative
-He stopped {{c1::to smoke}} a cigarette outside the conference hall.	Stop + to-inf (paused in order to)	cloze non-finite register:neutral frequency:mid domain:general
-He stopped {{c1::smoking}} ten years ago after his diagnosis.	Stop + V-ing (ceased the activity)	cloze non-finite gerund register:neutral frequency:mid domain:narrative
-She tried {{c1::to open}} the window, but it was stuck shut.	Try + to-inf (made the effort)	cloze non-finite register:neutral frequency:mid domain:general
-She tried {{c1::opening}} the window, but it didn't help with the heat.	Try + V-ing (experimented with as a solution)	cloze non-finite gerund register:neutral frequency:mid domain:general
-He regrets {{c1::telling}} her about his promotion before the announcement.	Regret + V-ing (regret about a past act)	cloze non-finite gerund register:neutral frequency:mid domain:news
-We regret {{c1::to inform}} you that your application has been unsuccessful.	Regret + to-inf (formal news, present moment)	cloze non-finite register:neutral frequency:mid domain:tech
-She has visited Tokyo three times. — So {{c1::has}} my brother.	Auxiliary ellipsis — match present perfect 'has'	cloze auxiliary-ellipsis register:spoken frequency:mid domain:travel
-I won't be attending the gala. — Neither {{c1::will}} my colleagues, unfortunately.	Auxiliary ellipsis — neither + 'will' inversion	cloze auxiliary-ellipsis register:spoken frequency:mid domain:work
-He doesn't drink coffee. — Nor {{c1::do}} I, actually.	Auxiliary ellipsis — nor + 'do' inversion	cloze auxiliary-ellipsis register:spoken frequency:mid domain:kitchen
-Open the window, {{c1::will you}}?	Tag question — imperative + 'will you'	cloze tag-question discourse register:spoken frequency:mid domain:dialogue
-He has finished the report, {{c1::hasn't he}}?	Tag question — present perfect → 'hasn't he'	cloze tag-question discourse register:spoken frequency:mid domain:work
-We should leave early, {{c1::shouldn't we}}?	Tag question — modal 'should' → 'shouldn't we'	cloze tag-question modal register:spoken frequency:high domain:dialogue
-Take an umbrella, {{c1::just in case}}.	'Just in case' — informal precaution adverbial	cloze in-case time-clause register:neutral frequency:mid domain:general
-She had a long, hot {{c1::shower}} after the gym session.	Light verb 'have' + delexical 'shower'	cloze light-verb collocation register:spoken frequency:mid domain:kitchen
-He took a {{c1::nap}} on the sofa for half an hour.	Light verb 'take' + delexical 'nap'	cloze light-verb collocation register:spoken frequency:mid domain:general
-Let's {{c1::make}} a decision and move on with the agenda.	Light verb 'make' + delexical 'decision'	cloze light-verb collocation register:spoken frequency:mid domain:general
-She did the {{c1::dishes}} while I tidied the living room.	Light verb 'do' + delexical 'dishes'	cloze light-verb collocation register:spoken frequency:mid domain:narrative
-He gave a brilliant {{c1::speech}} at the awards ceremony last night.	Light verb 'give' + delexical 'speech'	cloze light-verb collocation register:spoken frequency:mid domain:narrative
-She {{c1::lives}} in Moscow and commutes to Saint Petersburg every weekend.	Russian L1 trap — present simple, not continuous	cloze l1-interference l1-russian present-simple-vs-present-continuous register:neutral frequency:mid domain:tech
-I have {{c1::been reading}} this novel since this morning.	Russian L1 trap — present perfect continuous, not bare present	cloze l1-interference l1-russian present-perfect-continuous register:neutral frequency:mid domain:narrative
-He {{c1::has}} already had dinner, so he won't be eating with us.	Mandarin L1 trap — auxiliary 'has' is required (cf. 已经…了)	cloze l1-interference l1-mandarin present-perfect register:neutral frequency:high domain:kitchen
-I {{c1::ate}} rice every day for breakfast and lunch when I lived in Tokyo.	Japanese L1 trap — past simple with frequency adverbial	cloze l1-interference l1-japanese past-simple register:neutral frequency:high domain:travel
-I {{c1::saw}} her at the conference yesterday.	German L1 trap — past simple with 'yesterday', not Perfekt	cloze l1-interference l1-german past-simple-vs-present-perfect register:neutral frequency:mid domain:narrative
-She {{c1::ate}} breakfast at the hotel yesterday morning.	French L1 trap — past simple, not present perfect	cloze l1-interference l1-french past-simple-vs-present-perfect register:neutral frequency:mid domain:travel
-She {{c1::has worked}} at this company for five years.	Spanish L1 trap — present perfect (not preterite) for ongoing relevance	cloze l1-interference l1-spanish present-perfect register:neutral frequency:high domain:work
-We're going to launch the new product line {{c1::in early September}}.	Be going to + future time expression (pre-decided plan)	cloze future-going-to register:neutral frequency:high domain:general
-She {{c1::is leaving}} tomorrow on the early flight to Lyon.	Present continuous for fixed future arrangement	cloze present-continuous-future register:neutral frequency:mid domain:travel
-The train {{c1::leaves}} at 7:42 every weekday from platform 4.	Present simple for scheduled future	cloze present-simple-schedule register:neutral frequency:mid domain:tech
-We were just {{c1::about to leave}} when the rain finally stopped.	Be about to (imminent past intention)	cloze future-in-past future-about-to register:neutral frequency:mid domain:tech
-She wishes she {{c1::had taken}} the offer when it was still available.	Wish + past perfect — past regret	cloze wish-past wish subjunctive register:formal frequency:mid domain:tech
-I wish I {{c1::could speak}} four languages like you do.	Wish + could (present unreal ability)	cloze wish wish-present subjunctive register:formal frequency:mid domain:general
-{{c1::If only}} we had bought that house when prices were low!	If only + past perfect (past regret)	cloze if-only conditional-third register:neutral frequency:mid domain:narrative
-The thief {{c1::is believed}} to have escaped through the back door.	Double passive — passive matrix verb + perfect infinitive	cloze passive double-passive register:formal frequency:low domain:general
-A new policy {{c1::is said}} to be on the way regarding remote work.	Reporting double passive ('is said to be')	cloze passive double-passive register:formal frequency:low domain:tech
-The renovation {{c1::was reported}} to have cost over two million euros.	Reporting double passive (past)	cloze passive double-passive register:formal frequency:low domain:work
-Vintage records {{c1::sell}} quickly at the Saturday flea market.	Middle voice (active form, generic patient subject)	cloze middle-voice register:neutral frequency:low domain:general
-This shirt {{c1::washes}} well — even after twenty cycles.	Middle voice (washes well)	cloze middle-voice register:neutral frequency:low domain:narrative
-The window {{c1::broke}} during the storm last night.	Ergative use of 'break' (intransitive)	cloze ergative register:neutral frequency:low domain:narrative
-The door {{c1::opened}} slowly with a loud creak.	Ergative use of 'open' (intransitive)	cloze ergative register:neutral frequency:low domain:general
-The ice {{c1::melted}} within minutes in the warm sunshine.	Ergative use of 'melt' (intransitive change of state)	cloze ergative register:neutral frequency:low domain:general
-She {{c1::pretends to enjoy}} her cousin's piano recitals every Christmas.	Pretend + to-inf (matrix-clause control)	cloze control-verb non-finite register:neutral frequency:mid domain:family
-He turned out {{c1::to be}} the heir to a vast Italian estate.	Raising — turn out + to-inf	cloze raising-verb non-finite register:neutral frequency:mid domain:general
-The negotiations are likely {{c1::to take}} several more weeks to conclude.	Adjective 'likely' + to-inf (raising adjective)	cloze raising-verb non-finite register:neutral frequency:mid domain:work
-She is sure {{c1::to win}} the championship at her current pace.	'Be sure to' (raising adjective)	cloze raising-verb non-finite register:neutral frequency:mid domain:general
-He happens {{c1::to know}} the chairman personally.	Raising verb (happen + to-inf)	cloze raising-verb non-finite register:neutral frequency:mid domain:tech
-The problem proves {{c1::to be}} more complex than we anticipated.	Raising verb (prove + to-inf)	cloze raising-verb non-finite register:neutral frequency:mid domain:general
+She {{c1::eats}} an apple every day before her morning run.	Present Simple, 3rd person -s	cloze present-simple core register:neutral frequency:high domain:tech cefr:a1
+He {{c1::doesn't drink}} coffee in the afternoon — only in the morning.	Present Simple, negative auxiliary	cloze present-simple core register:neutral frequency:high domain:kitchen cefr:a1
+Water {{c1::boils}} at 100 degrees Celsius under standard atmospheric pressure.	Present Simple, general truth	cloze present-simple register:neutral frequency:high domain:general cefr:a1
+The Earth {{c1::revolves}} around the Sun once every 365.25 days.	Present Simple, scientific fact	cloze present-simple register:neutral frequency:high domain:general cefr:a1
+She {{c1::is reading}} a fascinating novel about ancient Rome at the moment.	Present Continuous, action in progress now	cloze present-continuous core register:neutral frequency:high domain:narrative cefr:a1
+The kettle {{c1::is boiling}} — could you turn the gas off, please?	Present Continuous, momentary action	cloze present-continuous core register:neutral frequency:high domain:dialogue cefr:a1
+I {{c1::am working}} on the quarterly report this week, so I can't help.	Present Continuous, temporary situation	cloze present-continuous core register:neutral frequency:high domain:work cefr:a1
+She {{c1::has lived}} in this neighbourhood for over fifteen years.	Present Perfect, state up to now (for + duration)	cloze present-perfect core register:neutral frequency:high domain:general cefr:a2
+We {{c1::have just finished}} the final round of interviews this morning.	Present Perfect, recent completion (just)	cloze present-perfect register:neutral frequency:high domain:work cefr:a2
+I {{c1::have already eaten}} breakfast, so I'll skip the bagel.	Present Perfect, completion with current relevance (already)	cloze present-perfect core register:neutral frequency:high domain:kitchen cefr:a2
+They {{c1::have been waiting}} at the bus stop for over forty minutes.	Present Perfect Continuous, ongoing duration up to now	cloze present-perfect-continuous core register:neutral frequency:high domain:tech cefr:b1
+She {{c1::has been studying}} Japanese since she moved to Kyoto last spring.	Present Perfect Continuous, since + start point	cloze present-perfect-continuous core register:neutral frequency:high domain:academic cefr:b1
+He {{c1::worked}} at the museum for ten years before retiring last June.	Past Simple, finished past period	cloze past-simple core register:neutral frequency:high domain:narrative cefr:a1
+She {{c1::didn't reply}} to any of my messages all afternoon.	Past Simple, negative auxiliary	cloze past-simple core register:neutral frequency:high domain:general cefr:a1
+We {{c1::were driving}} along the coast when we spotted a pod of whales.	Past Continuous, ongoing past action interrupted	cloze past-continuous core register:neutral frequency:high domain:narrative cefr:a2
+At nine o'clock last night, I {{c1::was finishing}} my essay in the library.	Past Continuous, action at a specific past time	cloze past-continuous core register:neutral frequency:high domain:academic cefr:a2
+By the time we arrived, they {{c1::had already left}} for the airport.	Past Perfect, earlier past event	cloze past-perfect core register:neutral frequency:high domain:tech cefr:b1
+She {{c1::had finished}} the manuscript before her editor called for revisions.	Past Perfect, earlier of two past events	cloze past-perfect core register:neutral frequency:high domain:narrative cefr:b1
+We {{c1::had been hiking}} for three hours when the storm finally broke.	Past Perfect Continuous, duration before past reference	cloze past-perfect-continuous core register:neutral frequency:high domain:narrative cefr:b2
+She {{c1::had been working}} late every night that week before the merger closed.	Past Perfect Continuous, ongoing past background	cloze past-perfect-continuous core register:neutral frequency:high domain:work cefr:b2
+The package {{c1::will arrive}} sometime tomorrow afternoon, according to tracking.	Future Simple (will), prediction	cloze future-simple core register:neutral frequency:high domain:tech cefr:a2
+I {{c1::'ll get}} the door — you stay where you are.	Future Simple (will), spontaneous offer	cloze future-simple register:neutral frequency:mid domain:dialogue cefr:a2
+She {{c1::is going to launch}} her new bakery in early September.	Be Going To, pre-decided plan	cloze future-going-to core register:neutral frequency:high domain:kitchen cefr:a2
+Look at those clouds — it {{c1::'s going to pour}} any minute now.	Be Going To, prediction from present evidence	cloze future-going-to register:neutral frequency:high domain:dialogue cefr:a2
+At this time tomorrow, we {{c1::will be flying}} over the Atlantic.	Future Continuous, ongoing future action	cloze future-continuous core register:neutral frequency:high domain:general cefr:b1
+By next Friday, the team {{c1::will have completed}} all the user-acceptance tests.	Future Perfect, completion before future reference	cloze future-perfect core register:neutral frequency:high domain:work cefr:b2
+By the time she retires, she {{c1::will have been working}} at this firm for forty years.	Future Perfect Continuous, duration up to future point	cloze future-perfect-continuous register:neutral frequency:low domain:work cefr:c1
+If she {{c1::studies}} hard, she will pass the exam without any difficulty.	First Conditional, if + present simple	cloze conditional-first core register:neutral frequency:high domain:academic cefr:a2
+If I {{c1::were}} you, I would take the earlier train to avoid the rush.	Second Conditional, were (subjunctive be)	cloze conditional-second core register:neutral frequency:high domain:tech cefr:b1
+If she {{c1::had told}} me about the meeting, I would have rearranged my afternoon.	Third Conditional, if + past perfect	cloze conditional-third core register:neutral frequency:high domain:work cefr:b2
+If you {{c1::heat}} ice above zero degrees, it melts within seconds.	Zero Conditional, general truth	cloze conditional-zero register:neutral frequency:high domain:general cefr:a2
+I wish I {{c1::knew}} the answer to that question — I really don't.	Wish (Present Unreal), past form for present meaning	cloze wish-present subjunctive register:formal frequency:mid domain:dialogue cefr:c1
+I wish you {{c1::would stop}} interrupting me when I'm trying to explain.	Wish + would, annoyance	cloze wish-annoyance wish-would register:informal frequency:mid domain:tech cefr:b1
+The new bridge {{c1::is being inspected}} by structural engineers this week.	Present Continuous Passive	cloze passive passive-present-continuous register:neutral frequency:mid domain:general cefr:b2
+The proposal {{c1::was discussed}} at length during yesterday's board meeting.	Past Simple Passive	cloze passive passive-past-simple register:neutral frequency:high domain:work cefr:b1
+The contract {{c1::has been signed}} by both parties already.	Present Perfect Passive	cloze passive passive-present-perfect register:neutral frequency:mid domain:work cefr:b2
+The roof {{c1::had been repaired}} long before the next storm hit the region.	Past Perfect Passive	cloze passive passive-past-perfect register:neutral frequency:low domain:tech cefr:b2
+The treaty {{c1::will be signed}} during next month's summit in Vienna.	Future Simple Passive	cloze passive register:neutral frequency:mid domain:news cefr:b1
+The order {{c1::must be approved}} by the regional manager before processing.	Modal Passive	cloze passive passive-modal register:neutral frequency:mid domain:news cefr:b2
+She {{c1::had}} the leaking roof repaired by a professional contractor last week.	Causative Have (have + obj + past participle)	cloze passive-causative-have causative register:neutral frequency:mid domain:work cefr:c1
+She finally {{c1::got}} her car repaired after months of putting it off.	Causative Get (get + obj + past participle, informal)	cloze passive-causative-get register:neutral frequency:mid domain:tech cefr:b1
+She {{c1::owns}} three properties in central Madrid.	Stative verb in Present Simple (not continuous)	cloze stative core register:neutral frequency:high domain:travel cefr:b1
+He {{c1::is being}} unusually quiet this evening — is something wrong?	Dynamic use of stative 'be' (temporary behaviour)	cloze dynamic-stative register:neutral frequency:mid domain:dialogue cefr:b1
+He told me he {{c1::was going}} to call back later that afternoon.	Future-in-the-past, was/were going to	cloze future-in-past reported-speech register:neutral frequency:mid domain:general cefr:b2
+Hardly {{c1::had we sat down}} when the fire alarm sounded.	Negative inversion (Hardly + had + subject + V-ed)	cloze negative-inversion register:formal frequency:low domain:narrative cefr:c2
+{{c1::Had I known}} about the strike, I would have taken the earlier flight.	Inverted Conditional (Third) — drops 'if'	cloze inverted-conditional conditional-third register:formal frequency:mid domain:travel cefr:c1
+She seems {{c1::to have forgotten}} about our scheduled meeting this afternoon.	Raising verb + perfect infinitive	cloze raising-verb non-finite register:neutral frequency:mid domain:work cefr:b1
+The new interns {{c1::were given}} a thorough orientation on their first morning.	Ditransitive passive, recipient-subject	cloze passive ditransitive-passive register:neutral frequency:mid domain:work cefr:b1
+The man {{c1::wearing}} the red scarf is our keynote speaker tonight.	Reduced relative (present participle)	cloze reduced-relative non-finite register:neutral frequency:mid domain:general cefr:b1
+The report {{c1::submitted}} last Friday already contains the new figures.	Reduced relative (past participle)	cloze reduced-relative non-finite register:neutral frequency:mid domain:work cefr:b1
+You {{c1::must}} fasten your seatbelt at all times during the flight.	Modal of obligation (must)	cloze modal modal-obligation register:neutral frequency:high domain:travel cefr:b1
+She {{c1::should}} apologise for what she said at the meeting yesterday.	Modal of advice (should)	cloze modal register:neutral frequency:high domain:work cefr:b1
+You {{c1::can}} use my car this weekend if you fill the tank.	Modal of permission (can)	cloze modal modal-permission register:neutral frequency:high domain:general cefr:b1
+She {{c1::could}} swim before she could walk — her parents are both lifeguards.	Modal of past ability (could)	cloze modal modal-ability register:neutral frequency:high domain:sport cefr:b1
+He {{c1::might}} be stuck in traffic — he's usually punctual.	Modal of possibility (might)	cloze modal register:neutral frequency:high domain:dialogue cefr:b1
+He {{c1::must have been}} working late again last night — his car was still in the lot at midnight.	Modal Perfect Continuous (deduction about sustained past activity)	cloze modal-perfect-continuous modal register:neutral frequency:low domain:tech cefr:c2
+You {{c1::should have called}} me yesterday — I was waiting all afternoon.	Modal Perfect (should have + V-ed) — past advice/regret	cloze modal-perfect modal register:formal frequency:high domain:tech cefr:b2
+She {{c1::needn't have}} brought any wine — we already had three bottles.	Modal Perfect (needn't have)	cloze modal-perfect modal register:formal frequency:high domain:dialogue cefr:b2
+He {{c1::could have caught}} the earlier train if he had set off ten minutes sooner.	Modal Perfect (could have + V-ed) — unrealised possibility	cloze modal-perfect modal register:formal frequency:high domain:tech cefr:b2
+You {{c1::ought to}} apologise for your language at the dinner table.	Semi-modal ought to	cloze modal register:neutral frequency:high domain:kitchen cefr:b1
+You {{c1::had better}} leave now if you want to catch the last train home.	Semi-modal had better (urgent advice/warning)	cloze modal register:neutral frequency:high domain:tech cefr:b1
+She {{c1::used to}} commute by train before she moved closer to the office.	Used to + base verb (discontinued past habit/state)	cloze habitual-used-to modal register:neutral frequency:high domain:work cefr:b1
+Every summer, we {{c1::would}} drive up to the lake for a long weekend.	Habitual would (past habits)	cloze habitual-would modal register:neutral frequency:high domain:general cefr:b1
+She {{c1::daren't}} say what she really thinks at the staff meetings.	Semi-modal dare (negative)	cloze semi-modal semi-modal-dare register:formal frequency:mid domain:work cefr:c1
+You {{c1::needn't}} bring anything to the dinner — we have everything covered.	Semi-modal need (absence of necessity)	cloze semi-modal semi-modal-need register:formal frequency:mid domain:kitchen cefr:c1
+{{c1::Should you require}} any further assistance, please contact our help desk.	Inverted Conditional (Should + subject + base verb) — formal first conditional	cloze inverted-conditional conditional-first register:formal frequency:high domain:dialogue cefr:c1
+{{c1::Were she}} more experienced, the committee would offer her the directorship.	Inverted Conditional (Were + subject) — formal second conditional	cloze inverted-conditional conditional-second register:formal frequency:mid domain:work cefr:c1
+If she {{c1::had taken}} the earlier train, she would already be here by now.	Mixed Conditional (third + second) — past condition, present result	cloze conditional-mixed register:neutral frequency:mid domain:tech cefr:b2
+{{c1::If only}} I had listened to your advice when you offered it!	If only + past perfect — regret about past	cloze if-only conditional-third register:neutral frequency:mid domain:narrative cefr:b2
+Take an umbrella {{c1::in case}} it rains during the ceremony tomorrow.	In case + present simple — precaution before the event	cloze in-case time-clause register:neutral frequency:mid domain:tech cefr:b1
+We'll proceed with the merger, {{c1::on condition that}} the regulator approves.	On condition that — formal stipulated condition	cloze on-condition-that conditional register:formal frequency:mid domain:news cefr:c2
+You can borrow the car {{c1::providing}} you fill the tank before returning it.	Providing — conditional permission	cloze providing conditional register:neutral frequency:mid domain:narrative cefr:b1
+{{c1::As soon as}} the report arrives, I'll forward it to the entire executive team.	As soon as + present simple, will-clause	cloze time-clause future register:neutral frequency:mid domain:work cefr:b1
+{{c1::By the time}} we reach the summit, the sun will have risen above the clouds.	By the time + present simple, future perfect	cloze time-clause future-perfect register:neutral frequency:mid domain:news cefr:b2
+{{c1::While}} the lasagna was baking, I tidied up the entire kitchen.	While + past continuous — background ongoing past action	cloze time-clause past-continuous register:neutral frequency:high domain:kitchen cefr:b1
+She told me she {{c1::would meet}} us at the gallery on Saturday.	Reported speech, will → would (backshift)	cloze reported-speech backshift register:neutral frequency:mid domain:general cefr:b2
+He said he {{c1::had finished}} the report before the deadline.	Reported speech, present perfect → past perfect	cloze reported-speech backshift register:neutral frequency:mid domain:work cefr:b2
+She asked me {{c1::if I had ever}} visited the Louvre during my time in Paris.	Reported question (if/whether + statement order)	cloze reported-speech reported-question embedded-question register:spoken frequency:mid domain:travel cefr:b2
+The teacher reminded the class that water {{c1::boils}} at 100 degrees Celsius.	Reported speech — universal truth, no backshift	cloze reported-speech reported-no-backshift register:neutral frequency:mid domain:general cefr:b2
+He admitted {{c1::breaking}} the antique vase during the move.	Reporting verb admit + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:general cefr:b2
+The committee suggested {{c1::postponing}} the launch until the new fiscal year.	Reporting verb suggest + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work cefr:b2
+The auditor accused the manager {{c1::of falsifying}} the quarterly figures.	Reporting verb accuse OF + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work cefr:b2
+She apologised {{c1::for arriving}} so late to the budget meeting.	Reporting verb apologise FOR + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work cefr:b2
+She promised {{c1::to deliver}} the prototype by the end of the quarter.	Reporting verb promise + to-inf	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work cefr:b2
+I love jazz. — So {{c1::do}} I, especially the early Coltrane recordings.	Auxiliary ellipsis (so + DO + I) — match the lexical-verb auxiliary	cloze auxiliary-ellipsis discourse register:spoken frequency:mid domain:dialogue cefr:b1
+He doesn't drink coffee. — Neither {{c1::do}} I, actually.	Auxiliary ellipsis (neither + DO + I) — negative agreement	cloze auxiliary-ellipsis discourse register:spoken frequency:mid domain:kitchen cefr:b1
+You're coming to the wedding, {{c1::aren't you}}?	Tag question — positive statement → negative tag	cloze tag-question discourse register:spoken frequency:mid domain:dialogue cefr:b1
+She doesn't speak any German, {{c1::does she}}?	Tag question — negative statement → positive tag	cloze tag-question discourse register:spoken frequency:mid domain:dialogue cefr:b1
+Do you know {{c1::whether the parcel has arrived}} yet?	Embedded yes/no question — statement word order	cloze embedded-question discourse register:spoken frequency:mid domain:dialogue cefr:b1
+Could you tell me {{c1::what time the pharmacy closes}} this evening?	Embedded wh-question — statement word order (no inversion)	cloze embedded-question politeness register:spoken frequency:mid domain:dialogue cefr:b1
+You {{c1::are to}} report to the security desk at 8 a.m. tomorrow morning.	Be + to-infinitive (formal scheduled future)	cloze be-to-infinitive register:formal frequency:low domain:work cefr:c2
+The President {{c1::is to}} address the nation this evening at nine.	Be + to-infinitive (official scheduled event)	cloze be-to-infinitive register:formal frequency:low domain:news cefr:c2
+{{c1::Shall}} we take a short break before the next session begins?	Shall (first-person suggestion — BrE)	cloze shall shall-suggestion register:formal frequency:mid domain:narrative cefr:b1
+The harder you train, {{c1::the faster}} you'll recover from injuries.	Comparative correlative (the …er, the …er)	cloze comparative-correlative discourse register:spoken frequency:low domain:tech cefr:c2
+{{c1::Even if}} she apologises, I won't be inviting her to the next party.	Even if — hypothetical concession	cloze even-if-vs-even-though conditional register:neutral frequency:mid domain:general cefr:c1
+She talks {{c1::as if}} she had been there herself, but she only read about it.	As if + past perfect (counterfactual past)	cloze as-if-counterfactual subjunctive register:formal frequency:low domain:general cefr:c2
+It's high time you {{c1::started}} taking your studies seriously.	It's high time + past subjunctive	cloze high-time subjunctive register:formal frequency:mid domain:general cefr:c2
+The drill sergeant made every recruit {{c1::run}} five additional kilometres.	Causative make + bare infinitive	cloze causative-make non-finite register:neutral frequency:mid domain:general cefr:b1
+The thief is believed {{c1::to have escaped}} through the back door.	Double passive (is believed + perfect infinitive passive)	cloze passive double-passive register:formal frequency:low domain:general cefr:c2
+She had a hot {{c1::shower}} after the gym session this morning.	Light verb 'have' + delexical noun	cloze light-verb collocation register:spoken frequency:mid domain:kitchen cefr:b1
+He took a deep {{c1::breath}} before stepping onto the stage.	Light verb 'take' + delexical noun	cloze light-verb collocation register:spoken frequency:mid domain:narrative cefr:b1
+The vintage records {{c1::sell}} quickly at the Saturday flea market.	Middle voice (active form, generic patient subject)	cloze middle-voice discourse register:spoken frequency:low domain:general cefr:c2
+The bookshelf {{c1::collapsed}} under the weight of the encyclopaedias.	Ergative verb (intransitive, no agent)	cloze ergative discourse register:spoken frequency:low domain:general cefr:c2
+We {{c1::look forward to}} hearing from you in due course.	Phrasal verb 'look forward to' + V-ing	cloze phrasal-verb pv-three-part register:neutral frequency:high domain:general cefr:b2
+She finally {{c1::gave up}} smoking after her doctor's stark warning.	Phrasal verb 'give up' (separable) + V-ing	cloze phrasal-verb pv-separable register:neutral frequency:high domain:narrative cefr:b2
+Could you {{c1::pick up}} some milk on your way home from the station?	Phrasal verb 'pick up' (separable, transitive)	cloze phrasal-verb pv-separable register:neutral frequency:high domain:dialogue cefr:b2
+We need to {{c1::find out}} who is responsible for this oversight.	Phrasal verb 'find out' (separable)	cloze phrasal-verb pv-separable register:neutral frequency:high domain:general cefr:b2
+She always {{c1::looks after}} her younger siblings on weekends.	Phrasal verb 'look after' (inseparable)	cloze phrasal-verb pv-inseparable register:neutral frequency:high domain:general cefr:b2
+The flight {{c1::took off}} forty-five minutes behind schedule today.	Phrasal verb 'take off' (intransitive, dynamic)	cloze phrasal-verb pv-intransitive register:neutral frequency:high domain:travel cefr:b1
+I just can't {{c1::put up with}} her constant complaining any longer.	Phrasal verb 'put up with' (three-part, inseparable)	cloze phrasal-verb pv-three-part register:neutral frequency:high domain:tech cefr:b2
+A detailed report {{c1::was sent}} to every member of the committee.	Ditransitive passive (theme-subject)	cloze passive ditransitive-passive register:neutral frequency:mid domain:work cefr:b1
+The patient {{c1::is being prepped}} for surgery in the operating theatre.	Present Continuous Passive (institutional context)	cloze passive passive-present-continuous register:neutral frequency:mid domain:general cefr:b2
+By midnight, all the evidence {{c1::had been collected}} by the forensic team.	Past Perfect Passive (completion before another past)	cloze passive passive-past-perfect register:neutral frequency:low domain:work cefr:b2
+Dinner {{c1::was being served}} when the fire alarm went off.	Past Continuous Passive (interrupted ongoing past)	cloze passive passive-past-continuous register:neutral frequency:low domain:kitchen cefr:b2
+By next year, the renovation {{c1::will have been completed}} on time.	Future Perfect Passive	cloze passive register:neutral frequency:mid domain:general cefr:b1
+The new policy {{c1::is expected to be implemented}} by the end of Q2.	Double passive — formal news/business register	cloze passive double-passive register:formal frequency:low domain:general cefr:c2
+He {{c1::let}} the children stay up late to watch the eclipse.	Causative let + bare infinitive (permission)	cloze causative-let non-finite register:neutral frequency:mid domain:family cefr:b1
+Her parents {{c1::made}} her practise the violin for an hour every evening.	Causative make + object + bare infinitive (compulsion)	cloze causative-make non-finite register:neutral frequency:mid domain:family cefr:b1
+He helped his grandmother {{c1::(to) plant}} the tomato seedlings in the garden.	Causative help — bare or 'to' infinitive both acceptable	cloze causative-help non-finite register:neutral frequency:mid domain:family cefr:b1
+She suggested {{c1::we leave}} an hour earlier to beat the traffic.	Mandative subjunctive (suggest + base verb)	cloze mandative subjunctive register:formal frequency:low domain:kitchen cefr:c2
+The committee insists that the rule {{c1::be}} enforced without exception.	Mandative subjunctive (insist + base 'be')	cloze mandative subjunctive register:formal frequency:low domain:work cefr:c2
+I'd rather you {{c1::didn't mention}} the surprise in front of the children.	Would rather + different subject + past simple	cloze modal-would-rather-vs-sooner subjunctive register:formal frequency:mid domain:family cefr:c1
+He'd sooner {{c1::resign}} than accept the demotion to a junior role.	Would sooner + bare infinitive	cloze modal-would-rather-vs-sooner register:neutral frequency:mid domain:general cefr:b1
+{{c1::Suppose}} your flight gets cancelled — what would you do then?	Suppose + present simple (conversational hypothetical)	cloze suppose conditional-second register:neutral frequency:mid domain:travel cefr:b1
+{{c1::Supposing}} she had taken the earlier train, she'd be here by now.	Supposing + past perfect (counterfactual)	cloze supposing conditional-third register:neutral frequency:mid domain:tech cefr:b2
+The work {{c1::needs finishing}} before the inspector arrives next week.	Need + V-ing (passive sense, thing-as-subject)	cloze passive non-finite register:neutral frequency:mid domain:narrative cefr:b1
+She regretted {{c1::having lied}} to her colleagues about the report.	Perfect gerund (action prior to matrix verb)	cloze non-finite perfect-gerund register:neutral frequency:low domain:work cefr:c2
+He apologised {{c1::for having missed}} the previous two team meetings.	Perfect gerund after preposition	cloze non-finite perfect-gerund register:neutral frequency:low domain:work cefr:c2
+We were happy {{c1::to have completed}} the project ahead of schedule.	Perfect infinitive after adjective	cloze non-finite perfect-infinitive register:neutral frequency:mid domain:work cefr:c1
+{{c1::Walking}} through the park, I noticed how beautiful the autumn colours were.	Present participle (adverbial)	cloze non-finite register:neutral frequency:mid domain:general cefr:b1
+{{c1::Having finished}} her presentation, she sat down and waited for questions.	Perfect participle (adverbial, prior action)	cloze non-finite perfect-participle register:neutral frequency:low domain:work cefr:c2
+She moved to Vancouver {{c1::to study}} marine biology at UBC.	Infinitive of purpose	cloze non-finite infinitive-of-purpose register:neutral frequency:mid domain:academic cefr:b1
+He stayed late {{c1::to finish}} the quarterly report before the deadline.	Infinitive of purpose	cloze non-finite infinitive-of-purpose register:neutral frequency:mid domain:work cefr:b1
+{{c1::Smoking}} inside the restaurant is strictly prohibited by local law.	Gerund as subject	cloze non-finite gerund register:neutral frequency:mid domain:kitchen cefr:b1
+She's tired of {{c1::being told}} what to do all the time.	Gerund passive after preposition	cloze non-finite passive-gerund register:neutral frequency:mid domain:general cefr:c1
+The contract is hoped {{c1::to have been finalised}} before the deadline.	Perfect passive infinitive (formal)	cloze non-finite passive-infinitive register:neutral frequency:mid domain:work cefr:c1
+{{c1::Not only}} did she finish the marathon, but she also broke her personal record.	Negative inversion (Not only + auxiliary + subject + base verb)	cloze negative-inversion register:formal frequency:low domain:academic cefr:c2
+{{c1::Never}} have I seen such a chaotic city council meeting in my life.	Negative inversion (Never + auxiliary + subject + past participle)	cloze negative-inversion register:formal frequency:low domain:news cefr:c2
+{{c1::No sooner}} had the meeting begun than the CEO announced his resignation.	Negative inversion (No sooner … than)	cloze negative-inversion register:formal frequency:low domain:news cefr:c2
+{{c1::Only after}} the storm had passed did the rescue teams resume their search.	Negative inversion (Only after + clause + auxiliary + subject + base verb)	cloze negative-inversion register:formal frequency:low domain:work cefr:c2
+She {{c1::seemed to be enjoying}} the conversation immensely.	Raising verb + progressive infinitive	cloze raising-verb non-finite register:neutral frequency:mid domain:general cefr:b1
+The negotiations appear {{c1::to be making}} some real progress at last.	Raising verb + progressive infinitive	cloze raising-verb non-finite register:neutral frequency:mid domain:work cefr:b1
+She managed {{c1::to convince}} the board to approve the new budget.	Control verb (manage) + to-infinitive	cloze control-verb non-finite register:neutral frequency:mid domain:news cefr:b1
+He refused {{c1::to identify}} the suspect during the line-up.	Reporting verb refuse + to-infinitive	cloze reporting-verb register:neutral frequency:mid domain:general cefr:b2
+She denied {{c1::taking}} any documents from the office without permission.	Reporting verb deny + V-ing	cloze reporting-verb reported-speech register:neutral frequency:mid domain:work cefr:b2
+He blamed his assistant {{c1::for losing}} the client's signed contract.	Reporting verb blame FOR + V-ing	cloze reporting-verb register:neutral frequency:mid domain:work cefr:b2
+She told us that if she {{c1::had}} more time, she would learn Mandarin.	Reported speech — conditional 2 retains form (no further backshift)	cloze reported-speech reported-no-backshift conditional-second register:neutral frequency:mid domain:general cefr:b2
+I've just {{c1::spoken}} to him about the contract.	Present perfect with 'just' (BrE preference)	cloze ame-vs-bre present-perfect register:informal frequency:high domain:work cefr:a2
+I {{c1::just got}} off the phone with him a few minutes ago.	AmE: past simple with 'just' (where BrE prefers present perfect)	cloze ame-vs-bre past-simple register:informal frequency:high domain:general cefr:a1
+At nine o'clock tomorrow morning, I {{c1::'ll be sitting}} in the dentist's chair.	Future continuous (ongoing future activity)	cloze future-continuous core register:neutral frequency:high domain:tech cefr:b1
+She {{c1::has been being}} interviewed for nearly two hours now.	Present perfect continuous passive (rare, very advanced)	cloze passive register:neutral frequency:mid domain:work cefr:b1
+{{c1::What I love most}} about this city is its endless street art.	Pseudo-cleft (What-cleft) for emphasis	cloze cleft register:neutral frequency:mid domain:general cefr:b2
+{{c1::It was}} her quick thinking that prevented the accident.	It-cleft for emphasis	cloze cleft register:neutral frequency:mid domain:general cefr:b2
+I {{c1::do}} appreciate everything you've done for the team this quarter.	Emphatic do (with present simple)	cloze emphatic register:neutral frequency:mid domain:work cefr:b1
+{{c1::Heat}} the oven to 180 degrees and bake for 25 minutes.	Recipe imperative	cloze recipe imperative register:academic frequency:mid domain:kitchen cefr:a1
+The minister {{c1::announces}} sweeping reforms to the tax system today.	Headline present (news register)	cloze headline register:academic frequency:mid domain:news cefr:b1
+The witness {{c1::then enters}} the courtroom and identifies the defendant.	Historical present (narrative)	cloze historical-present register:neutral frequency:mid domain:general cefr:b1
+It {{c1::could be argued}} that the evidence remains inconclusive at this stage.	Academic hedging modal (could be argued)	cloze hedging academic-hedging register:academic frequency:mid domain:tech cefr:c1
+She {{c1::might consider}} revising her conclusions in light of these findings.	Academic hedging modal (might + consider)	cloze hedging academic-hedging register:academic frequency:mid domain:general cefr:c1
+{{c1::I hereby declare}} this conference officially open.	Performative present (speech act)	cloze performative register:academic frequency:mid domain:news cefr:b1
+She has worked at this company {{c1::for}} five years now.	Present perfect + FOR + duration	cloze present-perfect core register:neutral frequency:high domain:work cefr:a2
+We have lived here {{c1::since}} my childhood.	Present perfect + SINCE + start point	cloze present-perfect core register:neutral frequency:high domain:family cefr:a2
+They moved house three years {{c1::ago}}, when his parents retired.	Past simple + … AGO (incompatible with present perfect)	cloze past-simple core register:neutral frequency:high domain:family cefr:a1
+He has {{c1::just}} arrived at the hotel — the rooms aren't ready yet.	Present perfect with JUST (recent completion)	cloze present-perfect core register:neutral frequency:high domain:travel cefr:a2
+I haven't finished the report {{c1::yet}}.	Present perfect with YET (negative)	cloze present-perfect core register:neutral frequency:high domain:work cefr:a2
+She has {{c1::already}} eaten breakfast, so she'll skip the bagel.	Present perfect with ALREADY	cloze present-perfect core register:neutral frequency:high domain:kitchen cefr:a2
+I'll let you know {{c1::when}} the package arrives tomorrow.	Time clause — when + present simple (future meaning)	cloze time-clause future register:neutral frequency:mid domain:general cefr:b1
+Don't sign anything {{c1::before}} you read the small print carefully.	Time clause — before + present simple	cloze time-clause register:neutral frequency:mid domain:general cefr:b1
+{{c1::Whenever}} I visit Lisbon, I always stay at the same little guesthouse.	Time clause — whenever + present simple	cloze time-clause register:neutral frequency:mid domain:travel cefr:b1
+{{c1::Until}} you apologise, I'm not going to speak to you again.	Time clause — until + present simple, future negation	cloze time-clause future register:neutral frequency:mid domain:tech cefr:b1
+{{c1::The moment}} the lights dim, the orchestra will begin the overture.	Time clause — the moment + present simple, will-clause	cloze time-clause future register:neutral frequency:mid domain:narrative cefr:b1
+{{c1::No matter when}} you arrive, dinner will be waiting on the table.	Time clause (concessive) — no matter when + present simple	cloze time-clause future register:neutral frequency:mid domain:tech cefr:b1
+Just as we {{c1::were locking}} the office, the alarm went off.	Past continuous in time clause (just as)	cloze time-clause past-continuous register:neutral frequency:high domain:work cefr:b1
+After she {{c1::had finished}} her presentation, the audience cheered.	After + past perfect (earlier of two past events)	cloze time-clause past-perfect register:neutral frequency:mid domain:work cefr:b1
+We had been waiting for an hour {{c1::when}} the train finally arrived.	When-clause anchoring past perfect continuous	cloze when-clause time-clause register:neutral frequency:mid domain:tech cefr:b1
+This time tomorrow, we {{c1::'ll be sailing}} off the coast of Sicily.	Future continuous + this-time-tomorrow	cloze future-continuous register:neutral frequency:mid domain:tech cefr:b1
+The committee {{c1::will have made}} a decision by Friday.	Future perfect — completion before future deadline	cloze future-perfect register:neutral frequency:mid domain:work cefr:b2
+She'd be writing her novel right now if she {{c1::weren't}} so busy.	Conditional continuous + counterfactual were-clause	cloze conditional-continuous conditional-second register:neutral frequency:mid domain:narrative cefr:b1
+At this hour next week, I'd {{c1::be lying}} on a beach in Greece.	Conditional continuous (would be + V-ing)	cloze conditional-continuous register:neutral frequency:mid domain:travel cefr:b1
+She would {{c1::have been studying}} medicine if her family had supported her decision.	Conditional perfect continuous (would have been + V-ing)	cloze conditional-perfect-continuous register:neutral frequency:low domain:academic cefr:b1
+The new bridge will {{c1::be inspected}} next month.	Future passive (will be + past participle)	cloze passive register:neutral frequency:mid domain:general cefr:b1
+By the end of the day, the contract {{c1::will have been signed}}.	Future perfect passive	cloze passive register:neutral frequency:mid domain:work cefr:b1
+The decision {{c1::had been made}} long before the meeting was even scheduled.	Past perfect passive	cloze passive passive-past-perfect register:neutral frequency:low domain:work cefr:b2
+The proposal {{c1::was being discussed}} when the chairperson left the room.	Past continuous passive	cloze passive passive-past-continuous register:neutral frequency:low domain:tech cefr:b2
+The order can {{c1::be cancelled}} up to 24 hours before delivery.	Modal passive (can be + V-ed)	cloze passive passive-modal register:neutral frequency:mid domain:narrative cefr:b2
+The package should {{c1::have been delivered}} by yesterday.	Modal perfect passive	cloze passive passive-modal modal-perfect register:formal frequency:mid domain:narrative cefr:b2
+Three witnesses are {{c1::being interviewed}} by the police as we speak.	Present continuous passive (live ongoing process)	cloze passive passive-present-continuous register:neutral frequency:mid domain:work cefr:b2
+He {{c1::got}} caught speeding on the motorway last weekend.	Get-passive (often negative outcome)	cloze passive passive-get register:neutral frequency:mid domain:general cefr:b1
+She finally {{c1::got}} promoted after five years at the company.	Get-passive (positive outcome)	cloze passive passive-get register:neutral frequency:mid domain:work cefr:b1
+He hates {{c1::being interrupted}} during his morning routine.	Gerund passive (after hate/like/love)	cloze passive passive-gerund non-finite register:neutral frequency:mid domain:dialogue cefr:c1
+She prefers {{c1::being told}} the truth, however painful.	Gerund passive after 'prefer'	cloze passive passive-gerund register:neutral frequency:mid domain:tech cefr:c1
+The report needs {{c1::to be finalised}} before the meeting tomorrow.	Infinitive passive (needs + to be + V-ed)	cloze passive passive-infinitive non-finite register:neutral frequency:mid domain:work cefr:c1
+The interns {{c1::were given}} a tour of the new headquarters yesterday.	Ditransitive passive (recipient subject)	cloze passive ditransitive-passive register:neutral frequency:mid domain:work cefr:b1
+A bonus {{c1::was awarded}} to every team member who exceeded their target.	Ditransitive passive (theme subject)	cloze passive ditransitive-passive register:neutral frequency:mid domain:work cefr:b1
+My laptop {{c1::is being repaired}} at the moment.	Present continuous passive (personal context)	cloze passive passive-present-continuous register:neutral frequency:mid domain:tech cefr:b2
+A new vaccine {{c1::has been developed}} by the research team.	Present perfect passive (institutional)	cloze passive passive-present-perfect register:neutral frequency:mid domain:academic cefr:b2
+She insists {{c1::on paying}} for everyone's coffee this morning.	Insist + on + V-ing	cloze reporting-verb register:neutral frequency:mid domain:kitchen cefr:b2
+He admitted {{c1::to lying}} about his qualifications during the interview.	Admit + to + V-ing	cloze reporting-verb register:neutral frequency:mid domain:work cefr:b2
+She thanked us {{c1::for organising}} the surprise party so beautifully.	Thank + for + V-ing	cloze reporting-verb register:neutral frequency:mid domain:general cefr:b2
+He warned us {{c1::not to leave}} the house after dark in that neighbourhood.	Warn + object + (not) + to-inf	cloze reporting-verb register:neutral frequency:mid domain:narrative cefr:b2
+She advised me {{c1::to consult}} a specialist about the recurring pain.	Advise + object + to-inf	cloze reporting-verb register:neutral frequency:mid domain:tech cefr:b2
+He persuaded her {{c1::to accept}} the job offer despite the long commute.	Persuade + object + to-inf	cloze reporting-verb register:neutral frequency:mid domain:general cefr:b2
+She offered {{c1::to drive}} me to the airport tomorrow morning.	Offer + to-inf	cloze reporting-verb register:neutral frequency:mid domain:tech cefr:b2
+He decided {{c1::to take}} a sabbatical year to travel.	Decide + to-inf	cloze reporting-verb register:neutral frequency:mid domain:general cefr:b2
+She agreed {{c1::to participate}} in the round-table discussion.	Agree + to-inf	cloze reporting-verb register:neutral frequency:mid domain:general cefr:b2
+We can't risk {{c1::losing}} our biggest client over this misunderstanding.	Risk + V-ing	cloze reporting-verb register:neutral frequency:mid domain:work cefr:b2
+She enjoys {{c1::reading}} historical fiction in the evenings.	Enjoy + V-ing (always gerund)	cloze non-finite gerund register:neutral frequency:mid domain:general cefr:b1
+He avoided {{c1::answering}} my question by changing the subject.	Avoid + V-ing	cloze non-finite gerund register:neutral frequency:mid domain:general cefr:b1
+She gave up {{c1::trying}} to convince him after the third attempt.	Give up + V-ing (phrasal verb pattern)	cloze phrasal-verb pv-separable non-finite register:neutral frequency:high domain:narrative cefr:b2
+He kept {{c1::interrupting}} the speaker throughout the whole lecture.	Keep + V-ing (continuation)	cloze non-finite gerund register:neutral frequency:mid domain:academic cefr:b1
+She remembered {{c1::to lock}} the door before leaving for work.	Remember + to-inf (necessary action remembered)	cloze non-finite register:neutral frequency:mid domain:narrative cefr:b1
+She remembered {{c1::locking}} the door before leaving for work.	Remember + V-ing (memory of having done it)	cloze non-finite gerund register:neutral frequency:mid domain:narrative cefr:b1
+He stopped {{c1::to smoke}} a cigarette outside the conference hall.	Stop + to-inf (paused in order to)	cloze non-finite register:neutral frequency:mid domain:general cefr:b1
+He stopped {{c1::smoking}} ten years ago after his diagnosis.	Stop + V-ing (ceased the activity)	cloze non-finite gerund register:neutral frequency:mid domain:narrative cefr:b1
+She tried {{c1::to open}} the window, but it was stuck shut.	Try + to-inf (made the effort)	cloze non-finite register:neutral frequency:mid domain:general cefr:b1
+She tried {{c1::opening}} the window, but it didn't help with the heat.	Try + V-ing (experimented with as a solution)	cloze non-finite gerund register:neutral frequency:mid domain:general cefr:b1
+He regrets {{c1::telling}} her about his promotion before the announcement.	Regret + V-ing (regret about a past act)	cloze non-finite gerund register:neutral frequency:mid domain:news cefr:b1
+We regret {{c1::to inform}} you that your application has been unsuccessful.	Regret + to-inf (formal news, present moment)	cloze non-finite register:neutral frequency:mid domain:tech cefr:b1
+She has visited Tokyo three times. — So {{c1::has}} my brother.	Auxiliary ellipsis — match present perfect 'has'	cloze auxiliary-ellipsis register:spoken frequency:mid domain:travel cefr:b1
+I won't be attending the gala. — Neither {{c1::will}} my colleagues, unfortunately.	Auxiliary ellipsis — neither + 'will' inversion	cloze auxiliary-ellipsis register:spoken frequency:mid domain:work cefr:b1
+He doesn't drink coffee. — Nor {{c1::do}} I, actually.	Auxiliary ellipsis — nor + 'do' inversion	cloze auxiliary-ellipsis register:spoken frequency:mid domain:kitchen cefr:b1
+Open the window, {{c1::will you}}?	Tag question — imperative + 'will you'	cloze tag-question discourse register:spoken frequency:mid domain:dialogue cefr:b1
+He has finished the report, {{c1::hasn't he}}?	Tag question — present perfect → 'hasn't he'	cloze tag-question discourse register:spoken frequency:mid domain:work cefr:b1
+We should leave early, {{c1::shouldn't we}}?	Tag question — modal 'should' → 'shouldn't we'	cloze tag-question modal register:spoken frequency:high domain:dialogue cefr:b1
+Take an umbrella, {{c1::just in case}}.	'Just in case' — informal precaution adverbial	cloze in-case time-clause register:neutral frequency:mid domain:general cefr:b1
+She had a long, hot {{c1::shower}} after the gym session.	Light verb 'have' + delexical 'shower'	cloze light-verb collocation register:spoken frequency:mid domain:kitchen cefr:b1
+He took a {{c1::nap}} on the sofa for half an hour.	Light verb 'take' + delexical 'nap'	cloze light-verb collocation register:spoken frequency:mid domain:general cefr:b1
+Let's {{c1::make}} a decision and move on with the agenda.	Light verb 'make' + delexical 'decision'	cloze light-verb collocation register:spoken frequency:mid domain:general cefr:b1
+She did the {{c1::dishes}} while I tidied the living room.	Light verb 'do' + delexical 'dishes'	cloze light-verb collocation register:spoken frequency:mid domain:narrative cefr:b1
+He gave a brilliant {{c1::speech}} at the awards ceremony last night.	Light verb 'give' + delexical 'speech'	cloze light-verb collocation register:spoken frequency:mid domain:narrative cefr:b1
+She {{c1::lives}} in Moscow and commutes to Saint Petersburg every weekend.	Russian L1 trap — present simple, not continuous	cloze l1-interference l1-russian present-simple-vs-present-continuous register:neutral frequency:mid domain:tech cefr:b1
+I have {{c1::been reading}} this novel since this morning.	Russian L1 trap — present perfect continuous, not bare present	cloze l1-interference l1-russian present-perfect-continuous register:neutral frequency:mid domain:narrative cefr:b1
+He {{c1::has}} already had dinner, so he won't be eating with us.	Mandarin L1 trap — auxiliary 'has' is required (cf. 已经…了)	cloze l1-interference l1-mandarin present-perfect register:neutral frequency:high domain:kitchen cefr:a2
+I {{c1::ate}} rice every day for breakfast and lunch when I lived in Tokyo.	Japanese L1 trap — past simple with frequency adverbial	cloze l1-interference l1-japanese past-simple register:neutral frequency:high domain:travel cefr:a1
+I {{c1::saw}} her at the conference yesterday.	German L1 trap — past simple with 'yesterday', not Perfekt	cloze l1-interference l1-german past-simple-vs-present-perfect register:neutral frequency:mid domain:narrative cefr:b1
+She {{c1::ate}} breakfast at the hotel yesterday morning.	French L1 trap — past simple, not present perfect	cloze l1-interference l1-french past-simple-vs-present-perfect register:neutral frequency:mid domain:travel cefr:b1
+She {{c1::has worked}} at this company for five years.	Spanish L1 trap — present perfect (not preterite) for ongoing relevance	cloze l1-interference l1-spanish present-perfect register:neutral frequency:high domain:work cefr:a2
+We're going to launch the new product line {{c1::in early September}}.	Be going to + future time expression (pre-decided plan)	cloze future-going-to register:neutral frequency:high domain:general cefr:a2
+She {{c1::is leaving}} tomorrow on the early flight to Lyon.	Present continuous for fixed future arrangement	cloze present-continuous-future register:neutral frequency:mid domain:travel cefr:b1
+The train {{c1::leaves}} at 7:42 every weekday from platform 4.	Present simple for scheduled future	cloze present-simple-schedule register:neutral frequency:mid domain:tech cefr:b1
+We were just {{c1::about to leave}} when the rain finally stopped.	Be about to (imminent past intention)	cloze future-in-past future-about-to register:neutral frequency:mid domain:tech cefr:b1
+She wishes she {{c1::had taken}} the offer when it was still available.	Wish + past perfect — past regret	cloze wish-past wish subjunctive register:formal frequency:mid domain:tech cefr:c1
+I wish I {{c1::could speak}} four languages like you do.	Wish + could (present unreal ability)	cloze wish wish-present subjunctive register:formal frequency:mid domain:general cefr:c1
+{{c1::If only}} we had bought that house when prices were low!	If only + past perfect (past regret)	cloze if-only conditional-third register:neutral frequency:mid domain:narrative cefr:b2
+The thief {{c1::is believed}} to have escaped through the back door.	Double passive — passive matrix verb + perfect infinitive	cloze passive double-passive register:formal frequency:low domain:general cefr:c2
+A new policy {{c1::is said}} to be on the way regarding remote work.	Reporting double passive ('is said to be')	cloze passive double-passive register:formal frequency:low domain:tech cefr:c2
+The renovation {{c1::was reported}} to have cost over two million euros.	Reporting double passive (past)	cloze passive double-passive register:formal frequency:low domain:work cefr:c2
+Vintage records {{c1::sell}} quickly at the Saturday flea market.	Middle voice (active form, generic patient subject)	cloze middle-voice register:neutral frequency:low domain:general cefr:c2
+This shirt {{c1::washes}} well — even after twenty cycles.	Middle voice (washes well)	cloze middle-voice register:neutral frequency:low domain:narrative cefr:c2
+The window {{c1::broke}} during the storm last night.	Ergative use of 'break' (intransitive)	cloze ergative register:neutral frequency:low domain:narrative cefr:c2
+The door {{c1::opened}} slowly with a loud creak.	Ergative use of 'open' (intransitive)	cloze ergative register:neutral frequency:low domain:general cefr:c2
+The ice {{c1::melted}} within minutes in the warm sunshine.	Ergative use of 'melt' (intransitive change of state)	cloze ergative register:neutral frequency:low domain:general cefr:c2
+She {{c1::pretends to enjoy}} her cousin's piano recitals every Christmas.	Pretend + to-inf (matrix-clause control)	cloze control-verb non-finite register:neutral frequency:mid domain:family cefr:b1
+He turned out {{c1::to be}} the heir to a vast Italian estate.	Raising — turn out + to-inf	cloze raising-verb non-finite register:neutral frequency:mid domain:general cefr:b1
+The negotiations are likely {{c1::to take}} several more weeks to conclude.	Adjective 'likely' + to-inf (raising adjective)	cloze raising-verb non-finite register:neutral frequency:mid domain:work cefr:b1
+She is sure {{c1::to win}} the championship at her current pace.	'Be sure to' (raising adjective)	cloze raising-verb non-finite register:neutral frequency:mid domain:general cefr:b1
+He happens {{c1::to know}} the chairman personally.	Raising verb (happen + to-inf)	cloze raising-verb non-finite register:neutral frequency:mid domain:tech cefr:b1
+The problem proves {{c1::to be}} more complex than we anticipated.	Raising verb (prove + to-inf)	cloze raising-verb non-finite register:neutral frequency:mid domain:general cefr:b1
+I {{c1::am 25 years old}}.	Spanish 'tener años' tempts 'I have 25 years' — use BE for age.	cloze l1-interference l1-spanish age-expression present-simple register:neutral frequency:high domain:dialogue cefr:a1
+She {{c1::works}} in accounting.	Spanish drops 3rd-person -s — English requires it.	cloze l1-interference l1-spanish subject-verb-agreement present-simple register:neutral frequency:high domain:family cefr:a1
+{{c1::I like}} it a lot.	Not 'It likes me' — Spanish gustar reverses subject and object.	cloze l1-interference l1-spanish word-order register:neutral frequency:mid domain:dialogue cefr:b1
+I {{c1::have worked}} here for five years.	French depuis + present transfers wrongly — use present perfect with since/for.	cloze l1-interference l1-french present-perfect-vs-present register:neutral frequency:mid domain:dialogue cefr:b1
+I enjoy {{c1::reading}} novels.	French aimer + infinitive tempts 'enjoy to read' — English requires gerund.	cloze l1-interference l1-french gerund-vs-infinitive register:neutral frequency:mid domain:tech cefr:b2
+A {{c1::red car}} was parked outside.	French adjectives often follow nouns; English adjectives precede them.	cloze l1-interference l1-french adjective-placement word-order register:neutral frequency:mid domain:dialogue cefr:b1
+Yesterday I {{c1::went}} to school.	Mandarin lacks tense morphology — English requires past -ed.	cloze l1-interference l1-mandarin past-simple tense-morphology register:neutral frequency:high domain:narrative cefr:a1
+{{c1::There are}} many people here.	Mandarin existential 'have' tempts 'Have many people' — English uses 'there are'.	cloze l1-interference l1-mandarin existential there-be register:neutral frequency:mid domain:dialogue cefr:b1
+She {{c1::is}} very tired.	Mandarin drops predicative copula — English requires 'is' before adjectives.	cloze l1-interference l1-mandarin copula present-simple register:neutral frequency:high domain:dialogue cefr:a1
+Yesterday {{c1::I went}} home.	German V2 tempts 'Yesterday went I home' — English does not invert.	cloze l1-interference l1-german word-order v2-rule register:neutral frequency:mid domain:narrative cefr:b1
+I have lived here {{c1::for}} five years.	German 'seit' means both since and for; English distinguishes by duration vs point.	cloze l1-interference l1-german preposition duration-since-vs-for register:neutral frequency:mid domain:dialogue cefr:b1
+{{c1::I have}} a car.	Russian possessive calque tempts 'By me is a car' — English uses HAVE directly.	cloze l1-interference l1-russian possessive have register:neutral frequency:mid domain:dialogue cefr:b1
+I like {{c1::reading}} books.	Russian defaults to infinitive ('I like read') — English like/love require gerund.	cloze l1-interference l1-russian gerund-vs-infinitive register:neutral frequency:mid domain:dialogue cefr:b2
+How long {{c1::have you worked}} here?	Russian uses present for ongoing states — English requires present perfect for duration.	cloze l1-interference l1-russian present-perfect-vs-present register:neutral frequency:mid domain:dialogue cefr:b1
+{{c1::It is}} very good.	Japanese permits zero subject for statives — English requires expletive 'it'.	cloze l1-interference l1-japanese subject-drop expletive register:neutral frequency:mid domain:dialogue cefr:b1
+I have {{c1::many books}}.	Japanese does not mark plural — English requires -s with quantifiers.	cloze l1-interference l1-japanese plural-marking register:neutral frequency:mid domain:dialogue cefr:b1
+I go {{c1::to}} school every morning.	Japanese omits prepositions with motion verbs — English requires 'to'.	cloze l1-interference l1-japanese preposition omission register:neutral frequency:mid domain:dialogue cefr:b1
+{{c1::There are}} many temples in Kyoto.	Japanese uses locative + 'exist' — English requires 'there are'.	cloze l1-interference l1-japanese existential there-be register:neutral frequency:mid domain:dialogue cefr:b1

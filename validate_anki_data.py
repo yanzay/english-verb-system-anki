@@ -282,11 +282,30 @@ ALLOWED_LABEL_PREFIXES = (
     'Hypothetical Past',
 )
 
+# L1-interference recognition cards label the *trap*, not a tense — these are
+# additional canonical labels for cross-linguistic transfer phenomena.
+L1_TRAP_LABELS = {
+    'Age Expression', 'Physical State', 'Third Person -s',
+    'Article Use', 'Question Word Order', 'Present Perfect Duration',
+    'Adjective Placement', 'Recent Past', 'Gerund After Verb',
+    'Past Tense Morphology', 'Copula Presence', 'Existential There',
+    'Adverbial Placement', 'V2 Word Order', 'Get vs Become',
+    'Since vs For Duration', 'Until vs By', 'Perfect Tense Word Order',
+    'Possession Existential', 'Negation Structure', 'Subject Presence',
+    'Plural Marking', 'Preposition Use', 'Subject Case',
+}
+ALLOWED_LABELS |= L1_TRAP_LABELS
+
 ALLOWED_ASPECTS = {
     'simple', 'progressive', 'perfective', 'perfect-progressive',
     'stative', 'modal', 'intentional',
     'zero', 'first', 'second', 'third', 'mixed',
     'backshift',
+    # L1-interference rows describe a structural phenomenon rather than a verb
+    # aspect; these are canonical "trap" categories.
+    'agreement', 'articles', 'syntax', 'aspect', 'non-finite',
+    'tense', 'be-verb', 'word-order', 'existential', 'preposition',
+    'semantics', 'negation', 'pronoun', 'plural', 'possessive',
 }
 
 # Canonical Label/Target → Aspect mapping. If a label appears here, the row's
