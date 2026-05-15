@@ -6,6 +6,8 @@ Contrast:    Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
 Production:  Prompt | Target | Aspect | Sample | Why | Tags
 """
 import csv
+import hashlib
+import json
 import sys
 from pathlib import Path
 
@@ -600,7 +602,133 @@ def cross_file_label_agreement(all_data):
     return errs
 
 
+# ── Audio manifest validation ────────────────────────────────────────────
+AUDIO_DIR        = Path('media/audio')
+AUDIO_MANIFEST   = Path('media/audio_manifest.json')
+_AUDIO_CLOZE_RE  = _re.compile(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}')
+
+
+def _audio_text_hash(text: str) -> str:
+    return hashlib.sha1(text.strip().encode('utf-8')).hexdigest()[:12]
+
+
+def _audio_file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open('rb') as f:
+        for chunk in iter(lambda: f.read(65536), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _audio_corpus_sentences(all_data):
+    """Return the set of unique English sentences for which audio is expected.
+    Mirrors collect_sentences() in build_audio.py."""
+    sentences = set()
+    for path, (header, rows) in all_data.items():
+        if path.endswith('conjugations_recognition.txt') or path.endswith('conjugations_contrast.txt'):
+            for r in rows:
+                if r and r[0].strip():
+                    sentences.add(r[0].strip())
+        elif path.endswith('conjugations_production.txt'):
+            for r in rows:
+                if len(r) >= 4 and r[3].strip():
+                    sentences.add(r[3].strip())
+        elif path.endswith('conjugations_cloze.txt'):
+            for r in rows:
+                if r and r[0].strip():
+                    sentences.add(_AUDIO_CLOZE_RE.sub(r'\1', r[0].strip()))
+    return sentences
+
+
+def validate_audio_manifest(all_data, errors, *, verify_sha=False, require=False):
+    """Audio rule:
+       1. media/audio_manifest.json exists and is valid JSON v1.
+       2. Every corpus sentence has a manifest entry whose text matches and
+          whose hash matches the expected sha1[:12].
+       3. Each entry's MP3 exists on disk under media/audio/<hash>.mp3.
+       4. Optional (verify_sha=True): on-disk sha256 matches manifest sha256.
+       5. There are no orphan files on disk that are missing from the manifest
+          and not in the corpus.
+       6. require=False: if no manifest exists at all (e.g. fresh checkout
+          without media), the rule is skipped with a warning rather than an
+          error."""
+    if not AUDIO_MANIFEST.exists():
+        msg = f'audio: {AUDIO_MANIFEST} missing — run `python3 build_audio.py --rehash` after generating audio.'
+        if require:
+            errors.append(msg)
+        else:
+            print(f'  audio: skipping (no manifest at {AUDIO_MANIFEST}; pass --require-audio to enforce)')
+        return 0
+
+    try:
+        manifest = json.loads(AUDIO_MANIFEST.read_text(encoding='utf-8'))
+    except json.JSONDecodeError as e:
+        errors.append(f'audio: {AUDIO_MANIFEST}: invalid JSON: {e}')
+        return 0
+
+    if manifest.get('version') != 1 or 'entries' not in manifest:
+        errors.append(f'audio: {AUDIO_MANIFEST}: unsupported version or missing "entries"')
+        return 0
+
+    entries = manifest['entries']
+    sentences = _audio_corpus_sentences(all_data)
+    expected_hashes = {_audio_text_hash(s): s for s in sentences}
+
+    checked = 0
+    for h, text in sorted(expected_hashes.items()):
+        entry = entries.get(h)
+        if entry is None:
+            errors.append(f'audio: missing manifest entry for sentence (hash {h}): {text[:60]!r}')
+            continue
+        if entry.get('text', '').strip() != text:
+            errors.append(
+                f'audio: manifest text mismatch for hash {h}: '
+                f'manifest={entry.get("text", "")[:60]!r} vs corpus={text[:60]!r}'
+            )
+            continue
+        # Recompute hash from manifest text — must agree with the key.
+        if _audio_text_hash(entry['text']) != h:
+            errors.append(f'audio: hash key {h} does not match sha1(text) for {text[:60]!r}')
+        mp3 = AUDIO_DIR / f'{h}.mp3'
+        if not mp3.exists():
+            errors.append(f'audio: missing MP3 file media/audio/{h}.mp3 for {text[:60]!r}')
+            continue
+        if mp3.stat().st_size == 0:
+            errors.append(f'audio: zero-byte MP3 media/audio/{h}.mp3 for {text[:60]!r}')
+            continue
+        if verify_sha:
+            recorded = entry.get('sha256', '')
+            if not recorded:
+                errors.append(f'audio: manifest entry {h} missing sha256')
+            else:
+                actual = _audio_file_sha256(mp3)
+                if actual != recorded:
+                    errors.append(
+                        f'audio: sha256 mismatch for media/audio/{h}.mp3 '
+                        f'(manifest={recorded[:12]}…, on-disk={actual[:12]}…)'
+                    )
+        checked += 1
+
+    # Orphan detection: on-disk MP3s with no corpus sentence.
+    if AUDIO_DIR.exists():
+        orphans = []
+        for mp3 in AUDIO_DIR.glob('*.mp3'):
+            if mp3.stem not in expected_hashes:
+                orphans.append(mp3.name)
+        if orphans:
+            head = ', '.join(sorted(orphans)[:5])
+            extra = '' if len(orphans) <= 5 else f' (+{len(orphans) - 5} more)'
+            errors.append(f'audio: {len(orphans)} orphan MP3(s) on disk not in corpus: {head}{extra}')
+
+    return checked
+
+
 def main():
+    ap_args = sys.argv[1:]
+    require_audio = '--require-audio' in ap_args
+    verify_audio_sha = '--verify-audio-sha' in ap_args
+    skip_audio = '--no-audio-check' in ap_args
+
     errors = []
     total = 0
     all_data = {}
@@ -616,6 +744,17 @@ def main():
     errors.extend(cross_errs)
     if cross_errs:
         print(f'\n  cross-file checks: {len(cross_errs)} disagreement(s)')
+
+    if not skip_audio:
+        audio_errs_before = len(errors)
+        checked = validate_audio_manifest(
+            all_data, errors,
+            verify_sha=verify_audio_sha, require=require_audio,
+        )
+        new_audio_errs = len(errors) - audio_errs_before
+        if checked or new_audio_errs:
+            verb = 'verified' if verify_audio_sha else 'checked'
+            print(f'  audio: {verb} {checked} sentence(s); {new_audio_errs} issue(s)')
 
     if errors:
         print(f'\nValidation FAILED ({len(errors)} errors):')

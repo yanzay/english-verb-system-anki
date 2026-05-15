@@ -175,8 +175,7 @@ Don't sign anything {{c1::before}} you read the small print carefully.	Time clau
 {{c1::No matter when}} you arrive, dinner will be waiting on the table.	Time clause (concessive) — no matter when + present simple	cloze time-clause future register:neutral frequency:low domain:family
 Just as we {{c1::were locking}} the office, the alarm went off.	Past continuous in time clause (just as)	cloze time-clause past-continuous register:neutral frequency:mid domain:work
 After she {{c1::had finished}} her presentation, the audience cheered.	After + past perfect (earlier of two past events)	cloze time-clause past-perfect register:neutral frequency:mid domain:academic
-We had been waiting for an hour {{c1::when}} the train finally arrived.	When-clause anchoring past perfect continuous	cloze past-perfect-continuous register:neutral frequency:mid domain:travel
-By the time she retires, she {{c1::will have been working}} at this firm for forty years.	Future perfect continuous + by-the-time	cloze future-perfect-continuous register:neutral frequency:low domain:work
+We had been waiting for an hour {{c1::when}} the train finally arrived.	When-clause anchoring past perfect continuous	cloze when-clause time-clause register:neutral frequency:mid domain:travel
 This time tomorrow, we {{c1::'ll be sailing}} off the coast of Sicily.	Future continuous + this-time-tomorrow	cloze future-continuous register:neutral frequency:mid domain:travel
 The committee {{c1::will have made}} a decision by Friday.	Future perfect — completion before future deadline	cloze future-perfect register:formal frequency:mid domain:work
 She'd be writing her novel right now if she {{c1::weren't}} so busy.	Conditional continuous + counterfactual were-clause	cloze conditional-continuous conditional-second register:neutral frequency:low domain:dialogue
@@ -220,7 +219,6 @@ She tried {{c1::to open}} the window, but it was stuck shut.	Try + to-inf (made 
 She tried {{c1::opening}} the window, but it didn't help with the heat.	Try + V-ing (experimented with as a solution)	cloze non-finite gerund register:neutral frequency:mid domain:family
 He regrets {{c1::telling}} her about his promotion before the announcement.	Regret + V-ing (regret about a past act)	cloze non-finite gerund register:neutral frequency:mid domain:work
 We regret {{c1::to inform}} you that your application has been unsuccessful.	Regret + to-inf (formal news, present moment)	cloze non-finite register:formal frequency:low domain:work
-I love jazz. — So {{c1::do}} I, especially the early Coltrane recordings.	Auxiliary ellipsis — match the lexical-verb auxiliary	cloze auxiliary-ellipsis register:spoken frequency:mid domain:dialogue
 She has visited Tokyo three times. — So {{c1::has}} my brother.	Auxiliary ellipsis — match present perfect 'has'	cloze auxiliary-ellipsis register:spoken frequency:mid domain:dialogue
 I won't be attending the gala. — Neither {{c1::will}} my colleagues, unfortunately.	Auxiliary ellipsis — neither + 'will' inversion	cloze auxiliary-ellipsis register:formal frequency:mid domain:work
 He doesn't drink coffee. — Nor {{c1::do}} I, actually.	Auxiliary ellipsis — nor + 'do' inversion	cloze auxiliary-ellipsis register:formal frequency:mid domain:dialogue
