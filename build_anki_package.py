@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.1.1'
+VERSION = '3.2.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -141,18 +141,30 @@ MODULE_TAGS = {
 }
 
 MODULE_NAMES = {
-    '01': 'English Verb System::01 - Core Tense & Aspect',
-    '02': 'English Verb System::02 - Future Forms',
-    '03': 'English Verb System::03 - Conditionals',
-    '04': 'English Verb System::04 - Passive Voice',
-    '05': 'English Verb System::05 - Stative vs Dynamic',
-    '06': 'English Verb System::06 - Reported Speech',
-    '07': 'English Verb System::07 - Time Clauses',
-    '08': 'English Verb System::08 - Modal Verbs',
-    '09': 'English Verb System::09 - Subjunctive & Wish',
-    '10': 'English Verb System::10 - Non-Finite Forms',
-    '11': 'English Verb System::11 - Phrasal Verbs',
-    '12': 'English Verb System::12 - Discourse & Pragmatics',
+    # ── v3.2.0 CURRICULUM-FIRST DECK STRUCTURE ───────────────────────
+    # Replaces the legacy 12 thematic modules with a sequenced
+    # curriculum derived directly from the grammatical category
+    # taxonomy (see _category_for() in build_decks). Order matters:
+    # Foundation comes FIRST — every learner masters the canonical
+    # 12-cell tense+aspect grid before unlocking the layered modules.
+    # All non-Foundation, non-L1 decks ship with the "opt-in" preset
+    # (0 new cards/day) so the user explicitly enables each layer
+    # only when they're ready. This pedagogy mirrors how Cambridge,
+    # Oxford, and Pearson sequence English-as-a-Foreign-Language
+    # syllabi (CEFR A1→C2).
+    '00': 'English Verb System::00 - Foundation (12-Cell Grid)',
+    '01': 'English Verb System::01 - Periphrastic Futures (be going to)',
+    '02': 'English Verb System::02 - Past Habits (used to)',
+    '03': 'English Verb System::03 - Modal Verbs',
+    '04': 'English Verb System::04 - Conditionals',
+    '05': 'English Verb System::05 - Passive Voice',
+    '06': 'English Verb System::06 - Mood (Subjunctive, Imperative)',
+    '07': 'English Verb System::07 - Non-Finite Forms (Gerund, Infinitive, Participle)',
+    '08': 'English Verb System::08 - Reported Speech',
+    '09': 'English Verb System::09 - Phrasal Verbs',
+    '10': 'English Verb System::10 - Discourse Constructions',
+    '11': 'English Verb System::11 - Phonology & Connected Speech',
+    '12': 'English Verb System::12 - Transformation & Register',
     # Module 13 is split per-L1 so a Russian speaker, say, only sees
     # the contrasts that actually trip Russian speakers up. The bare
     # '13' key is a catch-all for any L1 row that lacks a language tag.
@@ -178,37 +190,65 @@ L1_LANG_SUFFIX = {
     'l1-dutch':      '-nl',
 }
 
+# v3.2.0: maps every grammatical category (see _category_for) to a
+# numeric module code. The order in MODULE_NAMES IS the curriculum
+# sequence — Foundation first, then layers in pedagogically motivated
+# order (futures → past habits → modals → conditionals → passive →
+# mood → non-finite → reported speech → phrasal verbs → discourse
+# constructions → phonology → transformation/register).
+CATEGORY_MODULE = {
+    'tense-aspect':            '00',  # Foundation: the 12-cell grid
+    'aux-form':                '00',  # Aux choice IS tense+aspect (am/is/are/has/etc.)
+    'periphrastic-future':     '01',
+    'periphrastic-past-habit': '02',
+    'modal':                   '03',
+    'conditional':             '04',
+    'voice':                   '05',
+    'mood':                    '06',
+    'non-finite':              '07',
+    'reported-speech':         '08',
+    'phrasal-verb':            '09',
+    'construction':            '10',
+    'phonology':               '11',
+    'transformation':          '12',
+    'register':                '12',
+}
 
-def row_modules(tags_str):
-    """Like row_module() but returns ALL applicable module codes when an
-    L1 card pertains to multiple languages (e.g. Romance-language cluster
-    tagged with l1-spanish + l1-french + l1-portuguese gets routed to all
-    three per-language decks). Always returns at least one element.
+
+def row_modules(tags_str, category=None):
+    """Returns ALL deck codes a row should be added to.
+
+    L1-interference cards (cards specifically about how a particular
+    L1 trips its speakers up) always route to per-language sub-decks
+    of '13 - L1 Interference', regardless of the card's grammatical
+    category. This lets a Russian speaker, say, drill ONLY the
+    contrasts that catch Russian speakers, separately from their main
+    curriculum progression.
+
+    Non-L1 cards route purely by grammatical category: Foundation
+    (12-cell grid), then the 12 layered modules in pedagogical order.
     """
     tags = set(tags_str.split())
     if 'l1-interference' in tags or any(t in L1_LANG_SUFFIX for t in tags):
         mods = ['13' + L1_LANG_SUFFIX[t] for t in tags if t in L1_LANG_SUFFIX]
         return mods if mods else ['13']
-    return [row_module(tags_str)]
+    # Pure category-routing for non-L1 cards. The category is supplied
+    # by the caller (computed via _category_for() on Label/Answer/Target/
+    # tags), guaranteeing alignment with the prompt-classification.
+    if category is not None:
+        return [CATEGORY_MODULE.get(category, '00')]
+    # Fallback for code paths that don't have a category yet (legacy):
+    # everything goes to Foundation.
+    return ['00']
 
 
-def row_module(tags_str):
-    tags = set(tags_str.split())
-    # L1 interference routes per-language so each user reviews only their L1.
-    # We check this BEFORE the generic module loop because an L1 card may
-    # also carry tags like 'modal' (about a specific structure), and we
-    # always want it in the per-language deck.
-    if 'l1-interference' in tags or any(t in L1_LANG_SUFFIX for t in tags):
-        for tag, suffix in L1_LANG_SUFFIX.items():
-            if tag in tags:
-                return '13' + suffix
-        return '13'  # generic L1 card with no specific language → "Other"
-    # Check newer/more-specific modules first so e.g. a phrasal-verb card
-    # tagged with both 'phrasal-verb' and 'modal' routes to module 11.
-    for mod in ['13', '12', '11', '10', '09', '08', '07', '06', '05', '04', '03', '02']:
-        if tags & MODULE_TAGS[mod]:
-            return mod
-    return '01'
+def row_module(tags_str, category=None):
+    """Returns the single primary deck code for a row (legacy compatibility).
+
+    Same behaviour as row_modules()[0]. Kept because some non-deck
+    code paths (e.g. tag generation, statistics) still call this.
+    """
+    return row_modules(tags_str, category=category)[0]
 
 
 # ── Tier-2 media plumbing ───────────────────────────────────────────────
@@ -1310,6 +1350,10 @@ mark.focus {
     # Decks
     # ------------------------------------------------------------------
     DECK_IDS = {
+        # v3.2.0: Foundation deck (12-cell tense+aspect grid) at code '00'.
+        # Every other module ('01'..'12') is a layered curriculum unit
+        # that ships opted-out (0 new cards/day) until the user enables it.
+        ('00', 'rec'): 2056101001, ('00', 'con'): 2056101002, ('00', 'pro'): 2056101003, ('00', 'clz'): 2056101004,
         ('01', 'rec'): 2056101101, ('01', 'con'): 2056101102, ('01', 'pro'): 2056101103,
         ('02', 'rec'): 2056101201, ('02', 'con'): 2056101202, ('02', 'pro'): 2056101203,
         ('03', 'rec'): 2056101301, ('03', 'con'): 2056101302, ('03', 'pro'): 2056101303,
@@ -1753,7 +1797,8 @@ mark.focus {
     for row in rec_rows:
         if len(row) < 9:
             row += [''] * (9 - len(row))
-        mods = row_modules(row[8])
+        category = _category_for(row[1])
+        mods = row_modules(row[8], category=category)
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[1])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
@@ -1773,7 +1818,7 @@ mark.focus {
         else:
             focus_misses += 1
         prompt_text = _prompt_for(focused, row[1], row[0])
-        category = _category_for(row[1])
+        # category was computed above (used for deck routing)
         row_for_note = list(row)
         row_for_note[7] = deduped_when
         # Recognition fields: Sentence | Label | Aspect | Formula | MainUse |
@@ -1821,7 +1866,10 @@ mark.focus {
         if sentence in existing_samples:
             continue
         
-        mod = row_module(tags_str)
+        # Reverse production keeps the same routing as the source
+        # Recognition row: classify on Label, route by category.
+        rev_cat = _category_for(label)
+        mods_rev = row_modules(tags_str, category=rev_cat)
         audio_f, ipa_f, tl_f = media_for_sentence(sentence, ipa_index, timeline_index, label=label)
         
         # Create reverse production note
@@ -1831,7 +1879,7 @@ mark.focus {
             fields=[sentence, sentence, formula, tags_str, audio_f, ipa_f, tl_f],
             tags=tags_set.split() if isinstance(tags_set, str) else list(tags_set),
         )
-        for _mod in mods:
+        for _mod in mods_rev:
             decks[(_mod, 'pro')].add_note(rev_pro_note)
         rev_pro_count += 1
         existing_samples.add(sentence)
@@ -1843,17 +1891,17 @@ mark.focus {
     for row in con_rows:
         if len(row) < 7:
             row += [''] * (7 - len(row))
-        mods = row_modules(row[6])
+        # Compute category FIRST so deck routing aligns with prompt.
+        cat = _category_for(row[3])
+        mods = row_modules(row[6], category=cat)
         # For contrast, the "label" we map to a timeline is the Answer (column 3)
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[3])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
         
-        # Create regular contrast note. Category is inferred from the
-        # Answer field (col 3); see _category_for above. The Instruction
-        # is "Which X fits this sentence?" with X = the answer category.
-        cat = _category_for(row[3])
+        # Create regular contrast note. The Instruction is
+        # "Which X fits this sentence?" with X = the answer category.
         instruction = _CAT_PROMPTS_CONTRAST[cat]
         note = ap.Note(
             model=con_model,
@@ -1883,16 +1931,15 @@ mark.focus {
     for row in pro_rows:
         if len(row) < 6:
             row += [''] * (6 - len(row))
-        mods = row_modules(row[5])
+        # Production: classify on Target field (col 1). Compute category
+        # FIRST so deck routing aligns with prompt.
+        cat = _category_for(row[1])
+        mods = row_modules(row[5], category=cat)
         # For production, audio/IPA come from the Sample (column 3); timeline from Target (column 1).
         audio_f, ipa_f, tl_f = media_for_sentence(row[3], ipa_index, timeline_index, label=row[1])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
-        # Production: classify on Target field (col 1). Instruction is
-        # "Write a sentence using the target X" — e.g. "...using the
-        # target tense + aspect" / "...using the target modal".
-        cat = _category_for(row[1])
         instruction = _CAT_PROMPTS_PROD[cat]
         note = ap.Note(
             model=pro_model,
@@ -1911,19 +1958,18 @@ mark.focus {
         for row in cloze_rows:
             if len(row) < 3:
                 row += [''] * (3 - len(row))
-            mods = row_modules(row[2])
+            # Cloze: classify from the row's Hint + tags. Compute
+            # category FIRST so deck routing aligns with prompt.
+            cloze_tags = row[2]
+            cloze_label = (row[1] or '') + ' ' + cloze_tags
+            cat = _category_for(cloze_label)
+            mods = row_modules(row[2], category=cat)
             # For cloze, the spoken sentence is the cloze Text with the
             # {{c1::…}} markers stripped — that's the natural English audio.
             spoken = re.sub(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}', r'\1', row[0])
             audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label='')
             if audio_f: media_counts['audio'] += 1
             if ipa_f: media_counts['ipa'] += 1
-            # Cloze: classify from the row's tags (e.g. 'present-c' tag
-            # indicates Present Continuous → tense-aspect). Hint field
-            # often also names the form ("Present Continuous, action…").
-            cloze_tags = row[2]
-            cloze_label = (row[1] or '') + ' ' + cloze_tags  # combine for classifier
-            cat = _category_for(cloze_label)
             instruction = _CAT_PROMPTS_CLOZE[cat]
             note = ap.Note(
                 model=cloze_model,
