@@ -269,7 +269,46 @@ ALLOWED_LABELS = {
     'Causative Have (Service)', 'Causative Get (Result)',
     'Causative Make (Compulsion)', 'Causative Let (Permission)',
     'Causative Help (Bare or To-Inf)',
+    # ─── P1 wave additions: inversion + cleft ───
+    'Reverse Pseudo-Cleft', 'Locative Inversion', 'Comparative/Degree Inversion',
+    'Negative Inversion (Hardly)', 'Negative Inversion (No sooner)',
+    'Negative Inversion (Never)', 'Negative Inversion (Rarely)',
+    'Negative Inversion (Only after)', 'Negative Inversion (Only when)',
+    'Negative Inversion (Not only… but also)', 'Negative Inversion (Seldom)',
+    'Negative Inversion (Little did)', 'Negative Inversion (Scarcely)',
+    'Negative Inversion (Under no circumstances)',
+    'Negative Inversion (At no point)', 'Negative Inversion (On no account)',
+    'Negative Inversion (Not until)', 'Negative Inversion (In no way)',
+    # ─── P0 wave additions ───
+    # A1/A2 ramp basics
+    'Yes/No Question', 'Wh-Question', 'Short Answer',
+    'Future Going To', 'Modal',
+    'There Is / There Are', 'Have Got', 'Be (Identity)', 'Be (State)',
+    'Imperative', 'Imperative (Negative)',
+    'Can (Ability)', 'Can (Permission)', "Can't (Inability)",
+    'Past Simple Irregular', 'Past Simple Regular', 'Past Simple Negative',
+    'Past Simple Question',
+    # Listening / phonology module
+    'T-flapping', 'Linking R', 'Linking R or Linking Consonant',
+    'T-flapping and Linking',
+    'Reduction (gonna)', 'Reduction (wanna)', 'Reduction (gotta)',
+    'Reduction (hafta)', 'Reduction (shoulda)', 'Reduction (woulda)',
+    'Reduction (kinda)',
+    'Contraction (have)', 'Contraction (is/has)', 'Contraction (had/would)',
+    'Contraction Ambiguity (had/would)',
+    'Modal Weak Form (can)', 'Modal Weak Form (must)',
+    'Modal Weak Form (should)', 'Modal Weak Form (would)',
+    'Stress Contrast (was/were)', 'Stress Contrast (modal)',
 }
+
+# Allow any label whose stem matches these phonological/connected-speech families
+# (subagent-generated phrasing varies; we accept them as canonical).
+PHON_LABEL_PREFIXES = (
+    'Connected Speech',
+    'Reduction (', 'Contraction (', 'Contraction Ambiguity',
+    'Modal Weak Form', 'Stress Contrast', 'T-flap', 'Linking',
+    'Weak Form',
+)
 
 # Permit any label that begins with one of these canonical prefixes (extension-friendly)
 ALLOWED_LABEL_PREFIXES = (
@@ -280,7 +319,7 @@ ALLOWED_LABEL_PREFIXES = (
     'Academic Hedging',
     'Historical Present',
     'Hypothetical Past',
-)
+) + PHON_LABEL_PREFIXES
 
 # L1-interference recognition cards label the *trap*, not a tense — these are
 # additional canonical labels for cross-linguistic transfer phenomena.
@@ -306,6 +345,8 @@ ALLOWED_ASPECTS = {
     'agreement', 'articles', 'syntax', 'aspect', 'non-finite',
     'tense', 'be-verb', 'word-order', 'existential', 'preposition',
     'semantics', 'negation', 'pronoun', 'plural', 'possessive',
+    # P0 additions
+    'phonology', 'perfect', 'imperative', 'question',
 }
 
 # Canonical Label/Target → Aspect mapping. If a label appears here, the row's

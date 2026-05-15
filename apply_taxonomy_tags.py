@@ -276,9 +276,123 @@ def infer_cefr(tag_set):
     return "cefr:b1"
 
 
-def augment_tags(tag_str, sentence_or_sample):
+def infer_module(tag_set):
+    """Infer module:* tag based on existing tags.
+    
+    Returns a list of module tags (may be multiple).
+    """
+    modules = []
+    
+    # L1 interference module
+    l1_tags = {'l1-interference', 'l1-spanish', 'l1-french', 'l1-mandarin', 
+               'l1-german', 'l1-russian', 'l1-japanese', 'l1-korean', 
+               'l1-arabic', 'l1-portuguese'}
+    if tag_set & l1_tags:
+        modules.append('module:l1')
+    
+    # Phrasal verbs module
+    pv_tags = {'phrasal-verb', 'pv-separable', 'pv-transitive', 'pv-intransitive',
+               'pv-figurative', 'pv-literal'}
+    if tag_set & pv_tags:
+        modules.append('module:phrasal-verbs')
+    
+    # Discourse module
+    discourse_tags = {'discourse', 'narrative', 'headline', 'recipe', 
+                      'stage-direction', 'free-indirect'}
+    if tag_set & discourse_tags:
+        modules.append('module:discourse')
+    
+    # Passive/causative modules
+    passive_tags = {'passive', 'get-passive', 'double-passive', 'dative-passive',
+                    'ergative', 'middle-voice', 'causative'}
+    if tag_set & passive_tags:
+        if 'causative' in tag_set:
+            modules.append('module:causative')
+        else:
+            modules.append('module:passive')
+    
+    # Stative/dynamic module
+    stative_tags = {'stative', 'dynamic', 'raising-verb', 'control-verb'}
+    if tag_set & stative_tags:
+        modules.append('module:stative-dynamic')
+    
+    # Reported speech module
+    reported_tags = {'reported-speech', 'backshift', 'reporting-verb',
+                     'embedded-question'}
+    if tag_set & reported_tags:
+        modules.append('module:reported-speech')
+    
+    # Time clauses module
+    if 'time-clause' in tag_set:
+        modules.append('module:time-clauses')
+    
+    # Modals module
+    modal_tags = {t for t in tag_set if t.startswith('modal-')}
+    modal_specific = {'had-better', 'used-to', 'be-able-to', 'be-supposed-to',
+                      'would-rather', 'would-sooner', 'dare', 'need-modal', 'shall'}
+    if modal_tags or (tag_set & modal_specific):
+        modules.append('module:modals')
+    
+    # Subjunctive module
+    subj_tags = {'subjunctive', 'mandative-subjunctive', 'hypothetical-past',
+                 'would-rather-different-subject', 'wish-past', 'wish-future',
+                 'if-only', 'as-if-as-though'}
+    if tag_set & subj_tags:
+        modules.append('module:subjunctive')
+    
+    # Non-finite forms module
+    nonfinite_tags = {'gerund', 'infinitive', 'participle', 'perfect-infinitive',
+                      'perfect-gerund', 'bare-infinitive'}
+    if tag_set & nonfinite_tags:
+        modules.append('module:non-finite')
+    
+    # Conditionals module
+    cond_tags = {'conditional', 'conditional-zero', 'conditional-first',
+                 'conditional-second', 'conditional-third', 'conditional-mixed',
+                 'on-condition-that', 'providing', 'suppose', 'supposing',
+                 'in-case', 'even-if', 'even-though'}
+    if tag_set & cond_tags:
+        modules.append('module:conditionals')
+    
+    # Future module
+    future_tags = {'future-will', 'future-going-to', 'future-continuous',
+                   'future-perfect', 'future-perfect-continuous',
+                   'present-continuous-trend', 'be-about-to', 'be-to', 'going-to'}
+    if tag_set & future_tags:
+        modules.append('module:future')
+    
+    # Inversion/cleft module
+    inversion_tags = {'negative-inversion', 'inverted-conditional', 'fronting',
+                      'locative-inversion', 'comparative-correlative', 'cleft',
+                      'pseudo-cleft', 'it-cleft'}
+    if tag_set & inversion_tags:
+        modules.append('module:inversion-cleft')
+    
+    # Cohesion module
+    cohesion_tags = {'tag-question', 'ellipsis', 'auxiliary-ellipsis'}
+    if tag_set & cohesion_tags:
+        modules.append('module:cohesion')
+    
+    # Default to core if no other module matched
+    if not modules:
+        modules.append('module:core')
+    
+    return modules
+
+
+def augment_tags(tag_str, sentence_or_sample, card_type=None):
+    """Augment tags with register, frequency, domain, cefr, module, and card-type.
+    
+    Args:
+        tag_str: existing tags (space-separated)
+        sentence_or_sample: text to infer domain from
+        card_type: optional card type (recognition/contrast/production/cloze)
+    
+    Returns: augmented tag string
+    """
     existing = tag_str.split()
-    keep = [t for t in existing if not t.startswith(NEW_PREFIXES)]
+    keep = [t for t in existing if not t.startswith(NEW_PREFIXES) 
+            and not t.startswith('module:') and not t.startswith('card-type:')]
     tag_set = set(keep)
     new_tags = [
         infer_register(tag_set),
@@ -286,17 +400,25 @@ def augment_tags(tag_str, sentence_or_sample):
         infer_domain(sentence_or_sample),
         infer_cefr(tag_set),
     ]
+    
+    # Add module tags (may be multiple)
+    new_tags.extend(infer_module(tag_set))
+    
+    # Add card-type if provided and not already present
+    if card_type and not any(t.startswith('card-type:') for t in existing):
+        new_tags.append(f'card-type:{card_type}')
+    
     return " ".join(keep + new_tags)
 
 
 # ── File I/O ─────────────────────────────────────────────────────────────
 SCHEMAS = {
     # Schema: Sentence|Label|Aspect|Formula|MainUse|QuickCue|Contrast|WhenNotToUse|Tags
-    "conjugations_recognition.txt": {"tag_idx": 8, "text_idx": 0, "fields": 9},
-    "conjugations_contrast.txt":     {"tag_idx": 6, "text_idx": 0, "fields": 7},
-    "conjugations_production.txt":   {"tag_idx": 5, "text_idx": 3, "fields": 6},
+    "conjugations_recognition.txt": {"tag_idx": 8, "text_idx": 0, "fields": 9, "card_type": "recognition"},
+    "conjugations_contrast.txt":     {"tag_idx": 6, "text_idx": 0, "fields": 7, "card_type": "contrast"},
+    "conjugations_production.txt":   {"tag_idx": 5, "text_idx": 3, "fields": 6, "card_type": "production"},
     # Schema: Text|Hint|Tags  (3 fields)
-    "conjugations_cloze.txt":        {"tag_idx": 2, "text_idx": 0, "fields": 3},
+    "conjugations_cloze.txt":        {"tag_idx": 2, "text_idx": 0, "fields": 3, "card_type": "cloze"},
 }
 
 
@@ -306,6 +428,7 @@ def process_file(path: Path, spec):
     lines = path.read_text(encoding="utf-8").splitlines()
     out_lines = []
     rows_changed = 0
+    card_type = spec.get("card_type")
     for line in lines:
         if not line or line.startswith("#"):
             out_lines.append(line)
@@ -317,7 +440,7 @@ def process_file(path: Path, spec):
             out_lines.append(line)
             continue
         text = row[spec["text_idx"]]
-        new_tags = augment_tags(row[spec["tag_idx"]], text)
+        new_tags = augment_tags(row[spec["tag_idx"]], text, card_type=card_type)
         if new_tags != row[spec["tag_idx"]]:
             row[spec["tag_idx"]] = new_tags
             rows_changed += 1

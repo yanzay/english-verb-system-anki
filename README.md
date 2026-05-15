@@ -289,3 +289,44 @@ Present Simple (Stative) · Present Continuous (Dynamic Stative Shift)
 - Cards route to the correct module subdeck automatically based on their tags.
 - See `ANKI_SETTINGS.md` for full recommended options including new cards/day,
   review limits, burying, leech thresholds, and tag-based filtering shortcuts.
+
+## P1 module additions
+
+This release introduces the following modules, card types, and tagging:
+
+**New modules**
+- `module:l1` — L1 interference (Korean, Arabic, Portuguese added)
+- `module:phrasal-verbs` — Phrasal verb patterns
+- `module:discourse` — Discourse and narrative structures
+- `module:passive` — Passive voice constructions
+- `module:causative` — Causative structures
+- `module:stative-dynamic` — Stative vs. dynamic verb distinctions
+- `module:reported-speech` — Reported speech and backshift
+- `module:time-clauses` — Time clause structures
+- `module:modals` — Modal verbs and semi-modals
+- `module:subjunctive` — Subjunctive mood
+- `module:non-finite` — Non-finite forms (gerunds, infinitives, participles)
+- `module:conditionals` — Conditional structures
+- `module:future` — Future tense forms
+- `module:inversion-cleft` — Inversion and cleft structures
+- `module:cohesion` — Cohesive devices (tag questions, ellipsis)
+
+**New card types**
+- `card-type:recognition` — Recognize the tense/aspect
+- `card-type:contrast` — Choose between two options
+- `card-type:production` — Produce a sentence
+- `card-type:cloze` — Fill in the missing form
+- `Spot-the-Error` cards (model v1) — Error-correction variant for contrast rows
+- `Reverse Production (Auto)` cards (model v1) — B2+ learners, standard tenses
+
+**Tag taxonomy improvements**
+- Every row now has a `module:*` tag (idempotent backfill)
+- Every row now has a `card-type:*` tag where applicable
+- Module assignment follows explicit rules (L1 > phrasal-verbs > discourse, etc.)
+- Core module (`module:core`) as fallback for rows with no special tags
+
+**Auto-generated cards**
+- Spot-the-Error cards generated for rows tagged `error-correction`, 
+  `l1-interference`, or `spot-the-error`
+- Reverse Production cards auto-generated for recognition rows with 
+  CEFR B2/C1/C2 and standard tenses (Present Simple, Past Simple, etc.)
