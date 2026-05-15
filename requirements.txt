@@ -4,3 +4,5 @@ genanki==0.13.1
 # them; the deck simply ships without media if media/ is empty.
 google-cloud-texttospeech>=2.16.0   # for build_audio.py
 eng-to-ipa>=0.0.2                   # for build_ipa.py
+anki>=24.0
+zstandard>=0.22

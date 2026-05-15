@@ -53,6 +53,17 @@ def _open_collection(apkg_path: str):
     with zipfile.ZipFile(apkg_path, "r") as zf:
         zf.extractall(tmpdir)
     db_path = None
+    # Modern .apkg (Anki 23.10+) ships collection.anki21b (zstd-compressed)
+    # alongside a legacy collection.anki2 stub. We must use the modern db.
+    anki21b_path = Path(tmpdir) / 'collection.anki21b'
+    if anki21b_path.exists():
+        try:
+            import zstandard as zstd  # type: ignore
+            decompressed = Path(tmpdir) / 'collection.anki21'
+            with anki21b_path.open('rb') as src, decompressed.open('wb') as dst:
+                zstd.ZstdDecompressor().copy_stream(src, dst)
+        except Exception as _e:
+            print(f"  warn: could not decompress collection.anki21b: {_e}")
     for name in ("collection.anki21", "collection.anki2"):
         p = os.path.join(tmpdir, name)
         if os.path.exists(p):
@@ -65,10 +76,24 @@ def _open_collection(apkg_path: str):
     media_index_path = os.path.join(tmpdir, "media")
     media_map: dict[str, str] = {}
     if os.path.exists(media_index_path):
+        # Legacy: JSON {arc-number → original-filename}
         try:
             media_map = json.load(open(media_index_path, encoding="utf-8"))
         except Exception:
-            pass
+            # Modern (Anki 23.10+): zstd-compressed protobuf MediaEntries.
+            try:
+                import zstandard as zstd  # type: ignore
+                from anki.import_export_pb2 import MediaEntries  # type: ignore
+                import io as _io
+                raw = anki21b_path.parent.joinpath('media').read_bytes()
+                buf = _io.BytesIO()
+                zstd.ZstdDecompressor().copy_stream(_io.BytesIO(raw), buf)
+                entries = MediaEntries.FromString(buf.getvalue())
+                # Map: arc-name (numeric str of index) → original filename
+                for i, e in enumerate(entries.entries):
+                    media_map[str(i)] = e.name
+            except Exception:
+                pass
     conn = sqlite3.connect(db_path)
     return conn, media_map, tmpdir
 
@@ -82,13 +107,66 @@ def validate(apkg_path: str = DEFAULT_APKG) -> int:
     conn, media_map, tmpdir = _open_collection(apkg_path)
     cur = conn.cursor()
 
-    # ── Load models & decks ─────────────────────────────────────────────
-    raw_models = cur.execute("SELECT models FROM col").fetchone()[0]
-    raw_decks = cur.execute("SELECT decks FROM col").fetchone()[0]
-    raw_dconf = cur.execute("SELECT dconf FROM col").fetchone()[0]
-    models = json.loads(raw_models) if raw_models else {}
-    decks = json.loads(raw_decks) if raw_decks else {}
-    dconf = json.loads(raw_dconf) if raw_dconf else {}
+    # ── Load models & decks (schema-aware: modern v18+ uses dedicated tables;
+    #    legacy v11 stores everything as JSON in `col`) ───────────────────
+    tables = {r[0] for r in cur.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    )}
+    models: dict[str, dict] = {}
+    decks: dict[str, dict] = {}
+    dconf: dict[str, dict] = {}
+    if 'notetypes' in tables and 'fields' in tables:
+        # Modern schema (Anki 23.10+)
+        for mid, name in cur.execute("SELECT id, name FROM notetypes"):
+            models[str(mid)] = {'name': name, 'flds': []}
+        for ntid, ord_, name in cur.execute(
+            "SELECT ntid, ord, name FROM fields ORDER BY ntid, ord"
+        ):
+            ntid_str = str(ntid)
+            if ntid_str in models:
+                models[ntid_str]['flds'].append({'name': name, 'ord': ord_})
+        # Modern decks store the kind (Normal/Filtered + config_id) as a
+        # protobuf BLOB. We decode the inner Normal.config_id (field 1)
+        # manually to avoid pulling in the full anki proto.
+        def _decode_config_id(blob: bytes) -> int | None:
+            """Outer Deck.kind: field 1 (Normal) length-delimited.
+            Inside Normal: field 1 (config_id) varint."""
+            if not blob or blob[0] != 0x0a:  # field 1, wire type 2 (length-delimited)
+                return None
+            # length varint
+            i = 1
+            length = 0
+            shift = 0
+            while i < len(blob):
+                b = blob[i]; i += 1
+                length |= (b & 0x7f) << shift
+                if not (b & 0x80): break
+                shift += 7
+            normal = blob[i:i+length]
+            if not normal or normal[0] != 0x08:  # field 1, varint
+                return None
+            j = 1; cid = 0; shift = 0
+            while j < len(normal):
+                b = normal[j]; j += 1
+                cid |= (b & 0x7f) << shift
+                if not (b & 0x80): break
+                shift += 7
+            return cid
+
+        for did, name, kind in cur.execute("SELECT id, name, kind FROM decks"):
+            cid = _decode_config_id(kind) if kind else None
+            decks[str(did)] = {'name': name, 'dyn': 0, 'conf': cid}
+        if 'deck_config' in tables:
+            for dcid, name in cur.execute("SELECT id, name FROM deck_config"):
+                dconf[str(dcid)] = {'name': name}
+    else:
+        # Legacy schema
+        raw_models = cur.execute("SELECT models FROM col").fetchone()[0]
+        raw_decks = cur.execute("SELECT decks FROM col").fetchone()[0]
+        raw_dconf = cur.execute("SELECT dconf FROM col").fetchone()[0]
+        models = json.loads(raw_models) if raw_models else {}
+        decks = json.loads(raw_decks) if raw_decks else {}
+        dconf = json.loads(raw_dconf) if raw_dconf else {}
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -198,7 +276,10 @@ def validate(apkg_path: str = DEFAULT_APKG) -> int:
             continue
         referenced.update(sound_re.findall(fldstr))
         referenced.update(img_re.findall(fldstr))
-    available = set(media_map.values())  # the file basenames as referenced in HTML
+    # Modern media: media_map values are the original filenames; the
+    # archive entries are numeric (0, 1, 2…). Check that the original
+    # filename was placed in the archive (i.e. it appears in media_map values).
+    available = set(media_map.values())
     missing = sorted(referenced - available)
     if missing:
         warnings.append(
