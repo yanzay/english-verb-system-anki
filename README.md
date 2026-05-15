@@ -117,8 +117,12 @@ The deck now ships with three additional media layers that elevate it from
   env var or the `--voice` flag of `build_audio.py`.
 - Filename = `<sha1[:12] of sentence>.mp3`, content-addressed and idempotent.
 - Plays automatically on the front of every card via Anki's `[sound:…]` tag.
-- Optional **slow-speed (0.80×) variant** can be generated with
-  `build_audio.py` (omit `--no-slow`) for connected-speech / weak-form drilling.
+- **Idempotent + incremental:** `build_audio.py` records every render in
+  `media/audio_manifest.json` (text, voice, rate, lang, sha256). Re-running it
+  only synthesises sentences that are missing, whose params drifted, or whose
+  on-disk file no longer matches its recorded sha. Orphan MP3s for sentences
+  removed from the corpus are pruned automatically. `validate_anki_data.py`
+  enforces the manifest and (with `--verify-audio-sha`) the file fingerprints.
 
 ### 🔤 IPA transcription
 
@@ -153,7 +157,7 @@ pip install -r requirements.txt
 # 3. Generate the three media layers (timelines + IPA are free; audio uses paid TTS)
 python3 build_timelines.py             # 40 SVGs, ~instant, free
 python3 build_ipa.py                   # ~1,041 IPA strings, ~30 s, free
-python3 build_audio.py --no-slow       # ~1,041 MP3s, ~5 min, ≈ US$1.40
+python3 build_audio.py                 # ~1,218 MP3s, ~6 min, ≈ US$1.40 (incremental on subsequent runs)
 
 # 4. Rebuild the .apkg (now ~25 MB with audio bundled)
 python3 build_anki_package.py
