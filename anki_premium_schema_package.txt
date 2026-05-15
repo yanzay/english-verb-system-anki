@@ -1,0 +1,55 @@
+PREMIUM ANKI SCHEMA PACKAGE
+
+Recommended note types
+1. Recognition note type
+   Fields: Front | Back | Extra | Tags
+   Purpose: identify tense/aspect or conditional form from a sentence.
+
+2. Contrast note type
+   Fields: Front | Back | Extra | Tags
+   Purpose: choose between two confusable labels or forms.
+
+3. Production note type
+   Fields: Front | Back | Extra | Tags
+   Purpose: produce a sentence matching a target form and use.
+
+Recommended card templates
+A. Recognition card
+   Front: {{Front}}
+   Back: {{Front}}<hr id=answer>{{Back}}<br><br>{{Extra}}
+
+B. Contrast card
+   Front: {{Front}}
+   Back: {{Front}}<hr id=answer>{{Back}}<br><br>{{Extra}}
+
+C. Production card
+   Front: {{Front}}
+   Back: {{Front}}<hr id=answer>{{Back}}<br><br>{{Extra}}
+
+Recommended tag families
+- by form: present-simple, present-continuous, present-perfect, present-perfect-continuous, past-simple, past-continuous, past-perfect, past-perfect-continuous, future-will-simple, future-will-continuous, future-will-perfect, future-will-perfect-continuous, conditional-simple, conditional-continuous, conditional-perfect, conditional-perfect-continuous
+- by function: habit, routine, temporary, in-progress, experience, result, finished-time, earlier-past, duration, prediction, completion, hypothetical
+- by task type: recognition, contrast, production
+- by level: core, advanced
+
+Import instructions
+1. In Anki, choose Import.
+2. Import the .txt deck files as tab-separated text.
+3. Check the option that allows HTML in fields.
+4. Map fields in this order: Front, Back, Extra, Tags.
+5. For Tags, select the field as tags if your Anki setup supports tag mapping during import; otherwise keep them as a normal field and convert later.
+6. Suspend sibling cards if you create multiple cards from the same note to avoid review overload.
+
+Study strategy
+- Start with recognition cards.
+- Add contrast cards once recognition accuracy is stable.
+- Add production cards last, because they are more cognitively demanding.
+- Review high-frequency forms more often than advanced forms.
+- Keep explanations concise during reviews; use Extra for deeper study only when needed.
+
+Quality principles used in this package
+- Clear separation of tense/aspect from conditional meaning.
+- Natural example sentences where possible.
+- Short answer blocks for efficient spaced repetition.
+- Explicit contrasts for commonly confused forms.
+- Searchable tags for flexible filtered study.
