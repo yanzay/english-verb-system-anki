@@ -31,6 +31,47 @@ WORDS_JSON = Path("media/ipa_words.json")
 # Sentence-final punctuation we strip before IPA conversion.
 PUNCT_RE = re.compile(r"[\u2014\u2026\u201c\u201d\u2018\u2019\".,!?;:()\[\]\u2014\u2013]")
 
+# ── OOV overrides ───────────────────────────────────────────────────────
+# eng-to-ipa (CMUdict) doesn't know certain BrE spellings, contractions,
+# proper nouns, abbreviations, or compound words. Provide hand-curated
+# broad GA/RP transcriptions so we don't ship asterisked tokens. Keys
+# must be lowercase; values may include primary stress (ˈ).
+IPA_OVERRIDES = {
+    # BrE spellings → AmE phonology
+    "colours": "ˈkʌlərz",
+    "organised": "ˈɔrgəˌnaɪzd",
+    "organising": "ˈɔrgəˌnaɪzɪŋ",
+    "finalised": "ˈfaɪnəˌlaɪzd",
+    "encyclopaedias": "ɪnˌsaɪkləˈpidiəz",
+    # Contractions / clitics
+    "'ll": "əl",
+    "daren't": "dɛrnt",
+    # Common nouns missing from CMUdict
+    "motorway": "ˈmoʊtərˌweɪ",
+    "takeaway": "ˈteɪkəˌweɪ",
+    "round-table": "ˈraʊnd ˈteɪbəl",
+    "single-handedly": "ˈsɪŋgəl ˈhændɪdli",
+    "user-acceptance": "ˈjuzər əkˈsɛptəns",
+    # Verbs / participles
+    "tidied": "ˈtaɪdid",
+    # Proper nouns
+    "messi": "ˈmɛsi",
+    # Abbreviations / time expressions / typos
+    "o'clock": "əˈklɑk",
+    "oclock":  "əˈklɑk",
+    "2pm":     "tu pi ɛm",
+    "100°c":   "wʌn ˈhʌndrəd dɪˈgriz ˈsɛlsiəs",
+    "q2":      "kju tu",
+    "ubc":     "ju bi si",
+    # Symbols
+    "→": "tu",
+    # eng-to-ipa / CMUdict transcription corrections (broad GA)
+    "get":   "gɛt",
+    "gets":  "gɛts",
+    "just":  "dʒʌst",
+    "poor":  "pʊr",
+}
+
 
 def _hash(text: str) -> str:
     return hashlib.sha1(text.strip().encode("utf-8")).hexdigest()[:12]
@@ -77,12 +118,52 @@ def collect_sentences():
     return sorted(sentences)
 
 
+def _apply_overrides_to_ipa_string(ipa_str: str, original_text: str) -> str:
+    """Replace any 'word*' OOV tokens in ipa_str with our hand-curated
+    transcription when the original lowercased word is in IPA_OVERRIDES.
+    eng-to-ipa marks OOV tokens by appending '*' to the original word."""
+    if "*" not in ipa_str:
+        return ipa_str
+    # Tokenise the original sentence in the same way eng-to-ipa does
+    # (whitespace split after punctuation removal). Order is preserved.
+    src_tokens = PUNCT_RE.sub("", original_text).split()
+    out_tokens = ipa_str.split()
+    if len(src_tokens) != len(out_tokens):
+        # Token-count mismatch (e.g. eng-to-ipa expanded a contraction);
+        # fall back to a per-token lookup by stripped form.
+        fixed = []
+        for tok in out_tokens:
+            if tok.endswith("*"):
+                key = tok[:-1].lower()
+                fixed.append(IPA_OVERRIDES.get(key, tok))
+            else:
+                fixed.append(tok)
+        return " ".join(fixed)
+    fixed = []
+    for src, tok in zip(src_tokens, out_tokens):
+        if tok.endswith("*"):
+            key = src.lower()
+            fixed.append(IPA_OVERRIDES.get(key, tok))
+        else:
+            fixed.append(tok)
+    return " ".join(fixed)
+
+
+def _clean_for_ipa(text: str) -> str:
+    """Strip punctuation but leave a space behind so word boundaries are
+    preserved (e.g. 'leave—we' must not become 'leavewe'). Collapse runs
+    of whitespace afterwards."""
+    return re.sub(r"\s+", " ", PUNCT_RE.sub(" ", text)).strip()
+
+
 def sentence_to_ipa(text: str) -> str:
     """Convert a sentence to broad GA IPA. Unknown words are kept as
-    'asterisked' words, which is what eng-to-ipa returns for OOV tokens."""
+    'asterisked' words, which is what eng-to-ipa returns for OOV tokens —
+    except where we have a hand-curated override in IPA_OVERRIDES."""
     import eng_to_ipa as ipa
-    cleaned = PUNCT_RE.sub("", text)
-    return ipa.convert(cleaned).strip()
+    cleaned = _clean_for_ipa(text)
+    raw = ipa.convert(cleaned).strip()
+    return _apply_overrides_to_ipa_string(raw, cleaned)
 
 
 def collect_words(sentences):
@@ -90,7 +171,7 @@ def collect_words(sentences):
     per-word IPA index used in the WORDS_JSON audit file)."""
     words = set()
     for s in sentences:
-        for w in PUNCT_RE.sub("", s).split():
+        for w in _clean_for_ipa(s).split():
             w = w.strip().lower()
             if w:
                 words.add(w)
@@ -133,7 +214,15 @@ def main():
     print("Building per-word audit dictionary…")
     import eng_to_ipa as ipa
     words = collect_words(sentences)
-    word_index = {w: ipa.convert(w) for w in words}
+    def _word_ipa(w: str) -> str:
+        if w in IPA_OVERRIDES:
+            return IPA_OVERRIDES[w]
+        v = ipa.convert(w)
+        # eng-to-ipa returns 'word*' for OOV; honour overrides on the bare key.
+        if v.endswith("*") and w in IPA_OVERRIDES:
+            return IPA_OVERRIDES[w]
+        return v
+    word_index = {w: _word_ipa(w) for w in words}
     WORDS_JSON.write_text(json.dumps(word_index, ensure_ascii=False, indent=2) + "\n",
                           encoding="utf-8")
 

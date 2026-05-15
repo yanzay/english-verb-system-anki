@@ -8,9 +8,9 @@ conditionals, passive voice, and stative/dynamic verb distinctions.
 | File | Purpose |
 |------|---------|
 | `conjugations_recognition.txt` | Recognition notes — 9 fields per row (546 rows) |
-| `conjugations_contrast.txt` | Contrast notes — 7 fields per row (296 rows) |
+| `conjugations_contrast.txt` | Contrast notes — 7 fields per row (295 rows) |
 | `conjugations_production.txt` | Production notes — 6 fields per row (271 rows) |
-| `conjugations_cloze.txt` | **Tier 3** — Cloze deletion notes (3 fields, 260 rows) |
+| `conjugations_cloze.txt` | **Tier 3** — Cloze deletion notes (3 fields, 258 rows) |
 | `apply_taxonomy_tags.py` | **Tier 3** — auto-injects `register:* / frequency:* / domain:*` tags |
 | `anki_premium_schema_package.txt` | Schema and study strategy reference |
 | `build_anki_package.py` | Builds the `.apkg` package from the source files (Tier 1 + Tier 2 media) |
