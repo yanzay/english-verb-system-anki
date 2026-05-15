@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.5.2'
+VERSION = '2.6.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -598,12 +598,39 @@ hr#answer {
   border-top: 2px solid var(--border-default);
   margin: 20px 0 16px;
 }
+/* Centered answer block: the form name is THE answer; everything
+   underneath (aspect chip, formula grid, callouts) is supporting
+   metadata for context. Centering matches the front-echo above
+   the divider so the eye lands where the answer is. */
+.answer-block { text-align: center; }
 .answer-label {
-  font-size: 1.35em;
+  font-size: 1.6em;
   font-weight: 700;
   color: var(--fg-strong);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  line-height: 1.25;
 }
+/* Aspect/tense chip: small, muted-success, sits underneath as
+   secondary metadata so it never reads as a competing answer. */
+.answer-meta {
+  font-size: 0.82em;
+  color: var(--fg-faint);
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+.answer-meta .chip {
+  display: inline-block;
+  background: var(--success-bg);
+  color: var(--success-fg);
+  border: 1px solid var(--success-border);
+  border-radius: 999px;
+  padding: 1px 9px;
+  font-size: 0.92em;
+  font-weight: 600;
+  margin: 0 2px;
+}
+/* Legacy .answer-correct kept for contrast / spot-the-error
+   templates that still display it as a green confirmation pill. */
 .answer-correct {
   display: inline-block;
   background: var(--success-bg);
@@ -617,14 +644,19 @@ hr#answer {
 }
 
 /* ============================================================
-   Meta grid (Formula / Main use)
+   Meta grid (Formula / Main use). Inside a centered answer block
+   the grid itself stays left-aligned via inline-grid + auto margins
+   so the key/value columns line up but the whole grid is centered
+   horizontally on the card.
    ============================================================ */
 .meta-grid {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: auto 1fr;
   gap: 4px 12px;
-  margin: 10px 0 14px;
+  margin: 10px auto 14px;
   font-size: 0.93em;
+  text-align: left;
+  max-width: 560px;
 }
 .meta-key {
   color: var(--fg-faint);
@@ -895,21 +927,23 @@ input[type=text],
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
 <hr id="answer">
-<div class="answer-label">{{Label}}</div>
-{{#Aspect}}<span class="answer-correct">{{Aspect}}</span>{{/Aspect}}
-{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-<div class="meta-grid">
-  <span class="meta-key">Formula</span><span class="meta-val">{{Formula}}</span>
-  <span class="meta-key">Main use</span><span class="meta-val">{{MainUse}}</span>
+<div class="answer-block">
+  <div class="answer-label">{{Label}}</div>
+  {{#Aspect}}<div class="answer-meta">aspect <span class="chip">{{Aspect}}</span></div>{{/Aspect}}
+  {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+  <div class="meta-grid">
+    <span class="meta-key">Formula</span><span class="meta-val">{{Formula}}</span>
+    <span class="meta-key">Main use</span><span class="meta-val">{{MainUse}}</span>
+  </div>
+  {{#WhenNotToUse}}<div class="when-not-box"><span class="when-not-key">🚫 Don't use when</span> <span class="when-not-val">{{WhenNotToUse}}</span></div>{{/WhenNotToUse}}
+  {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
+  {{#QuickCue}}
+  <div class="info-box">
+    <div class="info-row"><span class="info-key">Quick cue</span><span class="info-val">{{QuickCue}}</span></div>
+    {{#Contrast}}<div class="info-row"><span class="info-key">Contrast</span><span class="info-val">{{Contrast}}</span></div>{{/Contrast}}
+  </div>
+  {{/QuickCue}}
 </div>
-{{#WhenNotToUse}}<div class="when-not-box"><span class="when-not-key">🚫 Don't use when</span> <span class="when-not-val">{{WhenNotToUse}}</span></div>{{/WhenNotToUse}}
-{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
-{{#QuickCue}}
-<div class="info-box">
-  <div class="info-row"><span class="info-key">Quick cue</span><span class="info-val">{{QuickCue}}</span></div>
-  {{#Contrast}}<div class="info-row"><span class="info-key">Contrast</span><span class="info-val">{{Contrast}}</span></div>{{/Contrast}}
-</div>
-{{/QuickCue}}
 ''',
         }],
         css=css,
@@ -957,11 +991,13 @@ input[type=text],
   <div class="option"><span class="opt-letter">B.</span>{{OptionB}}</div>
 </div>
 <hr id="answer">
-<span class="answer-correct">✓ {{Answer}}</span>
-{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-<div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
-{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
-{{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
+<div class="answer-block">
+  <span class="answer-correct">✓ {{Answer}}</span>
+  {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+  <div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
+  {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
+  {{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
+</div>
 ''',
         }],
         css=css,
@@ -1008,11 +1044,13 @@ input[type=text],
 </div>
 </div>
 <hr id="answer">
-<span class="answer-correct">✓ {{Answer}}: {{OptionB}}</span>
-{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-<div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
-{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
-{{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
+<div class="answer-block">
+  <span class="answer-correct">✓ {{Answer}}: {{OptionB}}</span>
+  {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+  <div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
+  {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
+  {{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
+</div>
 ''',
         }],
         css=css,
@@ -1092,12 +1130,14 @@ input[type=text],
 <div class="target-badge">{{Target}}</div>
 </div>
 <hr id="answer">
-<div class="sample-label">Sample answer (compared to your input above)</div>
-<div class="sample-answer">{{type:Sample}}</div>
-{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
-{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
-<div class="why-block"><span class="why-label">Why this works: </span>{{Why}}</div>
+<div class="answer-block">
+  <div class="sample-label">Sample answer (compared to your input above)</div>
+  <div class="sample-answer">{{type:Sample}}</div>
+  {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+  {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+  {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
+  <div class="why-block"><span class="why-label">Why this works: </span>{{Why}}</div>
+</div>
 ''',
         }],
         css=css,
@@ -1135,12 +1175,14 @@ input[type=text],
 <div class="sentence">{{Prompt}}</div>
 </div>
 <hr id="answer">
-<div class="sample-label">Sample answer</div>
-<div class="sample-answer">{{type:Sample}}</div>
-{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
-{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
-{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
-{{#Why}}<div class="why-block"><span class="why-label">Note: </span>{{Why}}</div>{{/Why}}
+<div class="answer-block">
+  <div class="sample-label">Sample answer</div>
+  <div class="sample-answer">{{type:Sample}}</div>
+  {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+  {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+  {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
+  {{#Why}}<div class="why-block"><span class="why-label">Note: </span>{{Why}}</div>{{/Why}}
+</div>
 ''',
         }],
         css=css,
@@ -1182,13 +1224,15 @@ input[type=text],
 {{#Image}}<div class="image-box">{{Image}}</div>{{/Image}}
 </div>
 <hr id="answer">
-<div class="sentence">{{Caption}}</div>
-{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
-<div class="target-badge">{{Form}}</div>
-<div class="why-block"><span class="why-label">Function: </span>{{Function}}</div>
-{{#Contrast}}<div class="tip-block"><span class="why-label">Contrast: </span>{{Contrast}}</div>{{/Contrast}}
-{{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
-{{#Attribution}}<div class="hint-row" style="font-size:0.75em;opacity:0.7">📷 {{Attribution}}</div>{{/Attribution}}
+<div class="answer-block">
+  <div class="sentence">{{Caption}}</div>
+  {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+  <div class="target-badge">{{Form}}</div>
+  <div class="why-block"><span class="why-label">Function: </span>{{Function}}</div>
+  {{#Contrast}}<div class="tip-block"><span class="why-label">Contrast: </span>{{Contrast}}</div>{{/Contrast}}
+  {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
+  {{#Attribution}}<div class="hint-row" style="font-size:0.75em;opacity:0.7">📷 {{Attribution}}</div>{{/Attribution}}
+</div>
 ''',
         }],
         css=css,
