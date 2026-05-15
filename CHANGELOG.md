@@ -2,9 +2,55 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
-## [1.5.0] — 2026-05-15
+## [2.0.0] - 2026-05-15
 
-### Added
+### 🎉 The "Preset That Actually Works" Release
+
+This is a major architectural rewrite that fixes the long-standing issue where
+the embedded FSRS preset was not auto-applied on import. Users no longer need
+to manually import a preset JSON or apply settings through a multi-step UI dance.
+
+### Fixed
+- **Preset auto-binding on import (THE big one).** When you import the .apkg
+  in Anki Desktop 23.10+, every sub-deck is automatically bound to the
+  `English Verb System` preset (FSRS on, retention 0.9, sibling burying,
+  150 reviews/day). No manual steps. No JSON to import. It just works.
+
+### Changed
+- **Migrated from `genanki` to the official `anki` PyPI package** for the
+  final packaging step. The build pipeline now:
+  1. Generates a v11-format .apkg with `genanki` (existing battle-tested
+     model/template/note construction).
+  2. Re-packages through the official `anki.Collection` API, binding every
+     deck to our preset via `set_config_id_for_deck_dict()` and exporting
+     with `with_deck_configs=true` and `legacy=false`.
+  3. Validates the result through `validate_apkg.py`.
+- The .apkg now uses the **modern v18 schema** with zstd-compressed payload
+  (`collection.anki21b`) and protobuf media manifest. File size is similar.
+
+### Removed
+- The `english_verb_system_preset.json` standalone-import workaround is no
+  longer needed (preset is now auto-applied). The file is retained for
+  pre-23.10 Anki users.
+- The `embed_fsrs_preset()` SQLite-hackery code path is now a fallback only.
+
+### Technical
+- New: `repackage_with_official_anki.py` (official-anki-backed repackager).
+- New: `requirements.txt` lists `anki` and `zstandard` as build dependencies.
+- Updated: `validate_apkg.py` now schema-aware (handles both legacy v11 JSON
+  blobs in `col` and modern v18 `notetypes`/`fields`/`decks` tables, plus
+  protobuf-encoded `Deck.kind` decoding for binding verification, plus
+  zstd-decompression of modern `media` manifest).
+
+### Acid-tested
+Round-trip import into a fresh collection now produces:
+- 69 decks, all bound to `English Verb System` preset
+- preset has `fsrs=True, retention=0.9, perDay=10`
+- 3,063 notes, 3,297 cards, 3,011 media files, all reachable
+
+### Migration
+If you imported a previous version: delete the old preset and re-import.
+Anki should pick up the new preset automatically.
 - **Image-Cue module** (47 CC-licensed Wikimedia photos for visual semantics of stative/dynamic, aspect, phrasal verbs)
 - **Audio loudness normalization** (standardized across all TTS audio files)
 - **IPA hover toggle** (interactive IPA phonetic transcription display)
@@ -12,6 +58,10 @@ All notable changes to the English Verb System Anki deck are documented here.
 
 ### Changed
 - Minor improvements to card styling for image display
+
+## [1.5.0] — 2026-05-15
+
+### Added
 
 ## [1.4.0] — 2025-11-15
 

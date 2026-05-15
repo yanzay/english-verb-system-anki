@@ -28,3 +28,7 @@ research-reports/
 # Google Cloud account just to import the deck. Re-render anytime via
 #   build_audio.py / build_ipa.py / build_timelines.py
 *.log
+
+# Research-time scratch directories (Anki Rust source dumps)
+anki_decks/
+anki_package_import/

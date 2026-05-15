@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '1.5.0'
+VERSION = '2.0.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1244,7 +1244,24 @@ hr#answer {
     package.media_files = media_files
     package.write_to_file(out)
 
-    embed_fsrs_preset(out)
+    # ── v2.0: repackage through the official `anki` library so the deck
+    # preset auto-binds on import (genanki produces legacy v11 format
+    # whose deck-options Anki silently discards on import). The repackager
+    # imports the genanki output, binds every deck to our preset using
+    # the proper backend API, then re-exports with `with_deck_configs=true`
+    # in the modern .anki21b format. Anki Desktop 23.10+ then auto-creates
+    # the preset and applies it to every imported deck — no manual step.
+    try:
+        from repackage_with_official_anki import repackage as _repackage
+    except Exception as _e:
+        print(f'  [repackage] could not import repackager: {_e}')
+        print(f'  [repackage] falling back to legacy embed_fsrs_preset (preset will NOT auto-bind)')
+        embed_fsrs_preset(out)
+    else:
+        rc = _repackage(Path(out), Path(out))
+        if rc != 0:
+            print(f'\n✗ Repackage failed (rc={rc}). Aborting.')
+            sys.exit(rc)
 
     # Post-build integrity check: round-trip through SQLite to catch
     # model-id collisions, field-count mismatches, dangling references, etc.

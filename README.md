@@ -399,4 +399,4 @@ This release introduces the following modules, card types, and tagging:
 
 This package follows semantic versioning. For a complete history of changes, see [CHANGELOG.md](CHANGELOG.md).
 
-Current version: **1.5.0**
+Current version: **2.0.0**
