@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.4.0'
+VERSION = '2.4.1'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -841,13 +841,13 @@ input[type=text],
             'name': 'Recognition Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">What tense or aspect is this?</div>
+<div class="instruction">Name this verb form</div>
 <div class="sentence">{{Sentence}}</div>
 </div>
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">What tense or aspect is this?</div>
+<div class="instruction">Name this verb form</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
@@ -895,7 +895,7 @@ input[type=text],
             'name': 'Contrast Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Which label fits this sentence?</div>
+<div class="instruction">Which form fits this sentence?</div>
 <div class="sentence">{{Sentence}}</div>
 <div class="options">
   <div class="option"><span class="opt-letter">A.</span>{{OptionA}}</div>
@@ -905,7 +905,7 @@ input[type=text],
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Which label fits this sentence?</div>
+<div class="instruction">Which form fits this sentence?</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
@@ -1036,7 +1036,7 @@ input[type=text],
             'name': 'Production Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Produce a sentence — type your answer below</div>
+<div class="instruction">Write a sentence using the target form</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
 {{type:Sample}}
@@ -1044,7 +1044,7 @@ input[type=text],
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Produce a sentence</div>
+<div class="instruction">Write a sentence in English</div>
 <div class="sentence">{{Prompt}}</div>
 <div class="target-badge">{{Target}}</div>
 </div>
@@ -1081,14 +1081,14 @@ input[type=text],
             'name': 'Reverse Production Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Produce a sentence</div>
+<div class="instruction">Write a sentence in English</div>
 <div class="sentence">{{Prompt}}</div>
 {{type:Sample}}
 </div>
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Produce a sentence</div>
+<div class="instruction">Write a sentence in English</div>
 <div class="sentence">{{Prompt}}</div>
 </div>
 <hr id="answer">
