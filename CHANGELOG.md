@@ -2,6 +2,32 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [2.2.0] - 2026-05-15
+
+### Changed
+- **Card front content is now centered** for distraction-free recall.
+  Added a `.front` CSS rule (`text-align: center`) and wrapped the
+  question portion of all 7 templates in `<div class="front">…</div>`.
+  The instruction line, sentence/prompt, A/B options, image, and
+  back-side echo of the question all sit center-stage; answer details
+  below the `<hr id="answer">` rule remain left-aligned for readability.
+- **Audio now autoplays only when the answer is revealed.** The
+  `{{Audio}}` field was removed from every `qfmt` (front side) and
+  retained on every `afmt` (back side). Anki's autoplay behavior plays
+  any `[sound:…]` tag rendered on the currently displayed side, so this
+  one change ensures pronunciation is heard at the moment of feedback,
+  not before the learner has tried to recall.
+
+### Why this matters (pedagogy)
+- *Effortful recall*: hearing the audio before attempting recall would
+  short-circuit the retrieval struggle that drives memory consolidation.
+  Listening on reveal turns the audio into a confirmation/correction
+  signal — exactly when a learner can map sound onto their guess.
+- *Visual focus*: a centered prompt eliminates left-edge eye-anchoring
+  and removes a small but constant cognitive scan; especially helpful on
+  AnkiMobile and tablets where wide left-aligned text drifts off the
+  thumb-zone.
+
 ## [2.1.0] - 2026-05-15
 
 ### Removed
