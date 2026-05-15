@@ -6,7 +6,7 @@ This deck is **fully self-contained** and requires no add-ons to function. Howev
 
 ### 1. Colorful Tags (+ Hierarchical Tags) — 594329229
 
-The deck uses a deep hierarchical taxonomy with 14 modules and tag dimensions (`module:*`, `form-*`, `cefr:*`, `register:*`). This add-on makes the tag tree navigable and organized, letting you filter by specific modules, CEFR levels, or verb forms in seconds.
+The deck uses a deep hierarchical taxonomy with 13 modules and tag dimensions (`module:*`, `card-type:*`, `cefr:*`, `register:*`). This add-on makes the tag tree navigable and organized, letting you filter by specific modules, CEFR levels, or verb forms in seconds.
 
 **Install:** Tools → Add-ons → Get Add-ons → paste **594329229** → OK
 

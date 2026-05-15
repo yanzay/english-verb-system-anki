@@ -2,6 +2,110 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.7] - 2026-05-16
+
+### Fixed (pre-release content audit)
+- **Removed 26 placeholder `vs related forms` Contrast values** in the
+  Recognition deck. Affected reported-speech, mandative-subjunctive,
+  wish/if-only, would-rather, as-if/as-though, and it's-time rows.
+  Each row now ships a category-specific contrast that names the
+  exact form being disambiguated against (e.g. `vs direct "I will
+  help" → "would help" (will → would)` instead of the meaningless
+  generic).
+- **Cleared 10 tautological `When [noun] is finished` WhenNotToUse**
+  values that just restated the form's own scope. The field is now
+  empty on those rows; the QuickCue + MainUse already convey the
+  correct usage window.
+- **De-duplicated 3 sentence/label pairs** that appeared twice in the
+  Recognition source. Kept the richer L1-interference variants for
+  age-expression rows ("I am 25 years old.", "She is 30 years old.")
+  and the perfect-aspect variant for the inverted-conditional row
+  ("Had I known the truth, I would have acted differently."). The
+  weaker earlier copies were dropped.
+- **Synced README deck-structure table to authoritative build numbers.**
+  Old totals (3,524 / 96 sub-decks / 14 modules) reflected a pre-3.2.0
+  layout that double-counted L1-interference rows and still listed the
+  retired Image-Cue module. Real numbers as of 3.2.7 build:
+  **2,794 unique cards across 85 sub-decks in 13 modules** (3,288
+  deck placements, since L1-interference rows route to one shared L1
+  deck plus their per-language deck by design).
+- **Rewrote `ANKI_SETTINGS.md` for the v3.2 deck structure.** The
+  previous version still documented the legacy thematic deck names
+  (`01 - Core Tense & Aspect`, `02 - Future Forms`, …) which haven't
+  existed since v3.2.0's curriculum-first restructure, and claimed
+  the package binds 52 sub-decks (now 85). New version documents the
+  two-preset opt-in strategy and provides curriculum-aligned tag
+  shortcuts.
+
+### Build verified
+2,794 cards · 85 sub-decks · 0 errors · two presets auto-bound
+(`English Verb System` + `English Verb System (L1 — opt in)`).
+
+## [3.2.0] – [3.2.6] - 2026-05-15
+
+### Changed
+- **Curriculum-first deck restructure (v3.2.0).** Replaced the legacy
+  12 thematic modules with a 13-module sequenced curriculum derived
+  directly from the grammatical category taxonomy:
+  `00 Foundation → 01 Periphrastic Futures → 02 Past Habits →
+  03 Modal Verbs → 04 Conditionals → 05 Passive Voice → 06 Mood →
+  07 Non-Finite Forms → 08 Reported Speech → 09 Phrasal Verbs →
+  10 Discourse Constructions → 11 Phonology & Connected Speech →
+  12 Transformation & Register → 13 L1 Interference (per-language)`.
+- **Two-preset opt-in strategy.** Foundation (`00`) is bound to the
+  main `English Verb System` preset (10 new/day, FSRS, sibling burying).
+  Modules `01–13` are bound to a separate `English Verb System (L1 — opt
+  in)` preset with **0 new cards/day** so users explicitly enable each
+  layer when they're ready. Mirrors how Cambridge / Oxford / Pearson
+  sequence EFL syllabi (CEFR A1→C2).
+- **Per-L1 sub-decks under Module 13.** Spanish, French, German,
+  Russian, Mandarin, Japanese, Korean, Arabic, Portuguese, Dutch each
+  get their own deck so a learner only sees the contrasts that
+  actually trip up speakers of *their* L1.
+
+### v3.2.1 – v3.2.6 (point releases)
+- v3.2.1: aux-form rows route to Foundation (was misrouted to register).
+- v3.2.2: re-binding the L1 opt-in preset survives Anki re-imports.
+- v3.2.3: per-language Cloze sub-decks added (were missing).
+- v3.2.4: standalone `english_verb_system_preset.json` emitted next to
+  the `.apkg` for one-click Deck-Options Import (Anki 23.10+).
+- v3.2.5: deck description includes a Changelog link in the deck list.
+- v3.2.6: misc. category-routing fixes for edge-case construction tags.
+
+## [3.1.0] - [3.1.1] - 2026-05-15
+
+### Changed
+- **Grammatical category taxonomy (v3.1.0).** Introduced 15-category
+  classification (`tense-aspect`, `aux-form`, `periphrastic-future`,
+  `periphrastic-past-habit`, `modal`, `conditional`, `voice`, `mood`,
+  `non-finite`, `reported-speech`, `phrasal-verb`, `construction`,
+  `phonology`, `transformation`, `register`) computed by `_category_for()`
+  from each row's Label/Answer/Target/tags. Used to drive both deck
+  routing and per-card prompts.
+- **Always-honest, category-aware prompts (v3.1.1).** Every Recognition,
+  Contrast, Cloze, and Production card now displays a prompt that names
+  the *expected answer category* — e.g. "Identify the highlighted
+  modal" / "Which conditional type fits?" / "Fill in the missing
+  passive form" / "Write a sentence using the target subjunctive" —
+  instead of the muddled generic ("Which form fits this sentence?").
+  Eliminates the prior failure mode where a Recognition card asked
+  "What tense?" but the answer was "Negative Inversion".
+
+## [3.0.0] - 2026-05-15
+
+### Added
+- **Design-system v3.0 CSS rewrite.** All ~50 hardcoded colors
+  consolidated into two CSS-variable token blocks (light + dark) at
+  the top of the stylesheet. Every class below uses `var(--*)` so
+  light↔dark theming is automatic and impossible to miss.
+- **Focus highlight on Recognition cards.** The targeted span is
+  wrapped in `<mark class="focus">` so prompts like "Identify the
+  highlighted weak form" become unambiguous — the highlighted span
+  tells the learner what to analyse.
+- **Foundation deck (Module 00, 12-cell grid).** The canonical 3
+  tenses × 4 aspects grid is now its own ENABLED-by-default deck
+  before any layer.
+
 ## [2.7.0] - 2026-05-15
 
 ### Removed
