@@ -337,6 +337,18 @@ def embed_fsrs_preset(apkg_path):
         print('  [fsrs-preset] embedded preset "English Verb System" '
               '(FSRS on, retention 0.90, sibling burying)')
 
+    # Also emit a standalone preset JSON next to the .apkg so users can
+    # import it via Anki 23.10+ Deck Options → ⋮ → Import preset.
+    # This works around Anki's long-standing bug where deck-options
+    # embedded in an .apkg are not reliably honoured on import.
+    preset_for_import = {k: v for k, v in preset.items()
+                         if k not in ('id', 'mod', 'usn')}
+    preset_json_path = Path('english_verb_system_preset.json')
+    preset_json_path.write_text(
+        _json.dumps(preset_for_import, indent=2) + '\n', encoding='utf-8')
+    print(f'  [fsrs-preset] wrote standalone {preset_json_path} '
+          f'for one-click Deck-Options Import')
+
 
 def main():
     ensure_genanki()
