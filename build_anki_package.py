@@ -882,7 +882,7 @@ hr#answer {
     )
 
     pro_model = genanki.Model(
-        2056102007,  # bumped to v3 for type:Sample schema change
+        2056102011,  # was 2056102007 — collided with cloze_model
         'Verb System · Production (v3)',
         fields=[
             {'name': 'Prompt'},
@@ -925,7 +925,7 @@ hr#answer {
     # Auto-generated from recognition rows for B2+ learners
     # ------------------------------------------------------------------
     rev_pro_model = genanki.Model(
-        2056102008,  # new model ID
+        2056102010,  # was 2056102008 — collided with rec_model
         'Verb System · Reverse Production (Auto) (v1)',
         fields=[
             {'name': 'Prompt'},
