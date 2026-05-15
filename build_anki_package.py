@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.0.0'
+VERSION = '3.0.1'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -920,13 +920,12 @@ mark.focus {
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
     rec_model = ap.Model(
-        2056102013,  # bumped (was 2056102012): replaced Prompt field
-                     # with FocusedSentence (HTML with <mark> around the
-                     # span the learner needs to identify). Solves the
-                     # genuine pedagogy problem (ambiguous which feature
-                     # is being asked about) instead of just relabelling
-                     # the prompt.
-        'Verb System · Recognition (v5)',
+        2056102014,  # bumped (was 2056102013): added Prompt field so
+                     # the instruction text can be conditional on
+                     # whether a focus span is present. Saying
+                     # 'Identify the highlighted form' on a card with
+                     # no highlight is broken UX.
+        'Verb System · Recognition (v6)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'Label'},
@@ -941,21 +940,29 @@ mark.focus {
             {'name': 'IPA'},
             {'name': 'Timeline'},
             {'name': 'FocusedSentence'},  # Sentence with the targeted
-                                          # span wrapped in <mark> so the
-                                          # learner knows WHICH feature
-                                          # is being asked about.
+                                          # span wrapped in <mark> when
+                                          # extractable, else bare
+                                          # sentence.
+            {'name': 'Prompt'},           # Always-present instruction
+                                          # matched to the card content:
+                                          #   - 'Identify the highlighted form'
+                                          #     when FocusedSentence has <mark>
+                                          #   - 'Name this verb form' / 'Name
+                                          #     this construction' / 'Name this
+                                          #     pronunciation feature' for
+                                          #     unmarked cards (category-aware).
         ],
         templates=[{
             'name': 'Recognition Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Identify the highlighted form</div>
+<div class="instruction">{{Prompt}}</div>
 <div class="sentence">{{FocusedSentence}}</div>
 </div>
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Identify the highlighted form</div>
+<div class="instruction">{{Prompt}}</div>
 <div class="sentence">{{FocusedSentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
@@ -1511,6 +1518,36 @@ mark.focus {
             sentence, count=1,
         )
 
+    # Category-aware prompt for cards WITHOUT a highlight: never lie
+    # about a "highlighted" form when nothing is highlighted. Three
+    # categories so the question is always answerable from the bare
+    # sentence: pronunciation features, syntactic constructions, or
+    # the default catch-all "verb form" prompt.
+    _PROMPT_PHON_RE = re.compile(
+        r'connected speech|reduction|contraction|stress|linking|'
+        r't[- ]flap|weak form|schwa|elision|intonation|assimilation|'
+        r'silent letter|word stress|sentence stress|prosody|rhythm',
+        re.I,
+    )
+    _PROMPT_CONSTR_RE = re.compile(
+        r'cleft|existential|causative|tag question|hedging|inversion|'
+        r'fronting|catenative|emphatic|exclamative|pseudo-cleft|'
+        r'reverse pseudo|response form|comment clause|extraposition',
+        re.I,
+    )
+    def _prompt_for(focused_html: str, label: str, sentence: str) -> str:
+        """Pick the instruction string. If the FocusedSentence contains a
+        <mark> tag, use the consistent 'Identify the highlighted form'.
+        Otherwise pick a category-appropriate prompt so we never claim
+        something is highlighted when it isn't."""
+        if '<mark' in focused_html:
+            return 'Identify the highlighted form'
+        if _PROMPT_PHON_RE.search(label):
+            return 'Name this pronunciation feature'
+        if _PROMPT_CONSTR_RE.search(label):
+            return 'Name this construction'
+        return 'Name this verb form'
+
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | WhenNotToUse | Tags
@@ -1528,24 +1565,25 @@ mark.focus {
         deduped_when = _dedupe_when_not(row[6], row[7])
         if deduped_when != row[7]:
             suppressed_when_not += 1
-        # Wrap the targeted span in <mark> so the learner knows WHICH
-        # feature is being asked about. Verb-form rows mostly fall
-        # through to no-mark and the bare sentence is shown — this is
-        # safe because verb forms in our corpus typically have one
-        # clear verb cluster (sentences are short and pedagogical).
+        # Wrap the targeted span in <mark> when extractable. Pick the
+        # prompt CONDITIONALLY: 'Identify the highlighted form' only
+        # when there IS a highlight; otherwise a category-appropriate
+        # 'Name this verb form / pronunciation feature / construction'
+        # so the question is always honest about what's on screen.
         focused = _focused_html(row[0], row[1])
         if focused != row[0]:
             focus_hits += 1
         else:
             focus_misses += 1
+        prompt_text = _prompt_for(focused, row[1], row[0])
         row_for_note = list(row)
         row_for_note[7] = deduped_when
         # Recognition fields: Sentence | Label | Aspect | Formula | MainUse |
         #   QuickCue | Contrast | WhenNotToUse | Tags | Audio | IPA |
-        #   Timeline | FocusedSentence
+        #   Timeline | FocusedSentence | Prompt
         note = ap.Note(
             model=rec_model,
-            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, focused],
+            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, focused, prompt_text],
             tags=row[8].split(),
         )
         for _mod in mods:
