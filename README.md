@@ -330,3 +330,9 @@ This release introduces the following modules, card types, and tagging:
   `l1-interference`, or `spot-the-error`
 - Reverse Production cards auto-generated for recognition rows with 
   CEFR B2/C1/C2 and standard tenses (Present Simple, Past Simple, etc.)
+
+## Versioning
+
+This package follows semantic versioning. For a complete history of changes, see [CHANGELOG.md](CHANGELOG.md).
+
+Current version: **1.5.0**
