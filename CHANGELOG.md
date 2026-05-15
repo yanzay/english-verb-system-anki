@@ -2,6 +2,34 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [2.7.0] - 2026-05-15
+
+### Removed
+- **Image-Cue module (Module 14) deleted entirely.** The premise — fetch
+  Wikimedia Commons photos via keyword search to illustrate verbal aspect,
+  stative/dynamic contrasts, and phrasal verbs — produced semantically
+  random matches in practice (e.g. "woman thinking in profile" returned
+  a Picasso sculpture in Chicago). Even with perfect matching, most
+  aspect contrasts (`thinks` vs `is thinking`, `has finished` vs `was
+  finishing`) are inherently abstract and cannot be disambiguated by a
+  still photograph. Better no images than misleading images.
+
+### Cleaned up
+- 267 image-cue rows in `conjugations_image.txt` (deleted)
+- 266 jpg/png assets in `media/images/` (deleted, ~58 MB freed in LFS)
+- `build_images.py` Wikimedia fetcher (deleted)
+- `media/images_index.json` manifest (deleted)
+- All Module 14 references in `build_anki_package.py`: MODULE_TAGS,
+  MODULE_NAMES, row_module() priority list, DECK_IDS, TYPE_SUFFIX,
+  Image-Cue note model, ingestion loop
+- Deck tree now ends cleanly at Module 13 (L1 Interference). No
+  "Coming soon" placeholder, no empty Module 14 deck.
+
+### Build verified
+3,320 cards · 109 decks · 0 errors · preset auto-binds. The 50-deck
+"unbound from main preset" warning corresponds to the per-language L1
+sub-decks intentionally bound to a zero-cards/day preset (v2.5.1).
+
 ## [2.3.0] - 2026-05-15
 
 ### Changed
@@ -32,8 +60,8 @@ All notable changes to the English Verb System Anki deck are documented here.
 - Added `color-scheme: light dark` on `.card` so native form
   controls (especially the type-in-the-answer input on iOS/iPadOS
   WebKit) render with theme-matching default chrome.
-- New `.attribution` class (image-cue back side) styled and
-  themed for proper visibility in both modes.
+- New `.attribution` class (since-removed image-cue back side) styled
+  and themed for proper visibility in both modes.
 
 ### Token taxonomy
 ```

@@ -36,15 +36,7 @@ Essential for power users syncing with external dictionaries, clipboard tools, o
 
 ---
 
-### 5. Image Occlusion Enhanced — 1374772155
-
-The deck includes a new Image-Cue module (Module 14) with bundled diagrams and photos. This add-on lets you create additional image-occlusion cards on top of those images, extending your ability to study verbs in visual/contextual formats.
-
-**Install:** Tools → Add-ons → Get Add-ons → paste **1374772155** → OK
-
----
-
-### 6. Advanced Browser — 874215009
+### 5. Advanced Browser — 874215009
 
 Leverages the deck's rich tag taxonomy to filter and sort cards powerfully. Search by `tag:cefr:b2 tag:module:listening` or any combination to study specific slices of the deck. Adds sortable columns for advanced card review workflows.
 
@@ -52,7 +44,7 @@ Leverages the deck's rich tag taxonomy to filter and sort cards powerfully. Sear
 
 ---
 
-### 7. Pop-up Dictionary — 153625306
+### 6. Pop-up Dictionary — 153625306
 
 Provides quick inline lookups on words within cards. Useful for collocations and phrasal-verb cards where you want context-aware definitions without breaking your study flow.
 
@@ -73,7 +65,7 @@ The following add-ons may conflict with the deck's preset or harm learning outco
 
 ## Key Notes
 
-- **No add-on required:** The deck ships with FSRS preset, image-cue native model, `type:Sample` support, multi-cell cloze, and 14 curated modules.
+- **No add-on required:** The deck ships with FSRS preset, `type:Sample` support, multi-cell cloze, and 13 curated modules covering basics through advanced discourse + per-L1 interference sub-decks.
 - **Add-ons are optional:** They enhance workflow, filtering, and motivation, but aren't needed to study successfully.
 - **Keep your presets:** Do not change "Desired Retention" from 0.90 or override the FSRS scheduler.
 
