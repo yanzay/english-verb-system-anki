@@ -1234,6 +1234,21 @@ hr#answer {
 
     embed_fsrs_preset(out)
 
+    # Post-build integrity check: round-trip through SQLite to catch
+    # model-id collisions, field-count mismatches, dangling references, etc.
+    # Hard failure here aborts the build with non-zero exit so a broken
+    # .apkg can never be shipped silently.
+    try:
+        import validate_apkg as _validate_apkg
+    except Exception as _e:
+        print(f'  [validate-apkg] could not import validator: {_e}')
+    else:
+        rc = _validate_apkg.validate(out)
+        if rc != 0:
+            print(f'\n✗ Post-build validation failed (rc={rc}). '
+                  f'See errors above. .apkg left in place for inspection.')
+            sys.exit(rc)
+
     total_cards = sum(counts.values()) + spot_error_count + rev_pro_count + img_count
     print(f'Built {out} (v{VERSION})')
     print(f'  recognition: {counts["rec"]}')
