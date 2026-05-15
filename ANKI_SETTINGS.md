@@ -1,18 +1,48 @@
 # Recommended Anki Settings
 
-After importing `english_verb_system_anki.apkg`, apply these deck option presets.
-The deck is organized into five modules. Apply settings per module or create one
-shared preset and adjust new-cards-per-day per module.
+The `.apkg` ships with the **"English Verb System"** preset embedded
+(FSRS on, retention 0.9, sibling burying, 1m/10m learning steps, leech
+suspend at 8). However, **Anki does not reliably honour preset settings
+from imported `.apkg` files** — on import it usually resets all decks
+to "Default". This is a long-standing Anki behaviour (see Anki forum
+threads on `.apkg` deck-options not importing).
+
+So you have to apply the preset **once** after importing. We provide
+two paths — pick whichever your Anki version supports.
 
 ---
 
-## How to apply deck options in Anki
+## Path A — One-click import (Anki 23.10 and later) ⭐ recommended
 
-1. Open Anki and click the gear icon next to a deck.
-2. Choose **Options**.
-3. Create a new preset (e.g. "English Verb System") and configure as below.
-4. Apply the same preset to all five module decks, or create per-module presets
-   for finer control.
+1. Download `english_verb_system_preset.json` from this repo (next to the `.apkg`).
+2. In Anki, click the gear icon next to **any** sub-deck of "English Verb System"
+   → **Deck options**.
+3. In the deck-options page, click the **⋮ (three-dot menu)** in the top-right
+   → **Import preset…**
+4. Select the downloaded `english_verb_system_preset.json`.
+   The preset "English Verb System" appears in the preset dropdown.
+5. With the preset selected, click **Save** (bottom-right).
+
+Now bind every sub-deck to the preset in one shot:
+
+6. Browse the deck list, **right-click** on the parent **"English Verb System"** deck
+   → **Deck options**.
+7. From the preset dropdown choose **English Verb System**.
+8. Click **Save**, and when asked **"Apply to all sub-decks?"** click **Yes**.
+
+That binds all 52 sub-decks at once. Done.
+
+---
+
+## Path B — Manual setup (any Anki version)
+
+If you're on an older Anki, or step 6–8 above didn't propagate, set it up by hand:
+
+1. Open Anki and click the gear icon next to any "English Verb System::*" deck.
+2. Choose **Deck options**.
+3. Add a new preset (the **+** button) called `English Verb System` and configure it
+   per the table below.
+4. Repeat step 7 above to bind it to every sub-deck.
 
 ---
 

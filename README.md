@@ -246,10 +246,23 @@ This creates `english_verb_system_anki.apkg`.
 3. Select `english_verb_system_anki.apkg`.
 4. Anki will create all 15 subdecks automatically.
 
-### Step 5 — Apply recommended settings
+### Step 5 — Apply the recommended preset
 
-See **`ANKI_SETTINGS.md`** for the full recommended Anki deck options preset
-and suggested study path (staged from core recognition through to stative/dynamic cards).
+> ⚠️ **Anki bug**: deck-options bundled inside an `.apkg` are **not reliably
+> applied on import** — your decks will show the **Default** preset.
+> This is by design (Anki forum threads, Anki ≥23.10 still affected).
+
+To get FSRS, sibling burying, and the recommended scheduling, do this **once**
+after import:
+
+**Anki 23.10+** (one-click):
+1. Click the gear next to any "English Verb System::*" sub-deck → **Deck options**.
+2. Click **⋮** (top-right) → **Import preset…**
+3. Select **`english_verb_system_preset.json`** (next to the .apkg in this repo).
+4. Right-click the parent **English Verb System** deck → **Deck options** → choose the
+   imported preset → **Save** → "Apply to all sub-decks?" → **Yes**.
+
+**Older Anki**: see `ANKI_SETTINGS.md` Path B for manual setup.
 
 ## Recommended study path
 
