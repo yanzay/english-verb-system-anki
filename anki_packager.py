@@ -249,14 +249,25 @@ class Package:
                 deck = col.decks.get(d.id)
                 if deck is None or deck.get('dyn'):
                     continue
-                # L1 Interference sub-decks ship OPTED-OUT: bound to a
-                # zero-cards-per-day preset. Each user enables only
-                # their L1 by switching that one sub-deck to the main
-                # 'English Verb System' preset.
+                # v3.2.0 curriculum-first binding:
+                #   - '00 - Foundation' (the 12-cell tense+aspect grid)
+                #     gets the MAIN preset → 10 new/day from day one.
+                #   - Every layered module ('01' periphrastic-future …
+                #     '12' transformation/register) ships OPTED-OUT.
+                #     Users explicitly enable each layer when they're
+                #     ready to add it on top of Foundation.
+                #   - L1 Interference sub-decks: opted-out (per-language
+                #     opt-in by speaker), as before.
+                # This enforces the pedagogy "master the grid first,
+                # then add layers" by default — the most common UX
+                # mistake (importing → being overwhelmed by 3,000
+                # cards from every category) becomes impossible.
+                deck_name = deck.get('name', '')
+                is_foundation = '00 - Foundation' in deck_name
+                is_l1 = '13 - L1 Interference::' in deck_name
                 target_preset = (
-                    l1_preset_id
-                    if '13 - L1 Interference::' in deck.get('name', '')
-                    else preset_id
+                    preset_id if is_foundation
+                    else l1_preset_id  # opted-out for both layered modules and L1
                 )
                 col.decks.set_config_id_for_deck_dict(deck, target_preset)
                 col.decks.save(deck)
