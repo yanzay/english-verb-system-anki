@@ -1,4 +1,14 @@
 {
+  "0015752a14f3": {
+    "attribution": "Picsum",
+    "caption": "Pick up your toys right now, please.",
+    "file": "0015752a14f3.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "child picking up scattered toys",
+    "size": 70646,
+    "source": "https://picsum.photos"
+  },
   "00516b6462bf": {
     "attribution": "Fritz Henle",
     "caption": "He is learning Japanese intensively this month.",
@@ -8,6 +18,46 @@
     "query": "student studying hard",
     "size": 120839,
     "source": "https://commons.wikimedia.org/wiki/File:After_a_day_of_hard_work_and_study,_Susan_Petty_8b09772v.jpg"
+  },
+  "02d48f016893": {
+    "attribution": "Claude Shafer",
+    "caption": "We have been dating for five years now.",
+    "file": "02d48f016893.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "couple holding hands, looking tired",
+    "size": 516775,
+    "source": "https://commons.wikimedia.org/wiki/File:The_American_Adventures_of_Marmaduke_Squeezledene,_Baronet_(number_3).jpg"
+  },
+  "04a2bb81f491": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "You may use this restroom.",
+    "file": "04a2bb81f491.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "bathroom door with occupied sign",
+    "size": 207795,
+    "source": "https://commons.wikimedia.org/wiki/File:American_homes_and_gardens_(1905)_(17530138874).jpg"
+  },
+  "04a7a8188ad0": {
+    "attribution": "Chris.sherlock2",
+    "caption": "The child was playing when her mother called.",
+    "file": "04a7a8188ad0.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "child playing in park",
+    "size": 142242,
+    "source": "https://commons.wikimedia.org/wiki/File:Childs_Park_Playing_Fields_03.jpg"
+  },
+  "05425d45cf47": {
+    "attribution": "Picsum",
+    "caption": "He is showing off his new skills.",
+    "file": "05425d45cf47.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "boy showing off gymnastics skills",
+    "size": 44469,
+    "source": "https://picsum.photos"
   },
   "054974ac41e7": {
     "attribution": "PICQ, background blur by Samsara",
@@ -19,6 +69,66 @@
     "size": 142785,
     "source": "https://commons.wikimedia.org/wiki/File:Kutia_kondh_woman_3.jpg"
   },
+  "05cbc257a9fc": {
+    "attribution": "NASA Earth Observatory image by Wanmei Liang, using Landsat data from the U.S. Geological Survey. Story by Adam Voiland.",
+    "caption": "The match is going to be postponed.",
+    "file": "05cbc257a9fc.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "dark clouds above football field",
+    "size": 317924,
+    "source": "https://commons.wikimedia.org/wiki/File:A_Super_Stadium_(153926).jpg"
+  },
+  "0701f2875c5d": {
+    "attribution": "Robertgombos",
+    "caption": "The coach is training the team intensely.",
+    "file": "0701f2875c5d.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "athlete training with weights",
+    "size": 288133,
+    "source": "https://commons.wikimedia.org/wiki/File:Athlete_after_training.jpg"
+  },
+  "0a5278619fae": {
+    "attribution": "Unknown authorUnknown author",
+    "caption": "They are dancing at the party right now.",
+    "file": "0a5278619fae.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "people dancing together",
+    "size": 46196,
+    "source": "https://commons.wikimedia.org/wiki/File:Excavated_from_Nohara_Burial_Mounds_%E2%80%94_The_Dancing_People_Haniwa.jpg"
+  },
+  "0aebfc60cba9": {
+    "attribution": "Picsum",
+    "caption": "Point out the errors in this sentence.",
+    "file": "0aebfc60cba9.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "teacher pointing to solution on board",
+    "size": 40011,
+    "source": "https://picsum.photos"
+  },
+  "0afa0b008054": {
+    "attribution": "Picsum",
+    "caption": "The conference room has been prepared for the meeting.",
+    "file": "0afa0b008054.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "empty meeting room with cleaned whiteboard",
+    "size": 80475,
+    "source": "https://picsum.photos"
+  },
+  "0bc4194e50ca": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "He got away with only a minor injury.",
+    "file": "0bc4194e50ca.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person getting away from danger",
+    "size": 345469,
+    "source": "https://commons.wikimedia.org/wiki/File:Evenings_at_home,_or,_The_juvenile_budget_opened_-_consisting_of_a_variety_of_miscellaneous_pieces_for_the_instruction_and_amusement_of_young_persons_(1839)_(14791773933).jpg"
+  },
   "0cc778e5fd71": {
     "attribution": "Elbert (Burt) L. Rutan; Rutan Aircraft Factory, Inc",
     "caption": "Oh no! I have broken the vase!",
@@ -28,6 +138,96 @@
     "query": "person breaking something accidentally",
     "size": 115940,
     "source": "https://commons.wikimedia.org/wiki/File:Rutan_VariEze_-_DPLA_-_7e134db51741677a89c39232e049f607_(page_1).jpg"
+  },
+  "0cce9e61830f": {
+    "attribution": "Ms Sarah Welch",
+    "caption": "The wall is being painted by the construction team.",
+    "file": "0cce9e61830f.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "freshly painted wall interior",
+    "size": 415768,
+    "source": "https://commons.wikimedia.org/wiki/File:12th-century_Vishnu_Shabari_Shivrinarayan_temple,_Seorinarayan_Janjgir_Chhattisgarh,_archive_late_19th_century_-_1.jpg"
+  },
+  "0d59c6f38870": {
+    "attribution": "Picsum",
+    "caption": "He might have allergies.",
+    "file": "0d59c6f38870.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person sneezing repeatedly",
+    "size": 20186,
+    "source": "https://picsum.photos"
+  },
+  "0ddeadaf598e": {
+    "attribution": "Dietmar Rabich",
+    "caption": "She set up her own business last year.",
+    "file": "0ddeadaf598e.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "entrepreneur setting up office",
+    "size": 223259,
+    "source": "https://commons.wikimedia.org/wiki/File:Darwin_(AU),_KPMG_--_2019_--_4322.jpg"
+  },
+  "0e1c6002c61b": {
+    "attribution": "Henry G. Gilbert Nursery and Seed Trade Catalog Collection.; Peter Henderson &amp; Co.",
+    "caption": "The orders are being packed for shipment.",
+    "file": "0e1c6002c61b.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "merchandise being packed",
+    "size": 524879,
+    "source": "https://commons.wikimedia.org/wiki/File:Autumn_bulbs_catalogue_(16266059267).jpg"
+  },
+  "1029d9ee9579": {
+    "attribution": "Federal Bureau of Investigation",
+    "caption": "The report was printed and distributed to all staff.",
+    "file": "1029d9ee9579.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "stack of printed documents",
+    "size": 71097,
+    "source": "https://commons.wikimedia.org/wiki/File:EFTA00001917_-_Gloved_hand_holds_a_white_document_with_LSJ_printed_on_it_positioned_in_front_of_a_stack_of_papers_inside_a_wooden_cabinet.jpg"
+  },
+  "13f2db0758df": {
+    "attribution": "iaace",
+    "caption": "She requested that we send her the documents by Friday.",
+    "file": "13f2db0758df.jpg",
+    "license": "CC BY 3.0",
+    "mime": "image/png",
+    "query": "person leaving voicemail",
+    "size": 211127,
+    "source": "https://commons.wikimedia.org/wiki/File:PNSWB_Weather_Balloon.png"
+  },
+  "165011e1ca45": {
+    "attribution": "Solomon203",
+    "caption": "You must not smoke in this area.",
+    "file": "165011e1ca45.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "no smoking symbol",
+    "size": 324359,
+    "source": "https://commons.wikimedia.org/wiki/File:Backstage_Caf%C3%A9_no_smoking_sign_20190504.jpg"
+  },
+  "17a8f5eb1ec1": {
+    "attribution": "Picsum",
+    "caption": "She is looking forward to her summer holiday.",
+    "file": "17a8f5eb1ec1.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "woman enjoying summer vacation ahead",
+    "size": 46211,
+    "source": "https://picsum.photos"
+  },
+  "184e64d2adb1": {
+    "attribution": "Ministry of Information official photographer",
+    "caption": "She has unpacked her suitcase already.",
+    "file": "184e64d2adb1.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "unpacked suitcase in bedroom",
+    "size": 44236,
+    "source": "https://commons.wikimedia.org/wiki/File:Colonial_Rest_Centre_in_Britain,_1944_TR2588.jpg"
   },
   "19795eeed015": {
     "attribution": "Phillip Medhurst",
@@ -39,6 +239,26 @@
     "size": 723375,
     "source": "https://commons.wikimedia.org/wiki/File:Eccleston_Park_war_memorial_Prescot._Photo_4_by_Phillip_Medhurst_1992.jpg"
   },
+  "1a2861799431": {
+    "attribution": "President Of Ukraine from Україна",
+    "caption": "If she had been more careful with her phone, it wouldn't have shattered.",
+    "file": "1a2861799431.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person looking at broken phone",
+    "size": 86156,
+    "source": "https://commons.wikimedia.org/wiki/File:Address_by_the_President_of_Ukraine_on_the_Fourth_Anniversary_of_the_Beginning_of_Russia%E2%80%99s_Full-Scale_Invasion_of_Ukraine._(55113242776).jpg"
+  },
+  "1a8bcde9b996": {
+    "attribution": "Picsum",
+    "caption": "She should have been more careful with it.",
+    "file": "1a8bcde9b996.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "broken toy in trash",
+    "size": 42119,
+    "source": "https://picsum.photos"
+  },
   "1a922e227d31": {
     "attribution": "R.C. Hulme, after Mason Jackson?",
     "caption": "He has picked up all the papers from the floor.",
@@ -48,6 +268,86 @@
     "query": "man picking up scattered papers",
     "size": 219019,
     "source": "https://commons.wikimedia.org/wiki/File:The_Crimea_revisited,_Graves_of_British_Soldiers_-_ILN_1869.jpg"
+  },
+  "1b00da3b0519": {
+    "attribution": "Krzysztof Golik",
+    "caption": "If the train hadn't been delayed, we would have arrived on time.",
+    "file": "1b00da3b0519.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "closed railway station",
+    "size": 506902,
+    "source": "https://commons.wikimedia.org/wiki/File:Closed_railway_station_of_Cajarc_01.jpg"
+  },
+  "1cd372dfc04b": {
+    "attribution": "Tammy from Atlanta",
+    "caption": "They get along with each other very well.",
+    "file": "1cd372dfc04b.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "two friends enjoying conversation",
+    "size": 20864,
+    "source": "https://commons.wikimedia.org/wiki/File:Give_one_hour_back_to_our_earth_(2371119531).jpg"
+  },
+  "1ceb4b9e0c00": {
+    "attribution": "U.S. Department of Agriculture",
+    "caption": "She was preparing dinner when guests arrived.",
+    "file": "1ceb4b9e0c00.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "cook chopping vegetables at counter",
+    "size": 343391,
+    "source": "https://commons.wikimedia.org/wiki/File:20171027-AMS-LSC-1006_(24215489758).jpg"
+  },
+  "1e07175f2511": {
+    "attribution": "USDAgov",
+    "caption": "They could have moved away.",
+    "file": "1e07175f2511.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person missing from photo frame",
+    "size": 217225,
+    "source": "https://commons.wikimedia.org/wiki/File:1912_(ca)_Bieber_Bldg_frame_construction_USDA_Construction_Photo_Collection_(1)_(50835112851).jpg"
+  },
+  "1e748f43f5f3": {
+    "attribution": "Picsum",
+    "caption": "She was waving goodbye when the train pulled away.",
+    "file": "1e748f43f5f3.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person at fence looking at departing train",
+    "size": 35310,
+    "source": "https://picsum.photos"
+  },
+  "1e967fefcafc": {
+    "attribution": "Picsum",
+    "caption": "Take off your shoes at the door, please.",
+    "file": "1e967fefcafc.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "woman removing jacket indoors",
+    "size": 45058,
+    "source": "https://picsum.photos"
+  },
+  "1fcdf26cb388": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "They ran out of coffee yesterday.",
+    "file": "1fcdf26cb388.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person checking supplies running low",
+    "size": 166131,
+    "source": "https://commons.wikimedia.org/wiki/File:Canadian_forest_industries_1892-1893_(1893)_(20523123315).jpg"
+  },
+  "20299517dbc2": {
+    "attribution": "Picsum",
+    "caption": "He sped up to pass the truck.",
+    "file": "20299517dbc2.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "car speeding up on empty road",
+    "size": 23140,
+    "source": "https://picsum.photos"
   },
   "208afe163063": {
     "attribution": "",
@@ -59,6 +359,136 @@
     "size": 456827,
     "source": "https://commons.wikimedia.org/wiki/File:A_woman_coughing_or_sneezing_without_a_handkerchief_in_a_dra_Wellcome_L0026927.jpg"
   },
+  "217e9b99e2bc": {
+    "attribution": "Picsum",
+    "caption": "She puts up with a lot from her job.",
+    "file": "217e9b99e2bc.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person tolerating difficult situation",
+    "size": 71126,
+    "source": "https://picsum.photos"
+  },
+  "222dc428922b": {
+    "attribution": "",
+    "caption": "He can't be very strong.",
+    "file": "222dc428922b.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person barely able to lift box",
+    "size": 392566,
+    "source": "https://commons.wikimedia.org/wiki/File:Captain_H.C._Gray_Balloon_Basket_-_DPLA_-_bab59faf69932dc71a2a98720256a9ed_(page_1).jpg"
+  },
+  "23a54a1f664f": {
+    "attribution": "Andre Carrotflower",
+    "caption": "The car must have been parked overnight.",
+    "file": "23a54a1f664f.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "car covered in thick snow",
+    "size": 211556,
+    "source": "https://commons.wikimedia.org/wiki/File:Abandoned_vehicles_on_West_Utica_Street_in_the_aftermath_of_the_December_2022_blizzard,_Main_Street,_Buffalo,_New_York_-_20221227.jpg"
+  },
+  "249cb6cd30f8": {
+    "attribution": "National Library NZ on The Commons",
+    "caption": "You may enter during these hours.",
+    "file": "249cb6cd30f8.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "library opening hours posted",
+    "size": 366460,
+    "source": "https://commons.wikimedia.org/wiki/File:Book_of_Hours,_Use_of_Carmel,_f.66v_(157_x_110_mm),_ca.1511,_Alexander_Turnbull_Library,_MSR-11_(5530631509).jpg"
+  },
+  "25d3ba538db9": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She is going to stand up now.",
+    "file": "25d3ba538db9.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person at edge of chair about to stand",
+    "size": 30565,
+    "source": "https://commons.wikimedia.org/wiki/File:American_homes_and_gardens_(1910)_(18158877611).jpg"
+  },
+  "298d853434bb": {
+    "attribution": "Picsum",
+    "caption": "The tub is going to overflow any second.",
+    "file": "298d853434bb.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "overflowing bathtub with water running",
+    "size": 27321,
+    "source": "https://picsum.photos"
+  },
+  "2aeaafacc435": {
+    "attribution": "Picsum",
+    "caption": "Put down your phone during dinner, please.",
+    "file": "2aeaafacc435.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "woman putting down phone on desk",
+    "size": 23417,
+    "source": "https://picsum.photos"
+  },
+  "2b0d8900f4bf": {
+    "attribution": "Unknown Indian artist",
+    "caption": "She might be sleeping.",
+    "file": "2b0d8900f4bf.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "closed curtains in daytime",
+    "size": 82300,
+    "source": "https://commons.wikimedia.org/wiki/File:A_Dooly_or_a_Woman%E2%80%99s_Palanquin_-_Unknown_-_19_1927_2_86.jpg"
+  },
+  "2b208e0606ff": {
+    "attribution": "Tortuga Language Productions",
+    "caption": "I have read that novel.",
+    "file": "2b208e0606ff.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "closed book on table",
+    "size": 85060,
+    "source": "https://commons.wikimedia.org/wiki/File:%22_live_and_in_color_(Mac_Book_Pro)_2016,_top_logo.jpg"
+  },
+  "2d4e5ac5016e": {
+    "attribution": "White House Photographic Office (WHPO) - Schumacher",
+    "caption": "They were having dinner when the news broke.",
+    "file": "2d4e5ac5016e.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "couple talking at dinner table",
+    "size": 270624,
+    "source": "https://commons.wikimedia.org/wiki/File:Ford_A1298_NLGRF_photo_contact_sheet_(1974-10-08)(Gerald_Ford_Library).jpg"
+  },
+  "2d99f3041894": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "He told me he would help me with the project.",
+    "file": "2d99f3041894.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "friend whispering secret",
+    "size": 410871,
+    "source": "https://commons.wikimedia.org/wiki/File:Green_fields_and_whispering_woods;_or,_The_recreations_of_an_American_%22country_gentleman%22;_embracing_journeys_over_his_farm_and_excursions_into_his_library_(1886)_(14596192609).jpg"
+  },
+  "2f3a0d7e7492": {
+    "attribution": "This Photo was taken by Timothy A. Gonsalves.  Feel free to use my photos, but please mention me as the author.  I would much appreciate if you send me an email tagooty@yahoo.com or write on my talk p",
+    "caption": "You must have forgotten your keys.",
+    "file": "2f3a0d7e7492.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "locked door with chain",
+    "size": 494401,
+    "source": "https://commons.wikimedia.org/wiki/File:Chain_Lock_Door_Padmanabhapuram_Palace_Mar24_A7C_10160.jpg"
+  },
+  "2f99d0185683": {
+    "attribution": "National Museum of the U.S. Navy",
+    "caption": "They might be going on vacation.",
+    "file": "2f99d0185683.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person packing suitcase",
+    "size": 374886,
+    "source": "https://commons.wikimedia.org/wiki/File:330-CFD-DD-ST-99-04235_(24896198096).jpg"
+  },
   "302ee440877c": {
     "attribution": "DiscoA340",
     "caption": "The plane is taking off in five minutes.",
@@ -69,6 +499,46 @@
     "size": 194676,
     "source": "https://commons.wikimedia.org/wiki/File:Airplane_Taking-off_at_CDG.jpg"
   },
+  "32f3e571f0b1": {
+    "attribution": "Poliphilo",
+    "caption": "She is painting the bedroom walls today.",
+    "file": "32f3e571f0b1.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person painting a wall",
+    "size": 153953,
+    "source": "https://commons.wikimedia.org/wiki/File:Death_of_Becket,_wall_painting,_St_James,_Bramley_01.jpg"
+  },
+  "3331206712b5": {
+    "attribution": "Blogotron",
+    "caption": "If he had worn his seatbelt, he wouldn't have been injured.",
+    "file": "3331206712b5.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person in hospital bed",
+    "size": 148975,
+    "source": "https://commons.wikimedia.org/wiki/File:Hospital_Bed_2011_CPR.JPG"
+  },
+  "3395c5708311": {
+    "attribution": "Andrew J. Russell / Mathew Benjamin Brady",
+    "caption": "The road is being repaired by the council.",
+    "file": "3395c5708311.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "road under repair",
+    "size": 232448,
+    "source": "https://commons.wikimedia.org/wiki/File:Bridge_on_Orange_and_Alexandria_Rail_Road,_as_Repaired_by_Army_Engineers_under_Colonel_Herman_Haupt_MET_DP274785.jpg"
+  },
+  "346d86dd2a35": {
+    "attribution": "Sima shimony",
+    "caption": "You should have used a case.",
+    "file": "346d86dd2a35.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "cracked phone screen",
+    "size": 94677,
+    "source": "https://commons.wikimedia.org/wiki/File:A_cracked_telephone_screen.jpg"
+  },
   "34a48b95e85f": {
     "attribution": "Picsum",
     "caption": "She is putting on her coat.",
@@ -78,6 +548,26 @@
     "query": "woman putting on coat outdoors",
     "size": 30112,
     "source": "https://picsum.photos"
+  },
+  "34e3872ae4eb": {
+    "attribution": "HowardMorland, mod. Farary",
+    "caption": "He could be lost.",
+    "file": "34e3872ae4eb.jpg",
+    "license": "CC0",
+    "mime": "image/png",
+    "query": "person at crossroads with map",
+    "size": 17699,
+    "source": "https://commons.wikimedia.org/wiki/File:Crossroads_Able_Target_Ship_Map_(pl).png"
+  },
+  "352500789fc5": {
+    "attribution": "Shixart1985",
+    "caption": "The child is playing with blocks.",
+    "file": "352500789fc5.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "young child playing with toys",
+    "size": 206315,
+    "source": "https://commons.wikimedia.org/wiki/File:Child_engaged_in_creative_play_with_wooden_building_blocks_on_a_pink_play_mat_in_a_cozy_indoor_space.jpg"
   },
   "358d896b85f8": {
     "attribution": "",
@@ -98,6 +588,46 @@
     "query": "woman looking very happy",
     "size": 127904,
     "source": "https://commons.wikimedia.org/wiki/File:Happy_look_of_woman.jpg"
+  },
+  "3724ba4c8d62": {
+    "attribution": "Picsum",
+    "caption": "Turn off the light when you leave.",
+    "file": "3724ba4c8d62.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "woman turning off light switch",
+    "size": 63968,
+    "source": "https://picsum.photos"
+  },
+  "37860ef839dd": {
+    "attribution": "Chicagohil",
+    "caption": "They came up with a brilliant new idea.",
+    "file": "37860ef839dd.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "brainstorm session with ideas",
+    "size": 256232,
+    "source": "https://commons.wikimedia.org/wiki/File:Education_Ideas_at_Library_Catalog_Wikidata_Brainstorming_Session_.jpg"
+  },
+  "38525158aa5a": {
+    "attribution": "Nisal Senanayaka",
+    "caption": "They climbed up the steep hillside.",
+    "file": "38525158aa5a.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "hiker climbing mountain path",
+    "size": 208582,
+    "source": "https://commons.wikimedia.org/wiki/File:Alagalla_mountain_range_16.jpg"
+  },
+  "3ac56c50c44c": {
+    "attribution": "https://www.flickr.com/photos/fotoblasete/ username:antonioxalonso",
+    "caption": "The book was published by a major publisher.",
+    "file": "3ac56c50c44c.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "person reading published book",
+    "size": 77869,
+    "source": "https://commons.wikimedia.org/wiki/File:A_person_reading_a_braille_book.jpg"
   },
   "3ba6a8e33e23": {
     "attribution": "Picsum",
@@ -139,6 +669,26 @@
     "size": 392566,
     "source": "https://commons.wikimedia.org/wiki/File:Captain_H.C._Gray_Balloon_Basket_-_DPLA_-_bab59faf69932dc71a2a98720256a9ed_(page_1).jpg"
   },
+  "3c60f7a44e19": {
+    "attribution": "Dr. Lyle Conrad",
+    "caption": "The plant might have died from neglect.",
+    "file": "3c60f7a44e19.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "withered plant",
+    "size": 242449,
+    "source": "https://commons.wikimedia.org/wiki/File:Starved_girl.jpg"
+  },
+  "3cb0ddfeb2fc": {
+    "attribution": "Unknown authorUnknown author or not provided",
+    "caption": "The package was delivered this morning by courier.",
+    "file": "3cb0ddfeb2fc.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person receiving package",
+    "size": 99733,
+    "source": "https://commons.wikimedia.org/wiki/File:American_Red_Cross_-_In_the_Service_of_Interior_-_Christmas_Boxes_-_Red_Cross_worker_furnishes_box_for_Christmas_packages._Mother_of_soldier_receiving_container_for_Christmas_package_furnished_by_the_American_Red(...)_-_NARA_-_20801926.jpg"
+  },
   "3fd543610887": {
     "attribution": "",
     "caption": "She is putting down the bags carefully.",
@@ -148,6 +698,16 @@
     "query": "woman putting down items",
     "size": 567365,
     "source": "https://commons.wikimedia.org/wiki/File:A_woman_putting_a_basket_down._Photogravure_after_Eadweard_M_Wellcome_V0048647.jpg"
+  },
+  "40c33761023f": {
+    "attribution": "Edward Williams Clay（1799-1857）",
+    "caption": "He must have eaten already.",
+    "file": "40c33761023f.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "abandoned dinner plate",
+    "size": 248351,
+    "source": "https://commons.wikimedia.org/wiki/File:Santa_Anna_declining_a_hasty_plate_of_soup_at_Cerro_Gordo.jpg"
   },
   "42e74057869a": {
     "attribution": "Alice Donovan Rouse (@alicekat)",
@@ -159,6 +719,106 @@
     "size": 113870,
     "source": "https://commons.wikimedia.org/wiki/File:Adult_couple_holding_hands.jpg"
   },
+  "48ab9f58f163": {
+    "attribution": "Stanley Scott Collection",
+    "caption": "She was awarded the prize for her outstanding work.",
+    "file": "48ab9f58f163.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person receiving award",
+    "size": 172204,
+    "source": "https://commons.wikimedia.org/wiki/File:162_General_Connolly_receiving_award_-_USACE-p15141coll5-9509.jpeg"
+  },
+  "49cb8a2eaf9d": {
+    "attribution": "charlotte henard",
+    "caption": "You should have been more careful.",
+    "file": "49cb8a2eaf9d.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "spilled coffee on desk",
+    "size": 280054,
+    "source": "https://commons.wikimedia.org/wiki/File:Deichman_Bj%C3%B8rvika,_Oslo_-_53131654721.jpg"
+  },
+  "4b688d16960f": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "We have cleaned the kitchen thoroughly.",
+    "file": "4b688d16960f.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "clean kitchen after cooking",
+    "size": 260425,
+    "source": "https://commons.wikimedia.org/wiki/File:The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_(1908)_(14743695776).jpg"
+  },
+  "4bf2ca3cf316": {
+    "attribution": "Kenneth  Allen",
+    "caption": "It might rain this afternoon.",
+    "file": "4bf2ca3cf316.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "dark clouds overhead",
+    "size": 144898,
+    "source": "https://commons.wikimedia.org/wiki/File:A_dark_cloud_overhead,_Drumnakilly_-_geograph.org.uk_-_4515084.jpg"
+  },
+  "4c3fc14f8df9": {
+    "attribution": "David from Washington, DC",
+    "caption": "He put off the meeting until next week.",
+    "file": "4c3fc14f8df9.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "woman postponing plans",
+    "size": 110883,
+    "source": "https://commons.wikimedia.org/wiki/File:Emancipation_statue_at_Lincoln_Park_(14131873).jpg"
+  },
+  "4c428c4e4081": {
+    "attribution": "Zenyrgarden",
+    "caption": "He has planted the seedlings in the garden.",
+    "file": "4c428c4e4081.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "planted garden with seedlings",
+    "size": 500338,
+    "source": "https://commons.wikimedia.org/wiki/File:Garden_bed_started.jpg"
+  },
+  "4d5077e24b84": {
+    "attribution": "A.-K. D.",
+    "caption": "If he had checked the stove, the fire wouldn't have started.",
+    "file": "4d5077e24b84.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "fire damage in room",
+    "size": 577398,
+    "source": "https://commons.wikimedia.org/wiki/File:Curved_bar_chamfer_stop_Phelan_Room_fire_place.jpg"
+  },
+  "4dbda41d755e": {
+    "attribution": "Breather breather",
+    "caption": "If we had prepared better, the presentation would have gone smoothly.",
+    "file": "4dbda41d755e.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "empty conference room with notes on table",
+    "size": 91171,
+    "source": "https://commons.wikimedia.org/wiki/File:120_E_8th_Street,_Los_Angeles,_California_(Unsplash).jpg"
+  },
+  "51179d8e9679": {
+    "attribution": "InclusiveGameLab",
+    "caption": "He can access this building.",
+    "file": "51179d8e9679.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "person in wheelchair",
+    "size": 112508,
+    "source": "https://commons.wikimedia.org/wiki/File:InclusiveGameLab_Person-in-Wheelchair-Playing-Mario-Kart-World_01_CC-BY-SA.jpg"
+  },
+  "514f08e25348": {
+    "attribution": "Picsum",
+    "caption": "He was sleeping when his roommate came home.",
+    "file": "514f08e25348.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "student asleep at desk with books",
+    "size": 30322,
+    "source": "https://picsum.photos"
+  },
   "5193fa3df83e": {
     "attribution": "Cierva Autogiro Company",
     "caption": "She has put on weight recently.",
@@ -169,6 +829,26 @@
     "size": 183243,
     "source": "https://commons.wikimedia.org/wiki/File:Cierva_C.8W_(C.8L_Mk._IV)_-_DPLA_-_ad37411c05c1b7c5c9b1c56affce9649_(page_1).jpg"
   },
+  "51b3b6e983f0": {
+    "attribution": "Giuseppe De Nittis",
+    "caption": "He asked if she was coming to the party.",
+    "file": "51b3b6e983f0.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "two people in conversation",
+    "size": 96515,
+    "source": "https://commons.wikimedia.org/wiki/File:Conversation_in_the_garden_(1869-71),_by_Giuseppe_De_Nittis.jpg"
+  },
+  "5230084e477f": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She has been painting all afternoon.",
+    "file": "5230084e477f.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person with paint-stained clothes",
+    "size": 166858,
+    "source": "https://commons.wikimedia.org/wiki/File:American_homes_and_gardens_(1909)_(18154747715).jpg"
+  },
   "5748f5574b7e": {
     "attribution": "English106",
     "caption": "The students sit down and begin the exam.",
@@ -178,6 +858,216 @@
     "query": "student sitting at desk",
     "size": 167636,
     "source": "https://commons.wikimedia.org/wiki/File:Female_student_writing_and_studying_at_dorm_room_desk.jpg"
+  },
+  "57e7a765e6cb": {
+    "attribution": "Stamboliyski",
+    "caption": "The window has been broken by the storm.",
+    "file": "57e7a765e6cb.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "broken window with glass shards",
+    "size": 452909,
+    "source": "https://commons.wikimedia.org/wiki/File:Bjorn11.JPG"
+  },
+  "5b90b340f583": {
+    "attribution": "Richard Sutcliffe",
+    "caption": "This could have belonged to my grandfather.",
+    "file": "5b90b340f583.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "old worn photograph",
+    "size": 271923,
+    "source": "https://commons.wikimedia.org/wiki/File:A_well-worn_old_brick_-_geograph.org.uk_-_7527794.jpg"
+  },
+  "5c8a032e70da": {
+    "attribution": "Grogan, Ewart Scott, 1874-;\n\nSharp, Arthur H. (Arthur Henry)",
+    "caption": "If I hadn't overslept, I would have caught my flight.",
+    "file": "5c8a032e70da.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person sleeping through alarm",
+    "size": 199562,
+    "source": "https://commons.wikimedia.org/wiki/File:From_the_Cape_to_Cairo;_the_first_traverse_of_Africa_from_south_to_north_(1900)_(14800661133).jpg"
+  },
+  "5d1852aeb970": {
+    "attribution": "Randi Love from Spokane Valley, Washington, United States",
+    "caption": "She gave up trying to fix it.",
+    "file": "5d1852aeb970.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "person with hands over face",
+    "size": 132398,
+    "source": "https://commons.wikimedia.org/wiki/File:Doggy_style.jpg"
+  },
+  "5e4b6cacc7f8": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She must have been working late.",
+    "file": "5e4b6cacc7f8.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "child asleep at desk",
+    "size": 40571,
+    "source": "https://commons.wikimedia.org/wiki/File:A_Christmas_carol_(1900)_(14779393222).jpg"
+  },
+  "5f57a2078997": {
+    "attribution": "Dietmar Rabich",
+    "caption": "The power must have gone out.",
+    "file": "5f57a2078997.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "candles still burning late",
+    "size": 189957,
+    "source": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_St.-Viktor-Kirche,_Innenansicht,_Altar_--_2018_--_0552-6.jpg"
+  },
+  "5f8cace9cf2e": {
+    "attribution": "Picsum",
+    "caption": "He must have walked through the garden.",
+    "file": "5f8cace9cf2e.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "muddy shoes in hallway",
+    "size": 40373,
+    "source": "https://picsum.photos"
+  },
+  "60b1653dc6d2": {
+    "attribution": "Steve Redman (MORA)",
+    "caption": "Look up the answer in the dictionary.",
+    "file": "60b1653dc6d2.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person looking up phone number",
+    "size": 198138,
+    "source": "https://commons.wikimedia.org/wiki/File:Looking_from_Paradise_up_to_Little_Tahoma_with_fresh_winter_snow._(b4535e1cd78a424ab9eed7179ab34665).JPG"
+  },
+  "61825de72ca5": {
+    "attribution": "President Of Ukraine from Україна",
+    "caption": "He has been working on this project since morning.",
+    "file": "61825de72ca5.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person with tired eyes working late",
+    "size": 106887,
+    "source": "https://commons.wikimedia.org/wiki/File:Address_by_Volodymyr_Zelenskyy_on_the_Independence_Day_of_Ukraine._(53945195818).jpg"
+  },
+  "62efc17790b8": {
+    "attribution": "Unknown authorUnknown author or not provided",
+    "caption": "I have been writing emails since 9 AM.",
+    "file": "62efc17790b8.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person writing at desk with many pages",
+    "size": 127553,
+    "source": "https://commons.wikimedia.org/wiki/File:A_class_room_at_the_Carlisle_Indian_School._The_school_has_14_classrooms_representing_instruction_in_the_elementss_of..._-_NARA_-_298640.jpg"
+  },
+  "63c9bbd57602": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "He should have ironed his shirt.",
+    "file": "63c9bbd57602.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person with wrinkled clothes",
+    "size": 120813,
+    "source": "https://commons.wikimedia.org/wiki/File:Book_of_the_Royal_blue_(1897)_(14735970116).jpg"
+  },
+  "65012f1b4aa3": {
+    "attribution": "Fanny (Appleton) Longfellow (1817-1861)",
+    "caption": "She must have gone swimming.",
+    "file": "65012f1b4aa3.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "wet hair on sleeping child",
+    "size": 240969,
+    "source": "https://commons.wikimedia.org/wiki/File:Frances_(Appleton)_Longfellow_to_Anne_Longfellow_Pierce,_4_May_1848_(02070ced-90b0-4eda-8a2e-c2d025de13b4).jpg"
+  },
+  "66fe4a38e3c8": {
+    "attribution": "Ivan Petrović Poljak",
+    "caption": "She has gotten dressed for the interview.",
+    "file": "66fe4a38e3c8.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "person getting dressed for work",
+    "size": 110280,
+    "source": "https://commons.wikimedia.org/wiki/File:Bokelj_getting_dressed.jpg"
+  },
+  "67137b818f51": {
+    "attribution": "SarahAnnFlickr",
+    "caption": "She is going to have a baby next month.",
+    "file": "67137b818f51.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "pregnant woman holding belly",
+    "size": 279854,
+    "source": "https://commons.wikimedia.org/wiki/File:Nude_Pregnant_Woman_Holding_Belly.jpg"
+  },
+  "6728a6ae322b": {
+    "attribution": "iMahesh",
+    "caption": "The new office building is being constructed downtown.",
+    "file": "6728a6ae322b.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "building under construction",
+    "size": 174891,
+    "source": "https://commons.wikimedia.org/wiki/File:Capgemini_building_under_construction_as_on_August_2019.jpg"
+  },
+  "683d51bda600": {
+    "attribution": "Greg Gjerdingen from Willmar, USA",
+    "caption": "He got in the car and drove away.",
+    "file": "683d51bda600.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "man getting into car driver seat",
+    "size": 126598,
+    "source": "https://commons.wikimedia.org/wiki/File:1986_Chevrolet_Spectrum_and_a_Christmas_%22Tail%22_(6387084457).jpg"
+  },
+  "69e36c55c54e": {
+    "attribution": "Picsum",
+    "caption": "They were discussing the proposal when the director walked in.",
+    "file": "69e36c55c54e.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "colleagues chatting near office window",
+    "size": 11725,
+    "source": "https://picsum.photos"
+  },
+  "6b42019e141b": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "Try out the new recipe before serving guests.",
+    "file": "6b42019e141b.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "chef trying new recipe",
+    "size": 279827,
+    "source": "https://commons.wikimedia.org/wiki/File:The_Boston_Cooking_School_magazine_of_culinary_science_and_domestic_economics_(1913)_(14755477066).jpg"
+  },
+  "6c6eb485e8e9": {
+    "attribution": "Picsum",
+    "caption": "Someone could have looked through these files.",
+    "file": "6c6eb485e8e9.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "messy desk with papers",
+    "size": 42554,
+    "source": "https://picsum.photos"
+  },
+  "6f2e84078b4a": {
+    "attribution": "Spc. Christopher Grammer",
+    "caption": "He keeps up with all his coursework easily.",
+    "file": "6f2e84078b4a.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "student keeping up with class",
+    "size": 206411,
+    "source": "https://commons.wikimedia.org/wiki/File:Keeping_Up_With_Technology_at_the_Speed_of_Light_DVIDS70755.jpg"
+  },
+  "6ffe5b9c368f": {
+    "attribution": "Acabashi",
+    "caption": "If she had come, she would have enjoyed the dinner.",
+    "file": "6ffe5b9c368f.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "empty chair at dining table",
+    "size": 234872,
+    "source": "https://commons.wikimedia.org/wiki/File:Beer_garden_gazebo_at_Staplefield,_West_Sussex,_England.jpg"
   },
   "737aa96c95e6": {
     "attribution": "SSgt/ Christopher Griffin",
@@ -199,6 +1089,76 @@
     "size": 160700,
     "source": "https://commons.wikimedia.org/wiki/File:A_musician_performs_passionately_on_stage_with_a_full_band.jpg"
   },
+  "7518660c1ad0": {
+    "attribution": "w_lemay",
+    "caption": "She turned around to check if he followed.",
+    "file": "7518660c1ad0.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "woman turning around in street",
+    "size": 382609,
+    "source": "https://commons.wikimedia.org/wiki/File:Sacred_Heart_Academy,_2nd_Street,_St._Charles,_MO.jpg"
+  },
+  "75af717a37ca": {
+    "attribution": "Picsum",
+    "caption": "You can't have gotten this fit overnight.",
+    "file": "75af717a37ca.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "extremely fit athlete",
+    "size": 29128,
+    "source": "https://picsum.photos"
+  },
+  "76c76793976c": {
+    "attribution": "Judgefloro",
+    "caption": "She could be making a cake.",
+    "file": "76c76793976c.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person with cooking ingredients",
+    "size": 173537,
+    "source": "https://commons.wikimedia.org/wiki/File:4304Food_ingredients_of_home_cooking_02.jpg"
+  },
+  "76eb9bc92ed2": {
+    "attribution": "Jean-Baptiste Monnoyer / Nicolas de Poilly",
+    "caption": "He has arranged the flowers beautifully.",
+    "file": "76eb9bc92ed2.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person with arranged flowers in vase",
+    "size": 388588,
+    "source": "https://commons.wikimedia.org/wiki/File:-Flowers_Arranged_in_a_Glass_Vase-_MET_DP210756.jpg"
+  },
+  "78260bf67f3a": {
+    "attribution": "mypubliclands",
+    "caption": "He was running along the path when he twisted his ankle.",
+    "file": "78260bf67f3a.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person jogging on trail",
+    "size": 265517,
+    "source": "https://commons.wikimedia.org/wiki/File:Arizona_National_Scenic_Trail,_Arizona_(36569163942).jpg"
+  },
+  "7905f2cb9223": {
+    "attribution": "Pedro Ribeiro Simões from Lisboa, Portugal",
+    "caption": "The suspect claimed that he hadn't stolen anything.",
+    "file": "7905f2cb9223.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "journalist interviewing suspect",
+    "size": 196980,
+    "source": "https://commons.wikimedia.org/wiki/File:Pepetela_-_%22O_quase_fim_do_mundo%22_(%22Almost_the_world%27s_end%22)_(18830099015).jpg"
+  },
+  "79c0621a150e": {
+    "attribution": "Picsum",
+    "caption": "I was reading when the lights went out.",
+    "file": "79c0621a150e.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person reading book by lamplight",
+    "size": 54095,
+    "source": "https://picsum.photos"
+  },
   "7a8fff0c36f7": {
     "attribution": "Thomas and James Holroyd",
     "caption": "She has been married for ten years.",
@@ -219,6 +1179,56 @@
     "size": 110758,
     "source": "https://commons.wikimedia.org/wiki/File:Food_Taste.jpg"
   },
+  "7b9258369b21": {
+    "attribution": "Dietmar Rabich",
+    "caption": "They went in through the main entrance.",
+    "file": "7b9258369b21.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "person going into building doorway",
+    "size": 180079,
+    "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Wale_Street_--_2024_--_3536.jpg"
+  },
+  "7d0a9d98fe66": {
+    "attribution": "Erik Pevernagie\n \n\n.mw-parser-output .messagebox{margin:4px 0;width:auto;border-collapse:collapse;border:2px solid var(--border-color-progressive,#6485d1);background-color:var(--background-color-neutr",
+    "caption": "I wish I had listened to you when you warned me.",
+    "file": "7d0a9d98fe66.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "person in regret posture",
+    "size": 643667,
+    "source": "https://commons.wikimedia.org/wiki/File:Final_decision.jpg"
+  },
+  "7e46125aadc7": {
+    "attribution": "NPS Photo",
+    "caption": "They got on the bus at the station.",
+    "file": "7e46125aadc7.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person getting onto bus",
+    "size": 192153,
+    "source": "https://commons.wikimedia.org/wiki/File:Cave_Tour_Bus_Transportation,_NPS_Photo_(c527a6e7-c621-40ef-8028-61332c824618).jpg"
+  },
+  "7f2be537a342": {
+    "attribution": "Unknown authorUnknown author",
+    "caption": "Hand back the papers to your students.",
+    "file": "7f2be537a342.jpg",
+    "license": "CC BY 4.0",
+    "mime": "image/jpeg",
+    "query": "woman handing back assignment",
+    "size": 46861,
+    "source": "https://commons.wikimedia.org/wiki/File:Order,_military_(AM_2015.20.31-1).jpg"
+  },
+  "816ab4dd7b66": {
+    "attribution": "Agne27",
+    "caption": "We should have filled up the tank.",
+    "file": "816ab4dd7b66.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "empty gas tank",
+    "size": 264562,
+    "source": "https://commons.wikimedia.org/wiki/File:Gas_tank_used_in_wineries.JPG"
+  },
   "81fb62079e6f": {
     "attribution": "Raph_PH",
     "caption": "The perfume smells wonderful.",
@@ -229,6 +1239,26 @@
     "size": 78993,
     "source": "https://commons.wikimedia.org/wiki/File:AllPointsEastAug2022_(255_of_385)_(52327314853).jpg"
   },
+  "8418f87f64e5": {
+    "attribution": "Cosimo Tura",
+    "caption": "Sit down and listen to me, please.",
+    "file": "8418f87f64e5.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "child sitting down on carpet",
+    "size": 488491,
+    "source": "https://commons.wikimedia.org/wiki/File:Cosme_Tura_Madonna_and_Child_in_the_Garden.jpg"
+  },
+  "8b73ead6d38b": {
+    "attribution": "Leendert Adriaan van Es",
+    "caption": "They have been studying for their exam all week.",
+    "file": "8b73ead6d38b.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/tiff",
+    "query": "student surrounded by study materials",
+    "size": 184419,
+    "source": "https://commons.wikimedia.org/wiki/File:ASC_Leiden_-_NSAG_-_van_Es_16a_-_001_-_Un_%C3%A9tudiant_n%C3%A9erlandais_inspecte_une_roue_du_camion_lourd_de_type_DAF_YA-126_-_Togo_-_18-21_f%C3%A9vrier_1962.tif"
+  },
   "8c12163b7110": {
     "attribution": "John Lewis Childs (Firm);\n\nHenry G. Gilbert Nursery and Seed Trade Catalog Collection",
     "caption": "Pick up your toys, please.",
@@ -238,6 +1268,46 @@
     "query": "child picking up toys",
     "size": 219619,
     "source": "https://commons.wikimedia.org/wiki/File:Childs%27_seeds_that_satisfy_bulbs_that_bloom_plants_that_please_(1920)_(19986061514).jpg"
+  },
+  "8dc90335aa86": {
+    "attribution": "Arrow Aircraft &amp; Motors Corporation",
+    "caption": "You must have spent a fortune.",
+    "file": "8dc90335aa86.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person looking shocked at bill",
+    "size": 214842,
+    "source": "https://commons.wikimedia.org/wiki/File:Arrow_Sport_A2-60_-_DPLA_-_40a2361214cdccbe5d454138296b39c9_(page_1).jpg"
+  },
+  "8fd5de8108d7": {
+    "attribution": "Bollywood Hungama",
+    "caption": "He told me he had finished the project on time.",
+    "file": "8fd5de8108d7.jpg",
+    "license": "CC BY 3.0",
+    "mime": "image/jpeg",
+    "query": "man gesturing while talking",
+    "size": 161831,
+    "source": "https://commons.wikimedia.org/wiki/File:Aditi_Rao_Hydari_at_Cafe_Coffee_Day_01.jpg"
+  },
+  "901a8af5585f": {
+    "attribution": "Picsum",
+    "caption": "He was getting dressed when the phone rang.",
+    "file": "901a8af5585f.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person entering busy subway during rush hour",
+    "size": 76236,
+    "source": "https://picsum.photos"
+  },
+  "90afb0ff3cc4": {
+    "attribution": "Dietmar Rabich",
+    "caption": "This could cost a fortune.",
+    "file": "90afb0ff3cc4.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "expensive sports car",
+    "size": 324927,
+    "source": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Fr%C3%BChlingsfest_Sportwagenmanufaktur_Wiesmann_--_2013_--_0127.jpg"
   },
   "912102f9ade1": {
     "attribution": "Barnes, Annie Maria, b. 1857",
@@ -269,6 +1339,66 @@
     "size": 95111,
     "source": "https://commons.wikimedia.org/wiki/File:Andrew_Petrie%27s_Residence,_Queen_and_Wharf_Streets,_Brisbane,_c_1859.jpg"
   },
+  "93a7dcd316c2": {
+    "attribution": "Picsum",
+    "caption": "The tower is going to collapse right now.",
+    "file": "93a7dcd316c2.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "teetering stack of books",
+    "size": 19543,
+    "source": "https://picsum.photos"
+  },
+  "9479aae5d84b": {
+    "attribution": "Jerry7171",
+    "caption": "He is going to ask you a question.",
+    "file": "9479aae5d84b.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "child looking up at adult's face",
+    "size": 251597,
+    "source": "https://commons.wikimedia.org/wiki/File:Prayer_Rock_Face_at_Pettigrew_Home_and_Museum_01.jpg"
+  },
+  "94ee08736450": {
+    "attribution": "Picsum",
+    "caption": "We are going to leave for the airport now.",
+    "file": "94ee08736450.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person with packed suitcase at door",
+    "size": 80475,
+    "source": "https://picsum.photos"
+  },
+  "95109c581f35": {
+    "attribution": "Austin L. Davison",
+    "caption": "My leg has been broken, and I can't walk.",
+    "file": "95109c581f35.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person with foot in cast",
+    "size": 89023,
+    "source": "https://commons.wikimedia.org/wiki/File:Austin_L._Davison,_Cast_Iron_Foot_Scraper,_1937,_NGA_23953.jpg"
+  },
+  "955e632225ca": {
+    "attribution": "Paul Lucas from Leicestershire, UK",
+    "caption": "You can count on me whenever you need help.",
+    "file": "955e632225ca.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "best friends together",
+    "size": 176210,
+    "source": "https://commons.wikimedia.org/wiki/File:Best_Friends!_(7573267890).jpg"
+  },
+  "9638539f055c": {
+    "attribution": "Pedro Ribeiro Simões from Lisboa, Portugal",
+    "caption": "Write down the main points from the lecture.",
+    "file": "9638539f055c.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "student writing down notes in class",
+    "size": 225456,
+    "source": "https://commons.wikimedia.org/wiki/File:Lady_and_Child_asleep_in_a_punter_under_the_willows_(1887)_-_John_Singer_Sargent_(1886_-_1925)_(30462902862).jpg"
+  },
   "97157879d526": {
     "attribution": "",
     "caption": "He has examined five patients this morning.",
@@ -279,6 +1409,26 @@
     "size": 1097750,
     "source": "https://commons.wikimedia.org/wiki/File:A_doctor_examining_a_disgruntled_patient,_John_Bull_Wellcome_V0011373.jpg"
   },
+  "982c2a07120b": {
+    "attribution": "Picsum",
+    "caption": "Set down the plates carefully on the table.",
+    "file": "982c2a07120b.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "parent setting down dishes",
+    "size": 16294,
+    "source": "https://picsum.photos"
+  },
+  "991f7d7b5a93": {
+    "attribution": "Cover, CDC, Painting: Pieter Claesz, 1627",
+    "caption": "He has eaten his dinner.",
+    "file": "991f7d7b5a93.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "empty plate after meal",
+    "size": 464392,
+    "source": "https://commons.wikimedia.org/wiki/File:EID_Journal_cover_January_2010.jpg"
+  },
   "993f97a66112": {
     "attribution": "JTF Guantanamo photo by Army Sgt. 1st Class Vaughn R. Larson",
     "caption": "They watch movies every Friday night.",
@@ -288,6 +1438,26 @@
     "query": "person watching movie",
     "size": 25457,
     "source": "https://commons.wikimedia.org/wiki/File:Guantanamo_movie_night.jpg"
+  },
+  "9acd66f5681f": {
+    "attribution": "Caleb Rogers therodgepodge",
+    "caption": "Someone must have left.",
+    "file": "9acd66f5681f.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "empty parking space",
+    "size": 90364,
+    "source": "https://commons.wikimedia.org/wiki/File:Dark_empty_parking_space_(Unsplash).jpg"
+  },
+  "9b9e61bd41e6": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "He takes after his grandfather in appearance.",
+    "file": "9b9e61bd41e6.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "young man resembling older man",
+    "size": 338955,
+    "source": "https://commons.wikimedia.org/wiki/File:Cast_away_in_the_cold_-_an_old_man%27s_story_of_a_young_man%27s_adventures,_as_related_by_Captain_John_Hardy,_mariner_(1868)_(14596105490).jpg"
   },
   "9bba90a4f268": {
     "attribution": "Oscar del Pozo / European Commission Audiovisual Service",
@@ -309,6 +1479,96 @@
     "size": 130704,
     "source": "https://commons.wikimedia.org/wiki/File:KOCIS_Journalist_NewAgency_01_(27767082333).jpg"
   },
+  "9ee41dc8cfdd": {
+    "attribution": "Fons Heijnsbroek",
+    "caption": "He was painting when inspiration struck.",
+    "file": "9ee41dc8cfdd.jpg",
+    "license": "CC0",
+    "mime": "image/tiff",
+    "query": "artist painting on canvas",
+    "size": 168027,
+    "source": "https://commons.wikimedia.org/wiki/File:%27Water_cathedrale%27_-_a_large_abstract_painting_on_canvas,_created_together_by_BenFo_(Dutch_artist_friends_Ben_Vollers_%26_Fons_Heijnsbroek._They_painted_it_together_on_one_canvas_in_Avallon,_Burgundy,_in_Spring_2009.tif"
+  },
+  "9ee814e2af00": {
+    "attribution": "JESHOOTS.COM jeshoots",
+    "caption": "She was working when her boss arrived early.",
+    "file": "9ee814e2af00.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person on laptop in office",
+    "size": 77846,
+    "source": "https://commons.wikimedia.org/wiki/File:Businessman_working_and_writing_notes_in_office_(Unsplash).jpg"
+  },
+  "9fe981682157": {
+    "attribution": "Pseudopanax at English Wikipedia",
+    "caption": "If I had watered the plants, they wouldn't have died.",
+    "file": "9fe981682157.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "garden with wilted plants",
+    "size": 388431,
+    "source": "https://commons.wikimedia.org/wiki/File:Espostoa_blossfeldiorum_with_wilted_flowers.jpg"
+  },
+  "a001686085b1": {
+    "attribution": "Department of Defense. American Forces Information Service. Defense Visual Information Center. 1994",
+    "caption": "She picked up the scattered papers.",
+    "file": "a001686085b1.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person picking up dropped items",
+    "size": 130614,
+    "source": "https://commons.wikimedia.org/wiki/File:A_C-141_Starlifter_aircraft_from_62nd_Air_Mobility_Wing,_McChord_Air_Force_Base,_Washington,_prepares_to_start_taxiing_to_the_fuel_pits_at_Marine_Corps_Air_Station_Cherry_Point_to_p_-_DPLA_-_838ad2ddae5a970bce7ef0e155aecb14.jpeg"
+  },
+  "a14fb9c3a3b8": {
+    "attribution": "Kenneth  Allen",
+    "caption": "The driver slowed down because of traffic.",
+    "file": "a14fb9c3a3b8.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "car slowing down on road",
+    "size": 235567,
+    "source": "https://commons.wikimedia.org/wiki/File:Car_slows_down_while_passing_cyclist,_Mullaghmore_-_geograph.org.uk_-_6359686.jpg"
+  },
+  "a1ab66997da3": {
+    "attribution": "Picsum",
+    "caption": "Help me climb up to the roof.",
+    "file": "a1ab66997da3.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "father helping son climb onto wall",
+    "size": 33580,
+    "source": "https://picsum.photos"
+  },
+  "a239e86dec19": {
+    "attribution": "Passport Photographer's Studio in Oxford Street, London. Copyright passed to Albert Humphrey, and then to his wife (Myriam De Baere) upon his death, who has released it",
+    "caption": "They could be planning a trip.",
+    "file": "a239e86dec19.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "person with passport and tickets",
+    "size": 287344,
+    "source": "https://commons.wikimedia.org/wiki/File:Albert_S_Humphrey_passport_picture.jpg"
+  },
+  "a31b569895ea": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She passed out when she heard the news.",
+    "file": "a31b569895ea.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person fainting from shock",
+    "size": 161034,
+    "source": "https://commons.wikimedia.org/wiki/File:Canadian_forest_industries_1916_(1916)_(20502880756).jpg"
+  },
+  "a4b36ab9b9d6": {
+    "attribution": "Tommy Wong",
+    "caption": "He is swimming in the pool at noon.",
+    "file": "a4b36ab9b9d6.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "person swimming in pool",
+    "size": 122317,
+    "source": "https://commons.wikimedia.org/wiki/File:Girl_with_swimming_board.jpg"
+  },
   "a51f01aac8a6": {
     "attribution": "The Library of Congress",
     "caption": "She is putting on her makeup for the party.",
@@ -318,6 +1578,56 @@
     "query": "woman putting on red lipstick",
     "size": 128379,
     "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_The_Library_of_Congress_-_Woman_putting_on_her_lipstick_in_a_park_with_Union_Station_behind_her,_Washington,_D.C._(LOC).jpg"
+  },
+  "a63d0bd03e36": {
+    "attribution": "Picsum",
+    "caption": "She put on her coat before leaving.",
+    "file": "a63d0bd03e36.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "woman putting on winter coat",
+    "size": 34662,
+    "source": "https://picsum.photos"
+  },
+  "a7601f47d04a": {
+    "attribution": "U.S. Navy Photographer's Mate 2nd Class Daniel J. McLain",
+    "caption": "You may graduate with honors.",
+    "file": "a7601f47d04a.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "graduation diploma ceremony",
+    "size": 132733,
+    "source": "https://commons.wikimedia.org/wiki/File:AnnapolisGraduation.jpg"
+  },
+  "a77eb83eee2e": {
+    "attribution": "Trougnouf (Benoit Brummer)",
+    "caption": "Cheer up, things will get better soon.",
+    "file": "a77eb83eee2e.jpg",
+    "license": "CC BY 4.0",
+    "mime": "image/jpeg",
+    "query": "person smiling happily",
+    "size": 506678,
+    "source": "https://commons.wikimedia.org/wiki/File:A_couple_of_face-painted_humans_happily_gazing_into_each_other%27s_eyes_-_crop_1_(DSC03824).jpg"
+  },
+  "a79d8236a744": {
+    "attribution": "Photo by Petty Officer 2nd Class Ernesto Hernandez Fonte",
+    "caption": "The witness stated that she had seen the suspect leaving the area.",
+    "file": "a79d8236a744.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "police officer interviewing witness",
+    "size": 115526,
+    "source": "https://commons.wikimedia.org/wiki/File:110220-N-9584H-049.jpg"
+  },
+  "a7ad6ccf43e1": {
+    "attribution": "Manfred Werner (Tsui)",
+    "caption": "If he had been watching, he wouldn't have missed the goal.",
+    "file": "a7ad6ccf43e1.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "person missing a ball in sports",
+    "size": 112915,
+    "source": "https://commons.wikimedia.org/wiki/File:Ball_des_Sports_2009_-_Kopal,_Nadarajah,_Schaschnig,_Koschischek,_Strobl.jpg"
   },
   "a8bbc9860d91": {
     "attribution": "Thomas Stothard",
@@ -329,6 +1639,176 @@
     "size": 318509,
     "source": "https://commons.wikimedia.org/wiki/File:A_Sailor%27s_Return_in_Peace_RMG_BHC1125.tiff"
   },
+  "a8d5df4f7bc8": {
+    "attribution": "Joxemai",
+    "caption": "The rubbish should have been taken out.",
+    "file": "a8d5df4f7bc8.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "overflowing trash bin",
+    "size": 179838,
+    "source": "https://commons.wikimedia.org/wiki/File:Full_trash_bin_0001.jpg"
+  },
+  "a92e3aaec1af": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "We ran into each other at the supermarket.",
+    "file": "a92e3aaec1af.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "two people meeting unexpectedly",
+    "size": 162958,
+    "source": "https://commons.wikimedia.org/wiki/File:Bell_telephone_magazine_(1922)_(14753018241).jpg"
+  },
+  "a9cf87ce11e5": {
+    "attribution": "Lies Thru a Lens",
+    "caption": "They were watching TV when the storm started.",
+    "file": "a9cf87ce11e5.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "person inside house looking out window at rain",
+    "size": 89333,
+    "source": "https://commons.wikimedia.org/wiki/File:Nude_beauty.jpg"
+  },
+  "aaa1f0d37f08": {
+    "attribution": "Picsum",
+    "caption": "We were sleeping through the night when the fire alarm sounded.",
+    "file": "aaa1f0d37f08.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "broken alarm clock on bedside table",
+    "size": 72788,
+    "source": "https://picsum.photos"
+  },
+  "ad9a7e0d5e9a": {
+    "attribution": "Picsum",
+    "caption": "If they had studied harder, they would have passed the exam.",
+    "file": "ad9a7e0d5e9a.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "empty exam hall after test",
+    "size": 35026,
+    "source": "https://picsum.photos"
+  },
+  "adef7eeb74b8": {
+    "attribution": "Teasdale, Sara, 1884-1933",
+    "caption": "She said that she had never been to that country before.",
+    "file": "adef7eeb74b8.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person reading aloud from letter",
+    "size": 310495,
+    "source": "https://commons.wikimedia.org/wiki/File:Letter_signed_Sara,_New_York,_to_Irma_(Filsinger),_July_19,_1918_-_DPLA_-_e87c7b37739751c5c9031c6e9756eebb_(page_1).jpg"
+  },
+  "aebe555081fa": {
+    "attribution": "Lies Thru a Lens",
+    "caption": "She lay down because she was tired.",
+    "file": "aebe555081fa.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "woman lying on couch resting",
+    "size": 75168,
+    "source": "https://commons.wikimedia.org/wiki/File:Ais_-_topless_woman_resting_on_couch,_2013.jpg"
+  },
+  "af6b0d91fbc3": {
+    "attribution": "Wikimedia Foundation Staff and Contractors",
+    "caption": "She said she was feeling tired after work.",
+    "file": "af6b0d91fbc3.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "woman on phone looking serious",
+    "size": 126277,
+    "source": "https://commons.wikimedia.org/wiki/File:Wikimedia_Foundation_Photography_Collection_2023_014.jpg"
+  },
+  "b02a67bfe4ee": {
+    "attribution": "Jonathan Billinger",
+    "caption": "The house was built in the 1960s.",
+    "file": "b02a67bfe4ee.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "newly built house",
+    "size": 206507,
+    "source": "https://commons.wikimedia.org/wiki/File:Newly-built_house_-_geograph.org.uk_-_2006515.jpg"
+  },
+  "b053c51030f6": {
+    "attribution": "Jean-Baptiste Camille Corot",
+    "caption": "He is reading the newspaper at breakfast.",
+    "file": "b053c51030f6.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person reading a book",
+    "size": 325402,
+    "source": "https://commons.wikimedia.org/wiki/File:Jean_Baptiste_Camille_Corot_-_Interrupted_Reading_-_1922.410_-_Art_Institute_of_Chicago.jpg"
+  },
+  "b1ab42f01d11": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She brought up an interesting point during the meeting.",
+    "file": "b1ab42f01d11.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "teacher bringing up topic in class",
+    "size": 335121,
+    "source": "https://commons.wikimedia.org/wiki/File:Annual_catalogue_of_the_officers_and_students_of_the_Fort_Hays_Auxiliary_State_Normal_School_-_first_year-1902-%2703_(1902)_(14779577864).jpg"
+  },
+  "b1ec0ed3f9a3": {
+    "attribution": "ChanisCaucasi",
+    "caption": "You must stop at this intersection.",
+    "file": "b1ec0ed3f9a3.jpg",
+    "license": "CC BY 4.0",
+    "mime": "image/jpeg",
+    "query": "stop sign on street",
+    "size": 300682,
+    "source": "https://commons.wikimedia.org/wiki/File:Bus_stop_sign_in_Rustam_Rustamov_street,_Baku.jpg"
+  },
+  "b216181518a3": {
+    "attribution": "Sam valadi",
+    "caption": "The company made up for the poor service.",
+    "file": "b216181518a3.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "person compensating for mistake",
+    "size": 147048,
+    "source": "https://commons.wikimedia.org/wiki/File:Gateway_Arch_-_St._Louis_-_Missouri_(17275578342).jpg"
+  },
+  "b24b41aa51ac": {
+    "attribution": "Airman Apprentice Antonia Ramos, U.S. Navy",
+    "caption": "He was waiting for the bus when it finally arrived.",
+    "file": "b24b41aa51ac.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person at traffic light checking watch",
+    "size": 149330,
+    "source": "https://commons.wikimedia.org/wiki/File:Defense.gov_News_Photo_050415-N-1590R-001.jpg"
+  },
+  "b3c8f374dac9": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She mentioned that she would visit next week.",
+    "file": "b3c8f374dac9.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person taking notes during conversation",
+    "size": 284502,
+    "source": "https://commons.wikimedia.org/wiki/File:Architect_and_engineer_(1920)_(14780005881).jpg"
+  },
+  "b479f95c4e26": {
+    "attribution": "Picsum",
+    "caption": "He should have submitted it on time.",
+    "file": "b479f95c4e26.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "missed deadline on calendar",
+    "size": 81781,
+    "source": "https://picsum.photos"
+  },
+  "b516dc9105fb": {
+    "attribution": "Picsum",
+    "caption": "She has drunk her coffee this morning.",
+    "file": "b516dc9105fb.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "woman with finished coffee cup",
+    "size": 44587,
+    "source": "https://picsum.photos"
+  },
   "b51ba7a296be": {
     "attribution": "Ivan Radic",
     "caption": "She wears sunglasses whenever it's sunny.",
@@ -338,6 +1818,116 @@
     "query": "person wearing sunglasses",
     "size": 153428,
     "source": "https://commons.wikimedia.org/wiki/File:First_person_view_close-up_photo_of_a_man_wearing_sunglasses._Side_of_his_head_including_the_ear_visible_(51169465776).jpg"
+  },
+  "b52017f09383": {
+    "attribution": "Katherine Stember",
+    "caption": "He is writing an essay at the moment.",
+    "file": "b52017f09383.jpg",
+    "license": "CC BY 4.0",
+    "mime": "image/jpeg",
+    "query": "student writing in notebook",
+    "size": 124339,
+    "source": "https://commons.wikimedia.org/wiki/File:Lab_Notebook.jpg"
+  },
+  "b5fbe04f39b7": {
+    "attribution": "USFWS/Southeast",
+    "caption": "He got over his cold very quickly.",
+    "file": "b5fbe04f39b7.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person recovering from illness",
+    "size": 139423,
+    "source": "https://commons.wikimedia.org/wiki/File:Administrative_professional_of_the_year-_Teresa_Ward_(40844135773).jpg"
+  },
+  "b763e12aecb5": {
+    "attribution": "Jeff Attaway from Dakar, Senegal",
+    "caption": "He might be getting sick.",
+    "file": "b763e12aecb5.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "thermometer showing high temp",
+    "size": 255284,
+    "source": "https://commons.wikimedia.org/wiki/File:Thermometer_in_Burkina_Faso_showing_high_temperature,_2009.jpg"
+  },
+  "b76fe1ab9b63": {
+    "attribution": "JigglyWiggley (scan), ChatGPT (text)",
+    "caption": "She has completed her homework already.",
+    "file": "b76fe1ab9b63.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "student with completed homework",
+    "size": 103645,
+    "source": "https://commons.wikimedia.org/wiki/File:ChatGPT_Spanish_homework.jpg"
+  },
+  "b7aa0214a36d": {
+    "attribution": "Picsum",
+    "caption": "He worked out the solution to the problem.",
+    "file": "b7aa0214a36d.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "student solving difficult equation",
+    "size": 49632,
+    "source": "https://picsum.photos"
+  },
+  "b8e5e097da78": {
+    "attribution": "Lightframer007",
+    "caption": "Call off the search and come home.",
+    "file": "b8e5e097da78.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "mother calling child to come home",
+    "size": 238791,
+    "source": "https://commons.wikimedia.org/wiki/File:Blessings_of_god.jpg"
+  },
+  "b9e1aceaf51d": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "If you had locked the door, the burglar wouldn't have gotten in.",
+    "file": "b9e1aceaf51d.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "locked door with key on ground",
+    "size": 393346,
+    "source": "https://commons.wikimedia.org/wiki/File:A_journey_in_the_seaboard_slave_states_-_with_remarks_on_their_economy_(1856)_(14595695408).jpg"
+  },
+  "bb1142c04e1c": {
+    "attribution": "Sgt. Mark Fayloga",
+    "caption": "She was warming up for the match when the coach called a team meeting.",
+    "file": "bb1142c04e1c.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "athlete stretching before game",
+    "size": 120101,
+    "source": "https://commons.wikimedia.org/wiki/File:Semper_Fi_All-Americans_prepare_for_Semper_Fidelis_Bowl_120101-M-YO938-016.jpg"
+  },
+  "bb462978904c": {
+    "attribution": "Bureau of Land Management Oregon and Washington from Portland, America",
+    "caption": "He wondered whether he would pass the final exam.",
+    "file": "bb462978904c.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "student talking to teacher after class",
+    "size": 162632,
+    "source": "https://commons.wikimedia.org/wiki/File:A_forester_goes_to_Buckman_Elementary_(34683879696).jpg"
+  },
+  "bbc53aed0638": {
+    "attribution": "Lionel Allorge",
+    "caption": "The car window was broken during the night.",
+    "file": "bbc53aed0638.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "broken car window",
+    "size": 254874,
+    "source": "https://commons.wikimedia.org/wiki/File:Broken_car_window.jpg"
+  },
+  "bc14f190ba2c": {
+    "attribution": "Ed Yourdon from New York City, USA",
+    "caption": "She is going to catch a cold.",
+    "file": "bc14f190ba2c.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "person walking in the rain, getting wet",
+    "size": 415772,
+    "source": "https://commons.wikimedia.org/wiki/File:Happy_man_in_a_rainy_day.jpg"
   },
   "bc60e588cb84": {
     "attribution": "Giles Laurent",
@@ -349,6 +1939,56 @@
     "size": 122098,
     "source": "https://commons.wikimedia.org/wiki/File:033_Saddle-billed_stork_landing_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg"
   },
+  "bd1885f1dbd7": {
+    "attribution": "Gunn, Thomas Butler, 1826-1903",
+    "caption": "If only she had bought the ticket earlier, she could have gone to the concert.",
+    "file": "bd1885f1dbd7.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "child with empty hands looking sad",
+    "size": 271487,
+    "source": "https://commons.wikimedia.org/wiki/File:Thomas_Butler_Gunn_Diaries-_Volume_5,_page_175,_March_29,_1853.jpg"
+  },
+  "bd680d98f1c7": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "She broke down after hearing the news.",
+    "file": "bd680d98f1c7.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person crying after bad news",
+    "size": 444590,
+    "source": "https://commons.wikimedia.org/wiki/File:St._Nicholas_(serial)_(1873)_(14590693559).jpg"
+  },
+  "bd7e7a1a9bbc": {
+    "attribution": "David Hume Kennerly",
+    "caption": "You are going to regret this decision.",
+    "file": "bd7e7a1a9bbc.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person holding phone with angry expression",
+    "size": 357712,
+    "source": "https://commons.wikimedia.org/wiki/File:Ford_A4232_NLGRF_photo_contact_sheet_(1975-04-28)(Gerald_Ford_Library).jpg"
+  },
+  "be97863fcab7": {
+    "attribution": "MrSwagger21",
+    "caption": "It is going to rain very soon.",
+    "file": "be97863fcab7.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "dark storm clouds approaching",
+    "size": 143812,
+    "source": "https://commons.wikimedia.org/wiki/File:Dark_clouds_over_Towers_of_Channelside,_Tampa,_FL.jpg"
+  },
+  "bfae28605f1b": {
+    "attribution": "James Carrington",
+    "caption": "If I had been more careful, the glass vase wouldn't have broken.",
+    "file": "bfae28605f1b.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "broken glass vase on floor",
+    "size": 452012,
+    "source": "https://commons.wikimedia.org/wiki/File:St_Etheldreda,_Hatfield,_Herts_-_Salisbury_Chapel_-_tomb_of_Robert_1st_Earl_of_Salisbury_and_stained_glass_window.jpg"
+  },
   "c0577288fa3f": {
     "attribution": "USDAgov",
     "caption": "Do you understand what I'm saying?",
@@ -358,6 +1998,126 @@
     "query": "person looking confused",
     "size": 189540,
     "source": "https://commons.wikimedia.org/wiki/File:GAS_look-alike_(20230920-APHIS-PPQ-FB-comp1).jpg"
+  },
+  "c13350d33a3d": {
+    "attribution": "Picsum",
+    "caption": "She looked forward to the summer holidays.",
+    "file": "c13350d33a3d.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person anticipating something pleasant",
+    "size": 52435,
+    "source": "https://picsum.photos"
+  },
+  "c13f3747533d": {
+    "attribution": "David Falconer",
+    "caption": "He is going to be late to the meeting.",
+    "file": "c13f3747533d.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person driving in heavy traffic",
+    "size": 204109,
+    "source": "https://commons.wikimedia.org/wiki/File:FREEWAY_TRAFFIC_WAS_NOT_AS_HEAVY_IN_MARCH,_1974,_AS_BEFORE_THE_GASOLINE_SHORTAGE._NON-ESSENTIAL_COMMERCIAL_TRAFFIC_AS..._-_NARA_-_555505.jpg"
+  },
+  "c321255be22d": {
+    "attribution": "Pacific Southwest Region USFWS from Sacramento, US",
+    "caption": "She looked up to her manager as a role model.",
+    "file": "c321255be22d.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "mentor and student admiring",
+    "size": 218662,
+    "source": "https://commons.wikimedia.org/wiki/File:Ashley_Spratt_(25045360314).jpg"
+  },
+  "c3999e604c09": {
+    "attribution": "Ezra Jeffrey emcomeau",
+    "caption": "She walked past the coffee shop without stopping.",
+    "file": "c3999e604c09.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person walking past storefront",
+    "size": 149782,
+    "source": "https://commons.wikimedia.org/wiki/File:Words_in_Context._Time_In_Context_(Unsplash).jpg"
+  },
+  "c3f1f30166e6": {
+    "attribution": "Chris Heaton",
+    "caption": "The website is being updated for security improvements.",
+    "file": "c3f1f30166e6.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "website under maintenance",
+    "size": 196021,
+    "source": "https://commons.wikimedia.org/wiki/File:Clapham_Viaduct_under_Maintenance_-_geograph.org.uk_-_4319477.jpg"
+  },
+  "c48ae91944f0": {
+    "attribution": "Marvin Nauman",
+    "caption": "Dinner is being prepared in the kitchen.",
+    "file": "c48ae91944f0.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "meal being cooked in kitchen",
+    "size": 150952,
+    "source": "https://commons.wikimedia.org/wiki/File:FEMA_-_17002_-_Photograph_by_Marvin_Nauman_taken_on_10-09-2005_in_Louisiana.jpg"
+  },
+  "c49cab4a3648": {
+    "attribution": "Picsum",
+    "caption": "She was singing beautifully when the microphone failed.",
+    "file": "c49cab4a3648.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "musician playing while audience watches",
+    "size": 39799,
+    "source": "https://picsum.photos"
+  },
+  "c5b820775f6a": {
+    "attribution": "Scan by NYPL",
+    "caption": "The cyclist fell over on the wet pavement.",
+    "file": "c5b820775f6a.jpg",
+    "license": "Public domain",
+    "mime": "image/tiff",
+    "query": "child falling over bicycle",
+    "size": 72573,
+    "source": "https://commons.wikimedia.org/wiki/File:Centre_(sic)_Fall,_over_Cave_of_Winds,_winter,_Niagara_(NYPL_b11707602-G90F395_132B).tiff"
+  },
+  "c608107a0451": {
+    "attribution": "Marko Milivojevic (milim84)",
+    "caption": "The orchestra has been rehearsing since this morning.",
+    "file": "c608107a0451.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "musicians playing ensemble",
+    "size": 67247,
+    "source": "https://commons.wikimedia.org/wiki/File:Bra%C4%8D_played_in_the_tamburica_ensemble_(2019-04-20_16.52.09_by_Marko_Milivojevic_@PIXNIO_2592516).jpg"
+  },
+  "c727a8318bd2": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "The baby has been crying for an hour.",
+    "file": "c727a8318bd2.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "child crying with tears",
+    "size": 331891,
+    "source": "https://commons.wikimedia.org/wiki/File:A_study_of_a_child_(1898)_(14597377789).jpg"
+  },
+  "c74d1a654ce2": {
+    "attribution": "Boucher, Jack E.\nRelated names:\n\nPost, Marjorie Merriweather\nWyeth, Marion Sims\nUrban, Joseph\nBarwig, Franz\nLewis and Valentine\nLightbrown, Cooper C",
+    "caption": "You can't be cold on the beach.",
+    "file": "c74d1a654ce2.jpg",
+    "license": "Public domain",
+    "mime": "image/tiff",
+    "query": "person at beach in winter coat",
+    "size": 139956,
+    "source": "https://commons.wikimedia.org/wiki/File:April_1967_DETAIL_OF_SOUTH_END_OF_ENTRANCE_HALL_SHOWING_TILE_OVERDOOR,_CEILING_DECORATION,_AND_COATS_OF_ARMS_-_Mar-a-Lago,_1100_South_Ocean_Boulevard,_Palm_Beach,_Palm_Beach_HABS_FLA,50-PALM,1-17.tif"
+  },
+  "c7cf863efae8": {
+    "attribution": "Henri Rousseau (French, 1844 - 1910) (1844 - 1910) – artist (French) Details on Google Art Project",
+    "caption": "It turned out to be a surprise party.",
+    "file": "c7cf863efae8.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "surprise birthday party",
+    "size": 248515,
+    "source": "https://commons.wikimedia.org/wiki/File:Henri_Rousseau_(French)_-_A_Centennial_of_Independence_-_Google_Art_Project.jpg"
   },
   "c7eeb184885e": {
     "attribution": "Samira Oumousa",
@@ -369,6 +2129,56 @@
     "size": 255731,
     "source": "https://commons.wikimedia.org/wiki/File:Chef_fabrizio_facchini.jpg"
   },
+  "c83336aee7fb": {
+    "attribution": "",
+    "caption": "A new key has been made for the front door.",
+    "file": "c83336aee7fb.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person holding new key",
+    "size": 193508,
+    "source": "https://commons.wikimedia.org/wiki/File:Panel_with_crouching_figure_holding_a_key_MET_13.182.45_EGDP013800.jpg"
+  },
+  "ca2f1a27ddd9": {
+    "attribution": "Office of Congresswoman Alma Adams",
+    "caption": "She was asked difficult questions during the interview.",
+    "file": "ca2f1a27ddd9.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person being interviewed",
+    "size": 105613,
+    "source": "https://commons.wikimedia.org/wiki/File:Alma_Adams_being_interviewed_-_2019.jpg"
+  },
+  "ca498aed6d64": {
+    "attribution": "Picsum",
+    "caption": "He asked what time the restaurant would close.",
+    "file": "ca498aed6d64.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "waiter taking customer order",
+    "size": 54095,
+    "source": "https://picsum.photos"
+  },
+  "cb6d1954560b": {
+    "attribution": "Artaxerxes",
+    "caption": "She is playing the guitar for her audience.",
+    "file": "cb6d1954560b.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "musician playing guitar",
+    "size": 417218,
+    "source": "https://commons.wikimedia.org/wiki/File:Jason_Wagner_acoustic_guitar_Our_Community_Place_Harrisonburg_VA_April_2008.jpg"
+  },
+  "cbc135705975": {
+    "attribution": "Retired electrician",
+    "caption": "We should have gone shopping yesterday.",
+    "file": "cbc135705975.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "empty fridge interior",
+    "size": 180293,
+    "source": "https://commons.wikimedia.org/wiki/File:Moscow,_31.05.2022_-_empty_space_in_Auchan-Mini_store_01.jpg"
+  },
   "cbfae86ab12a": {
     "attribution": "jetzenpolis from USA",
     "caption": "She thinks Paris is beautiful.",
@@ -378,6 +2188,16 @@
     "query": "woman thinking in profile",
     "size": 243357,
     "source": "https://commons.wikimedia.org/wiki/File:Chicago-_Picasso_sculpture,_Richard_J_Daley_Ctr_(1068546281).jpg"
+  },
+  "cde5121212cc": {
+    "attribution": "Eric Friedebach",
+    "caption": "The boy ran away when he saw the dog.",
+    "file": "cde5121212cc.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "child running away from camera",
+    "size": 203251,
+    "source": "https://commons.wikimedia.org/wiki/File:Baldwin_Hotel,_Klamath_Falls_OR_(51106635442).jpg"
   },
   "ceabffe8a0e9": {
     "attribution": "Picsum",
@@ -409,6 +2229,76 @@
     "size": 134196,
     "source": "https://commons.wikimedia.org/wiki/File:Pittura_parietale_uomo_con_antilope;_in_alto,_due_uomini_IEU_5005.tif"
   },
+  "d356f88e7fde": {
+    "attribution": "Grand Canyon NPS",
+    "caption": "He looks down on people from lower backgrounds.",
+    "file": "d356f88e7fde.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "boss looking down on employee",
+    "size": 227985,
+    "source": "https://commons.wikimedia.org/wiki/File:Grand_Canyon_National_Park_bison_corralling_pilot_program_9292_-_48762165002.jpg"
+  },
+  "d44c262934a1": {
+    "attribution": "Rudolph.A.furtado",
+    "caption": "They are jogging through the park right now.",
+    "file": "d44c262934a1.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "person jogging in park",
+    "size": 290468,
+    "source": "https://commons.wikimedia.org/wiki/File:Cat_in_%27Joggers_Park%27_in_Mumbai..JPG"
+  },
+  "d478d6e4712d": {
+    "attribution": "dronepicr",
+    "caption": "They told me they were moving to a new city.",
+    "file": "d478d6e4712d.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "person on video call",
+    "size": 200611,
+    "source": "https://commons.wikimedia.org/wiki/File:Call_of_Duty_Modern_Warfare_Gamescom_2019_(48605842367).jpg"
+  },
+  "d4facda5ffcc": {
+    "attribution": "Mason Jackson",
+    "caption": "You should have been here earlier.",
+    "file": "d4facda5ffcc.jpg",
+    "license": "CC BY-SA 3.0",
+    "mime": "image/jpeg",
+    "query": "late arrival at meeting",
+    "size": 323287,
+    "source": "https://commons.wikimedia.org/wiki/File:1863_Meeting_of_Settlers_and_Maoris_at_Hawke%27s_Bay,_New_Zealand.jpg"
+  },
+  "d68ecfd6aed2": {
+    "attribution": "nola.agent",
+    "caption": "The room has been completely redecorated.",
+    "file": "d68ecfd6aed2.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "new furniture in room",
+    "size": 147291,
+    "source": "https://commons.wikimedia.org/wiki/File:36_Seaward_Ct._New_Orleans_LA_70131_Dining_Room.jpg"
+  },
+  "d6c122f83008": {
+    "attribution": "Picsum",
+    "caption": "She fell back on her savings when unemployed.",
+    "file": "d6c122f83008.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person relying on backup plan",
+    "size": 20194,
+    "source": "https://picsum.photos"
+  },
+  "d76aaaa47fc7": {
+    "attribution": "Picsum",
+    "caption": "He is getting on his bike.",
+    "file": "d76aaaa47fc7.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "man climbing onto bicycle",
+    "size": 47991,
+    "source": "https://picsum.photos"
+  },
   "da875ecc9d41": {
     "attribution": "Grand Canyon NPS",
     "caption": "They are watching the new film together.",
@@ -418,6 +2308,16 @@
     "query": "family watching film together",
     "size": 178907,
     "source": "https://commons.wikimedia.org/wiki/File:2016_Grand_Canyon_History_Symposium_Historic_Kolb_Studio_0246.jpg"
+  },
+  "df048ce691e7": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "He could be the manager.",
+    "file": "df048ce691e7.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "person in elegant business suit",
+    "size": 27384,
+    "source": "https://commons.wikimedia.org/wiki/File:American_bee_journal_(1881)_(17924887118).jpg"
   },
   "dfd6c2ae9f56": {
     "attribution": "Internet Archive Book Images",
@@ -429,6 +2329,56 @@
     "size": 287478,
     "source": "https://commons.wikimedia.org/wiki/File:Bleak_house_(1895)_(14585941849).jpg"
   },
+  "e05076025b4e": {
+    "attribution": "Marek Ślusarczyk (Tupungato) Photo portfolio",
+    "caption": "You must not exceed this speed.",
+    "file": "e05076025b4e.jpg",
+    "license": "CC BY 3.0",
+    "mime": "image/jpeg",
+    "query": "speed limit sign on highway",
+    "size": 201542,
+    "source": "https://commons.wikimedia.org/wiki/File:10_US_Highway_speed_limit_sign_55_MPH_-_Garfield_County,_Colorado.jpg"
+  },
+  "e0e84249310d": {
+    "attribution": "Michael Vadon",
+    "caption": "She caught up on all her missed homework.",
+    "file": "e0e84249310d.jpg",
+    "license": "CC BY-SA 2.0",
+    "mime": "image/jpeg",
+    "query": "student catching up with studies",
+    "size": 136616,
+    "source": "https://commons.wikimedia.org/wiki/File:Election_2016-_Bernie_Sanders_NYC_Fundraiser_Draws_Campaign_Supporters_Who_Are_%27Feelin%27_The_Bern%27_(21035731494).jpg"
+  },
+  "e174c0922f3a": {
+    "attribution": "The original uploader was Snow storm in Eastern Asia at English Wikipedia.",
+    "caption": "That can't be right!",
+    "file": "e174c0922f3a.jpg",
+    "license": "CC BY 3.0",
+    "mime": "image/png",
+    "query": "person looking at price tag shocked",
+    "size": 287155,
+    "source": "https://commons.wikimedia.org/wiki/File:PIIGS_Mk_4_map.png"
+  },
+  "e1cbd0e5674e": {
+    "attribution": "Picsum",
+    "caption": "Students might have finished early.",
+    "file": "e1cbd0e5674e.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "empty classroom after hours",
+    "size": 59186,
+    "source": "https://picsum.photos"
+  },
+  "e316241e8434": {
+    "attribution": "Picsum",
+    "caption": "She has been running for an hour.",
+    "file": "e316241e8434.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "athlete breathing hard mid-run",
+    "size": 27009,
+    "source": "https://picsum.photos"
+  },
   "e4960e1fa093": {
     "attribution": "Zoltan Kluger",
     "caption": "We are arriving at the airport soon.",
@@ -438,6 +2388,106 @@
     "query": "person arriving at destination",
     "size": 134558,
     "source": "https://commons.wikimedia.org/wiki/File:A_GROUP_OF_%22YOUTH_ALIYA%22_YOUNGSTERS_ARRIVING_AT_THEIR_TEMPORARY_DESTINATION_IN_HAIFA._%D7%A7%D7%91%D7%95%D7%A6%D7%AA_%D7%91%D7%A0%D7%99_%D7%A0%D7%95%D7%A2%D7%A8_%D7%9E%22%D7%A2%D7%9C%D7%99%D7%99%D7%AA_%D7%94%D7%A0%D7%95%D7%A2%D7%A8%22_%D7%9E%D7%92%D7%99%D7%A2%D7%94_%D7%9C%D7%97%D7%99%D7%A4%D7%94,_%D7%A9%D7%9D_%D7%AA%D7%A9%D7%94%D7%94_%D7%91%D7%90%D7%95%D7%A4%D7%9F_%D7%96%D7%9E%D7%A0%D7%99.D31-048.jpg"
+  },
+  "e5b988958730": {
+    "attribution": "Picsum",
+    "caption": "He is going to fall off that ladder.",
+    "file": "e5b988958730.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person at top of slippery slope",
+    "size": 37273,
+    "source": "https://picsum.photos"
+  },
+  "e5ee31b79f20": {
+    "attribution": "Museum of London, Kate Sumnall, 2015-06-10 10:53:20",
+    "caption": "The burglar must have come through here.",
+    "file": "e5ee31b79f20.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "broken window with gap",
+    "size": 105410,
+    "source": "https://commons.wikimedia.org/wiki/File:A_post_medieval_iron_window_frame_dating_to_the_early_17th_century._(FindID_726286).jpg"
+  },
+  "e73d7b523f23": {
+    "attribution": "Caroline Frances (Appleton) Blatchford  (1817-1901)",
+    "caption": "Why not drop in on me this weekend?",
+    "file": "e73d7b523f23.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "friend dropping by unexpectedly",
+    "size": 220319,
+    "source": "https://commons.wikimedia.org/wiki/File:Caroline_Frances_Appleton_to_Fanny_Appleton,_11_February_1834_(9a508a0c-9e91-4c29-98a3-3e1dfd82a966).jpg"
+  },
+  "e7be45988d38": {
+    "attribution": "Internet Archive Book Images",
+    "caption": "Everyone stood up to applaud him.",
+    "file": "e7be45988d38.jpg",
+    "license": "No restrictions",
+    "mime": "image/jpeg",
+    "query": "group standing up from table",
+    "size": 329234,
+    "source": "https://commons.wikimedia.org/wiki/File:Around_the_tea-table_(1874)_(14779118954).jpg"
+  },
+  "e7dddd797213": {
+    "attribution": "Picsum",
+    "caption": "The dentist has examined my teeth.",
+    "file": "e7dddd797213.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person in doctor's chair after checkup",
+    "size": 47971,
+    "source": "https://picsum.photos"
+  },
+  "e83e00320d36": {
+    "attribution": "Carleton Watkins",
+    "caption": "This could have been taken fifty years ago.",
+    "file": "e83e00320d36.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "historical photograph",
+    "size": 344476,
+    "source": "https://commons.wikimedia.org/wiki/File:1._The_Mother_of_the_Forest.jpg"
+  },
+  "ea3ee59d5aa3": {
+    "attribution": "Official Navy Page from United States of America\n\nMass Communication Specialist 3rd Class Brian M. Brooks/U.S. Navy",
+    "caption": "She can lift that weight.",
+    "file": "ea3ee59d5aa3.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "person doing pull-ups",
+    "size": 142121,
+    "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_Official_U.S._Navy_Imagery_-_Sailor_does_pull-ups_aboard_USS_Anzio..jpg"
+  },
+  "ecf366dc25e5": {
+    "attribution": "Picsum",
+    "caption": "The argument blew up into a huge fight.",
+    "file": "ecf366dc25e5.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "balloon exploding dramatically",
+    "size": 6955,
+    "source": "https://picsum.photos"
+  },
+  "edee34fda7f7": {
+    "attribution": "Real Estate Japan",
+    "caption": "It must have rained earlier today.",
+    "file": "edee34fda7f7.jpg",
+    "license": "CC BY 2.0",
+    "mime": "image/jpeg",
+    "query": "wet umbrella in stand",
+    "size": 223328,
+    "source": "https://commons.wikimedia.org/wiki/File:7-Eleven_Yoyogi-eki-kitaguchi_te_Yoyogi_1-ch%C5%8Dme,_-15_oktober_2020_14%EF%BC%9A17.jpg"
+  },
+  "eee2f0eecefa": {
+    "attribution": "Picsum",
+    "caption": "He has been gardening since early morning.",
+    "file": "eee2f0eecefa.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person with dirt-stained hands in garden",
+    "size": 34170,
+    "source": "https://picsum.photos"
   },
   "ef69c2c86d96": {
     "attribution": "Lulu Kyriacou",
@@ -459,6 +2509,46 @@
     "size": 157058,
     "source": "https://commons.wikimedia.org/wiki/File:Matsunaga-2017-homecoming-writing-awards-5770_(38250824551).jpg"
   },
+  "f191ce4168b4": {
+    "attribution": "Picsum",
+    "caption": "She can't be that confused.",
+    "file": "f191ce4168b4.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "expert reading simple instructions",
+    "size": 78080,
+    "source": "https://picsum.photos"
+  },
+  "f1c4d9252097": {
+    "attribution": "",
+    "caption": "She confirmed that she had taken her medication every day.",
+    "file": "f1c4d9252097.jpg",
+    "license": "CC BY 4.0",
+    "mime": "image/jpeg",
+    "query": "doctor talking to patient",
+    "size": 791125,
+    "source": "https://commons.wikimedia.org/wiki/File:A_doctor_and_his_patient_talking_at_cross_purposes._Coloured_Wellcome_V0010950.jpg"
+  },
+  "f2c40b43c0ad": {
+    "attribution": "Picsum",
+    "caption": "If you had been more careful, you wouldn't have spilled your coffee.",
+    "file": "f2c40b43c0ad.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "spilled coffee on white shirt",
+    "size": 21697,
+    "source": "https://picsum.photos"
+  },
+  "f39539ec7d3e": {
+    "attribution": "Zoltan Kluger",
+    "caption": "He explained that he couldn't attend the class yesterday.",
+    "file": "f39539ec7d3e.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "teacher speaking to student",
+    "size": 155899,
+    "source": "https://commons.wikimedia.org/wiki/File:A_TEACHER_SPEAKING_TO_ELEMENTARY_SCHOOL_STUDENTS_ABOUT_THE_IMPORTANCE_OF_%22KEREN_KAYEMET%22_FUND_RAISING._%D7%9E%D7%95%D7%A8%D7%94_%D7%9E%D7%A1%D7%91%D7%99%D7%A8_%D7%9C%D7%AA%D7%9C%D7%9E%D7%99%D7%93%D7%99%D7%95_%D7%A2%D7%9C_%D7%97%D7%A9%D7%99%D7%91%D7%95%D7%AA_%D7%92%D7%99%D7%95%D7%A1_%D7%9B%D7%A1%D7%A4%D7%99%D7%9D_%D7%9C%D7%A7%D7%A8%D7%9F_%D7%94D31-081.jpg"
+  },
   "f417556333a5": {
     "attribution": "Picsum",
     "caption": "He is cooking dinner at the moment.",
@@ -467,6 +2557,106 @@
     "mime": "image/jpeg",
     "query": "chef working at stove",
     "size": 85214,
+    "source": "https://picsum.photos"
+  },
+  "f534512342f0": {
+    "attribution": "Lewis Hine",
+    "caption": "Come back here right now, please.",
+    "file": "f534512342f0.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "child coming back to parent",
+    "size": 163778,
+    "source": "https://commons.wikimedia.org/wiki/File:9_P.M._Gum_vendors_still_selling,_near_the_National_Theater._Eli_Marks,_8_years_old,_makes_25_cents_a_night._Morris..._-_NARA_-_306615.jpg"
+  },
+  "f6163f506a66": {
+    "attribution": "Rondal Partridge",
+    "caption": "They have finished their water bottles.",
+    "file": "f6163f506a66.jpg",
+    "license": "Public domain",
+    "mime": "image/tiff",
+    "query": "person holding empty water bottle",
+    "size": 114770,
+    "source": "https://commons.wikimedia.org/wiki/File:San_Joaquin_Valley,_California._On_the_Freights._Two_youngsters_aged_fifteen_and_sixteen_traveling_in_the_company_of..._-_NARA_-_532076.tif"
+  },
+  "f69abfe6ad6c": {
+    "attribution": "Master Sgt. Dawn Price",
+    "caption": "The wall has been painted in soft blue.",
+    "file": "f69abfe6ad6c.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "completed wall with fresh paint",
+    "size": 127104,
+    "source": "https://commons.wikimedia.org/wiki/File:Army_Civil_Affairs_team_works_with_Djiboutians_to_renovate_school_110419-F-XM360-006.jpg"
+  },
+  "f7190e5eb07e": {
+    "attribution": "The original uploader was Textorus at English Wikipedia.",
+    "caption": "The contract was signed yesterday by both parties.",
+    "file": "f7190e5eb07e.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "signed document on desk",
+    "size": 9088,
+    "source": "https://commons.wikimedia.org/wiki/File:Clinton_signing_document.jpg"
+  },
+  "f78221cc381d": {
+    "attribution": "Grmore",
+    "caption": "She calmed down after the argument.",
+    "file": "f78221cc381d.jpg",
+    "license": "CC BY-SA 4.0",
+    "mime": "image/jpeg",
+    "query": "person relaxing and smiling peacefully",
+    "size": 240842,
+    "source": "https://commons.wikimedia.org/wiki/File:LOVE_FREQUENCY_528Hz.jpg"
+  },
+  "f8f27621032c": {
+    "attribution": "ABC Television",
+    "caption": "The president announced that the economy was growing.",
+    "file": "f8f27621032c.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "news anchor at desk",
+    "size": 91768,
+    "source": "https://commons.wikimedia.org/wiki/File:1963_Ron_Cochran_News_Program_Set_Desk_ABC_Commentator_Anchor_Press_Photo.jpg"
+  },
+  "f9b91e29e183": {
+    "attribution": "Brandon Morgan littleppl85",
+    "caption": "The boy jumped in without thinking.",
+    "file": "f9b91e29e183.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "child jumping into swimming pool",
+    "size": 167815,
+    "source": "https://commons.wikimedia.org/wiki/File:Children_backyard_swimming_(Unsplash_XtOKVEyHP2s).jpg"
+  },
+  "fd6aff973d1f": {
+    "attribution": "U.S. Department of Agriculture",
+    "caption": "They have washed the vegetables for dinner.",
+    "file": "fd6aff973d1f.jpg",
+    "license": "Public domain",
+    "mime": "image/jpeg",
+    "query": "washed vegetables on counter",
+    "size": 343391,
+    "source": "https://commons.wikimedia.org/wiki/File:20171027-AMS-LSC-1006_(24215489758).jpg"
+  },
+  "fd7632e84b66": {
+    "attribution": "Andy Li",
+    "caption": "It can't have been built yesterday.",
+    "file": "fd7632e84b66.jpg",
+    "license": "CC0",
+    "mime": "image/jpeg",
+    "query": "old ancient building",
+    "size": 177577,
+    "source": "https://commons.wikimedia.org/wiki/File:Banh_Mi_Ancient_Saigon,_Old_Street,_London_2024-12-20.jpg"
+  },
+  "fddb49a2dec0": {
+    "attribution": "Picsum",
+    "caption": "I have been sleeping badly this week.",
+    "file": "fddb49a2dec0.jpg",
+    "license": "Picsum placeholder (CC0 Lorem-Ipsum-of-images)",
+    "mime": "image/jpeg",
+    "query": "person with messy hair after sleep",
+    "size": 43327,
     "source": "https://picsum.photos"
   }
 }
