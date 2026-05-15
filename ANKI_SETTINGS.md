@@ -1,56 +1,49 @@
 # Recommended Anki Settings
 
-The `.apkg` ships with **two presets** embedded:
+The `.apkg` ships with **two presets** embedded, **both auto-bound on
+import** in Anki 23.10+:
 
 - **`English Verb System`** — the main FSRS preset (retention 0.90,
-  sibling burying on, 1m/10m learning steps, leech suspend at 8 lapses).
+  sibling burying on, 1m/10m learning steps, leech suspend at 8
+  lapses, 10 new cards/day). Bound to **Module 00 (Foundation)** so
+  you start studying immediately on import.
 - **`English Verb System (L1 — opt in)`** — same scheduler with
   **0 new cards/day**. Bound to every non-Foundation sub-deck so the
   curriculum stays sequenced ("master the 12-cell grid first, then
   unlock layers").
 
-> ⚠️ **Anki bug:** deck-options bundled inside an `.apkg` are **not
-> reliably honoured on import** — your decks may show the **Default**
-> preset on a fresh import (long-standing Anki behaviour, still present
-> in Anki 23.10+). Re-apply the preset once after import using one of
-> the paths below.
+## Path A — Default import (Anki 23.10 and later) ⭐
+
+1. **File → Import** the `.apkg`.
+2. In the import dialog, leave **"Update notetypes"** and **"Import
+   deck presets"** checked (both default-on).
+3. Done. The two presets appear in **Deck options**, and every
+   sub-deck is already bound to the right one.
+
+To unlock a layer (e.g. **`03 - Modal Verbs`**), open Deck Options on
+that sub-deck and switch its preset from `English Verb System (L1 —
+opt in)` to `English Verb System`. The layer's cards start flowing at
+10/day alongside Foundation reviews.
 
 ---
 
-## Path A — One-click import (Anki 23.10 and later) ⭐ recommended
+## Path B — Manual setup (Anki ≤ 23.09 or troubleshooting)
 
-1. Download `english_verb_system_preset.json` from this repo (it ships
-   alongside the `.apkg`).
-2. In Anki, click the gear icon next to **any** sub-deck of
-   `English Verb System` → **Deck options**.
-3. In the deck-options page, click the **⋮ (three-dot menu)** in the
-   top-right → **Import preset…**
-4. Select the downloaded `english_verb_system_preset.json`. The preset
-   `English Verb System` appears in the preset dropdown.
-5. With the preset selected, click **Save** (bottom-right).
-
-Bind every sub-deck to the preset in one shot:
-
-6. **Right-click** the parent **`English Verb System`** deck → **Deck
-   options**.
-7. From the preset dropdown choose **English Verb System**.
-8. Click **Save** → when asked **"Apply to all sub-decks?"** click
-   **Yes**.
-
-That binds all 85 sub-decks at once. Done.
-
----
-
-## Path B — Manual setup (any Anki version)
-
-If you're on an older Anki, or step 6–8 above didn't propagate, set it
-up by hand:
+If you're on an older Anki, or the auto-binding didn't take, set it up
+by hand:
 
 1. Open Anki and click the gear icon next to any
    `English Verb System::*` deck → **Deck options**.
 2. Add a new preset (the **+** button) called `English Verb System` and
    configure it per the table below.
-3. Repeat steps 6–8 above to bind it to every sub-deck.
+3. **Right-click** the parent `English Verb System` deck → **Deck
+   options** → choose the new preset → **Save** → when asked **"Apply
+   to all sub-decks?"** click **Yes**. That binds all 85 sub-decks at
+   once.
+4. (Optional) Repeat the same steps for an `English Verb System (L1 —
+   opt in)` preset with `New cards per day = 0`, then bind it to the
+   non-Foundation sub-decks individually if you want to enforce the
+   "Foundation first" curriculum manually.
 
 ---
 
