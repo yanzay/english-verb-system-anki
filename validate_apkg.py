@@ -174,7 +174,7 @@ def validate(apkg_path: str = DEFAULT_APKG) -> int:
     # ── M1: model id uniqueness ─────────────────────────────────────────
     # Models dict is keyed by id-string already, but Anki internally also
     # keys notes by `mid`. The SQLite key is the source of truth; if any
-    # int collision sneaks in via genanki, we catch it here.
+    # int collision sneaks in via the packager, we catch it here.
     mid_to_name: dict[int, list[str]] = defaultdict(list)
     for mid_str, mdef in models.items():
         try:

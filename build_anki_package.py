@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.5.1'
+VERSION = '2.5.2'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -271,7 +271,7 @@ def media_for_sentence(sentence, ipa_index, timeline_index, label=''):
 def embed_fsrs_preset(apkg_path):
     """DEPRECATED in v2.0: superseded by genanki-shim's official-anki path.
 
-    The genanki package now in this repo (see ./genanki.py) is a drop-in
+    The anki_packager module in this repo (see ./anki_packager.py) is a drop-in
     shim built on `anki.Collection` that creates the FSRS preset and binds
     every deck to it during the export step itself. This SQLite-hackery
     fallback is kept only as a safety net and is NOT called by main().
@@ -410,7 +410,7 @@ def _embed_fsrs_preset_legacy(apkg_path):
 
 def main():
     ensure_genanki()
-    import genanki
+    import anki_packager as ap
 
     # ------------------------------------------------------------------
     # Shared CSS
@@ -863,7 +863,7 @@ input[type=text],
     # RECOGNITION MODEL
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
-    rec_model = genanki.Model(
+    rec_model = ap.Model(
         2056102008,  # bumped: schema changed again (added WhenNotToUse)
         'Verb System · Recognition (v3)',
         fields=[
@@ -919,7 +919,7 @@ input[type=text],
     # CONTRAST MODEL
     # Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
     # ------------------------------------------------------------------
-    con_model = genanki.Model(
+    con_model = ap.Model(
         2056102005,  # bumped
         'Verb System · Contrast (v2)',
         fields=[
@@ -972,7 +972,7 @@ input[type=text],
     # Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
     # Same schema as Contrast, but front shows strikethrough OptionA
     # ------------------------------------------------------------------
-    spot_error_model = genanki.Model(
+    spot_error_model = ap.Model(
         2056102006,  # new model ID
         'Verb System · Spot-the-Error (v1)',
         fields=[
@@ -1026,7 +1026,7 @@ input[type=text],
     # CLOZE MODEL (Tier-3 — uses Anki's built-in cloze type)
     # Fields: Text | Hint | Tags | Audio | IPA | Timeline
     # ------------------------------------------------------------------
-    cloze_model = genanki.Model(
+    cloze_model = ap.Model(
         2056102007,
         'Verb System · Cloze',
         fields=[
@@ -1058,10 +1058,10 @@ input[type=text],
 ''',
         }],
         css=css,
-        model_type=genanki.Model.CLOZE,
+        model_type=ap.Model.CLOZE,
     )
 
-    pro_model = genanki.Model(
+    pro_model = ap.Model(
         2056102011,  # was 2056102007 — collided with cloze_model
         'Verb System · Production (v3)',
         fields=[
@@ -1108,7 +1108,7 @@ input[type=text],
     # Fields: Prompt | Sample | Why | Tags
     # Auto-generated from recognition rows for B2+ learners
     # ------------------------------------------------------------------
-    rev_pro_model = genanki.Model(
+    rev_pro_model = ap.Model(
         2056102010,  # was 2056102008 — collided with rec_model
         'Verb System · Reverse Production (Auto) (v1)',
         fields=[
@@ -1152,7 +1152,7 @@ input[type=text],
     # Front: image only; learner formulates the caption silently.
     # Back:  caption + form/function + contrast + audio + IPA + image + CC attribution.
     # ------------------------------------------------------------------
-    img_model = genanki.Model(
+    img_model = ap.Model(
         2056102009,  # new model ID
         'Verb System · Image Cue (v1)',
         fields=[
@@ -1241,7 +1241,7 @@ input[type=text],
     decks = {}
     for (mod, typ), did in DECK_IDS.items():
         name = MODULE_NAMES[mod] + TYPE_SUFFIX[typ]
-        decks[(mod, typ)] = genanki.Deck(did, name, description=deck_description)
+        decks[(mod, typ)] = ap.Deck(did, name, description=deck_description)
 
     counts = {'rec': 0, 'con': 0, 'pro': 0, 'clz': 0}
     media_counts = {'audio': 0, 'ipa': 0, 'timeline': 0}
@@ -1269,7 +1269,7 @@ input[type=text],
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
-        note = genanki.Note(
+        note = ap.Note(
             model=rec_model,
             fields=row[:9] + [audio_f, ipa_f, tl_f],
             tags=row[8].split(),
@@ -1311,7 +1311,7 @@ input[type=text],
         
         # Create reverse production note
         # Fields: Prompt | Sample | Why | Tags | Audio | IPA | Timeline
-        rev_pro_note = genanki.Note(
+        rev_pro_note = ap.Note(
             model=rev_pro_model,
             fields=[sentence, sentence, formula, tags_str, audio_f, ipa_f, tl_f],
             tags=tags_set.split() if isinstance(tags_set, str) else list(tags_set),
@@ -1336,7 +1336,7 @@ input[type=text],
         if tl_f: media_counts['timeline'] += 1
         
         # Create regular contrast note
-        note = genanki.Note(
+        note = ap.Note(
             model=con_model,
             fields=row[:7] + [audio_f, ipa_f, tl_f],
             tags=row[6].split(),
@@ -1349,7 +1349,7 @@ input[type=text],
         tags_set = set(row[6].split())
         error_tags = {'error-correction', 'l1-interference', 'spot-the-error'}
         if tags_set & error_tags:
-            spot_note = genanki.Note(
+            spot_note = ap.Note(
                 model=spot_error_model,
                 fields=row[:7] + [audio_f, ipa_f, tl_f],
                 tags=row[6].split(),
@@ -1370,7 +1370,7 @@ input[type=text],
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
-        note = genanki.Note(
+        note = ap.Note(
             model=pro_model,
             fields=row[:6] + [audio_f, ipa_f, tl_f],
             tags=row[5].split(),
@@ -1394,7 +1394,7 @@ input[type=text],
             audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label='')
             if audio_f: media_counts['audio'] += 1
             if ipa_f: media_counts['ipa'] += 1
-            note = genanki.Note(
+            note = ap.Note(
                 model=cloze_model,
                 fields=row[:3] + [audio_f, ipa_f, tl_f],
                 tags=row[2].split(),
@@ -1431,7 +1431,7 @@ input[type=text],
             if audio_f: media_counts['audio'] += 1
             if ipa_f: media_counts['ipa'] += 1
             if img_field: media_counts.setdefault('image', 0); media_counts['image'] = media_counts.get('image', 0) + 1
-            note = genanki.Note(
+            note = ap.Note(
                 model=img_model,
                 fields=[row[0], caption, row[2], row[3], row[4], tags_str,
                         img_field, audio_f, ipa_f, attribution_field],
@@ -1442,11 +1442,11 @@ input[type=text],
             img_count += 1
 
     out = 'english_verb_system_anki.apkg'
-    package = genanki.Package(list(decks.values()))
+    package = ap.Package(list(decks.values()))
     package.media_files = media_files
     package.write_to_file(out)
 
-    # v2.0: the genanki shim (./genanki.py) builds the .apkg directly via
+    # v2.0+: anki_packager (./anki_packager.py) builds the .apkg directly via
     # `anki.Collection`, so it's already in modern format with the FSRS
     # preset bound to every deck. No post-processing repackage step needed.
 

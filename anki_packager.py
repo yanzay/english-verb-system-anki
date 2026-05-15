@@ -1,4 +1,7 @@
-"""Drop-in genanki replacement built on top of the official `anki` package.
+"""Self-contained .apkg builder on top of the official `anki` package.
+
+Exposes a Model / Deck / Note / Package API (originally inspired by the
+third-party `genanki` library, but with no runtime dependency on it).
 
 WHY THIS EXISTS
 ---------------
@@ -244,7 +247,7 @@ class Package:
                 options=export_opts,
                 limit=limit,
             )
-            print(f'  [genanki-shim] notes: {n_added}, decks: {len(installed_decks)}, '
+            print(f'  [anki-packager] notes: {n_added}, decks: {len(installed_decks)}, '
                   f'models: {len(installed_models)}, media: {n_media}, '
                   f'preset bound to {bound} decks → {exported} cards exported')
         finally:
@@ -352,5 +355,5 @@ class Package:
         return int(new_id)
 
 
-# Re-exports for `from genanki import Model, Deck, Note, Package`
+# Re-exports for `from anki_packager import Model, Deck, Note, Package`
 __all__ = ['Model', 'Deck', 'Note', 'Package']
