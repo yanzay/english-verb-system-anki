@@ -24,44 +24,91 @@ conditionals, passive voice, and stative/dynamic verb distinctions.
 | `media/timelines/` | Generated SVG timelines (one per tense label) — gitignored |
 | `media/ipa_index.json` | Hash → IPA lookup used by the build script — gitignored |
 
-## Deck structure
+## Deck structure (v3.2.0 — curriculum-first)
 
-The package produces 38 subdecks organized into 13 modules:
+The package produces **96 sub-decks across 14 modules**, sequenced as a
+proper curriculum:
 
 ```
 English Verb System
-├── 01 - Core Tense & Aspect          (104 / 42 / 46)
-├── 02 - Future Forms                 ( 23 / 14 / 10)
-├── 03 - Conditionals                 ( 41 / 20 / 20)
-├── 04 - Passive Voice                ( 52 / 19 / 20)
-├── 05 - Stative vs Dynamic           ( 25 / 18 / 15)
-├── 06 - Reported Speech              ( 33 / 26 / 24)
-├── 07 - Time Clauses                 ( 22 / 18 / 17)
-├── 08 - Modal Verbs                  ( 29 / 17 / 19)
-├── 09 - Subjunctive & Wish           ( 19 / 16 / 10)
-├── 10 - Non-Finite Forms             ( 37 / 19 / 19)
-├── 11 - Phrasal Verbs (Top 60)       ( 63 / 28 / 30)
-├── 12 - Discourse & Pragmatics       ( 64 / 33 / 30)
-└── 13 - L1 Interference (6 langs)    ( 33 / 25 / 10)
+├── 00 - Foundation (12-Cell Grid)              ← 1,397 cards · ENABLED by default
+├── 01 - Periphrastic Futures (be going to)     ←    39 cards · opt-in
+├── 02 - Past Habits (used to)                  ←    11 cards · opt-in
+├── 03 - Modal Verbs                            ←   134 cards · opt-in
+├── 04 - Conditionals                           ←   147 cards · opt-in
+├── 05 - Passive Voice                          ←   134 cards · opt-in
+├── 06 - Mood (Subjunctive, Imperative)         ←    25 cards · opt-in
+├── 07 - Non-Finite Forms                       ←   107 cards · opt-in
+├── 08 - Reported Speech                        ←    86 cards · opt-in
+├── 09 - Phrasal Verbs                          ←   101 cards · opt-in
+├── 10 - Discourse Constructions                ←   202 cards · opt-in
+├── 11 - Phonology & Connected Speech           ←    62 cards · opt-in
+├── 12 - Transformation & Register              ←    73 cards · opt-in
+└── 13 - L1 Interference (per-language)         ← 1,006 cards · opt-in (per L1)
 
-Counts shown as Recognition / Contrast / Production.
-Total: 1,113 basic cards + **260 Cloze cards** (Tier 3) = **1,373 cards across 52 subdecks**.
+Total: 3,524 cards across 96 sub-decks.
 ```
 
-Each module also has a `4 - Cloze` subdeck for fill-in-the-blank practice on
-high-impact verb forms (Tier 3).
+Each module has 4 sub-decks: **Recognition · Contrast · Cloze · Production**.
+
+### How the default works
+
+On a fresh import of the `.apkg`:
+
+* **Module 00 (Foundation)** is bound to the main `English Verb System`
+  preset → 10 new cards/day, FSRS scheduling, sibling burying. You start
+  studying immediately.
+* **Modules 01–13** are bound to a separate `English Verb System (L1 — opt in)`
+  preset that's set to **0 new cards/day**. The cards are present but
+  silent.
+
+This enforces the pedagogical principle "**master the canonical
+12-cell tense+aspect grid first, then layer everything else on top**" —
+a default the deck author can't accidentally let you skip.
+
+### How to unlock a layer (or your L1)
+
+When you're ready to add, say, **Module 03 - Modal Verbs**:
+
+1. Click the gear icon ⚙ next to `English Verb System::03 - Modal Verbs`
+2. **Deck Options** → at the top, switch the preset from
+   `English Verb System (L1 — opt in)` to `English Verb System`
+3. The 134 modal cards will start flowing in at 10/day alongside your
+   Foundation reviews
+
+Same flow for Module 13 sub-decks — switch only your L1 (e.g.
+`13 - L1 Interference::🇷🇺 Russian speakers`) to the main preset.
+
+### Recommended study path
+
+| Phase | Weeks | Enable | Why |
+|---|---|---|---|
+| **1. Foundation** | 1–8 | 00 | Master the 12-cell grid (CEFR A1–B1) — every other layer presupposes this |
+| **2. Modality** | 9–12 | 03 + 04 | Add modal verbs and conditional types — the next-most-frequent grammar |
+| **3. Voice & Mood** | 13–16 | 05 + 06 | Passive voice and subjunctive — needed for B2 |
+| **4. Non-finite + Reported** | 17–20 | 07 + 08 | Gerund/infinitive + reported speech — late-B2 sticking points |
+| **5. Lexical** | any time | 09 | Top-frequency phrasal verbs — independent of the grammar curriculum |
+| **6. Discourse + Phonology** | C1+ | 10 + 11 + 12 | Cleft, inversion, connected speech, register transformations |
+| **L1 (anytime)** | any | 13 | Drill the contrasts that *your* L1 trips its speakers up on |
+
+Module 02 (Past Habits) and 01 (Periphrastic Futures) are useful enrichment but optional — they cover a smaller surface area than the modal/conditional layers.
 
 ## What each module covers
 
-- **01–05** — the original core (tenses, future forms, conditionals, passive, stative/dynamic).
-- **06 Reported Speech** — full backshift system + reported questions/commands/requests/modals.
-- **07 Time Clauses** — when/before/after/by-the-time interactions with tense.
-- **08 Modal Verbs** — must/should/may/might/can/could (deduction · obligation · advice · ability) plus modal perfects (should have / must have / could have / etc.) and used-to / would.
-- **09 Subjunctive & Wish** — mandative subjunctive, wish (present/past/would), if only, would rather, it's time, as if/as though.
-- **10 Non-Finite Forms** — gerund vs infinitive choice, bare infinitive after let/make/help, perfect infinitive/gerund/participle, infinitive of purpose.
-- **11 Phrasal Verbs** — top 60 high-frequency phrasal verbs from BNC/COCA, with separability and confusable-pair drills.
-- **12 Discourse & Pragmatics** — historical present, headline present, recipe imperative, hypothetical past for politeness, academic hedging modals, cleft sentences, emphatic do.
-- **13 L1 Interference** — diagnostic + corrective cards for typical English errors made by Spanish, French, German, Russian, Mandarin, and Japanese speakers. All meta-text rows have been rewritten as natural English target sentences (the L1 trap is preserved in the explanation/contrast fields).
+- **00 Foundation (12-Cell Grid)** — the canonical 3 tenses × 4 aspects grid: Present/Past/Future × Simple/Continuous/Perfect/Perfect-Continuous. Plus the 12 cells in their passive variants and basic auxiliary patterns. **This is what every learner masters first.**
+- **01 Periphrastic Futures** — `be going to`, `be about to`, `be to + inf` (formal future), `shall` (suggestion + formal). These are not part of the canonical grid; they're separate constructions that *express* future meaning.
+- **02 Past Habits** — `used to` (states + actions, no longer true) vs `would` (dynamic actions only, narrative).
+- **03 Modal Verbs** — must/should/may/might/can/could (deduction · obligation · advice · ability) plus modal perfects (should have / must have / could have / etc.) and semi-modals (`needn't`, `daren't`, `had better`).
+- **04 Conditionals** — Type 0/1/2/3, mixed conditionals, inverted conditionals (*Had I known…, Were she…, Should you require…*), implicit conditionals, cleft conditionals (*if it weren't for…*).
+- **05 Passive Voice** — all 12 cells in passive form, ditransitive passive (recipient vs theme subject), ergative/middle voice, reduced relative clauses, double passive, get-passive vs be-passive.
+- **06 Mood** — mandative subjunctive (*I insist that he be…*), past subjunctive (*if I were…, it's high time you went…*), imperative variants (recipe imperative, polite imperative).
+- **07 Non-Finite Forms** — gerund vs infinitive choice (verb-pattern), bare infinitive after let/make/help, perfect infinitive/gerund/participle, infinitive of purpose, raising vs control verbs.
+- **08 Reported Speech** — full backshift system, reported questions/commands/requests/modals, reporting-verb patterns (`admit/deny + V-ing`, `accuse of`, `apologise for`), backshift exceptions (universal truths, conditional 2/3).
+- **09 Phrasal Verbs** — top 60 high-frequency phrasal verbs from BNC/COCA, separability rules, confusable-pair drills.
+- **10 Discourse Constructions** — cleft sentences (it-cleft, what-cleft, all-cleft, pseudo-cleft), existential there, negative inversion, fronting, emphatic do, tag questions, auxiliary ellipsis (*so do I, neither will…*), hedging modals, comparative correlatives (*the harder…*), narrative tense layering, indirect questions.
+- **11 Phonology & Connected Speech** — weak forms (`have/has/was/were/to`), reductions (`gonna/gotta/wanna/shoulda`), contractions (`I'd/she'd/we've/it's`), t-flapping, linking-r, stress contrast, schwa elision.
+- **12 Transformation & Register** — formal vs informal (modal paraphrase, register shift, AmE vs BrE), active↔passive transformations, tense-change drills.
+- **13 L1 Interference** — split into per-language sub-decks for Spanish, French, German, Russian, Mandarin, Japanese, Korean, Arabic, Portuguese, Dutch + an "Other" catch-all. Each user enables only their own L1.
 
 ### Tier 1 expansions (this release)
 
