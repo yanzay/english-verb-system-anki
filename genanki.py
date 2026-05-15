@@ -99,6 +99,7 @@ class Package:
     """
 
     PRESET_NAME = 'English Verb System'
+    L1_PRESET_NAME = 'English Verb System (L1 — opt in)'
     PRESET_DEF = {
         'name': PRESET_NAME,
         'fsrs': True,
@@ -207,6 +208,7 @@ class Package:
 
             # ── 5. Create FSRS preset + bind every non-default deck ───
             preset_id = self._ensure_preset(col)
+            l1_preset_id = self._ensure_l1_preset(col)
             bound = 0
             for d in col.decks.all_names_and_ids():
                 if d.id == 1:
@@ -214,7 +216,16 @@ class Package:
                 deck = col.decks.get(d.id)
                 if deck is None or deck.get('dyn'):
                     continue
-                col.decks.set_config_id_for_deck_dict(deck, preset_id)
+                # L1 Interference sub-decks ship OPTED-OUT: bound to a
+                # zero-cards-per-day preset. Each user enables only
+                # their L1 by switching that one sub-deck to the main
+                # 'English Verb System' preset.
+                target_preset = (
+                    l1_preset_id
+                    if '13 - L1 Interference::' in deck.get('name', '')
+                    else preset_id
+                )
+                col.decks.set_config_id_for_deck_dict(deck, target_preset)
                 col.decks.save(deck)
                 bound += 1
 
@@ -292,6 +303,34 @@ class Package:
             deck['desc'] = d.description
             col.decks.save(deck)
         return old_id
+
+    # ------------------------------------------------------------------
+    def _ensure_l1_preset(self, col) -> int:
+        """Create/update the opt-in preset (zero new + zero review/day).
+
+        L1 Interference sub-decks bind to this preset by default so a
+        Russian speaker doesn't get drowned in Spanish/French/Mandarin
+        cards. To activate any L1 deck the user simply opens
+        gear → Deck options on that one sub-deck and switches the
+        preset selector to 'English Verb System'.
+        """
+        existing = next(
+            (c for c in col.decks.all_config()
+             if c.get('name') == self.L1_PRESET_NAME),
+            None,
+        )
+        l1_def = {**self.PRESET_DEF, 'name': self.L1_PRESET_NAME}
+        l1_def['new'] = {**l1_def['new'], 'perDay': 0}
+        l1_def['rev'] = {**l1_def['rev'], 'perDay': 0}
+        if existing:
+            existing.update({k: v for k, v in l1_def.items() if k != 'name'})
+            col.decks.update_config(existing)
+            return int(existing['id'])
+        new_id = col.decks.add_config_returning_id(self.L1_PRESET_NAME)
+        full = col.decks.get_config(new_id)
+        full.update({k: v for k, v in l1_def.items() if k != 'name'})
+        col.decks.update_config(full)
+        return int(new_id)
 
     # ------------------------------------------------------------------
     def _ensure_preset(self, col) -> int:
