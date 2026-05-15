@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.0.1'
+VERSION = '3.0.2'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1386,7 +1386,21 @@ mark.focus {
         if 'connected speech' in L and 'have' in L:
             m = re.search(r"\b(could|would|should|might|may|must|will|shall)('ve|\s+have)\b", S, re.I)
             if m: return m.group(0)
+            # Relaxed: allow one adverb between modal and have
+            m = re.search(r"\b(could|would|should|might|may|must|will|shall)\s+\w+\s+have\b", S, re.I)
+            if m: return m.group(0)
             m = re.search(r"\b(I|you|we|they|he|she|it|[A-Z]\w+)\s+(have|has|had)\b", S)
+            if m: return m.group(0)
+        if 'contraction' in L:
+            # Pull the cue from the parenthetical (have/is/had/would)
+            cue = ''
+            mp = re.search(r'\(([^)]+)\)', label)
+            if mp: cue = mp.group(1).lower()
+            # Find ANY apostrophe-contracted token: I'd, She'd, We've, It's, There'd, He's, You've, etc.
+            m = re.search(r"\b\w+'(?:ve|d|s|re|ll|m)\b", S)
+            if m: return m.group(0)
+            # Or n't contractions
+            m = re.search(r"\b\w+n't\b", S)
             if m: return m.group(0)
         if 'reduction' in L:
             m = re.search(r'\(([a-z]+)\)', label, re.I)
@@ -1419,7 +1433,7 @@ mark.focus {
             m = re.search(r"\b(?:It|It's)\s+(?:was|is|were|will be|has been|had been|only)?[\w\s'-]*?\b(?:who|that|which|whom)\b", S, re.I)
             if m: return m.group(0).rstrip()
         if 'cleft conditional' in L or "if it weren't" in L.lower():
-            m = re.match(r"^If\s+it\s+(?:wasn't|weren't|hadn't been|isn't)\s+for\s+[\w\s']+,?", S, re.I)
+            m = re.match(r"^If\s+it\s+(?:wasn't|weren't|hadn't\s+been|isn't|hasn't\s+been)\s+for\s+[\w\s'’]+,?", S, re.I)
             if m: return m.group(0).rstrip(',')
         if 'pseudo-cleft' in L or 'what-cleft' in L:
             m = re.search(r'\b(?:What|All|The\s+(?:thing|reason|most\s+\w+\s+thing|only\s+thing))\b[\w\s\']*?\b(?:is|was|are|were)\b', S, re.I)
@@ -1430,8 +1444,18 @@ mark.focus {
         if 'existential there' in L:
             m = re.search(r'\bThere\s+(?:is|are|was|were|has\s+been|have\s+been|will\s+be|seems?\s+to\s+be|appears?\s+to\s+be)\b', S, re.I)
             if m: return m.group(0)
+            # Inverted existential: "A cat is in the garden." → highlight "is in the"
+            m = re.search(r'\b(is|are|was|were)\s+in\s+(?:the|a|an|my|your|his|her|its|our|their)\b', S, re.I)
+            if m: return m.group(0)
         if 'possession existential' in L:
-            m = re.search(r'\b(I|you|we|they|he|she|it|[A-Z]\w+)\s+(have|has|had)\s+(?:a|an|the|some|no|\d+|my|your|his|her|its|our|their)?\s*\w+', S)
+            # Bare possessive: "I have a car", "My brother has two cars"
+            m = re.search(r'\b(have|has|had)\s+(?:a|an|the|some|no|two|three|four|five|several|many|few)\s+\w+', S, re.I)
+            if m: return m.group(0)
+            # Subject + have/has + N
+            m = re.search(r'\b(I|you|we|they|he|she|it|[A-Z]\w+)\s+(have|has|had)\b', S)
+            if m: return m.group(0)
+            # Mis-tagged "There" sentence shadowed as possessive
+            m = re.search(r'\bThere\s+(?:is|are|was|were)\b', S, re.I)
             if m: return m.group(0)
         if 'causative' in L:
             m = re.search(r'\b(had|have|has|got|get|gets|made|make|let|help|helped)\b\s+\w+\s+(?:\w+ed|\w+en|\w+|to\s+\w+)', S, re.I)
@@ -1447,7 +1471,21 @@ mark.focus {
             m = re.search(r'\b(may|might|could|would|seems?\s+to|appears?\s+to|tends?\s+to)\b', S, re.I)
             if m: return m.group(0)
         if 'inversion' in L:
+            # Negative inversion: "Never have I…", "Rarely does she…"
             m = re.match(r'^(Never|Rarely|Hardly|Seldom|Not\s+only|Little|No\s+sooner|Only|Under\s+no|Nowhere|Scarcely|Barely)\b.*?\b(?:do|does|did|have|has|had|is|are|was|were|can|could|will|would|may|might|must|should)\b', S, re.I)
+            if m: return m.group(0)
+            # Locative inversion: "Down the road came a mysterious figure"
+            # Highlight the leading PP + inverted verb.
+            m = re.match(r'^(Down|Up|In|Into|On|Onto|Out|Off|Across|Around|Behind|Before|Above|Below|Among|Beside|Beyond|Through|Under|Over)\b[\w\s\'.]+?\b(?:came|come|stood|stands|sat|sits|lay|lies|hung|hangs|appeared|appears|emerged|rose|rises|ran|runs|flew|flies|walked|walks)\b', S, re.I)
+            if m: return m.group(0)
+            # Comparative/degree inversion: "So great was her talent that…",
+            # "Such was the impact that…"
+            m = re.match(r'^(So|Such)\b[\w\s]+?\b(?:was|were|is|are|had|has|did|does|do)\b', S, re.I)
+            if m: return m.group(0)
+        if 'emphatic do' in L:
+            # Highlight emphatic do/does/did + bare verb: "I DO like…",
+            # "She DID say…", "They DO understand…"
+            m = re.search(r'\b(do|does|did)\s+\w+\b', S, re.I)
             if m: return m.group(0)
 
         # Verb-form rows (the 707 majority): highlight the matching verb
