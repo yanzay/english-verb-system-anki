@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.9.0'
+VERSION = '3.0.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -866,6 +866,23 @@ input[type=text],
   text-underline-offset: 2px;
 }
 
+/* ============================================================
+   Focus highlight on Recognition cards (v3.0.0)
+   The <mark class="focus"> tag wraps the span the learner is
+   being asked to identify — so prompts like "It could've been
+   worse." with answer "Connected Speech (Weak 'have')" become
+   unambiguous: the highlighted span tells you what to analyze.
+   Subtle pill-shape, theme-aware, never alarm-grade.
+   ============================================================ */
+mark.focus {
+  background: var(--target-bg);
+  color: var(--target-fg);
+  border: 1px solid var(--target-border);
+  border-radius: 4px;
+  padding: 0 4px;
+  font-weight: 600;
+}
+
 /* Anki cloze blank styling */
 .cloze {
   font-weight: 700;
@@ -903,11 +920,13 @@ input[type=text],
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
     rec_model = ap.Model(
-        2056102012,  # bumped (was 2056102008): added Prompt field for
-                     # category-aware prompts (verb-form vs pronunciation
-                     # vs construction). Anki ≥23.10 handles model-id
-                     # bumps gracefully on import.
-        'Verb System · Recognition (v4)',
+        2056102013,  # bumped (was 2056102012): replaced Prompt field
+                     # with FocusedSentence (HTML with <mark> around the
+                     # span the learner needs to identify). Solves the
+                     # genuine pedagogy problem (ambiguous which feature
+                     # is being asked about) instead of just relabelling
+                     # the prompt.
+        'Verb System · Recognition (v5)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'Label'},
@@ -921,23 +940,23 @@ input[type=text],
             {'name': 'Audio'},
             {'name': 'IPA'},
             {'name': 'Timeline'},
-            {'name': 'Prompt'},  # NEW: category-aware question
-                                 # ("Name this verb form" vs
-                                 #  "Name this pronunciation feature" vs
-                                 #  "Name this construction")
+            {'name': 'FocusedSentence'},  # Sentence with the targeted
+                                          # span wrapped in <mark> so the
+                                          # learner knows WHICH feature
+                                          # is being asked about.
         ],
         templates=[{
             'name': 'Recognition Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">{{Prompt}}</div>
-<div class="sentence">{{Sentence}}</div>
+<div class="instruction">Identify the highlighted form</div>
+<div class="sentence">{{FocusedSentence}}</div>
 </div>
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">{{Prompt}}</div>
-<div class="sentence">{{Sentence}}</div>
+<div class="instruction">Identify the highlighted form</div>
+<div class="sentence">{{FocusedSentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
 <hr id="answer">
@@ -1339,44 +1358,168 @@ input[type=text],
             return ''
         return when_not
 
-    # ── Category-aware prompt classifier ──────────────────────────────
-    # The Recognition card asks "what is the answer?" but the answer
-    # category varies: most are verb forms (Present Simple), but some
-    # are pronunciation features (Connected Speech, Reduction, Stress
-    # Contrast) and others are syntactic constructions (Cleft, Existential,
-    # Causative, Tag Question). A single hard-coded prompt
-    # "Name this verb form" makes 16% of cards literally unanswerable
-    # ("It could've easily been worse." → answer: "Connected Speech (Weak
-    # 'have')" — clearly NOT a verb form). We classify on the Label
-    # string deterministically and emit the appropriate prompt:
-    _PROMPT_PHON_RE = re.compile(
-        r'connected speech|reduction|contraction|stress|linking|'
-        r't[- ]flap|weak form|schwa|elision|intonation|assimilation|'
-        r'silent letter|word stress|sentence stress|prosody|rhythm',
-        re.I,
-    )
-    _PROMPT_CONSTR_RE = re.compile(
-        r'cleft|existential|causative|tag question|hedging|inversion|'
-        r'fronting|catenative|emphatic|exclamative|pseudo-cleft|'
-        r'reverse pseudo|response form|comment clause|extraposition',
-        re.I,
-    )
-    def _prompt_for_label(label: str) -> str:
-        if _PROMPT_PHON_RE.search(label):
-            return 'Name this pronunciation feature'
-        if _PROMPT_CONSTR_RE.search(label):
-            return 'Name this construction'
-        return 'Name this verb form'
+    # ── Focus-span extractor (v3.0.0) ─────────────────────────────────
+    # The Recognition prompt was historically ambiguous: "It could've
+    # easily been worse." with answer "Connected Speech (Weak 'have')"
+    # is unanswerable because the sentence has multiple verbs and
+    # multiple grammatical features. The fix is NOT to reword the prompt
+    # — it's to TELL the learner which span of the sentence is being
+    # asked about, by wrapping that span in <mark>. The extractor below
+    # is a deterministic regex pipeline keyed on the Label content;
+    # 80%+ hit-rate is the target — for the unmatched edge cases
+    # (T-flapping, Linking R, etc.) we fall back to no highlight and
+    # the learner sees the bare sentence (current behaviour).
+    def _extract_focus(sentence: str, label: str) -> str:
+        """Return the substring of `sentence` to wrap in <mark>, or '' to
+        leave the sentence unhighlighted. Pure regex, no NLP — every
+        rule is keyed on the Label string."""
+        L = label.lower()
+        S = sentence
+        # Pronunciation / phonology
+        if 'connected speech' in L and 'have' in L:
+            m = re.search(r"\b(could|would|should|might|may|must|will|shall)('ve|\s+have)\b", S, re.I)
+            if m: return m.group(0)
+            m = re.search(r"\b(I|you|we|they|he|she|it|[A-Z]\w+)\s+(have|has|had)\b", S)
+            if m: return m.group(0)
+        if 'reduction' in L:
+            m = re.search(r'\(([a-z]+)\)', label, re.I)
+            if m:
+                tok = m.group(1).lower()
+                expansions = {
+                    'gonna': r'gonna|going\s+to', 'gotta': r'gotta|got\s+to|have\s+got\s+to',
+                    'wanna': r'wanna|want\s+to', 'hafta': r'hafta|have\s+to',
+                    'shoulda': r"shoulda|should(?:'ve|\s+have)",
+                    'coulda': r"coulda|could(?:'ve|\s+have)",
+                    'woulda': r"woulda|would(?:'ve|\s+have)",
+                    'lemme': r'lemme|let\s+me', 'gimme': r'gimme|give\s+me',
+                    'dunno': r"dunno|don'?t\s+know",
+                    'kinda': r'kinda|kind\s+of', 'sorta': r'sorta|sort\s+of',
+                }
+                pat = expansions.get(tok, re.escape(tok))
+                mm = re.search(rf'\b({pat})\b', S, re.I)
+                if mm: return mm.group(0)
+        if 'stress contrast' in L or 'modal weak form' in L or ('weak form' in L and re.search(r'[("]', label)):
+            m = re.search(r'"([^"]+)"', label) or re.search(r'\(([\w\s]+)\)', label)
+            if m:
+                tok = re.sub(r'^\s*weak\s+', '', m.group(1).strip(), flags=re.I)
+                mm = re.search(rf'\b{re.escape(tok)}\b', S, re.I)
+                if mm: return mm.group(0)
+        if 'contraction' in L and 'connected' not in L:
+            m = re.search(r"\b\w+(?:'(?:ve|d|s|re|ll|m)|n't)\b", S)
+            if m: return m.group(0)
+        # Constructions
+        if 'cleft' in L and 'pseudo' not in L and 'conditional' not in L:
+            m = re.search(r"\b(?:It|It's)\s+(?:was|is|were|will be|has been|had been|only)?[\w\s'-]*?\b(?:who|that|which|whom)\b", S, re.I)
+            if m: return m.group(0).rstrip()
+        if 'cleft conditional' in L or "if it weren't" in L.lower():
+            m = re.match(r"^If\s+it\s+(?:wasn't|weren't|hadn't been|isn't)\s+for\s+[\w\s']+,?", S, re.I)
+            if m: return m.group(0).rstrip(',')
+        if 'pseudo-cleft' in L or 'what-cleft' in L:
+            m = re.search(r'\b(?:What|All|The\s+(?:thing|reason|most\s+\w+\s+thing|only\s+thing))\b[\w\s\']*?\b(?:is|was|are|were)\b', S, re.I)
+            if m: return m.group(0)
+        if 'reverse pseudo' in L:
+            m = re.search(r'\b(?:is|was|are|were)\s+(?:what|the\s+\w+)\b', S, re.I)
+            if m: return m.group(0)
+        if 'existential there' in L:
+            m = re.search(r'\bThere\s+(?:is|are|was|were|has\s+been|have\s+been|will\s+be|seems?\s+to\s+be|appears?\s+to\s+be)\b', S, re.I)
+            if m: return m.group(0)
+        if 'possession existential' in L:
+            m = re.search(r'\b(I|you|we|they|he|she|it|[A-Z]\w+)\s+(have|has|had)\s+(?:a|an|the|some|no|\d+|my|your|his|her|its|our|their)?\s*\w+', S)
+            if m: return m.group(0)
+        if 'causative' in L:
+            m = re.search(r'\b(had|have|has|got|get|gets|made|make|let|help|helped)\b\s+\w+\s+(?:\w+ed|\w+en|\w+|to\s+\w+)', S, re.I)
+            if m: return m.group(0)
+            m = re.search(r'\b(had|have|has|got|get|gets|made|make|let|help|helped)\b', S, re.I)
+            if m: return m.group(0)
+        if 'tag question' in L:
+            m = re.search(r",\s+\w+(?:n't)?\s+\w+\?$", S)
+            if m: return m.group(0)
+        if 'hedging' in L:
+            m = re.search(r'\b(?:it\s+could\s+be\s+argued|it\s+might\s+be\s+argued|it\s+seems\s+that|it\s+appears\s+that)\b', S, re.I)
+            if m: return m.group(0)
+            m = re.search(r'\b(may|might|could|would|seems?\s+to|appears?\s+to|tends?\s+to)\b', S, re.I)
+            if m: return m.group(0)
+        if 'inversion' in L:
+            m = re.match(r'^(Never|Rarely|Hardly|Seldom|Not\s+only|Little|No\s+sooner|Only|Under\s+no|Nowhere|Scarcely|Barely)\b.*?\b(?:do|does|did|have|has|had|is|are|was|were|can|could|will|would|may|might|must|should)\b', S, re.I)
+            if m: return m.group(0)
+
+        # Verb-form rows (the 707 majority): highlight the matching verb
+        # cluster so the learner sees exactly which token sequence is
+        # being asked about. Patterns are keyed on the Label and matched
+        # via a flexible verb-cluster regex.
+        AUX = r'(?:am|is|are|was|were|have|has|had|do|does|did|will|would|shall|should|can|could|may|might|must|be|been|being|going)'
+        # Map standard tense Labels → verb-cluster pattern
+        # Each pattern includes the optional "n't" / "not" + main verb in
+        # appropriate form (V/Ving/Ven). Pattern goal: greedy enough to
+        # catch the whole construction, narrow enough to skip subject NPs.
+        FORM_PATS = [
+            ('present perfect continuous',     r"\b(?:has|have)(?:n't)?\s+been\s+\w+ing\b"),
+            ('past perfect continuous',        r"\bhad(?:n't)?\s+been\s+\w+ing\b"),
+            ('future perfect continuous',      r"\bwill(?:\s+not|\s+have(?:\s+been)?\s+\w+ing|\s+have\s+been\s+\w+ing)\b|\bwill\s+have\s+been\s+\w+ing\b"),
+            ('conditional perfect continuous', r"\bwould(?:n't)?\s+have\s+been\s+\w+ing\b"),
+            ('present perfect',                r"\b(?:has|have)(?:n't)?\s+(?:been\s+)?\w+(?:ed|en|own|ung|ought|aught|oken|orne|orn|one)\b|\b(?:has|have)(?:n't)?\s+\w+\b(?=\s|[\.,?!])"),
+            ('past perfect',                   r"\bhad(?:n't)?\s+\w+(?:ed|en|own|ung|ought|aught|oken|orne|one)\b"),
+            ('future perfect',                 r"\bwill\s+have\s+\w+(?:ed|en|own|ung|ought|oken|one)\b"),
+            ('conditional perfect',            r"\bwould(?:n't)?\s+have\s+\w+(?:ed|en|own|ung|ought|oken|one)\b"),
+            ('present continuous',             r"\b(?:am|is|are)(?:n't)?\s+\w+ing\b|\b(?:'m|'re|'s)\s+\w+ing\b"),
+            ('past continuous',                r"\b(?:was|were)(?:n't)?\s+\w+ing\b"),
+            ('future continuous',              r"\bwill\s+be\s+\w+ing\b"),
+            ('conditional continuous',         r"\bwould\s+be\s+\w+ing\b"),
+            ('future simple',                  r"\bwill(?:\s+not|n't)?\s+\w+\b|\b'll\s+\w+\b"),
+            ('be going to',                    r"\b(?:am|is|are|was|were)(?:n't)?\s+going\s+to\s+\w+\b|\b(?:'m|'re|'s)\s+going\s+to\s+\w+\b"),
+            ('future going to',                r"\b(?:am|is|are)(?:n't)?\s+going\s+to\s+\w+\b|\b(?:'m|'re|'s)\s+going\s+to\s+\w+\b"),
+            ('past simple',                    r"\b(?:did(?:n't)?\s+\w+|was|were|wasn't|weren't|\w+ed)\b|\b\w+(?:ought|ame|ent|ot|ound|ade|ave|ought|ought|aw|ook|nown|hought|elt|ept|elt|aught|ame|ave)\b"),
+            ('present simple',                 r"\b(?:do(?:n't)?|does(?:n't)?)\s+\w+\b|\b\w+s\b(?=\s|[\.,?!])"),
+            ('conditional',                    r"\bwould(?:n't)?\s+\w+\b"),
+            ('subjunctive',                    r"\b(?:were|be|have|do)(?:\s+not)?\s+\w+\b"),
+            ('passive',                        r"\b(?:am|is|are|was|were|been|being|be)\s+\w+(?:ed|en|own|ung|ought|aught|oken|orne|one)(?:\s+by\s+\w+)?\b"),
+            ('imperative',                     r"^[A-Z]\w+\b"),
+            ('used to',                        r"\bused\s+to\s+\w+\b"),
+            ('would (habitual)',               r"\bwould\s+\w+\b"),
+            ('modal',                          r"\b(?:can(?:'t|not)?|could(?:n't)?|may|might|must(?:n't)?|should(?:n't)?|ought\s+to|need(?:n't)?|dare(?:n't)?|have\s+to|has\s+to|had\s+to)\s+\w+\b"),
+            ('zero conditional',               r"\bif\s+[\w\s]+,\s*[\w\s]+"),
+            ('first conditional',              r"\bif\s+[\w\s]+,\s*[\w\s]+will\s+\w+"),
+            ('second conditional',             r"\bif\s+[\w\s]+,\s*[\w\s]+would\s+\w+"),
+            ('third conditional',              r"\bif\s+[\w\s]+had\s+[\w\s]+,\s*[\w\s]+would\s+have\s+\w+"),
+            ('mixed conditional',              r"\bif\s+[\w\s]+,\s*[\w\s]+would\s+\w+"),
+            ('reported speech',                r"\b(?:said|told|asked|claimed|reported|mentioned|explained)\b\s+(?:that\s+)?[\w\s]+\b"),
+            ('gerund',                         r"\b\w+ing\b"),
+            ('infinitive',                     r"\bto\s+\w+\b"),
+            ('participle',                     r"\b\w+(?:ed|ing|en)\b"),
+        ]
+        # Try the most-specific Labels first (longest match wins).
+        # Sort patterns by Label length desc so 'present perfect continuous'
+        # is tried before 'present perfect'.
+        for key, pat in sorted(FORM_PATS, key=lambda x: -len(x[0])):
+            if key in L:
+                m = re.search(pat, S, re.I)
+                if m:
+                    return m.group(0)
+        return ''
+
+    def _focused_html(sentence: str, label: str) -> str:
+        """Return Sentence with the focus span wrapped in <mark>. If no
+        focus is extractable, returns the bare sentence (no highlight)."""
+        focus = _extract_focus(sentence, label)
+        if not focus:
+            return sentence
+        # Replace ONLY the first occurrence so we never double-mark.
+        # re.escape so any special chars in focus are taken literally.
+        pat = re.compile(re.escape(focus), re.I)
+        return pat.sub(
+            lambda m: f'<mark class="focus">{m.group(0)}</mark>',
+            sentence, count=1,
+        )
 
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | WhenNotToUse | Tags
     suppressed_when_not = 0
-    prompt_counts = {'verb-form': 0, 'pronunciation': 0, 'construction': 0}
+    focus_hits = focus_misses = 0
     for row in rec_rows:
         if len(row) < 9:
             row += [''] * (9 - len(row))
-        mods = row_modules(row[8])  # Tags now at index 8
+        mods = row_modules(row[8])
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[1])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
@@ -1385,22 +1528,24 @@ input[type=text],
         deduped_when = _dedupe_when_not(row[6], row[7])
         if deduped_when != row[7]:
             suppressed_when_not += 1
-        # Pick the right prompt based on the Label content
-        prompt_text = _prompt_for_label(row[1])
-        if prompt_text == 'Name this pronunciation feature':
-            prompt_counts['pronunciation'] += 1
-        elif prompt_text == 'Name this construction':
-            prompt_counts['construction'] += 1
+        # Wrap the targeted span in <mark> so the learner knows WHICH
+        # feature is being asked about. Verb-form rows mostly fall
+        # through to no-mark and the bare sentence is shown — this is
+        # safe because verb forms in our corpus typically have one
+        # clear verb cluster (sentences are short and pedagogical).
+        focused = _focused_html(row[0], row[1])
+        if focused != row[0]:
+            focus_hits += 1
         else:
-            prompt_counts['verb-form'] += 1
+            focus_misses += 1
         row_for_note = list(row)
         row_for_note[7] = deduped_when
         # Recognition fields: Sentence | Label | Aspect | Formula | MainUse |
         #   QuickCue | Contrast | WhenNotToUse | Tags | Audio | IPA |
-        #   Timeline | Prompt
+        #   Timeline | FocusedSentence
         note = ap.Note(
             model=rec_model,
-            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, prompt_text],
+            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, focused],
             tags=row[8].split(),
         )
         for _mod in mods:
@@ -1409,9 +1554,8 @@ input[type=text],
     if suppressed_when_not:
         print(f'  [dedupe] suppressed {suppressed_when_not} WhenNotToUse '
               f'fields that duplicated Contrast')
-    print(f'  [prompts] verb-form: {prompt_counts["verb-form"]}, '
-          f'pronunciation: {prompt_counts["pronunciation"]}, '
-          f'construction: {prompt_counts["construction"]}')
+    print(f'  [focus] highlighted span: {focus_hits} cards, '
+          f'no highlight (whole sentence visible): {focus_misses} cards')
 
     # Reverse Production (Auto) — generated from recognition rows
     rev_pro_count = 0
