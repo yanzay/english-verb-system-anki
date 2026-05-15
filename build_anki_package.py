@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.8.1'
+VERSION = '2.9.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -903,8 +903,11 @@ input[type=text],
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
     rec_model = ap.Model(
-        2056102008,  # bumped: schema changed again (added WhenNotToUse)
-        'Verb System · Recognition (v3)',
+        2056102012,  # bumped (was 2056102008): added Prompt field for
+                     # category-aware prompts (verb-form vs pronunciation
+                     # vs construction). Anki ≥23.10 handles model-id
+                     # bumps gracefully on import.
+        'Verb System · Recognition (v4)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'Label'},
@@ -918,18 +921,22 @@ input[type=text],
             {'name': 'Audio'},
             {'name': 'IPA'},
             {'name': 'Timeline'},
+            {'name': 'Prompt'},  # NEW: category-aware question
+                                 # ("Name this verb form" vs
+                                 #  "Name this pronunciation feature" vs
+                                 #  "Name this construction")
         ],
         templates=[{
             'name': 'Recognition Card',
             'qfmt': '''
 <div class="front">
-<div class="instruction">Name this verb form</div>
+<div class="instruction">{{Prompt}}</div>
 <div class="sentence">{{Sentence}}</div>
 </div>
 ''',
             'afmt': '''
 <div class="front">
-<div class="instruction">Name this verb form</div>
+<div class="instruction">{{Prompt}}</div>
 <div class="sentence">{{Sentence}}</div>
 {{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 </div>
@@ -1332,10 +1339,40 @@ input[type=text],
             return ''
         return when_not
 
+    # ── Category-aware prompt classifier ──────────────────────────────
+    # The Recognition card asks "what is the answer?" but the answer
+    # category varies: most are verb forms (Present Simple), but some
+    # are pronunciation features (Connected Speech, Reduction, Stress
+    # Contrast) and others are syntactic constructions (Cleft, Existential,
+    # Causative, Tag Question). A single hard-coded prompt
+    # "Name this verb form" makes 16% of cards literally unanswerable
+    # ("It could've easily been worse." → answer: "Connected Speech (Weak
+    # 'have')" — clearly NOT a verb form). We classify on the Label
+    # string deterministically and emit the appropriate prompt:
+    _PROMPT_PHON_RE = re.compile(
+        r'connected speech|reduction|contraction|stress|linking|'
+        r't[- ]flap|weak form|schwa|elision|intonation|assimilation|'
+        r'silent letter|word stress|sentence stress|prosody|rhythm',
+        re.I,
+    )
+    _PROMPT_CONSTR_RE = re.compile(
+        r'cleft|existential|causative|tag question|hedging|inversion|'
+        r'fronting|catenative|emphatic|exclamative|pseudo-cleft|'
+        r'reverse pseudo|response form|comment clause|extraposition',
+        re.I,
+    )
+    def _prompt_for_label(label: str) -> str:
+        if _PROMPT_PHON_RE.search(label):
+            return 'Name this pronunciation feature'
+        if _PROMPT_CONSTR_RE.search(label):
+            return 'Name this construction'
+        return 'Name this verb form'
+
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | WhenNotToUse | Tags
     suppressed_when_not = 0
+    prompt_counts = {'verb-form': 0, 'pronunciation': 0, 'construction': 0}
     for row in rec_rows:
         if len(row) < 9:
             row += [''] * (9 - len(row))
@@ -1348,11 +1385,22 @@ input[type=text],
         deduped_when = _dedupe_when_not(row[6], row[7])
         if deduped_when != row[7]:
             suppressed_when_not += 1
+        # Pick the right prompt based on the Label content
+        prompt_text = _prompt_for_label(row[1])
+        if prompt_text == 'Name this pronunciation feature':
+            prompt_counts['pronunciation'] += 1
+        elif prompt_text == 'Name this construction':
+            prompt_counts['construction'] += 1
+        else:
+            prompt_counts['verb-form'] += 1
         row_for_note = list(row)
         row_for_note[7] = deduped_when
+        # Recognition fields: Sentence | Label | Aspect | Formula | MainUse |
+        #   QuickCue | Contrast | WhenNotToUse | Tags | Audio | IPA |
+        #   Timeline | Prompt
         note = ap.Note(
             model=rec_model,
-            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f],
+            fields=row_for_note[:9] + [audio_f, ipa_f, tl_f, prompt_text],
             tags=row[8].split(),
         )
         for _mod in mods:
@@ -1361,6 +1409,9 @@ input[type=text],
     if suppressed_when_not:
         print(f'  [dedupe] suppressed {suppressed_when_not} WhenNotToUse '
               f'fields that duplicated Contrast')
+    print(f'  [prompts] verb-form: {prompt_counts["verb-form"]}, '
+          f'pronunciation: {prompt_counts["pronunciation"]}, '
+          f'construction: {prompt_counts["construction"]}')
 
     # Reverse Production (Auto) — generated from recognition rows
     rev_pro_count = 0
