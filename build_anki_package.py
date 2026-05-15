@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.3'
+VERSION = '3.2.4'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1891,12 +1891,18 @@ mark.focus {
         mods_rev = row_modules(tags_str, category=rev_cat)
         audio_f, ipa_f, tl_f = media_for_sentence(sentence, ipa_index, timeline_index, label=label)
         
-        # Create reverse production note
+        # Create reverse production note. Add cat:* tag so Foundation
+        # alignment audits show this card correctly classified (the
+        # only auto-generated note type that previously lacked it).
         # Fields: Prompt | Sample | Why | Tags | Audio | IPA | Timeline
+        rev_tags = (tags_set.split() if isinstance(tags_set, str)
+                    else list(tags_set))
+        if not any(t.startswith('cat:') for t in rev_tags):
+            rev_tags.append(f'cat:{rev_cat}')
         rev_pro_note = ap.Note(
             model=rev_pro_model,
             fields=[sentence, sentence, formula, tags_str, audio_f, ipa_f, tl_f],
-            tags=tags_set.split() if isinstance(tags_set, str) else list(tags_set),
+            tags=rev_tags,
         )
         for _mod in mods_rev:
             decks[(_mod, 'pro')].add_note(rev_pro_note)
