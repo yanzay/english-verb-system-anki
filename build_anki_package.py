@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.6.1'
+VERSION = '2.6.2'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -737,15 +737,21 @@ input[type=text],
   font-size: 0.85em;
   color: var(--fg-faint);
 }
+/* IPA: a learner reference, not a primary signal. Quiet styling so
+   it never competes with the answer / formula / timeline. The
+   <details> element ensures it's collapsed by default; opening it
+   reveals the transcription in monospace-friendly serif. */
 .ipa-box {
-  margin-top: 10px;
-  padding: 6px 10px;
-  background: var(--ipa-bg);
-  color: var(--ipa-fg);
-  border: 1px solid var(--ipa-border);
+  margin: 10px auto 0;
+  max-width: 560px;
+  padding: 5px 10px;
+  background: var(--bg-surface);
+  color: var(--fg-muted);
+  border: 1px solid var(--border-default);
   border-radius: 6px;
   font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif;
-  font-size: 0.95em;
+  font-size: 0.88em;
+  text-align: left;
 }
 .ipa-box summary {
   list-style: none;
@@ -754,18 +760,19 @@ input[type=text],
 }
 .ipa-box summary::-webkit-details-marker { display: none; }
 .ipa-key {
-  font-weight: 700;
-  color: var(--ipa-key-fg);
+  font-weight: 600;
+  color: var(--fg-faint);
   font-family: -apple-system, "Segoe UI", Arial, sans-serif;
-  font-size: 0.78em;
+  font-size: 0.75em;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-right: 6px;
 }
 .ipa-val {
-  color: var(--ipa-fg);
+  color: var(--fg-default);
   display: none;
   margin-left: 4px;
+  font-size: 1.05em;
 }
 .ipa-box[open] .ipa-val { display: inline; }
 
@@ -800,21 +807,30 @@ input[type=text],
 /* ============================================================
    WhenNotToUse callout, cloze hint row, attribution, etc.
    ============================================================ */
+/* "Don't use when" sidenote: this is supplementary clarification,
+   not a danger / error — so style it like .tip-block (quiet muted
+   background, italic). The previous loud red callout misleadingly
+   read as 'YOU MADE AN ERROR' rather than 'usage caveat'. */
 .when-not-box {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: var(--danger-bg);
-  border-left: 3px solid var(--danger-border);
+  margin: 10px auto 0;
+  max-width: 560px;
+  padding: 7px 12px;
+  background: var(--bg-surface);
+  border-left: 3px solid var(--border-muted);
   border-radius: 4px;
-  font-size: 0.92em;
-  color: var(--danger-fg);
+  font-size: 0.86em;
+  color: var(--fg-muted);
+  font-style: italic;
+  text-align: left;
 }
 .when-not-key {
-  font-weight: 700;
+  font-weight: 600;
   margin-right: 6px;
-  color: var(--danger-fg);
+  color: var(--fg-faint);
+  font-style: normal;
+  letter-spacing: 0.02em;
 }
-.when-not-val { color: var(--danger-fg); }
+.when-not-val { color: var(--fg-muted); }
 
 .hint-row {
   margin: 8px 0;
@@ -915,7 +931,7 @@ input[type=text],
     <span class="meta-key">Formula</span><span class="meta-val">{{Formula}}</span>
     <span class="meta-key">Main use</span><span class="meta-val">{{MainUse}}</span>
   </div>
-  {{#WhenNotToUse}}<div class="when-not-box"><span class="when-not-key">🚫 Don't use when</span> <span class="when-not-val">{{WhenNotToUse}}</span></div>{{/WhenNotToUse}}
+  {{#WhenNotToUse}}<div class="when-not-box"><span class="when-not-val">{{WhenNotToUse}}</span></div>{{/WhenNotToUse}}
   {{#IPA}}<details class="ipa-box"><summary class="ipa-key">🔊 IPA — tap to show</summary><span class="ipa-val">/{{IPA}}/</span></details>{{/IPA}}
   {{#QuickCue}}
   <div class="info-box">
