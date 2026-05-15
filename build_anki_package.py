@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.6.0'
+VERSION = '2.6.1'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -610,25 +610,6 @@ hr#answer {
   margin-bottom: 6px;
   line-height: 1.25;
 }
-/* Aspect/tense chip: small, muted-success, sits underneath as
-   secondary metadata so it never reads as a competing answer. */
-.answer-meta {
-  font-size: 0.82em;
-  color: var(--fg-faint);
-  letter-spacing: 0.02em;
-  margin-bottom: 14px;
-}
-.answer-meta .chip {
-  display: inline-block;
-  background: var(--success-bg);
-  color: var(--success-fg);
-  border: 1px solid var(--success-border);
-  border-radius: 999px;
-  padding: 1px 9px;
-  font-size: 0.92em;
-  font-weight: 600;
-  margin: 0 2px;
-}
 /* Legacy .answer-correct kept for contrast / spot-the-error
    templates that still display it as a green confirmation pill. */
 .answer-correct {
@@ -929,7 +910,6 @@ input[type=text],
 <hr id="answer">
 <div class="answer-block">
   <div class="answer-label">{{Label}}</div>
-  {{#Aspect}}<div class="answer-meta">aspect <span class="chip">{{Aspect}}</span></div>{{/Aspect}}
   {{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
   <div class="meta-grid">
     <span class="meta-key">Formula</span><span class="meta-val">{{Formula}}</span>
