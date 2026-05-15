@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '2.3.1'
+VERSION = '2.4.0'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -713,17 +713,20 @@ input[type=text],
 }
 .ipa-box[open] .ipa-val { display: inline; }
 
-.timeline-box { margin: 10px 0; text-align: center; }
-.timeline-box img { max-width: 100%; height: auto; display: inline-block; }
-/* Timeline SVGs are line drawings on transparent BG; invert in dark mode
-   so the strokes become bright. Keeps a single asset usable for both themes. */
-.card.nightMode .timeline-box img, .card.night_mode .timeline-box img,
-.nightMode .timeline-box img,    .night_mode .timeline-box img {
-  filter: invert(0.92) hue-rotate(180deg);
+.timeline-box {
+  margin: 10px 0;
+  text-align: center;
 }
-@media (prefers-color-scheme: dark) {
-  .timeline-box img { filter: invert(0.92) hue-rotate(180deg); }
+.timeline-box img {
+  max-width: 100%;
+  max-width: min(420px, 100%);  /* cap width — these are line drawings */
+  height: auto;
+  display: inline-block;
 }
+/* The timeline SVGs ship with their own @media (prefers-color-scheme)
+   block, so the strokes/labels recolor themselves correctly in dark
+   mode. We deliberately do NOT apply an outer invert() filter — that
+   double-flips the colors and produces washed-out artifacts. */
 
 .image-box {
   margin: 14px auto;
