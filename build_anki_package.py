@@ -24,6 +24,8 @@ Recommended Anki settings: see ANKI_SETTINGS.md
 """
 
 import csv
+import hashlib
+import json
 import sys
 import subprocess
 from pathlib import Path
@@ -40,11 +42,23 @@ def ensure_genanki():
 
 
 def load_tsv(path):
+    """Parse Anki-format TSV. The header is taken from the `#columns:` directive
+    (Anki's own metadata line); all non-comment lines are real data rows."""
     lines = Path(path).read_text(encoding='utf-8').splitlines()
-    rows = [line for line in lines if line and not line.startswith('#')]
-    reader = csv.reader(rows, delimiter='\t', quotechar='"')
-    header = next(reader)
-    return header, list(reader)
+    header = None
+    data_lines = []
+    for line in lines:
+        if line.startswith('#columns:'):
+            header = line[len('#columns:'):].split('\t')
+        elif line and not line.startswith('#'):
+            data_lines.append(line)
+    reader = csv.reader(data_lines, delimiter='\t', quotechar='"')
+    rows = list(reader)
+    if header is None:
+        # Legacy fallback: first non-comment row is the header
+        header = rows[0] if rows else []
+        rows = rows[1:]
+    return header, rows
 
 
 MODULE_TAGS = {
@@ -79,19 +93,31 @@ MODULE_TAGS = {
     '06': {'reported-speech', 'backshift', 'reported-question', 'reported-command',
            'reported-modal', 'reported-no-backshift', 'backshift-present-to-past',
            'backshift-perfect', 'reported-production'},
-    '07': {'time-clause'},
+    '07': {'time-clause', 'in-case', 'on-condition-that'},
     '08': {'modal', 'modal-deduction', 'modal-obligation', 'modal-permission',
-           'modal-perfect', 'modal-ability', 'modal-past-habit', 'modal-production'},
+           'modal-perfect', 'modal-ability', 'modal-past-habit', 'modal-production',
+           'semi-modal', 'semi-modal-dare', 'semi-modal-need',
+           'modal-perfect-continuous', 'shall', 'shall-suggestion',
+           'be-to-infinitive', 'habitual-would', 'habitual-used-to',
+           'modal-would-rather-vs-sooner'},
     '09': {'subjunctive', 'wish-present', 'wish-past', 'wish-would', 'if-only',
-           'would-rather', 'its-time', 'as-if', 'mandative', 'subjunctive-production'},
+           'would-rather', 'its-time', 'as-if', 'mandative', 'subjunctive-production',
+           'high-time', 'wish-annoyance', 'wish-polite-request',
+           'as-if-counterfactual'},
     '10': {'non-finite', 'gerund', 'infinitive', 'bare-infinitive',
            'perfect-infinitive', 'perfect-gerund', 'perfect-participle',
-           'infinitive-of-purpose'},
+           'infinitive-of-purpose',
+           'reduced-relative', 'reduced-relative-present-participle',
+           'reduced-relative-past-participle', 'raising-verb', 'control-verb'},
     '11': {'phrasal-verb', 'pv-separable', 'pv-inseparable', 'pv-transitive',
            'pv-intransitive', 'pv-three-part', 'pv-figurative', 'pv-literal'},
     '12': {'discourse', 'historical-present', 'politeness', 'hedging', 'headline',
            'recipe', 'cleft', 'emphatic', 'narrative-shift', 'performative',
-           'register-formal', 'register-informal'},
+           'register-formal', 'register-informal',
+           'auxiliary-ellipsis', 'tag-question', 'embedded-question',
+           'indirect-question', 'negative-inversion', 'comparative-correlative',
+           'even-if-vs-even-though', 'narrative-layering', 'cleft-conditional',
+           'light-verb', 'ame-vs-bre'},
     '13': {'l1-interference', 'l1-spanish', 'l1-french', 'l1-german',
            'l1-russian', 'l1-mandarin', 'l1-japanese'},
 }
@@ -121,6 +147,49 @@ def row_module(tags_str):
         if tags & MODULE_TAGS[mod]:
             return mod
     return '01'
+
+
+# ── Tier-2 media plumbing ───────────────────────────────────────────────
+MEDIA_AUDIO_DIR = Path('media/audio')
+MEDIA_IPA_INDEX = Path('media/ipa_index.json')
+MEDIA_TIMELINES_DIR = Path('media/timelines')
+MEDIA_TIMELINES_INDEX = Path('media/timelines_index.json')
+
+
+def _sentence_hash(text):
+    return hashlib.sha1((text or '').strip().encode('utf-8')).hexdigest()[:12]
+
+
+def load_media_indices():
+    """Return (ipa_index, timeline_index, media_files) for the package.
+    Falls back to empty maps if media hasn't been generated yet."""
+    ipa_index = {}
+    timeline_index = {}
+    if MEDIA_IPA_INDEX.exists():
+        ipa_index = json.loads(MEDIA_IPA_INDEX.read_text(encoding='utf-8'))
+    if MEDIA_TIMELINES_INDEX.exists():
+        timeline_index = json.loads(MEDIA_TIMELINES_INDEX.read_text(encoding='utf-8'))
+
+    # Collect all media files we'll bundle into the .apkg
+    media_files = []
+    if MEDIA_AUDIO_DIR.exists():
+        media_files.extend(str(p) for p in sorted(MEDIA_AUDIO_DIR.glob('*.mp3'))
+                           if p.stat().st_size > 0)
+    if MEDIA_TIMELINES_DIR.exists():
+        media_files.extend(str(p) for p in sorted(MEDIA_TIMELINES_DIR.glob('*.svg')))
+    return ipa_index, timeline_index, media_files
+
+
+def media_for_sentence(sentence, ipa_index, timeline_index, label=''):
+    """Return (audio_field, ipa_field, timeline_field) for a sentence.
+    Audio field uses Anki's [sound:filename.mp3] tag; timeline uses <img>."""
+    h = _sentence_hash(sentence)
+    audio_path = MEDIA_AUDIO_DIR / f'{h}.mp3'
+    audio_field = f'[sound:{h}.mp3]' if audio_path.exists() and audio_path.stat().st_size > 0 else ''
+    ipa_field = ipa_index.get(h, '')
+    timeline_file = timeline_index.get(label, '')
+    timeline_field = f'<img src="{timeline_file}">' if timeline_file else ''
+    return audio_field, ipa_field, timeline_field
 
 
 def main():
@@ -343,6 +412,48 @@ hr#answer {
   color: #dbeafe;
   border-color: #1e40af;
 }
+
+/* ── Tier-2 additions: audio row, IPA box, timeline image ── */
+.audio-row {
+  margin: 6px 0 8px;
+  font-size: 0.85em;
+  color: #6b7280;
+}
+.ipa-box {
+  margin-top: 10px;
+  padding: 6px 10px;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  font-family: "Charis SIL", "Doulos SIL", "Lucida Sans Unicode", serif;
+  font-size: 0.95em;
+}
+.ipa-key {
+  font-weight: 700;
+  color: #92400e;
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 6px;
+}
+.ipa-val { color: #78350f; }
+.timeline-box {
+  margin: 10px 0;
+  text-align: center;
+}
+.timeline-box img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+.nightMode .ipa-box, .night_mode .ipa-box {
+  background: #422006;
+  border-color: #78350f;
+}
+.nightMode .ipa-key, .night_mode .ipa-key { color: #fde68a; }
+.nightMode .ipa-val, .night_mode .ipa-val { color: #fef3c7; }
+.nightMode .audio-row, .night_mode .audio-row { color: #9ca3af; }
 '''
 
     # ------------------------------------------------------------------
@@ -350,8 +461,8 @@ hr#answer {
     # Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue | Contrast | Tags
     # ------------------------------------------------------------------
     rec_model = genanki.Model(
-        2056102001,
-        'Verb System · Recognition',
+        2056102004,  # bumped: schema changed (added Audio/IPA/Timeline)
+        'Verb System · Recognition (v2)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'Label'},
@@ -361,23 +472,30 @@ hr#answer {
             {'name': 'QuickCue'},
             {'name': 'Contrast'},
             {'name': 'Tags'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Timeline'},
         ],
         templates=[{
             'name': 'Recognition Card',
             'qfmt': '''
 <div class="instruction">What tense or aspect is this?</div>
 <div class="sentence">{{Sentence}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 ''',
             'afmt': '''
 <div class="instruction">What tense or aspect is this?</div>
 <div class="sentence">{{Sentence}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 <hr id="answer">
 <div class="answer-label">{{Label}}</div>
 {{#Aspect}}<span class="answer-correct">{{Aspect}}</span>{{/Aspect}}
+{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
 <div class="meta-grid">
   <span class="meta-key">Formula</span><span class="meta-val">{{Formula}}</span>
   <span class="meta-key">Main use</span><span class="meta-val">{{MainUse}}</span>
 </div>
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
 {{#QuickCue}}
 <div class="info-box">
   <div class="info-row"><span class="info-key">Quick cue</span><span class="info-val">{{QuickCue}}</span></div>
@@ -394,8 +512,8 @@ hr#answer {
     # Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags
     # ------------------------------------------------------------------
     con_model = genanki.Model(
-        2056102002,
-        'Verb System · Contrast',
+        2056102005,  # bumped
+        'Verb System · Contrast (v2)',
         fields=[
             {'name': 'Sentence'},
             {'name': 'OptionA'},
@@ -404,12 +522,16 @@ hr#answer {
             {'name': 'Why'},
             {'name': 'Tip'},
             {'name': 'Tags'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Timeline'},
         ],
         templates=[{
             'name': 'Contrast Card',
             'qfmt': '''
 <div class="instruction">Which label fits this sentence?</div>
 <div class="sentence">{{Sentence}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 <div class="options">
   <div class="option"><span class="opt-letter">A.</span>{{OptionA}}</div>
   <div class="option"><span class="opt-letter">B.</span>{{OptionB}}</div>
@@ -418,13 +540,16 @@ hr#answer {
             'afmt': '''
 <div class="instruction">Which label fits this sentence?</div>
 <div class="sentence">{{Sentence}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
 <div class="options">
   <div class="option"><span class="opt-letter">A.</span>{{OptionA}}</div>
   <div class="option"><span class="opt-letter">B.</span>{{OptionB}}</div>
 </div>
 <hr id="answer">
 <span class="answer-correct">✓ {{Answer}}</span>
+{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
 <div class="why-block"><span class="why-label">Why: </span>{{Why}}</div>
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
 {{#Tip}}<div class="tip-block">{{Tip}}</div>{{/Tip}}
 ''',
         }],
@@ -436,8 +561,8 @@ hr#answer {
     # Fields: Prompt | Target | Aspect | Sample | Why | Tags
     # ------------------------------------------------------------------
     pro_model = genanki.Model(
-        2056102003,
-        'Verb System · Production',
+        2056102006,  # bumped
+        'Verb System · Production (v2)',
         fields=[
             {'name': 'Prompt'},
             {'name': 'Target'},
@@ -445,6 +570,9 @@ hr#answer {
             {'name': 'Sample'},
             {'name': 'Why'},
             {'name': 'Tags'},
+            {'name': 'Audio'},
+            {'name': 'IPA'},
+            {'name': 'Timeline'},
         ],
         templates=[{
             'name': 'Production Card',
@@ -460,6 +588,9 @@ hr#answer {
 <hr id="answer">
 <div class="sample-label">Sample answer</div>
 <div class="sample-answer">{{Sample}}</div>
+{{#Audio}}<div class="audio-row">{{Audio}}</div>{{/Audio}}
+{{#Timeline}}<div class="timeline-box">{{Timeline}}</div>{{/Timeline}}
+{{#IPA}}<div class="ipa-box"><span class="ipa-key">IPA</span> <span class="ipa-val">/{{IPA}}/</span></div>{{/IPA}}
 <div class="why-block"><span class="why-label">Why this works: </span>{{Why}}</div>
 ''',
         }],
@@ -492,6 +623,10 @@ hr#answer {
         decks[(mod, typ)] = genanki.Deck(did, name)
 
     counts = {'rec': 0, 'con': 0, 'pro': 0}
+    media_counts = {'audio': 0, 'ipa': 0, 'timeline': 0}
+
+    # Tier-2 media indices
+    ipa_index, timeline_index, media_files = load_media_indices()
 
     # Recognition
     _, rec_rows = load_tsv('conjugations_recognition.txt')
@@ -500,9 +635,13 @@ hr#answer {
         if len(row) < 8:
             row += [''] * (8 - len(row))
         mod = row_module(row[7])
+        audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[1])
+        if audio_f: media_counts['audio'] += 1
+        if ipa_f: media_counts['ipa'] += 1
+        if tl_f: media_counts['timeline'] += 1
         note = genanki.Note(
             model=rec_model,
-            fields=row[:8],
+            fields=row[:8] + [audio_f, ipa_f, tl_f],
             tags=row[7].split(),
         )
         decks[(mod, 'rec')].add_note(note)
@@ -515,9 +654,14 @@ hr#answer {
         if len(row) < 7:
             row += [''] * (7 - len(row))
         mod = row_module(row[6])
+        # For contrast, the "label" we map to a timeline is the Answer (column 3)
+        audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[3])
+        if audio_f: media_counts['audio'] += 1
+        if ipa_f: media_counts['ipa'] += 1
+        if tl_f: media_counts['timeline'] += 1
         note = genanki.Note(
             model=con_model,
-            fields=row[:7],
+            fields=row[:7] + [audio_f, ipa_f, tl_f],
             tags=row[6].split(),
         )
         decks[(mod, 'con')].add_note(note)
@@ -530,22 +674,32 @@ hr#answer {
         if len(row) < 6:
             row += [''] * (6 - len(row))
         mod = row_module(row[5])
+        # For production, audio/IPA come from the Sample (column 3); timeline from Target (column 1).
+        audio_f, ipa_f, tl_f = media_for_sentence(row[3], ipa_index, timeline_index, label=row[1])
+        if audio_f: media_counts['audio'] += 1
+        if ipa_f: media_counts['ipa'] += 1
+        if tl_f: media_counts['timeline'] += 1
         note = genanki.Note(
             model=pro_model,
-            fields=row[:6],
+            fields=row[:6] + [audio_f, ipa_f, tl_f],
             tags=row[5].split(),
         )
         decks[(mod, 'pro')].add_note(note)
         counts['pro'] += 1
 
     out = 'english_verb_system_anki.apkg'
-    genanki.Package(list(decks.values())).write_to_file(out)
+    package = genanki.Package(list(decks.values()))
+    package.media_files = media_files
+    package.write_to_file(out)
 
     print(f'Built {out}')
     print(f'  recognition: {counts["rec"]}')
     print(f'  contrast:    {counts["con"]}')
     print(f'  production:  {counts["pro"]}')
     print(f'  total:       {sum(counts.values())}')
+    print(f'Media bundled: {len(media_files)} files '
+          f'(audio={media_counts["audio"]}, ipa={media_counts["ipa"]}, '
+          f'timeline={media_counts["timeline"]})')
     print()
     print('Decks:')
     for (mod, typ), deck in decks.items():

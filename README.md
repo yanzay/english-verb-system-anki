@@ -7,14 +7,20 @@ conditionals, passive voice, and stative/dynamic verb distinctions.
 
 | File | Purpose |
 |------|---------|
-| `conjugations_recognition.txt` | Recognition notes — 8 fields per row (404 rows) |
-| `conjugations_contrast.txt` | Contrast notes — 7 fields per row (208 rows) |
-| `conjugations_production.txt` | Production notes — 6 fields per row (204 rows) |
+| `conjugations_recognition.txt` | Recognition notes — 8 fields per row (546 rows) |
+| `conjugations_contrast.txt` | Contrast notes — 7 fields per row (296 rows) |
+| `conjugations_production.txt` | Production notes — 6 fields per row (271 rows) |
 | `anki_premium_schema_package.txt` | Schema and study strategy reference |
-| `build_anki_package.py` | Builds the `.apkg` package from the source files |
+| `build_anki_package.py` | Builds the `.apkg` package from the source files (Tier 1 + Tier 2 media) |
+| `build_audio.py` | **Tier 2** — generates one MP3 per unique sentence via Google Cloud TTS |
+| `build_ipa.py` | **Tier 2** — generates broad GA IPA transcriptions per sentence (and per word) |
+| `build_timelines.py` | **Tier 2** — generates SVG timeline diagrams per canonical tense label |
 | `validate_anki_data.py` | Validates field structure, labels, and answer integrity |
 | `requirements.txt` | Pinned Python dependencies |
 | `ANKI_SETTINGS.md` | Recommended Anki deck options and study path |
+| `media/audio/` | Generated MP3s (one per unique sentence, hashed filename) — gitignored |
+| `media/timelines/` | Generated SVG timelines (one per tense label) — gitignored |
+| `media/ipa_index.json` | Hash → IPA lookup used by the build script — gitignored |
 
 ## Deck structure
 
@@ -22,22 +28,22 @@ The package produces 38 subdecks organized into 13 modules:
 
 ```
 English Verb System
-├── 01 - Core Tense & Aspect          (90 / 42 / 44)
-├── 02 - Future Forms                 (20 / 14 / 10)
-├── 03 - Conditionals                 (35 / 17 / 19)
-├── 04 - Passive Voice                (40 / 19 / 20)
-├── 05 - Stative vs Dynamic           (25 / 18 / 15)
-├── 06 - Reported Speech              (22 / 20 / 19)
-├── 07 - Time Clauses                 ( 9 /  6 /  4)
-├── 08 - Modal Verbs                  (22 / 13 / 15)
-├── 09 - Subjunctive & Wish           (15 / 12 /  7)
-├── 10 - Non-Finite Forms             ( 8 /  6 /  6)
-├── 11 - Phrasal Verbs (Top 60)       (63 / 28 / 30)
-├── 12 - Discourse & Pragmatics       (22 / 13 /  5)
-└── 13 - L1 Interference (6 langs)    (33 /  0 / 10)
+├── 01 - Core Tense & Aspect          (104 / 42 / 46)
+├── 02 - Future Forms                 ( 23 / 14 / 10)
+├── 03 - Conditionals                 ( 41 / 20 / 20)
+├── 04 - Passive Voice                ( 52 / 19 / 20)
+├── 05 - Stative vs Dynamic           ( 25 / 18 / 15)
+├── 06 - Reported Speech              ( 33 / 26 / 24)
+├── 07 - Time Clauses                 ( 22 / 18 / 17)
+├── 08 - Modal Verbs                  ( 29 / 17 / 19)
+├── 09 - Subjunctive & Wish           ( 19 / 16 / 10)
+├── 10 - Non-Finite Forms             ( 37 / 19 / 19)
+├── 11 - Phrasal Verbs (Top 60)       ( 63 / 28 / 30)
+├── 12 - Discourse & Pragmatics       ( 64 / 33 / 30)
+└── 13 - L1 Interference (6 langs)    ( 33 / 25 / 10)
 
 Counts shown as Recognition / Contrast / Production.
-Total: 816 cards across 38 subdecks.
+Total: 1,113 cards across 39 subdecks.
 ```
 
 ## What each module covers
@@ -50,11 +56,106 @@ Total: 816 cards across 38 subdecks.
 - **10 Non-Finite Forms** — gerund vs infinitive choice, bare infinitive after let/make/help, perfect infinitive/gerund/participle, infinitive of purpose.
 - **11 Phrasal Verbs** — top 60 high-frequency phrasal verbs from BNC/COCA, with separability and confusable-pair drills.
 - **12 Discourse & Pragmatics** — historical present, headline present, recipe imperative, hypothetical past for politeness, academic hedging modals, cleft sentences, emphatic do.
-- **13 L1 Interference** — diagnostic + corrective cards for typical English errors made by Spanish, French, German, Russian, Mandarin, and Japanese speakers.
+- **13 L1 Interference** — diagnostic + corrective cards for typical English errors made by Spanish, French, German, Russian, Mandarin, and Japanese speakers. All meta-text rows have been rewritten as natural English target sentences (the L1 trap is preserved in the explanation/contrast fields).
+
+### Tier 1 expansions (this release)
+
+The deck has grown from 816 → 1,113 cards (+297) by plugging twelve previously
+missing topic clusters and backfilling all labels that had fewer than four
+examples per card type:
+
+- **Auxiliary ellipsis** — *So do I / Neither will my colleagues / Nor do I*
+- **Tag questions** — positive/negative/imperative/modal tag agreement
+- **Negative inversion** — *Hardly had…, Not only did…, Never have I…, No sooner had…, Only after…*
+- **Inverted conditionals** — *Had I known…, Were she…, Should you require…*
+- **Raising vs control verbs** — *seem/appear* vs *manage/promise/want*
+- **Ditransitive passive** — recipient-subject vs theme-subject variants
+- **Ergative & middle voice** — *the bookshelf collapsed*, *vintage records sell quickly*
+- **Reduced relative clauses** — *the man wearing…*, *the report submitted…*
+- **Double passive** — *is expected to be signed*
+- **Light / delexical verbs** — *have a shower, take a breath, make a decision*
+- **Be + to-infinitive** (formal future) — *You are to report at 8 a.m.*
+- **Shall** — suggestion + formal future
+- **Semi-modals** — *daren't, needn't, would rather, would sooner*
+- **Suppose / Supposing / Providing / On condition that / In case**
+- **Comparative correlative** — *the harder you train, the faster you recover*
+- **Even if vs even though** — hypothetical vs real concession
+- **Implicit conditionals** — *one more interruption and I'll lose my temper*
+- **Future-in-the-past** — *was going to / would / was about to*
+- **Narrative tense layering** — past simple + past continuous + past perfect
+- **Modal + perfect continuous** — *must have been working, should have been studying*
+- **Embedded / indirect questions** — *Do you know whether…? Could you tell me where…?*
+- **Reporting verb patterns** — *admit/deny/suggest + V-ing*, *accuse of, apologise for, blame for, promise/refuse + to-inf*
+- **Backshift exceptions** — universal truths and conditional 2/3 don't backshift
+- **Wish + would** — annoyance and polite-request senses
+- **AmE vs BrE** — *I just got off the phone* vs *I've just spoken to him*
+- **Habitual would vs used to** — dynamic habits only vs habits + states
+- **As if + past perfect** — counterfactual past comparison
+- **It's high time** — past subjunctive form
+- **Cleft conditionals** — *if it weren't for her quick thinking…*
+- **Causatives** — have/get/make/let/help with object + bare infinitive or past participle
 
 ## Card styling
 
-The shipped CSS includes a light/serif default plus a `@media (max-width: 600px)` block for mobile and full **dark-mode** support that activates automatically with Anki's night-mode toggle (`.nightMode` / `.night_mode` body class).
+The shipped CSS includes a light/serif default plus a `@media (max-width: 600px)` block for mobile and full **dark-mode** support that activates automatically with Anki's night-mode toggle (`.nightMode` / `.night_mode` body class). Tier 2 adds a warm IPA panel and centered timeline image.
+
+## Tier 2 — multimodal upgrade (this release)
+
+The deck now ships with three additional media layers that elevate it from
+"good text deck" to "premium pronunciation + grammar deck":
+
+### 🔊 Audio
+
+- **One MP3 per unique sentence** (1,113 cards, ~1,041 unique sentences after dedup).
+- Synthesised with **Google Cloud Text-to-Speech**, voice `en-US-Neural2-F`
+  (a warm, natural female voice). Fully configurable via `EVS_TTS_VOICE`
+  env var or the `--voice` flag of `build_audio.py`.
+- Filename = `<sha1[:12] of sentence>.mp3`, content-addressed and idempotent.
+- Plays automatically on the front of every card via Anki's `[sound:…]` tag.
+- Optional **slow-speed (0.80×) variant** can be generated with
+  `build_audio.py` (omit `--no-slow`) for connected-speech / weak-form drilling.
+
+### 🔤 IPA transcription
+
+- Every sentence has a broad General-American IPA transcription on the back.
+- Computed offline (no network) by the `eng-to-ipa` library
+  (Carnegie-Mellon dict + heuristic fallback).
+- Out-of-dictionary rate on this corpus: **0.9 %** (14 / 1,566 unique words).
+- Per-word audit dump in `media/ipa_words.json` lets you spot odd entries.
+
+### ⏱️ Timeline diagrams
+
+- 40 lightweight SVG diagrams (~1 KB each) — one per canonical
+  tense / aspect label.
+- Show the action's position relative to the **PAST / NOW / FUTURE** axis
+  and whether it is punctual, durative, or perfective.
+- Auto-invert in Anki dark mode via `@media (prefers-color-scheme: dark)`.
+- 416 cards (those whose canonical Label/Answer/Target matches a known
+  tense) get a timeline; the rest fall back to text only.
+
+### How to (re)generate the media
+
+The package as shipped already contains the media. To re-render from scratch:
+
+```bash
+# 1. Auth once with gcloud (uses Application Default Credentials)
+gcloud auth application-default login
+
+# 2. Install Python deps in a venv
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Generate the three media layers (timelines + IPA are free; audio uses paid TTS)
+python3 build_timelines.py             # 40 SVGs, ~instant, free
+python3 build_ipa.py                   # ~1,041 IPA strings, ~30 s, free
+python3 build_audio.py --no-slow       # ~1,041 MP3s, ~5 min, ≈ US$1.40
+
+# 4. Rebuild the .apkg (now ~25 MB with audio bundled)
+python3 build_anki_package.py
+```
+
+`build_audio.py --dry-run --limit 10` is the recommended cost-free smoke test
+before committing a full re-render.
 
 ## How to build and import
 
@@ -175,7 +276,7 @@ Present Simple (Stative) · Present Continuous (Dynamic Stative Shift)
 ## Notes
 
 - The build script auto-installs `genanki` if it is missing.
-- All 219 rows pass validation before each build.
+- All 1,113 rows pass validation before each build.
 - Cards route to the correct module subdeck automatically based on their tags.
 - See `ANKI_SETTINGS.md` for full recommended options including new cards/day,
   review limits, burying, leech thresholds, and tag-based filtering shortcuts.
