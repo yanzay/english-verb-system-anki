@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.4'
+VERSION = '3.2.5'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1661,7 +1661,11 @@ mark.focus {
         # Register / pragmatic axis (Contrast cards):
         (r'^(formal|informal|neutral|colloquial|academic|spoken|written|literary)$', 'register'),
         # Aux-verb single-word answers in Contrast (am/is/are/was/were/has/have/had/do/does/did)
-        (r'^(am|is|are|was|were|has|have|had|do|does|did|will|would|shall|should|can|could|may|might|must|ought|need)$', 'aux-form'),
+        # Bare aux-form (Contrast/Cloze single-word answers). Modals
+        # (will/would/shall/should/can/could/may/might/must/ought/need)
+        # are handled by the explicit \bmodal\b rule below so they
+        # land in Module 03 Modals, not Foundation.
+        (r'^(am|is|are|was|were|has|have|had|do|does|did)$', 'aux-form'),
         # Production targets
         (r'modal paraphrase|tense change|contraction expansion|register shift|active.{0,4}passive|passive.{0,4}active|paraphrase|transformation|nominalisation|nominalization', 'transformation'),
         # Discourse semantics
@@ -1669,7 +1673,7 @@ mark.focus {
         (r'connected speech|reduction|contraction|stress|linking|t[- ]flap|weak form|schwa|elision|intonation|assimilation|silent letter|word stress|sentence stress|prosody|rhythm', 'phonology'),
         (r'phrasal verb|particle verb', 'phrasal-verb'),
         (r'reported speech|indirect speech|direct speech|backshift', 'reported-speech'),
-        (r'cleft|existential|causative|tag question|hedging|inversion|fronting|catenative|emphatic|exclamative|pseudo-cleft|reverse pseudo|response form|comment clause|extraposition|locative|comparative.*invers|degree.*invers|so.*such', 'construction'),
+        (r'cleft|existential|causative|tag question|hedging|inversion|fronting|catenative|emphatic|exclamative|pseudo-cleft|reverse pseudo|response form|comment clause|extraposition|locative|comparative.*invers|degree.*invers|so.*such|time clause|narrative layering|reduced relative|caption present|headline present|stage direction|recipe imperative|historical present|performative', 'construction'),
         (r'gerund|infinitive|participle', 'non-finite'),
         (r'subjunctive|imperative', 'mood'),
         (r'passive|middle voice', 'voice'),
@@ -1692,8 +1696,57 @@ mark.focus {
         r'present-?perfect|past-?perfect|future-?perfect|'
         r'narrative|historical|stative|dynamic)\b', re.I)
 
+    # Some Recognition Labels in the source TSVs include a USE clause
+    # ('Present Simple for Schedule', 'Present Continuous for Future
+    # Arrangement') or a regional VARIANT marker ('Past Simple
+    # (American Variant)', 'Present Perfect (British Variant)'). These
+    # are valid pedagogical micro-distinctions but they conflate the
+    # answer (the form name) with the function/variant — the
+    # recognition prompt becomes unanswerable because there are too
+    # many things to identify.
+    #
+    # Strip them from the displayed Label so the answer is JUST the
+    # canonical form name. The function/variant info is already in
+    # the MainUse field (or trivially derivable from it).
+    _LABEL_USE_RE = re.compile(
+        r'\s+for\s+(Schedule|Future Arrangement|Future Plan|Background|'
+        r'Repeated Action|Polite Request|General Truth|Permanent State|'
+        r'Habit|Future Reference|Annoyance|Emphasis|Storytelling|'
+        r'Effect|Result|Recent Action|News|Personal Experience|Schedule)$',
+        re.I)
+    _LABEL_VARIANT_RE = re.compile(
+        r'\s*\((American|British|Australian|Canadian|Irish|Scottish|'
+        r'Indian|African|US|UK|AmE|BrE)\s*Variant\)$', re.I)
+    # Strip parenthetical *use* / *style* notes that aren't variants
+    # but still pollute the answer. The grammatical form is canonical;
+    # the parenthetical is supplementary.
+    #
+    # Greedy: strip ANY trailing parenthetical that does NOT name a
+    # major grammatical form (Continuous, Perfect, Passive, Subjunctive,
+    # etc.). 'Past Simple (Polite Distancing)' → 'Past Simple', but
+    # 'Future Simple Passive' is left alone (the 'Passive' word is the
+    # form name itself).
+    _LABEL_USE_PAREN_RE = re.compile(
+        r'\s*\((?!('
+        r'Continuous|Progressive|Perfect|Simple|Passive|Active|'
+        r'Subjunctive|Imperative|Gerund|Infinitive|Participle|'
+        r'Past|Present|Future|Modal|Conditional'
+        r')\)$)[^()]+\)$',
+        re.I)
+
+    def _normalize_label(label: str) -> str:
+        if not label: return label
+        L = _LABEL_VARIANT_RE.sub('', label)
+        L = _LABEL_USE_PAREN_RE.sub('', L)
+        L = _LABEL_USE_RE.sub('', L)
+        return L.strip()
+
     def _category_for(label: str) -> str:
         L = label.strip()
+        # Passive trumps everything — 'Future Simple Passive' is voice,
+        # not tense-aspect.
+        if re.search(r'\bpassive\b|\bmiddle voice\b', L, re.I):
+            return 'voice'
         # Future tenses are tense-aspect, not modal:
         if re.search(r'^future (?:simple|continuous|perfect)', L, re.I):
             return 'tense-aspect'
@@ -1816,6 +1869,11 @@ mark.focus {
     for row in rec_rows:
         if len(row) < 9:
             row += [''] * (9 - len(row))
+        # Normalize Label: 'Present Simple for Schedule' → 'Present
+        # Simple', 'Past Simple (American Variant)' → 'Past Simple'.
+        # The use/variant info already lives in MainUse (col 4); the
+        # answer to the recognition question becomes a clean form name.
+        row[1] = _normalize_label(row[1])
         category = _category_for(row[1])
         mods = row_modules(row[8], category=category)
         audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[1])
@@ -1916,6 +1974,14 @@ mark.focus {
     for row in con_rows:
         if len(row) < 7:
             row += [''] * (7 - len(row))
+        # Normalize OptionA / OptionB / Answer (cols 1, 2, 3) so the
+        # contrast options shown to the learner read 'Present Simple'
+        # vs 'Present Continuous' (not '… for Schedule' vs '… for
+        # Future Arrangement'). The semantic distinction stays in the
+        # ContrastInfo column where it belongs as supplementary context.
+        row[1] = _normalize_label(row[1])
+        row[2] = _normalize_label(row[2])
+        row[3] = _normalize_label(row[3])
         # Compute category FIRST so deck routing aligns with prompt.
         cat = _category_for(row[3])
         mods = row_modules(row[6], category=cat)
@@ -1956,6 +2022,10 @@ mark.focus {
     for row in pro_rows:
         if len(row) < 6:
             row += [''] * (6 - len(row))
+        # Normalize Target field (col 1): 'Present Simple for Schedule'
+        # → 'Present Simple'. The 'use the target tense+aspect' prompt
+        # then asks for the form, not the form-plus-function.
+        row[1] = _normalize_label(row[1])
         # Production: classify on Target field (col 1). Compute category
         # FIRST so deck routing aligns with prompt.
         cat = _category_for(row[1])
