@@ -175,7 +175,7 @@ def collect_sentences() -> List[str]:
     if rec.exists():
         for row in load_tsv(rec):
             if row and row[0].strip():
-                sentences.add(row[0].strip())
+                sentences.add(_spoken_sentence(row[0].strip()))
     if con.exists():
         for row in load_tsv(con):
             if row and row[0].strip():
@@ -193,7 +193,7 @@ def collect_sentences() -> List[str]:
     if pro.exists():
         for row in load_tsv(pro):
             if len(row) >= 4 and row[3].strip():
-                sentences.add(row[3].strip())
+                sentences.add(_spoken_sentence(row[3].strip()))
     if clz.exists():
         for row in load_tsv(clz):
             if row and row[0].strip():
@@ -204,7 +204,7 @@ def collect_sentences() -> List[str]:
     if img.exists():
         for row in load_tsv(img):
             if len(row) >= 2 and row[1].strip():
-                sentences.add(row[1].strip())
+                sentences.add(_spoken_sentence(row[1].strip()))
     return sorted(sentences)
 
 

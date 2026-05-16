@@ -713,7 +713,7 @@ def _audio_corpus_sentences(all_data):
         if path.endswith('conjugations_recognition.txt'):
             for r in rows:
                 if r and r[0].strip():
-                    sentences.add(r[0].strip())
+                    sentences.add(_audio_spoken_sentence(r[0].strip()))
         elif path.endswith('conjugations_contrast.txt'):
             for r in rows:
                 if r and r[0].strip():
@@ -731,7 +731,7 @@ def _audio_corpus_sentences(all_data):
         elif path.endswith('conjugations_production.txt'):
             for r in rows:
                 if len(r) >= 4 and r[3].strip():
-                    sentences.add(r[3].strip())
+                    sentences.add(_audio_spoken_sentence(r[3].strip()))
         elif path.endswith('conjugations_cloze.txt'):
             for r in rows:
                 if r and r[0].strip():

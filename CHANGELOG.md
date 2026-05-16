@@ -2,6 +2,20 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.11] - 2026-05-16
+
+### Fixed (Universal spoken-text normalization)
+- **Applied blank/cloze sentence normalization as a shared mechanism across all
+  media paths**, not only contrast/spot call sites. `media_for_sentence()` now
+  resolves spoken text centrally before audio/IPA hash lookup.
+- **Extended collectors/validators to normalize every sentence source**
+  (recognition, production samples, cloze text, contrast rows with answer
+  substitution) so future rows/card variants cannot regress to placeholder-based
+  hashes.
+- **Audited placeholder-bearing rows** (`___`, `[blank]`, `(blank)`, cloze
+  markers) across corpora and verified package build + validation still resolve
+  100% of expected audio entries.
+
 ## [3.2.10] - 2026-05-16
 
 ### Fixed (Blank-card audio now uses full sentence)

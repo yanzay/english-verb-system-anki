@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.10'
+VERSION = '3.2.11'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -326,10 +326,11 @@ def _image_caption_hash(caption):
     return hashlib.sha1((caption or '').strip().encode('utf-8')).hexdigest()[:12]
 
 
-def media_for_sentence(sentence, ipa_index, timeline_index, label=''):
+def media_for_sentence(sentence, ipa_index, timeline_index, label='', option_a='', option_b='', answer=''):
     """Return (audio_field, ipa_field, timeline_field) for a sentence.
     Audio field uses Anki's [sound:filename.mp3] tag; timeline uses <img>."""
-    h = _sentence_hash(sentence)
+    spoken = spoken_sentence(sentence, option_a=option_a, option_b=option_b, answer=answer)
+    h = _sentence_hash(spoken)
     audio_path = MEDIA_AUDIO_DIR / f'{h}.mp3'
     audio_field = f'[sound:{h}.mp3]' if audio_path.exists() and audio_path.stat().st_size > 0 else ''
     ipa_field = ipa_index.get(h, '')
@@ -2328,13 +2329,15 @@ mark.focus {
         cat = _category_for(row[3])
         mods = row_modules(row[6], category=cat)
         # For contrast, the "label" we map to a timeline is the Answer (column 3)
-        spoken = spoken_sentence(
+        audio_f, ipa_f, tl_f = media_for_sentence(
             row[0],
+            ipa_index,
+            timeline_index,
+            label=row[3],
             option_a=row[1] if len(row) > 1 else '',
             option_b=row[2] if len(row) > 2 else '',
             answer=row[3] if len(row) > 3 else '',
         )
-        audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label=row[3])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1
@@ -2409,8 +2412,7 @@ mark.focus {
             mods = row_modules(row[2], category=cat)
             # For cloze, the spoken sentence is the cloze Text with the
             # {{c1::…}} markers stripped — that's the natural English audio.
-            spoken = re.sub(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}', r'\1', row[0])
-            audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label='')
+            audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label='')
             if audio_f: media_counts['audio'] += 1
             if ipa_f: media_counts['ipa'] += 1
             instruction = _CAT_PROMPTS_CLOZE[cat]
