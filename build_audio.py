@@ -41,6 +41,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -208,6 +209,38 @@ def collect_sentences() -> List[str]:
     return sorted(sentences)
 
 
+def collect_legacy_blank_aliases() -> Dict[str, Tuple[str, str]]:
+    """Return {legacy_hash: (legacy_text_with_blank, canonical_text)}.
+
+    Back-compat shim: older package versions hashed some contrast prompts with
+    raw blanks (___). We now synthesize canonical spoken text, but we also
+    materialize legacy filenames so old notes still play full-sentence audio.
+    """
+    aliases: Dict[str, Tuple[str, str]] = {}
+    con = Path("conjugations_contrast.txt")
+    if not con.exists():
+        return aliases
+    for row in load_tsv(con):
+        if not row or not row[0].strip():
+            continue
+        legacy_text = row[0].strip()
+        if not _BLANK_RE.search(legacy_text):
+            continue
+        option_a = row[1] if len(row) > 1 else ""
+        option_b = row[2] if len(row) > 2 else ""
+        answer = row[3] if len(row) > 3 else ""
+        canonical_text = _spoken_sentence(
+            legacy_text,
+            option_a=option_a,
+            option_b=option_b,
+            answer=answer,
+        )
+        if not canonical_text or canonical_text == legacy_text:
+            continue
+        aliases[text_hash(legacy_text)] = (legacy_text, canonical_text)
+    return aliases
+
+
 # ── Manifest I/O ─────────────────────────────────────────────────────────
 def load_manifest() -> dict:
     if MANIFEST_PATH.exists():
@@ -295,6 +328,7 @@ def main():
         DRY_RUN = True
 
     full_sentences = collect_sentences()
+    legacy_aliases = collect_legacy_blank_aliases()
     sentences = full_sentences[:args.limit] if args.limit else full_sentences
 
     manifest = load_manifest()
@@ -377,11 +411,38 @@ def main():
                   f"up-to-date={up_to_date} stale-rerendered={stale} "
                   f"missing-rendered={missing}")
 
+    # ── Back-compat alias files (old blank-hash -> canonical audio) ──
+    alias_written = 0
+    for legacy_h, (legacy_text, canonical_text) in sorted(legacy_aliases.items()):
+        legacy_out = MEDIA_DIR / f"{legacy_h}.mp3"
+        canonical_h = text_hash(canonical_text)
+        canonical_out = MEDIA_DIR / f"{canonical_h}.mp3"
+        if not canonical_out.exists() or canonical_out.stat().st_size == 0:
+            continue
+        need_alias = not legacy_out.exists()
+        if not need_alias and not args.no_verify_sha:
+            need_alias = file_sha256(legacy_out) != file_sha256(canonical_out)
+        if need_alias:
+            if DRY_RUN:
+                print(f"  [dry-run] would alias audio/{legacy_out.name} -> {canonical_out.name}")
+            else:
+                shutil.copy2(canonical_out, legacy_out)
+            alias_written += 1
+        if legacy_out.exists():
+            entries[legacy_h] = manifest_entry(
+                legacy_text,
+                voice=args.voice,
+                rate=args.rate,
+                lang=args.lang,
+                mp3_path=legacy_out,
+            )
+
     # ── Prune orphans ──
     # IMPORTANT: prune is always computed against the FULL corpus, never the
     # --limit-truncated subset; and --limit auto-disables prune as a safety net
     # so a smoke run like `--limit 3` doesn't wipe the rest of the corpus.
     desired = {text_hash(s) for s in full_sentences}
+    desired.update(legacy_aliases.keys())
     pruned = 0
     if args.limit and not args.no_prune:
         if not DRY_RUN:
@@ -400,7 +461,7 @@ def main():
     if not DRY_RUN:
         save_manifest(manifest)
 
-    print(f"\n✓ Done. written={written}  up-to-date={up_to_date}  pruned={pruned}")
+    print(f"\n✓ Done. written={written}  alias-written={alias_written}  up-to-date={up_to_date}  pruned={pruned}")
     if reasons:
         details = ", ".join(f"{k}={v}" for k, v in sorted(reasons.items()))
         print(f"  re-render reasons: {details}")

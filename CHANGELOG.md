@@ -2,6 +2,19 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.13] - 2026-05-16
+
+### Fixed (blank-audio backward compatibility)
+- **Added compatibility audio aliases for legacy blank-hash filenames.**
+  Contrast rows that previously hashed raw prompts like `___` now ship extra
+  MP3 files at those old hashes, but with the canonical full-sentence audio.
+- **Prevents stale imports from speaking "blank".** Even if a learner still has
+  old note fields referencing blank-era filenames, playback now resolves to the
+  same full-sentence recording as the new canonical hash.
+- **Updated audio validation to track both canonical spoken hashes and legacy
+  contrast blank hashes** so manifest checks stay strict with zero false
+  orphans.
+
 ## [3.2.12] - 2026-05-16
 
 ### Fixed (L1 opt-in at language deck level)
