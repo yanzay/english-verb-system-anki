@@ -124,7 +124,7 @@ def collect_sentences():
     if rec_path.exists():
         for row in load_tsv(rec_path):
             if row and row[0].strip():
-                sentences.add(row[0].strip())
+                sentences.add(spoken_sentence(row[0].strip()))
 
     con_path = Path("conjugations_contrast.txt")
     if con_path.exists():
@@ -146,7 +146,7 @@ def collect_sentences():
     if pro_path.exists():
         for row in load_tsv(pro_path):
             if len(row) >= 4 and row[3].strip():
-                sentences.add(row[3].strip())
+                sentences.add(spoken_sentence(row[3].strip()))
     # Tier-3 cloze sentences (strip {{c1::…}} markers first)
     cloze_path = Path("conjugations_cloze.txt")
     if cloze_path.exists():
@@ -158,7 +158,7 @@ def collect_sentences():
     if img_path.exists():
         for row in load_tsv(img_path):
             if len(row) >= 2 and row[1].strip():
-                sentences.add(row[1].strip())
+                sentences.add(spoken_sentence(row[1].strip()))
     return sorted(sentences)
 
 
