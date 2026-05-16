@@ -2,6 +2,80 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.9] - 2026-05-16
+
+### Fixed (Recognition focus-highlight overhaul)
+- **Fixed broken `Future Perfect Continuous` highlight** that was
+  selecting `"will not"` for `"They will not have been waiting long."`
+  The previous regex put `\s+not` as an alternation branch terminating
+  on the auxiliary, so any negative cluster collapsed to `"will not"`.
+  Replaced with a proper `\bwill(?:\s+not|n't)?{SUBJ}\s+have\s+been\s+\w+ing\b`.
+- **Comprehensive Recognition highlight audit & rewrite.** Rebuilt all
+  verb-cluster patterns in `_extract_focus()` so they correctly cover
+  the four clause shapes — declarative positive, declarative negative,
+  yes/no question, wh-question — with one shared `SUBJ`/`NEG` slot
+  vocabulary. Coverage went from **494 / 833 highlighted rows (59 %)
+  with 51 demonstrably wrong** to **813 / 833 highlighted (97.6 %)
+  with the residual 20 being intentional L1-trap and phonology rows
+  where the whole sentence is the focus** (Article Use, V2 Word Order,
+  Get vs Become, T-flapping, Linking R, Subject Case, etc.).
+- **Added curated irregular past-participle list (`IRREG_PP`)** so
+  perfect tenses now match `lost / left / found / bought / gone /
+  seen / done / made / known / taken / written / spoken / chosen / …`
+  instead of failing on every irregular and capturing only the
+  auxiliary.
+- **Added contraction support** (`'ve`, `'s`, `'d`, `'ll`, `'re`,
+  `'m`) to every perfect/continuous tense pattern so cards like
+  `"I've already written the letter."`, `"He'd sooner resign…"`,
+  `"At this hour next week, I'd be lying on a beach…"`,
+  `"She's just finished the report."` now extract the full cluster.
+- **Added phrasal-verb extractor** that pulls the canonical phrasal
+  out of the parenthetical in the Label (`Phrasal Verb (look up to)`),
+  inflects the head (look/looks/looked/looking with full irregular
+  forms for go/come/get/give/take/make/break/fall/etc.), and matches
+  the full multi-word verb across the sentence — so all 60+ phrasal
+  Recognition rows now have correct highlights.
+- **Added high-precision sub-form fallbacks** for `Wish (Present
+  Unreal / Past Regret)`, `If Only`, `Be About To`, `Was/Were Going
+  To`, `Get-Passive`, `Be Able To`, `Be Supposed To`, `Had Better`,
+  `Due To (Formal Future)`, `Time Clause (Future / Future Perfect /
+  Past Continuous / Past Perfect)`, `Conditional (Zero/First/Second/
+  Third/Mixed/Unless/As Long As/Provided That)`, `Reported Speech
+  (Suggest/Recommend)`, `Stative Present Simple`, `Present Perfect
+  with Just/Still/Already/Yet`, `Present Continuous (Complaint —
+  always/forever/constantly Ving)`, `Light Verb (Take/Make/Have/Give/
+  Do)`, `Modal (Would Sooner/Would Rather)`, `Mandative Subjunctive`,
+  `Bare Infinitive (Let/Make)`, `Perfect Infinitive/Gerund/Participle`,
+  and `Implicit Conditional (Coordination)`.
+- **Added passive-label short-circuit** so `"Coffee is grown in
+  Colombia."` (label `Present Simple Passive`) now highlights
+  `"is grown"` instead of being claimed by the present-simple
+  `\b\w+s\b` 3sg fallback and stopping at `"is"`.
+- **Improved Past Simple matcher** to recognise irregular forms by
+  literal token (`came / went / got / gave / took / made / said /
+  saw / found / told / brought / broke / fell / held / ran / kept /
+  left / paid / sold / sat / stood / ate / drank / thought / spoke /
+  wrote / read / met / cut / put / set / let / bet / hurt / cost /
+  hit / shut / sang / swam / knew / grew / threw / drew / flew /
+  showed / blew / drove / rode / chose / froze / stole / woke / bit /
+  hid / fell / lost / bought / caught / fought / taught / sought /
+  sent / spent / built / burnt / dealt / dreamt / learnt / swept /
+  crept / bent / lent / won / held / fled / led / fed / bred / laid /
+  wept / withdrew / undertook / overcame`) so cards like `"She ate
+  breakfast at the hotel yesterday morning."`, `"He said hello."`,
+  and `"She got the job."` highlight the actual past form.
+- **Improved Present Simple matcher** to highlight the bare-verb
+  cluster after a pronoun (`"I drink coffee every morning…"`,
+  `"I eat rice every day…"`, `"I use a pen."`).
+- **Added last-resort generic verb-cluster fallback** so any row with
+  an auxiliary or post-pronoun verb gets *some* highlight even when
+  the row's specific Label doesn't match a registered key.
+
+### Build verified
+3,288 cards · 96 sub-decks · 0 schema errors · 0 audio errors · v3.2.9
+stamp on the apkg. Recognition highlight coverage 97.6 % across all
+833 rows.
+
 ## [3.2.8] - 2026-05-16
 
 ### Fixed (pre-release content audit, round 3)
