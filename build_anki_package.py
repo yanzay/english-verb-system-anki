@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.9'
+VERSION = '3.2.10'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -259,10 +259,34 @@ MEDIA_TIMELINES_INDEX = Path('media/timelines_index.json')
 MEDIA_IMAGES_DIR = Path('media/images')
 MEDIA_IMAGES_INDEX = Path('media/images_index.json')
 IMAGE_TSV = Path('conjugations_image.txt')
+_BLANK_RE = re.compile(r'_{3,}|\[blank\]|\(blank\)', re.IGNORECASE)
+_CHOICE_ANNOTATION_RE = re.compile(r'\s*\([^)]*\)\s*$')
 
 
 def _sentence_hash(text):
     return hashlib.sha1((text or '').strip().encode('utf-8')).hexdigest()[:12]
+
+
+def _strip_choice_annotation(text):
+    return _CHOICE_ANNOTATION_RE.sub('', (text or '').strip()).strip()
+
+
+def spoken_sentence(sentence, *, option_a='', option_b='', answer=''):
+    """Resolve authored prompts to natural spoken text for media lookup."""
+    spoken = (sentence or '').strip()
+    if not spoken:
+        return ''
+    spoken = re.sub(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}', r'\1', spoken)
+    if _BLANK_RE.search(spoken):
+        fill = (answer or '').strip()
+        if fill == (option_a or '').strip():
+            fill = option_a
+        elif fill == (option_b or '').strip():
+            fill = option_b
+        fill = _strip_choice_annotation(fill)
+        if fill:
+            spoken = _BLANK_RE.sub(fill, spoken)
+    return spoken
 
 
 def load_media_indices():
@@ -2304,7 +2328,13 @@ mark.focus {
         cat = _category_for(row[3])
         mods = row_modules(row[6], category=cat)
         # For contrast, the "label" we map to a timeline is the Answer (column 3)
-        audio_f, ipa_f, tl_f = media_for_sentence(row[0], ipa_index, timeline_index, label=row[3])
+        spoken = spoken_sentence(
+            row[0],
+            option_a=row[1] if len(row) > 1 else '',
+            option_b=row[2] if len(row) > 2 else '',
+            answer=row[3] if len(row) > 3 else '',
+        )
+        audio_f, ipa_f, tl_f = media_for_sentence(spoken, ipa_index, timeline_index, label=row[3])
         if audio_f: media_counts['audio'] += 1
         if ipa_f: media_counts['ipa'] += 1
         if tl_f: media_counts['timeline'] += 1

@@ -138,6 +138,31 @@ def load_tsv(path: Path):
 
 
 _CLOZE_RE = re.compile(r"\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}")
+_BLANK_RE = re.compile(r"_{3,}|\[blank\]|\(blank\)", re.IGNORECASE)
+_CHOICE_ANNOTATION_RE = re.compile(r"\s*\([^)]*\)\s*$")
+
+
+def _strip_choice_annotation(text: str) -> str:
+    return _CHOICE_ANNOTATION_RE.sub("", (text or "").strip()).strip()
+
+
+def _spoken_sentence(sentence: str, *, option_a: str = "", option_b: str = "", answer: str = "") -> str:
+    """Return the natural spoken sentence used for audio hashing/rendering."""
+    spoken = (sentence or "").strip()
+    if not spoken:
+        return ""
+    spoken = _CLOZE_RE.sub(r"\1", spoken)
+
+    if _BLANK_RE.search(spoken):
+        fill = (answer or "").strip()
+        if fill == (option_a or "").strip():
+            fill = option_a
+        elif fill == (option_b or "").strip():
+            fill = option_b
+        fill = _strip_choice_annotation(fill)
+        if fill:
+            spoken = _BLANK_RE.sub(fill, spoken)
+    return spoken
 
 
 def collect_sentences() -> List[str]:
@@ -154,7 +179,17 @@ def collect_sentences() -> List[str]:
     if con.exists():
         for row in load_tsv(con):
             if row and row[0].strip():
-                sentences.add(row[0].strip())
+                option_a = row[1] if len(row) > 1 else ""
+                option_b = row[2] if len(row) > 2 else ""
+                answer = row[3] if len(row) > 3 else ""
+                sentences.add(
+                    _spoken_sentence(
+                        row[0].strip(),
+                        option_a=option_a,
+                        option_b=option_b,
+                        answer=answer,
+                    )
+                )
     if pro.exists():
         for row in load_tsv(pro):
             if len(row) >= 4 and row[3].strip():
@@ -162,7 +197,7 @@ def collect_sentences() -> List[str]:
     if clz.exists():
         for row in load_tsv(clz):
             if row and row[0].strip():
-                sentences.add(_CLOZE_RE.sub(r"\1", row[0].strip()))
+                sentences.add(_spoken_sentence(row[0].strip()))
     # Image-cue captions (column 1) — also need TTS audio so the back of
     # the image card can play the model pronunciation.
     img = Path("conjugations_image.txt")

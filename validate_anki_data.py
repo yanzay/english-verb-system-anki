@@ -671,6 +671,8 @@ def cross_file_label_agreement(all_data):
 AUDIO_DIR        = Path('media/audio')
 AUDIO_MANIFEST   = Path('media/audio_manifest.json')
 _AUDIO_CLOZE_RE  = _re.compile(r'\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}')
+_AUDIO_BLANK_RE  = _re.compile(r'_{3,}|\[blank\]|\(blank\)', _re.IGNORECASE)
+_AUDIO_CHOICE_ANNOTATION_RE = _re.compile(r'\s*\([^)]*\)\s*$')
 
 
 def _audio_text_hash(text: str) -> str:
@@ -685,15 +687,47 @@ def _audio_file_sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+def _audio_strip_choice_annotation(text: str) -> str:
+    return _AUDIO_CHOICE_ANNOTATION_RE.sub('', (text or '').strip()).strip()
+
+
+def _audio_spoken_sentence(sentence: str, *, option_a: str = '', option_b: str = '', answer: str = '') -> str:
+    spoken = _AUDIO_CLOZE_RE.sub(r'\1', (sentence or '').strip())
+    if _AUDIO_BLANK_RE.search(spoken):
+        fill = (answer or '').strip()
+        if fill == (option_a or '').strip():
+            fill = option_a
+        elif fill == (option_b or '').strip():
+            fill = option_b
+        fill = _audio_strip_choice_annotation(fill)
+        if fill:
+            spoken = _AUDIO_BLANK_RE.sub(fill, spoken)
+    return spoken
+
+
 def _audio_corpus_sentences(all_data):
     """Return the set of unique English sentences for which audio is expected.
     Mirrors collect_sentences() in build_audio.py."""
     sentences = set()
     for path, (header, rows) in all_data.items():
-        if path.endswith('conjugations_recognition.txt') or path.endswith('conjugations_contrast.txt'):
+        if path.endswith('conjugations_recognition.txt'):
             for r in rows:
                 if r and r[0].strip():
                     sentences.add(r[0].strip())
+        elif path.endswith('conjugations_contrast.txt'):
+            for r in rows:
+                if r and r[0].strip():
+                    option_a = r[1] if len(r) > 1 else ''
+                    option_b = r[2] if len(r) > 2 else ''
+                    answer = r[3] if len(r) > 3 else ''
+                    sentences.add(
+                        _audio_spoken_sentence(
+                            r[0].strip(),
+                            option_a=option_a,
+                            option_b=option_b,
+                            answer=answer,
+                        )
+                    )
         elif path.endswith('conjugations_production.txt'):
             for r in rows:
                 if len(r) >= 4 and r[3].strip():
@@ -701,7 +735,7 @@ def _audio_corpus_sentences(all_data):
         elif path.endswith('conjugations_cloze.txt'):
             for r in rows:
                 if r and r[0].strip():
-                    sentences.add(_AUDIO_CLOZE_RE.sub(r'\1', r[0].strip()))
+                    sentences.add(_audio_spoken_sentence(r[0].strip()))
     return sentences
 
 
