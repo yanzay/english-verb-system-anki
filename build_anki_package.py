@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.8'
+VERSION = '3.2.9'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 
@@ -1570,31 +1570,117 @@ mark.focus {
         # Each pattern includes the optional "n't" / "not" + main verb in
         # appropriate form (V/Ving/Ven). Pattern goal: greedy enough to
         # catch the whole construction, narrow enough to skip subject NPs.
+        # ── Verb-cluster regexes (rebuilt v3.2.9) ──────────────────────
+        # Every multi-word verb cluster needs to behave correctly across
+        # FOUR clause shapes:
+        #   (a) declarative positive: "She has been working."
+        #   (b) declarative negative: "She has not been working." / "...hasn't been..."
+        #   (c) yes/no question:      "Has she been working?"
+        #   (d) wh-question:          "What has she been working on?"
+        # The auxiliary chain stays contiguous in (a) and (b); in (c) and
+        # (d) the SUBJECT is inserted between the first auxiliary and the
+        # rest. Rather than try to skip the subject (which causes greedy
+        # over-matching on long subjects), we explicitly allow ONE
+        # optional intervening NP token (`(?:\s+\w+)?`) between the
+        # leading auxiliary and the rest of the cluster. This covers the
+        # 99% case (single-word subject pronouns: he/she/it/you/we/they/I)
+        # without false positives.
+        #
+        # `(?:\s+not|n't)?` slots into the natural negation position of
+        # each tense so the negation marker is part of the highlight, not
+        # a terminator. The previous patterns (v3.0–v3.2.8) used
+        # `\bwill(?:\s+not|...)\b` as alternation, which made `will not`
+        # a complete match on its own and stopped before the actual verb.
+        SUBJ = r"(?:\s+(?:I|you|we|they|he|she|it|[A-Z]\w+))?"  # optional inverted subject
+        NEG  = r"(?:\s+not|n't)?"                               # optional negation
+        # Curated irregular past participles. Recognising these by literal
+        # tokens (rather than by suffix heuristics that miss "lost", "left",
+        # "found", "bought", "gone", "seen", "done", "made") is essential
+        # for the perfect-tense highlighters to grab the WHOLE cluster.
+        IRREG_PP = (r"(?:been|had|done|gone|seen|made|said|got|gotten|known|grown|"
+                    r"thrown|drawn|flown|shown|blown|driven|written|ridden|risen|"
+                    r"chosen|frozen|broken|spoken|stolen|woken|bitten|hidden|"
+                    r"forbidden|fallen|eaten|beaten|forgotten|taken|shaken|mistaken|"
+                    r"lost|left|kept|slept|felt|meant|brought|bought|caught|fought|"
+                    r"taught|sought|thought|sent|spent|built|burnt|dealt|dreamt|"
+                    r"learnt|leant|swept|crept|bent|lent|put|cut|hit|set|let|read|"
+                    r"shut|hurt|cost|spread|burst|cast|quit|fit|spat|swum|run|come|"
+                    r"become|begun|drunk|sung|rung|stung|sunk|stuck|won|held|fled|"
+                    r"led|fed|bred|shed|paid|laid|said|made|met|sat|bought|wept|"
+                    r"told|sold|found|wound|bound|ground|stood|understood|withdrawn|"
+                    r"undertaken|overcome|been)")
+        # Built from a list-then-or for clarity; ed/d-suffixed regulars are
+        # handled by the generic `\w+ed` alternative.
         FORM_PATS = [
-            ('present perfect continuous',     r"\b(?:has|have)(?:n't)?\s+been\s+\w+ing\b"),
-            ('past perfect continuous',        r"\bhad(?:n't)?\s+been\s+\w+ing\b"),
-            ('future perfect continuous',      r"\bwill(?:\s+not|\s+have(?:\s+been)?\s+\w+ing|\s+have\s+been\s+\w+ing)\b|\bwill\s+have\s+been\s+\w+ing\b"),
-            ('conditional perfect continuous', r"\bwould(?:n't)?\s+have\s+been\s+\w+ing\b"),
-            ('present perfect',                r"\b(?:has|have)(?:n't)?\s+(?:been\s+)?\w+(?:ed|en|own|ung|ought|aught|oken|orne|orn|one)\b|\b(?:has|have)(?:n't)?\s+\w+\b(?=\s|[\.,?!])"),
-            ('past perfect',                   r"\bhad(?:n't)?\s+\w+(?:ed|en|own|ung|ought|aught|oken|orne|one)\b"),
-            ('future perfect',                 r"\bwill\s+have\s+\w+(?:ed|en|own|ung|ought|oken|one)\b"),
-            ('conditional perfect',            r"\bwould(?:n't)?\s+have\s+\w+(?:ed|en|own|ung|ought|oken|one)\b"),
-            ('present continuous',             r"\b(?:am|is|are)(?:n't)?\s+\w+ing\b|\b(?:'m|'re|'s)\s+\w+ing\b"),
-            ('past continuous',                r"\b(?:was|were)(?:n't)?\s+\w+ing\b"),
-            ('future continuous',              r"\bwill\s+be\s+\w+ing\b"),
-            ('conditional continuous',         r"\bwould\s+be\s+\w+ing\b"),
-            ('future simple',                  r"\bwill(?:\s+not|n't)?\s+\w+\b|\b'll\s+\w+\b"),
-            ('be going to',                    r"\b(?:am|is|are|was|were)(?:n't)?\s+going\s+to\s+\w+\b|\b(?:'m|'re|'s)\s+going\s+to\s+\w+\b"),
-            ('future going to',                r"\b(?:am|is|are)(?:n't)?\s+going\s+to\s+\w+\b|\b(?:'m|'re|'s)\s+going\s+to\s+\w+\b"),
-            ('past simple',                    r"\b(?:did(?:n't)?\s+\w+|was|were|wasn't|weren't|\w+ed)\b|\b\w+(?:ought|ame|ent|ot|ound|ade|ave|ought|ought|aw|ook|nown|hought|elt|ept|elt|aught|ame|ave)\b"),
-            ('present simple',                 r"\b(?:do(?:n't)?|does(?:n't)?)\s+\w+\b|\b\w+s\b(?=\s|[\.,?!])"),
-            ('conditional',                    r"\bwould(?:n't)?\s+\w+\b"),
-            ('subjunctive',                    r"\b(?:were|be|have|do)(?:\s+not)?\s+\w+\b"),
-            ('passive',                        r"\b(?:am|is|are|was|were|been|being|be)\s+\w+(?:ed|en|own|ung|ought|aught|oken|orne|one)(?:\s+by\s+\w+)?\b"),
+            # Perfect tenses with contraction support: 've = have, 's = has,
+            # 'd = had/would (disambiguated by following form). The
+            # contracted form attaches to the preceding subject token, so
+            # the highlight needs to cover "subject + 've + ..." rather
+            # than start at "have".
+            ('present perfect continuous',     rf"\b(?:has|have|haven't|hasn't){NEG}{SUBJ}\s+been\s+\w+ing\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'(?:ve|s)\s+(?:not\s+)?been\s+\w+ing\b"),
+            ('past perfect continuous',        rf"\bhad{NEG}{SUBJ}\s+been\s+\w+ing\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'d\s+(?:not\s+)?been\s+\w+ing\b"),
+            ('future perfect continuous',      rf"\bwill{NEG}{SUBJ}{NEG}\s+have\s+been\s+\w+ing\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'ll\s+(?:not\s+)?have\s+been\s+\w+ing\b"),
+            ('conditional perfect continuous', rf"\bwould{NEG}{SUBJ}{NEG}\s+have\s+been\s+\w+ing\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'d\s+(?:not\s+)?have\s+been\s+\w+ing\b"),
+            ('present perfect',                rf"\b(?:has|have|haven't|hasn't){NEG}{SUBJ}{NEG}\s+(?:been\s+)?(?:already\s+|just\s+|never\s+|ever\s+|still\s+|yet\s+|recently\s+|lately\s+)?(?:{IRREG_PP}|\w+ed)\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'(?:ve|s)\s+(?:not\s+)?(?:already\s+|just\s+|never\s+|ever\s+|still\s+|yet\s+|recently\s+|lately\s+)?(?:been\s+)?(?:{IRREG_PP}|\w+ed)\b"),
+            ('past perfect',                   rf"\bhad{NEG}{SUBJ}{NEG}\s+(?:already\s+|just\s+)?(?:{IRREG_PP}|\w+ed)\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'d\s+(?:not\s+)?(?:already\s+|just\s+)?(?:{IRREG_PP}|\w+ed)\b"),
+            ('future perfect',                 rf"\bwill{NEG}{SUBJ}{NEG}\s+have\s+(?:{IRREG_PP}|\w+ed)\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'ll\s+(?:not\s+)?have\s+(?:{IRREG_PP}|\w+ed)\b"),
+            ('conditional perfect',            rf"\bwould{NEG}{SUBJ}{NEG}\s+have\s+(?:{IRREG_PP}|\w+ed)\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'d\s+(?:not\s+)?have\s+(?:{IRREG_PP}|\w+ed)\b"),
+            ('present continuous',             rf"\b(?:am|is|are){NEG}{SUBJ}{NEG}\s+(?:always\s+|forever\s+|constantly\s+|continually\s+)?\w+ing\b|\b(?:'m|'re|'s)\s+(?:always\s+|forever\s+|constantly\s+|continually\s+)?\w+ing\b"),
+            ('past continuous',                rf"\b(?:was|were){NEG}{SUBJ}{NEG}\s+\w+ing\b"),
+            ('future continuous',              rf"\bwill{NEG}{SUBJ}{NEG}\s+be\s+\w+ing\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'ll\s+(?:not\s+)?be\s+\w+ing\b"),
+            ('conditional continuous',         rf"\bwould{NEG}{SUBJ}{NEG}\s+be\s+\w+ing\b"
+                                               + rf"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)'d\s+(?:not\s+)?be\s+\w+ing\b"),
+            # Future simple: will/'ll + (not)? + bare verb. We require a
+            # main verb after the optional negation so "will not" alone
+            # never matches — it must extend to the verb that follows.
+            ('future simple',                  rf"\bwill{NEG}\s+\w+\b|\b'll\s+\w+\b"),
+            ('be going to',                    rf"\b(?:am|is|are|was|were){NEG}{SUBJ}{NEG}\s+going\s+to\s+\w+\b|\b(?:'m|'re|'s)\s+going\s+to\s+\w+\b"),
+            ('future going to',                rf"\b(?:am|is|are){NEG}{SUBJ}{NEG}\s+going\s+to\s+\w+\b|\b(?:'m|'re|'s)\s+going\s+to\s+\w+\b"),
+            # Past simple: prefer the precise auxiliary forms first; the
+            # bare `\w+ed` fallback is intentionally LAST so it only fires
+            # if no auxiliary cluster is present (irregular past forms
+            # like "went", "saw", "took" are caught by the irregular set).
+            # Past simple: cluster matchers first (most specific), then a
+            # subject + irregular-past fallback, then a bare-V-ed fallback.
+            ('past simple',                    r"\bdid(?:n't|\s+not)?" + SUBJ + r"\s+\w+\b"
+                                               + r"|\b(?:wasn't|weren't|was\s+not|were\s+not|was|were)\s+\w+\b"
+                                               + r"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)\s+"
+                                                 r"(?:was|were|had|did|came|went|got|gave|took|made|said|"
+                                                 r"saw|found|told|brought|broke|fell|held|ran|kept|"
+                                                 r"left|paid|sold|sat|stood|ate|drank|thought|spoke|"
+                                                 r"wrote|read|met|cut|put|set|let|bet|hurt|cost|hit|"
+                                                 r"shut|read|ate|drank|sang|swam|knew|grew|threw|drew|"
+                                                 r"flew|showed|blew|drove|rode|chose|froze|stole|woke|"
+                                                 r"bit|hid|forbade|fell|lost|bought|caught|fought|"
+                                                 r"taught|sought|sent|spent|built|burnt|dealt|dreamt|"
+                                                 r"learnt|swept|crept|bent|lent|won|held|fled|led|fed|"
+                                                 r"bred|laid|wept|withdrew|undertook|overcame|\w+ed)\b"
+                                               + r"|\b\w+ed\b"),
+            # Present simple: do/does/don't/doesn't aux first, then bare
+            # subject + verb, then a 3sg "verb-s" fallback. The bare
+            # subject + verb pattern catches "I eat rice." / "I drink
+            # coffee" / "We use pens" — sentences where there's no aux.
+            ('present simple',                 r"\b(?:do(?:n't|\s+not)?|does(?:n't|\s+not)?)" + SUBJ + r"\s+\w+\b"
+                                               + r"|\b(?:I|you|we|they|he|she|it|[A-Z]\w+)\s+"
+                                                 r"(?:am|is|are|have|has|do|does|"
+                                                 r"\w+s|\w+(?<!ing)(?<!ed)(?<!en))\b"
+                                               + r"|\b\w+s\b(?=\s|[\.,?!])"),
+            ('conditional',                    rf"\bwould{NEG}{SUBJ}{NEG}\s+\w+\b"),
+            ('subjunctive',                    rf"\b(?:were|be|have|do){NEG}\s+\w+\b"),
+            ('passive',                        rf"\b(?:am|is|are|was|were|been|being|be){NEG}{SUBJ}{NEG}\s+\w+(?:ed|en|own|ung|ought|aught|oken|orne|one)(?:\s+by\s+\w+)?\b"),
             ('imperative',                     r"^[A-Z]\w+\b"),
             ('used to',                        r"\bused\s+to\s+\w+\b"),
-            ('would (habitual)',               r"\bwould\s+\w+\b"),
-            ('modal',                          r"\b(?:can(?:'t|not)?|could(?:n't)?|may|might|must(?:n't)?|should(?:n't)?|ought\s+to|need(?:n't)?|dare(?:n't)?|have\s+to|has\s+to|had\s+to)\s+\w+\b"),
+            ('would (habitual)',               rf"\bwould{NEG}\s+\w+\b"),
+            ('modal',                          rf"\b(?:can(?:'t|not)?|could(?:n't)?|may{NEG}?|might{NEG}?|must(?:n't)?|should(?:n't)?|ought\s+to|need(?:n't)?|dare(?:n't)?|have\s+to|has\s+to|had\s+to){SUBJ}\s+\w+\b"),
             ('zero conditional',               r"\bif\s+[\w\s]+,\s*[\w\s]+"),
             ('first conditional',              r"\bif\s+[\w\s]+,\s*[\w\s]+will\s+\w+"),
             ('second conditional',             r"\bif\s+[\w\s]+,\s*[\w\s]+would\s+\w+"),
@@ -1605,6 +1691,28 @@ mark.focus {
             ('infinitive',                     r"\bto\s+\w+\b"),
             ('participle',                     r"\b\w+(?:ed|ing|en)\b"),
         ]
+        # Passive labels carry both a tense ("present simple", "past simple",
+        # …) and "passive". The naive longest-match-key sort would pick the
+        # tense-only pattern first and stop at "is" / "are" rather than
+        # extend to "is grown" / "are recommended". Route passive labels
+        # straight to the passive cluster matcher.
+        if 'passive' in L:
+            pat = (rf"\b(?:am|is|are|was|were|been|being|be|get|gets|got|"
+                   rf"gotten|getting){NEG}{SUBJ}{NEG}\s+(?:{IRREG_PP}|\w+ed|"
+                   rf"\w+(?:en|own|ung|aught|oken|orne))(?:\s+by\s+\w+)?\b")
+            m = re.search(pat, S, re.I)
+            if m:
+                return m.group(0)
+
+        # Perfect Infinitive / Gerund / Participle short-circuit: these
+        # labels would otherwise be claimed by the generic 'infinitive' /
+        # 'gerund' / 'participle' keys in FORM_PATS, producing "to have"
+        # without the participle. Run the perfect-cluster matcher first.
+        if re.search(r'\bperfect (?:infinitive|gerund|participle)\b', L):
+            m = re.search(rf"\b(?:to\s+have|having)\s+(?:{IRREG_PP}|\w+ed)\b", S, re.I)
+            if m:
+                return m.group(0)
+
         # Try the most-specific Labels first (longest match wins).
         # Sort patterns by Label length desc so 'present perfect continuous'
         # is tried before 'present perfect'.
@@ -1613,6 +1721,216 @@ mark.focus {
                 m = re.search(pat, S, re.I)
                 if m:
                     return m.group(0)
+
+        # ── Sub-form & wish/if-only/about-to/etc. fallbacks ────────────
+        # Many Recognition rows carry richer Labels than the canonical
+        # 12-cell grid (e.g. "Wish (Past Regret)", "Be About To",
+        # "Time Clause (Future)"). The above pattern table can't reasonably
+        # name every variant, so we try a set of high-precision keyword
+        # matches before giving up.
+        SUB = [
+            # Wish + past simple/perfect/were
+            (r'\bwish\b.*?\b(present|present unreal|past regret|past)',
+             rf"\bwish(?:es|ed)?{SUBJ}\s+(?:I|you|we|they|he|she|it|[A-Z]\w+)?\s*"
+             rf"(?:had{NEG}\s+(?:{IRREG_PP}|\w+ed)\b|were\b|(?:was|were){NEG}\s+\w+|"
+             rf"\w+ed\b|could\s+\w+\b|would\s+\w+\b)"),
+            # If only — highlight from "If only" through the verb cluster
+            (r'\bif only\b',
+             r"\bif\s+only\b\s+\w+\s+(?:had{NEG}\s+\w+|could\s+\w+|would\s+\w+|\w+ed)"),
+            # Be About To — highlight "is/are/was/were about to + V"
+            (r'\babout to\b',
+             r"\b(?:am|is|are|was|were|'m|'s|'re)\s+about\s+to\s+\w+\b"),
+            # Was/Were Going To
+            (r'\bwas/were going to\b|\bwas going to\b|\bwere going to\b',
+             rf"\b(?:was|were){NEG}\s+going\s+to\s+\w+\b"),
+            # Get-Passive
+            (r'\bget-passive\b|\bget passive\b',
+             rf"\b(?:get|gets|got|gotten|getting){SUBJ}\s+\w+(?:ed|en|own|ung|"
+             rf"ought|aught|oken)\b"),
+            # Modal (Be Able To / Be Supposed To / Had Better)
+            (r'\bbe able to\b',     r"\b(?:am|is|are|was|were|'m|'s|'re)\s+able\s+to\s+\w+\b"),
+            (r'\bbe supposed to\b', r"\b(?:am|is|are|was|were|'m|'s|'re)\s+supposed\s+to\s+\w+\b"),
+            (r'\bhad better\b|\bhad\b.*\bbetter\b',
+             r"\b(?:'d|had|had\s+better|'d\s+better)(?:\s+not)?\s+\w+\b"),
+            # Modal (Would — Past Habit) — already partially handled but
+            # legacy 'would (habitual)' key may not align with this label
+            (r'\bwould\b.*\bhabit\b|\bpast habit\b',
+             rf"\bwould{NEG}\s+\w+\b"),
+            # Due To (Formal Future)
+            (r'\bdue to\b',         r"\b(?:am|is|are)\s+due\s+to\s+\w+\b"),
+            # Time Clause — highlight the temporal subordinator + clause verb
+            (r'\btime clause\b',
+             r"\b(?:when|after|before|until|as soon as|by the time|once|while)\s+"
+             r"[\w\s]+?\s+(?:\w+s\b|\w+ed\b|will\s+\w+|have\s+\w+|had\s+\w+|\w+\b)"),
+            # Conditionals (zero / first / second / third / mixed) —
+            # generic: highlight the if-clause verb cluster.
+            (r'\bconditional\b|\bunless\b|\bas long as\b|\bprovided that\b',
+             r"\b(?:if|unless|as\s+long\s+as|provided\s+that|on\s+condition\s+that)\s+"
+             r"[\w'\s]+?(?:,|\s+(?:will|would|can|could|may|might|should))"),
+            # Reported Speech (Suggest/Recommend) — subjunctive bare verb
+            (r'\bsuggest\b|\brecommend\b',
+             r"\b(?:suggest|suggests|suggested|recommend|recommends|recommended|"
+             r"insist|insists|insisted|demand|demands|demanded|propose|proposes|proposed)"
+             r"\s+that\s+\w+\s+\w+\b"),
+            # Stative-aspect Present Simple ('look', 'prefer', 'suppose', 'love', etc.)
+            (r'\bstative\b',
+             r"\b(?:I|you|we|they|he|she|it|[A-Z]\w+)\s+"
+             r"(?:look|looks|seem|seems|prefer|prefers|love|loves|hate|hates|"
+             r"like|likes|believe|believes|know|knows|think|thinks|need|needs|"
+             r"want|wants|own|owns|have|has|understand|understands|suppose|"
+             r"supposes|remember|remembers|forget|forgets|recognise|recognises|"
+             r"recognize|recognizes|consist|consists|contain|contains|cost|"
+             r"costs|matter|matters|mean|means|deserve|deserves)\b"),
+            # Present Perfect with adverbs (Just / Still / Already / Yet)
+            (r'\b(just|still|already|yet|ever|never|recently|lately)\b',
+             rf"\b(?:has|have|haven't|hasn't|'ve|'s)\s+"
+             rf"(?:just|still|already|yet|ever|never|recently|lately)?\s*"
+             rf"(?:been\s+)?(?:{IRREG_PP}|\w+ed)\b"),
+            # Present Continuous (Complaint) — "she's always Ving"
+            (r'\bcomplaint\b',
+             r"\b(?:'s|'re|is|are|was|were)\s+(?:always|forever|constantly|continually)\s+\w+ing\b"),
+            # Light Verb (Take/Make/Have/Give/Do) — "take a breath",
+            # "make a decision", "have a look", "give a smile", "do a check".
+            (r'\blight verb\b',
+             r"\b(?:take|takes|took|taken|taking|"
+             r"make|makes|made|making|"
+             r"have|has|had|having|"
+             r"give|gives|gave|given|giving|"
+             r"do|does|did|done|doing)\s+"
+             r"(?:a|an|the|some|two|three|several|another)\s+\w+\b"),
+            # Modal (Would Sooner / Would Rather) — "He'd sooner resign…"
+            (r'\bwould sooner\b|\bwould rather\b',
+             r"\b(?:would|'d)\s+(?:sooner|rather)(?:\s+not)?\s+\w+\b"),
+            # Phrasal-verb labels carry the literal phrasal in parentheses,
+            # e.g. "Phrasal Verb (look forward to)". The handler below
+            # (after this list) extracts that and matches against the sentence.
+            # Mandative subjunctive: "It's essential that he submit..."
+            (r'\bmandative\b|\bsubjunctive\b',
+             r"\b(?:essential|important|crucial|vital|necessary|imperative|"
+             r"mandatory|recommended|advisable|insist|insists|insisted|"
+             r"suggest|suggests|suggested|demand|demands|demanded|"
+             r"propose|proposes|proposed|require|requires|required)\b"
+             r"[\s\w']*?\bthat\b\s+\w+\s+\w+\b"),
+            # Bare Infinitive (Let/Make/Help/See/Hear/etc.)
+            (r'\bbare infinitive\b',
+             r"\b(?:let|lets|made|make|makes|help|helps|helped|see|saw|sees|"
+             r"hear|heard|hears|watch|watches|watched|feel|feels|felt)"
+             r"\s+(?:I|you|we|they|he|she|it|the|a|an|my|your|his|her|its|our|"
+             r"their|[A-Z]\w+|\w+)\s+\w+\b"),
+            # Perfect Infinitive / Gerund / Participle — take the whole
+            # "to have V-en" / "having V-en" cluster. Case-insensitive
+            # search (the wider pipeline uses re.I), so capital "Having"
+            # at sentence start is handled by the same alternative.
+            (r'\bperfect (?:infinitive|gerund|participle)\b',
+             rf"\b(?:to\s+have|having)\s+(?:{IRREG_PP}|\w+ed)\b"),
+            # Implicit Conditional (Coordination): "One more X and Y" / "Do X or Y"
+            (r'\bimplicit conditional\b|\bcoordination\b',
+             r"\b(?:one\s+more\s+\w+|another\s+\w+|do\s+that|stop\s+\w+ing)"
+             r"\s+(?:and|or)\s+\w+(?:'ll|\s+will)\s+\w+\b"),
+            # Passive forms: be + V-en (regular) or irregular participle
+            (r'\bpassive\b',
+             rf"\b(?:am|is|are|was|were|been|being|be|get|gets|got|gotten|getting)"
+             rf"{NEG}{SUBJ}{NEG}\s+(?:{IRREG_PP}|\w+ed|\w+(?:en|own|ung|aught|"
+             rf"oken|orne))(?:\s+by\s+\w+)?\b"),
+        ]
+        for label_pat, sent_pat in SUB:
+            if re.search(label_pat, L):
+                m = re.search(sent_pat, S, re.I)
+                if m:
+                    return m.group(0).rstrip(',')
+
+        # ── Phrasal-verb labels ────────────────────────────────────────
+        # The Label carries the canonical phrasal in parentheses, e.g.
+        # "Phrasal Verb (look forward to)". We pull that out, build a
+        # regex tolerant of inflection (look/looks/looked/looking) and
+        # of intervening object pronouns (took it on, looked it up), and
+        # match it back into the sentence so the highlight covers the
+        # entire multi-word verb.
+        if 'phrasal verb' in L or 'phrasal-verb' in L:
+            mp = re.search(r'\(([^)]+)\)', label)
+            if mp:
+                parts = mp.group(1).strip().lower().split()
+                if parts:
+                    head = parts[0]
+                    particles = parts[1:]
+                    # Curated irregular forms for common phrasal heads, plus
+                    # a generic regular-inflection fallback (V/V-s/V-ed/V-ing).
+                    IRREG_VERB_FORMS = {
+                        'be':    ['be', 'am', 'is', 'are', 'was', 'were', 'been', 'being'],
+                        'have':  ['have', 'has', 'had', 'having'],
+                        'do':    ['do', 'does', 'did', 'done', 'doing'],
+                        'go':    ['go', 'goes', 'went', 'gone', 'going'],
+                        'come':  ['come', 'comes', 'came', 'coming'],
+                        'get':   ['get', 'gets', 'got', 'gotten', 'getting'],
+                        'give':  ['give', 'gives', 'gave', 'given', 'giving'],
+                        'take':  ['take', 'takes', 'took', 'taken', 'taking'],
+                        'make':  ['make', 'makes', 'made', 'making'],
+                        'put':   ['put', 'puts', 'putting'],
+                        'set':   ['set', 'sets', 'setting'],
+                        'see':   ['see', 'sees', 'saw', 'seen', 'seeing'],
+                        'find':  ['find', 'finds', 'found', 'finding'],
+                        'tell':  ['tell', 'tells', 'told', 'telling'],
+                        'bring': ['bring', 'brings', 'brought', 'bringing'],
+                        'break': ['break', 'breaks', 'broke', 'broken', 'breaking'],
+                        'fall':  ['fall', 'falls', 'fell', 'fallen', 'falling'],
+                        'hold':  ['hold', 'holds', 'held', 'holding'],
+                        'run':   ['run', 'runs', 'ran', 'running'],
+                        'keep':  ['keep', 'keeps', 'kept', 'keeping'],
+                        'leave': ['leave', 'leaves', 'left', 'leaving'],
+                        'pay':   ['pay', 'pays', 'paid', 'paying'],
+                        'sell':  ['sell', 'sells', 'sold', 'selling'],
+                        'sit':   ['sit', 'sits', 'sat', 'sitting'],
+                        'stand': ['stand', 'stands', 'stood', 'standing'],
+                        'eat':   ['eat', 'eats', 'ate', 'eaten', 'eating'],
+                        'drink': ['drink', 'drinks', 'drank', 'drunk', 'drinking'],
+                        'think': ['think', 'thinks', 'thought', 'thinking'],
+                        'speak': ['speak', 'speaks', 'spoke', 'spoken', 'speaking'],
+                        'write': ['write', 'writes', 'wrote', 'written', 'writing'],
+                        'read':  ['read', 'reads', 'reading'],
+                        'meet':  ['meet', 'meets', 'met', 'meeting'],
+                        'cut':   ['cut', 'cuts', 'cutting'],
+                    }
+                    if head in IRREG_VERB_FORMS:
+                        head_pat = '(?:' + '|'.join(re.escape(f) for f in IRREG_VERB_FORMS[head]) + ')'
+                    else:
+                        # Regular verb: V / V-s / V-ed / V-ing
+                        # If head ends in 'e', drop it for -ing form (look→looking
+                        # but make→making). For -ed, just append "d" to e-final.
+                        h = re.escape(head)
+                        if head.endswith('e'):
+                            head_pat = (rf'(?:{h}|{h}s|{h}d|{re.escape(head[:-1])}ing)')
+                        else:
+                            head_pat = rf'(?:{h}|{h}s|{h}ed|{h}ing)'
+                    # Particles must appear in order, with up to 4
+                    # intervening object-NP tokens between adjacent particles
+                    # AND between head and first particle.
+                    if particles:
+                        particle_pat = r'(?:\s+\w+){0,4}\s+'.join(re.escape(p) for p in particles)
+                        pat = rf"\b{head_pat}(?:\s+\w+){{0,4}}\s+{particle_pat}\b"
+                    else:
+                        pat = rf"\b{head_pat}\b"
+                    m = re.search(pat, S, re.I)
+                    if m:
+                        return m.group(0)
+
+        # ── Last-resort generic verb-cluster fallback ──────────────────
+        # If we still haven't extracted a focus, find ANY plausible verb
+        # cluster in the sentence: subject (or aux) + main verb. This is
+        # better than leaving the highlight empty, since the learner's
+        # task on Recognition is "identify the highlighted verb form" —
+        # we owe them a span even if our taxonomy didn't predict the
+        # exact pattern.
+        for pat in (
+            # Aux + (subject)? + (not)? + (been)? + V(ing|ed|en|...)
+            rf"\b(?:has|have|had|will|would|shall|should|can|could|may|might|must|"
+            rf"do|does|did|am|is|are|was|were){NEG}{SUBJ}{NEG}\s+"
+            rf"(?:been\s+)?(?:going\s+to\s+)?(?:about\s+to\s+)?\w+(?:ing|ed|en)?\b",
+            # Bare past simple verb at clause start (e.g. "Plants die...")
+            r"\b[a-z]\w+(?:ed|s)\b(?=\s|[\.,?!])",
+        ):
+            m = re.search(pat, S, re.I)
+            if m:
+                return m.group(0)
         return ''
 
     def _focused_html(sentence: str, label: str) -> str:
