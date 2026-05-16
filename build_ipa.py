@@ -90,6 +90,8 @@ def load_tsv(path: Path):
 
 
 CLOZE_RE = re.compile(r"\{\{c\d+::([^:}]+)(?:::[^}]+)?\}\}")
+BLANK_RE = re.compile(r"_{3,}|\[blank\]|\(blank\)", re.IGNORECASE)
+CHOICE_ANNOTATION_RE = re.compile(r"\s*\([^)]*\)\s*$")
 
 
 def strip_cloze(text: str) -> str:
@@ -98,24 +100,59 @@ def strip_cloze(text: str) -> str:
     return CLOZE_RE.sub(r"\1", text)
 
 
+def _strip_choice_annotation(text: str) -> str:
+    return CHOICE_ANNOTATION_RE.sub("", (text or "").strip()).strip()
+
+
+def spoken_sentence(sentence: str, *, option_a: str = "", option_b: str = "", answer: str = "") -> str:
+    spoken = strip_cloze((sentence or "").strip())
+    if BLANK_RE.search(spoken):
+        fill = (answer or "").strip()
+        if fill == (option_a or "").strip():
+            fill = option_a
+        elif fill == (option_b or "").strip():
+            fill = option_b
+        fill = _strip_choice_annotation(fill)
+        if fill:
+            spoken = BLANK_RE.sub(fill, spoken)
+    return spoken
+
+
 def collect_sentences():
     sentences = set()
-    for p, idx in [
-        (Path("conjugations_recognition.txt"), 0),
-        (Path("conjugations_contrast.txt"), 0),
-        (Path("conjugations_production.txt"), 3),
-    ]:
-        if not p.exists():
-            continue
-        for row in load_tsv(p):
-            if len(row) > idx and row[idx].strip():
-                sentences.add(row[idx].strip())
+    rec_path = Path("conjugations_recognition.txt")
+    if rec_path.exists():
+        for row in load_tsv(rec_path):
+            if row and row[0].strip():
+                sentences.add(row[0].strip())
+
+    con_path = Path("conjugations_contrast.txt")
+    if con_path.exists():
+        for row in load_tsv(con_path):
+            if row and row[0].strip():
+                option_a = row[1] if len(row) > 1 else ""
+                option_b = row[2] if len(row) > 2 else ""
+                answer = row[3] if len(row) > 3 else ""
+                sentences.add(
+                    spoken_sentence(
+                        row[0].strip(),
+                        option_a=option_a,
+                        option_b=option_b,
+                        answer=answer,
+                    )
+                )
+
+    pro_path = Path("conjugations_production.txt")
+    if pro_path.exists():
+        for row in load_tsv(pro_path):
+            if len(row) >= 4 and row[3].strip():
+                sentences.add(row[3].strip())
     # Tier-3 cloze sentences (strip {{c1::…}} markers first)
     cloze_path = Path("conjugations_cloze.txt")
     if cloze_path.exists():
         for row in load_tsv(cloze_path):
             if row and row[0].strip():
-                sentences.add(strip_cloze(row[0].strip()))
+                sentences.add(spoken_sentence(row[0].strip()))
     # Image-cue captions (col 1)
     img_path = Path("conjugations_image.txt")
     if img_path.exists():

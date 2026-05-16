@@ -2,6 +2,21 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.10] - 2026-05-16
+
+### Fixed (Blank-card audio now uses full sentence)
+- **Resolved incomplete back-side audio on blank-style cards** (including
+  Spot-the-Error rows generated from contrast data). Audio/IPA lookup no
+  longer hashes placeholder text like `___`; it now resolves blanks to the
+  authored answer phrase and synthesizes the full natural sentence.
+- **Audited and aligned all sentence collectors** used by media generation and
+  validation (`build_audio.py`, `build_ipa.py`, `build_anki_package.py`,
+  `validate_anki_data.py`) so they compute the same spoken sentence for
+  contrast/spot/cloze rows.
+- **Regenerated Tier-2 media + package** after the pipeline fix:
+  audio manifest rebuilt, orphan hashes pruned, new hashes rendered, IPA index
+  synced, and `.apkg` rebuilt with v3.2.10 stamp.
+
 ## [3.2.9] - 2026-05-16
 
 ### Fixed (Recognition focus-highlight overhaul)
