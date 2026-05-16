@@ -2,6 +2,17 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.12] - 2026-05-16
+
+### Fixed (L1 opt-in at language deck level)
+- **Changed L1 preset binding to language parent decks only.** The
+  `English Verb System (L1 — opt in)` preset now binds to
+  `13 - L1 Interference::<language>` decks, not to each child
+  `Recognition/Contrast/Production/Cloze` sub-deck.
+- **Restored one-switch enable flow for L1.** Users now opt in to an L1 by
+  switching the language deck preset once, instead of repeating the same action
+  on four child decks.
+
 ## [3.2.11] - 2026-05-16
 
 ### Fixed (Universal spoken-text normalization)
