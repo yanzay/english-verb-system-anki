@@ -31,7 +31,7 @@ import sys
 import subprocess
 from pathlib import Path
 
-VERSION = '3.2.7'
+VERSION = '3.2.8'
 CHANGELOG_URL = 'https://github.com/yanzay/english-verb-system-anki/blob/main/CHANGELOG.md'
 
 

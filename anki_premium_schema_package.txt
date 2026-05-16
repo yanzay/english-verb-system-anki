@@ -1,55 +1,134 @@
-PREMIUM ANKI SCHEMA PACKAGE
+PREMIUM ANKI SCHEMA PACKAGE — English Verb System
 
-Recommended note types
-1. Recognition note type
-   Fields: Front | Back | Extra | Tags
-   Purpose: identify tense/aspect or conditional form from a sentence.
+This is the canonical reference for the note types, fields, deck
+structure, and tag taxonomy that ship inside `english_verb_system_anki.apkg`.
+Everything below is what `build_anki_package.py` actually produces — keep
+this file in sync when fields, modules, or tag dimensions change.
 
-2. Contrast note type
-   Fields: Front | Back | Extra | Tags
-   Purpose: choose between two confusable labels or forms.
+================================================================
+NOTE TYPES (4 active + 1 auto-derived)
+================================================================
 
-3. Production note type
-   Fields: Front | Back | Extra | Tags
-   Purpose: produce a sentence matching a target form and use.
+1. Verb System · Recognition (v7)
+   Fields: Sentence | Label | Aspect | Formula | MainUse | QuickCue |
+           Contrast | WhenNotToUse | Tags | Audio | IPA | Timeline |
+           FocusedSentence | Prompt | Category
+   Purpose: Identify the highlighted tense/aspect/modal/voice/etc. form
+            in a natural sentence. The Prompt field is category-aware
+            ("Identify the highlighted tense + aspect" vs "...modal"
+            vs "...construction"), so the question is never misleading.
 
-Recommended card templates
-A. Recognition card
-   Front: {{Front}}
-   Back: {{Front}}<hr id=answer>{{Back}}<br><br>{{Extra}}
+2. Verb System · Contrast (v3)
+   Fields: Sentence | OptionA | OptionB | Answer | Why | Tip | Tags |
+           Audio | IPA | Timeline | Instruction | Category
+   Purpose: A/B discrimination between two confusable forms in a
+            single sentence context. The Instruction field names the
+            expected category ("Which tense + aspect fits…?", "Which
+            modal fits…?", etc.).
 
-B. Contrast card
-   Front: {{Front}}
-   Back: {{Front}}<hr id=answer>{{Back}}<br><br>{{Extra}}
+3. Verb System · Cloze (v2)
+   Fields: Text | Hint | Tags | Audio | IPA | Timeline |
+           Instruction | Category
+   Purpose: Active recall of a single missing form via Anki cloze.
+            Instruction field is category-aware ("Fill in the missing
+            tense + aspect", "...modal", etc.).
 
-C. Production card
-   Front: {{Front}}
-   Back: {{Front}}<hr id=answer>{{Back}}<br><br>{{Extra}}
+4. Verb System · Production (v4)
+   Fields: Prompt | Target | Aspect | Sample | Why | Tags | Audio |
+           IPA | Timeline | Instruction | Category
+   Purpose: Generate a sentence matching the named Target form.
+            Sample is the canonical answer used by Anki's
+            `{{type:Sample}}` comparison field.
 
-Recommended tag families
-- by form: present-simple, present-continuous, present-perfect, present-perfect-continuous, past-simple, past-continuous, past-perfect, past-perfect-continuous, future-will-simple, future-will-continuous, future-will-perfect, future-will-perfect-continuous, conditional-simple, conditional-continuous, conditional-perfect, conditional-perfect-continuous
-- by function: habit, routine, temporary, in-progress, experience, result, finished-time, earlier-past, duration, prediction, completion, hypothetical
-- by task type: recognition, contrast, production
-- by level: core, advanced
+5. Verb System · Reverse Production (Auto) (v1)
+   Fields: Prompt | Sample | Tags | Audio | IPA | Timeline
+   Purpose: Auto-derived from Recognition rows — given the form name,
+            write a sentence in English. De-duplicated against
+            existing Production samples at build time.
 
-Import instructions
-1. In Anki, choose Import.
-2. Import the .txt deck files as tab-separated text.
-3. Check the option that allows HTML in fields.
-4. Map fields in this order: Front, Back, Extra, Tags.
-5. For Tags, select the field as tags if your Anki setup supports tag mapping during import; otherwise keep them as a normal field and convert later.
-6. Suspend sibling cards if you create multiple cards from the same note to avoid review overload.
+(Image-Cue (v1) is defined but disabled — see anki_packager notes.)
 
-Study strategy
-- Start with recognition cards.
-- Add contrast cards once recognition accuracy is stable.
-- Add production cards last, because they are more cognitively demanding.
-- Review high-frequency forms more often than advanced forms.
-- Keep explanations concise during reviews; use Extra for deeper study only when needed.
+================================================================
+DECK STRUCTURE (curriculum-first, 13 modules + parent)
+================================================================
 
-Quality principles used in this package
-- Clear separation of tense/aspect from conditional meaning.
-- Natural example sentences where possible.
-- Short answer blocks for efficient spaced repetition.
-- Explicit contrasts for commonly confused forms.
-- Searchable tags for flexible filtered study.
+English Verb System
+├── 00 - Foundation               (12-cell tense+aspect grid · ENABLED by default)
+├── 01 - Periphrastic Futures     (be going to / be about to / be to + inf / shall)
+├── 02 - Past Habits              (used to vs would)
+├── 03 - Modal Verbs              (deduction / obligation / advice / ability + perfects)
+├── 04 - Conditionals             (Type 0/1/2/3, mixed, inverted, cleft)
+├── 05 - Passive Voice            (all 12 cells + ditransitive + get-passive)
+├── 06 - Mood                     (mandative + past subjunctive + imperative)
+├── 07 - Non-Finite Forms         (gerund vs infinitive, raising vs control)
+├── 08 - Reported Speech          (full backshift + reporting verbs)
+├── 09 - Phrasal Verbs            (top-60 BNC/COCA + separability)
+├── 10 - Discourse Constructions  (cleft, inversion, ellipsis, fronting)
+├── 11 - Phonology & Connected Speech (weak forms, reductions, contractions)
+├── 12 - Transformation & Register    (formal↔informal, AmE↔BrE, voice swaps)
+└── 13 - L1 Interference          (per-language sub-decks; opt in by L1)
+
+Each module has 4 sub-decks: Recognition · Contrast · Cloze · Production.
+Module 13 splits per L1 (Spanish / French / German / Russian / Mandarin /
+Japanese / Korean / Arabic / Portuguese / Other) so a learner only sees
+the contrasts that catch their own L1.
+
+================================================================
+DECK PRESETS (both auto-bound on import in Anki ≥ 23.10)
+================================================================
+
+A. English Verb System          (FSRS · retention 0.90 · sibling burying ·
+                                 1m/10m learning steps · 10 new/day · leech
+                                 suspend at 8 lapses)
+                                 → bound to Module 00 (Foundation).
+
+B. English Verb System (L1 — opt in)  (same scheduler, 0 new/day)
+                                       → bound to every other sub-deck.
+                                       Switch to preset A when ready to
+                                       unlock that layer.
+
+================================================================
+TAG TAXONOMY (filterable in Browse)
+================================================================
+
+card-type:    recognition | contrast | cloze | production
+module:       core | future | past-habit | modals | conditionals |
+              passive | mood | non-finite | reported-speech |
+              phrasal-verbs | inversion-cleft | phonology |
+              transformation | register | l1 | stative-dynamic
+cefr:         a1 | a2 | b1 | b2 | c1 | c2
+register:     formal | neutral | spoken | academic | literary
+frequency:    high | mid | low
+domain:       general | dialogue | work | academic | travel | family |
+              kitchen | tech | narrative
+l1:           l1-spanish | l1-french | l1-german | l1-russian |
+              l1-mandarin | l1-japanese | l1-korean | l1-arabic |
+              l1-portuguese | l1-dutch
+plus form-specific tags: present-simple | present-continuous |
+              present-perfect | present-perfect-continuous | past-* |
+              future-* | conditional-* | modal-* | passive-* |
+              cleft | inversion | reported-* | phrasal-* | etc.
+
+================================================================
+QUALITY PRINCIPLES
+================================================================
+
+- Foundation-first sequencing enforced via deck naming AND default preset binding.
+- One canonical answer per Production card; Sample is the only sentence rendered.
+- Category-aware Prompt / Instruction fields so questions never read as muddled
+  "Which form fits this sentence?".
+- Interleaved practice within each module (Anki ≥ 23.10 newCardGatherPriority=5).
+- Audio + IPA + timeline diagrams attached idempotently via build_audio.py /
+  build_ipa.py / build_timelines.py and validated via validate_anki_data.py.
+- Light + dark theme tokens: every callout is theme-aware.
+- L1-interference cards routed to per-language sub-decks via L1_LANG_SUFFIX.
+
+================================================================
+HOW TO REBUILD
+================================================================
+
+1. python3 validate_anki_data.py         (sanity-checks all 4 TSVs + audio)
+2. python3 build_anki_package.py         (emits english_verb_system_anki.apkg)
+3. python3 validate_apkg.py              (post-build smoke check)
+
+The build is idempotent; re-running steps 1–3 is safe and fast.
