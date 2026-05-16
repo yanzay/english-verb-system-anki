@@ -717,17 +717,23 @@ def _audio_corpus_sentences(all_data):
         elif path.endswith('conjugations_contrast.txt'):
             for r in rows:
                 if r and r[0].strip():
+                    raw = r[0].strip()
                     option_a = r[1] if len(r) > 1 else ''
                     option_b = r[2] if len(r) > 2 else ''
                     answer = r[3] if len(r) > 3 else ''
-                    sentences.add(
-                        _audio_spoken_sentence(
-                            r[0].strip(),
-                            option_a=option_a,
-                            option_b=option_b,
-                            answer=answer,
-                        )
+                    spoken = _audio_spoken_sentence(
+                        raw,
+                        option_a=option_a,
+                        option_b=option_b,
+                        answer=answer,
                     )
+                    sentences.add(spoken)
+                    # Back-compat with older releases that hashed raw
+                    # contrast prompts containing blanks (___). We now
+                    # synthesize spoken text, but still ship alias files
+                    # at legacy hashes so old notes can play updated audio.
+                    if _AUDIO_BLANK_RE.search(raw) and raw != spoken:
+                        sentences.add(raw)
         elif path.endswith('conjugations_production.txt'):
             for r in rows:
                 if len(r) >= 4 and r[3].strip():
