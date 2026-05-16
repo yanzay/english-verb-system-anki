@@ -2,6 +2,80 @@
 
 All notable changes to the English Verb System Anki deck are documented here.
 
+## [3.2.8] - 2026-05-16
+
+### Fixed (pre-release content audit, round 3)
+- **Repaired 9 schema-broken Production rows.** Six L1-interference rows had
+  generic verbal Targets (e.g. `Past Simple`, `Present Perfect`,
+  `Present Continuous`) but L1-trap aspects (`semantics`, `tense`, `plural`,
+  …); they now use the canonical L1 trap labels (`Physical State`,
+  `Recent Past`, `Get vs Become`, `Perfect Tense Word Order`,
+  `Plural Marking`, `Since vs For Duration`). Three "ask/answer" Production
+  prompts had short colloquial samples that didn't pattern-match the
+  declared verbal Target morphology — samples were rewritten to make the
+  target form unambiguous (`What are you doing right now?`,
+  `What were you doing at 3 PM yesterday?`, `No, I haven't eaten yet.`).
+- **Cleared one tautological `WhenNotToUse`** in Recognition row 749
+  (`When chess match is finished` for the present-perfect-continuous chess
+  example) — the column now carries an explanatory contrast instead of
+  restating the form's own scope.
+- **Fixed the validator's hidden curly-quote bug.** `validate_anki_data.py`
+  carried `Cleft Conditional (If It Weren\u2019t For)` (curly apostrophe)
+  in its `ALLOWED_LABELS` set — TSV rows use a straight ASCII apostrophe
+  for that label, so the validator was emitting a spurious "unknown label"
+  on every Cleft Conditional row. Replaced with the matching straight
+  form. Also widened the production morphology regexes for Present /
+  Past / Future Continuous and Present / Past Perfect to accept inverted
+  question forms (`What are you doing?`) and short answers
+  (`No, I haven't eaten yet.`).
+- **Pruned 92 orphan MP3s** (and their `audio_manifest.json` entries) for
+  sentences that had been removed from the corpus in earlier audits but
+  whose audio assets still lingered on disk. The manifest is back in sync
+  with the source TSVs (2,348 entries → matches `_audio_corpus_sentences`
+  output exactly).
+- **Synced README to authoritative numbers and v3.2.8.** "Current version"
+  pill jumped from a stale `2.0.0` to `3.2.8`. The "Tier 1 expansions"
+  blurb (`816 → 1,113 cards`), the audio sentence count (`1,113 cards,
+  ~1,041 unique sentences`), the IPA count (`14 / 1,566 unique words`),
+  the MP3-count `~1,218`, and the validation tally `All 1,373 rows pass`
+  were all replaced with the v3.2.8 figures (`2,794` cards, `~2,348`
+  unique sentences, `~2,400` MP3s, `2,638` source rows).
+
+### Build verified
+2,794 cards · 85 sub-decks · 0 schema errors
+(`python3 validate_anki_data.py --no-audio-check` exits 0) · two presets
+auto-bound (`English Verb System` + `English Verb System (L1 — opt in)`).
+
+## [3.2.8 — round 2] - 2026-05-16
+
+### Fixed (pre-release content audit, round 2)
+- **Repaired 95 schema-broken Production rows** where the `Target` field
+  contained a full sentence (e.g. `"My team has won the championship."`)
+  instead of a form name. The Anki template renders Target as a small
+  pill above the typed answer; with a sentence in there the card showed
+  the answer to itself before the learner typed anything. Fix: derive a
+  proper form name from each row's tags + aspect (`Present Perfect`,
+  `Be Going To (Future)`, `Have Got (Possession)`, etc.) and promote
+  the original sentence into `Sample` (the canonical answer used by
+  `{{type:Sample}}`). Throwaway extra sentences in the old `Sample`
+  field — e.g. `"She has scored three goals. They have beaten their
+  rivals."` for a single-answer card — were dropped.
+- **Re-tagged a misclassified L1-interference row.** Row 618 was tagged
+  `gerund-after-verb` but contained `I need to go to the store.`
+  (infinitive, not gerund). Re-tagged to `need-to` and renamed Target.
+- **Normalised 5 stray curly-quote characters** in
+  `conjugations_recognition.txt` and `conjugations_contrast.txt`
+  (`o'clock`, `Weren't`) to straight ASCII apostrophes for consistency
+  with the other 1,623+ apostrophes already in straight form.
+- **Rewrote `anki_premium_schema_package.txt`** end-to-end. The previous
+  version documented a hypothetical Front/Back/Extra schema that has
+  never matched any shipped note type and gave instructions to import
+  TSVs by hand into Anki — instructions that haven't applied since v2.0
+  when we moved to the `.apkg` build pipeline. The new version is a
+  faithful reference for the four real note types, the 13-module
+  curriculum-first deck structure, the two presets, and the tag
+  taxonomy actually shipped.
+
 ## [3.2.7] - 2026-05-16
 
 ### Fixed (pre-release content audit)
@@ -36,6 +110,18 @@ All notable changes to the English Verb System Anki deck are documented here.
   the package binds 52 sub-decks (now 85). New version documents the
   two-preset opt-in strategy and provides curriculum-aligned tag
   shortcuts.
+
+### Documentation correction
+- **Removed obsolete "preset JSON sidecar" instructions** from README
+  Step 5 and `ANKI_SETTINGS.md` Path A. The two presets ARE embedded
+  in the `.apkg` and DO auto-bind on import in Anki 23.10+ (verified by
+  importing into a fresh test collection: `English Verb System` binds
+  to 59 decks, `English Verb System (L1 — opt in)` binds to 51 decks,
+  Default keeps 1). Older docs assumed the long-standing Anki bug
+  applies; under modern Anki with `with_deck_configs=True` (the
+  default in the import dialog) it doesn't. The standalone
+  `english_verb_system_preset.json` is no longer shipped as a release
+  asset.
 
 ### Build verified
 2,794 cards · 85 sub-decks · 0 errors · two presets auto-bound

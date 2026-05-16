@@ -265,7 +265,7 @@ ALLOWED_LABELS = {
     # It's high time
     "It's High Time (Past Subjunctive)",
     # Cleft with verbs
-    'Cleft Conditional (If It Weren\u2019t For)',
+    "Cleft Conditional (If It Weren't For)",
     # Causative production/contrast labels
     'Causative Have (Service)', 'Causative Get (Result)',
     'Causative Make (Compulsion)', 'Causative Let (Permission)',
@@ -450,12 +450,14 @@ TARGET_SAMPLE_PATTERNS = {
     'Present Perfect Continuous': _re.compile(r"\b(have|has|'ve|'s)\s+been\s+\w+ing\b", _re.I),
     'Past Perfect Continuous':    _re.compile(r"\b(had|'d)\s+been\s+\w+ing\b", _re.I),
     'Future Perfect Continuous':  _re.compile(r"\b(will|'ll)\s+have\s+been\s+\w+ing\b", _re.I),
-    'Present Perfect':            _re.compile(r"\b(have|has|'ve|'s)\s+(\w+|not\s+\w+|already\s+\w+|just\s+\w+|never\s+\w+|ever\s+\w+)", _re.I),
-    'Past Perfect':               _re.compile(r"\b(had|'d)\s+(\w+|not\s+\w+|already\s+\w+|just\s+\w+|never\s+\w+)", _re.I),
+    # Allow inverted/short forms: "Have you eaten?", "No, I haven't eaten yet."
+    'Present Perfect':            _re.compile(r"\b(have|has|haven't|hasn't|'ve|'s)\s+(?:\w+\s+)?(\w+|not\s+\w+|already\s+\w+|just\s+\w+|never\s+\w+|ever\s+\w+)", _re.I),
+    'Past Perfect':               _re.compile(r"\b(had|hadn't|'d)\s+(?:\w+\s+)?(\w+|not\s+\w+|already\s+\w+|just\s+\w+|never\s+\w+)", _re.I),
     'Future Perfect':             _re.compile(r"\b(will|'ll)\s+have\s+(?!been\b)\w+", _re.I),
-    'Present Continuous':         _re.compile(r"\b(am|is|are|'m|'s|'re)\s+(not\s+)?\w+ing\b", _re.I),
-    'Past Continuous':            _re.compile(r"\b(was|were)\s+(not\s+)?\w+ing\b", _re.I),
-    'Future Continuous':          _re.compile(r"\b(will|'ll)\s+be\s+\w+ing\b", _re.I),
+    # Allow inverted question word order: "What are you doing?" / "Why is she crying?"
+    'Present Continuous':         _re.compile(r"\b(am|is|are|'m|'s|'re)\s+(?:\w+\s+)?(?:not\s+)?\w+ing\b", _re.I),
+    'Past Continuous':            _re.compile(r"\b(was|were)\s+(?:\w+\s+)?(?:not\s+)?\w+ing\b", _re.I),
+    'Future Continuous':          _re.compile(r"\b(will|'ll)\s+(?:\w+\s+)?be\s+\w+ing\b", _re.I),
     # Be Going To: declarative `is going to`, negative `is not going to`,
     # and inverted question form `Are you going to …?`
     'Be Going To':                _re.compile(r"\b(am|is|are|'m|'s|'re)\s+\w*\s*(?:not\s+)?going\s+to\s+\w+|\b(am|is|are)\s+\w+\s+going\s+to\s+\w+", _re.I),

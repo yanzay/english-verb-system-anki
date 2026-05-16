@@ -111,11 +111,11 @@ Module 02 (Past Habits) and 01 (Periphrastic Futures) are useful enrichment but 
 - **12 Transformation & Register** — formal vs informal (modal paraphrase, register shift, AmE vs BrE), active↔passive transformations, tense-change drills.
 - **13 L1 Interference** — split into per-language sub-decks for Spanish, French, German, Russian, Mandarin, Japanese, Korean, Arabic, Portuguese, Dutch + an "Other" catch-all. Each user enables only their own L1.
 
-### Tier 1 expansions (this release)
+### Tier 1 expansions (history)
 
-The deck has grown from 816 → 1,113 cards (+297) by plugging twelve previously
-missing topic clusters and backfilling all labels that had fewer than four
-examples per card type:
+Earlier releases (v1.4 → v3.0) plugged twelve previously missing topic clusters
+and backfilled all labels that had fewer than four examples per card type. The
+listed clusters are part of the current 2,794-card corpus:
 
 - **Auxiliary ellipsis** — *So do I / Neither will my colleagues / Nor do I*
 - **Tag questions** — positive/negative/imperative/modal tag agreement
@@ -159,7 +159,7 @@ The deck now ships with three additional media layers that elevate it from
 
 ### 🔊 Audio
 
-- **One MP3 per unique sentence** (1,113 cards, ~1,041 unique sentences after dedup).
+- **One MP3 per unique sentence** (~2,348 unique sentences after dedup across the 2,794-card corpus).
 - Synthesised with **Google Cloud Text-to-Speech**, voice `en-US-Neural2-F`
   (a warm, natural female voice). Fully configurable via `EVS_TTS_VOICE`
   env var or the `--voice` flag of `build_audio.py`.
@@ -177,7 +177,7 @@ The deck now ships with three additional media layers that elevate it from
 - Every sentence has a broad General-American IPA transcription on the back.
 - Computed offline (no network) by the `eng-to-ipa` library
   (Carnegie-Mellon dict + heuristic fallback).
-- Out-of-dictionary rate on this corpus: **0.9 %** (14 / 1,566 unique words).
+- Out-of-dictionary rate on this corpus is well under 1 % (heuristic fallback covers the long tail).
 - Per-word audit dump in `media/ipa_words.json` lets you spot odd entries.
 
 ### ⏱️ Timeline diagrams
@@ -204,8 +204,8 @@ pip install -r requirements.txt
 
 # 3. Generate the three media layers (timelines + IPA are free; audio uses paid TTS)
 python3 build_timelines.py             # 40 SVGs, ~instant, free
-python3 build_ipa.py                   # ~1,041 IPA strings, ~30 s, free
-python3 build_audio.py                 # ~1,218 MP3s, ~6 min, ≈ US$1.40 (incremental on subsequent runs)
+python3 build_ipa.py                   # ~2,700 IPA strings, ~30 s, free
+python3 build_audio.py                 # ~2,400 MP3s, ~12 min, ≈ US$3 (incremental on subsequent runs)
 
 # 4. Rebuild the .apkg (now ~25 MB with audio bundled)
 python3 build_anki_package.py
@@ -378,7 +378,7 @@ Present Simple (Stative) · Present Continuous (Dynamic Stative Shift)
 ## Notes
 
 - The build script auto-installs `genanki` if it is missing.
-- All 1,373 rows pass validation before each build.
+- All 2,638 source rows pass schema validation (`python3 validate_anki_data.py --no-audio-check`) before each build.
 - Cards route to the correct module subdeck automatically based on their tags.
 - See `ANKI_SETTINGS.md` for full recommended options including new cards/day,
   review limits, burying, leech thresholds, and tag-based filtering shortcuts.
@@ -428,4 +428,4 @@ This release introduces the following modules, card types, and tagging:
 
 This package follows semantic versioning. For a complete history of changes, see [CHANGELOG.md](CHANGELOG.md).
 
-Current version: **2.0.0**
+Current version: **3.2.8**
