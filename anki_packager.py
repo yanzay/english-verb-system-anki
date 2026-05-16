@@ -267,11 +267,13 @@ class Package:
                 # original v2.5.x intent after a brief v3.2.0–3.2.1
                 # detour that wrongly opted-out everything except
                 # Foundation): ────────────────────────────────────
-                #   - L1 Interference per-language sub-decks AND
-                #     their parent ('13 - L1 Interference') ship
-                #     OPTED-OUT (0 new/day). Each user enables only
-                #     their L1 by switching that one sub-deck to
-                #     the main preset.
+                #   - L1 Interference language PARENT decks only
+                #     (e.g. '...::13 - L1 Interference::🇷🇺 Russian speakers')
+                #     ship OPTED-OUT (0 new/day). Their child
+                #     sub-decks stay on the main preset so the user
+                #     can opt in once at the language level instead of
+                #     flipping Recognition/Contrast/Production/Cloze
+                #     individually.
                 #   - EVERYTHING else (Foundation + all layered
                 #     modules + the top-level parent) binds to the
                 #     main 'English Verb System' preset (10 new/day).
@@ -284,8 +286,11 @@ class Package:
                 # the "drowning in 3,000 cards" problem it tried to
                 # solve. Anki's per-deck 'New cards/day' is enough
                 # rate-limiting; users can adjust as needed.
-                is_l1 = '13 - L1 Interference' in deck_name
-                target_preset = l1_preset_id if is_l1 else preset_id
+                is_l1_language_parent = (
+                    '::13 - L1 Interference::' in deck_name
+                    and deck_name.count('::') == 2
+                )
+                target_preset = l1_preset_id if is_l1_language_parent else preset_id
                 col.decks.set_config_id_for_deck_dict(deck, target_preset)
                 col.decks.save(deck)
                 bound += 1
@@ -382,11 +387,10 @@ class Package:
     def _ensure_l1_preset(self, col) -> int:
         """Create/update the opt-in preset (zero new + zero review/day).
 
-        L1 Interference sub-decks bind to this preset by default so a
-        Russian speaker doesn't get drowned in Spanish/French/Mandarin
-        cards. To activate any L1 deck the user simply opens
-        gear → Deck options on that one sub-deck and switches the
-        preset selector to 'English Verb System'.
+        L1 Interference language parent decks bind to this preset by
+        default so a Russian speaker doesn't get drowned in
+        Spanish/French/Mandarin cards. To activate one L1, the user
+        switches that language deck's preset to 'English Verb System'.
         """
         existing = next(
             (c for c in col.decks.all_config()
