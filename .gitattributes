@@ -1,7 +1,6 @@
-media/audio/*.mp3 filter=lfs diff=lfs merge=lfs -text
-media/ipa/*.txt filter=lfs diff=lfs merge=lfs -text
-media/timelines/*.svg filter=lfs diff=lfs merge=lfs -text
-media/images/*.jpg filter=lfs diff=lfs merge=lfs -text
-media/images/*.png filter=lfs diff=lfs merge=lfs -text
-*.apkg filter=lfs diff=lfs merge=lfs -text
-* !text !filter !merge !diff
+# Binary media is stored directly in git (no Git LFS).
+# Built Anki packages (*.apkg) are NOT committed — they ship via GitHub Releases.
+*.mp3  -text
+*.svg  -text
+*.jpg  -text
+*.png  -text
